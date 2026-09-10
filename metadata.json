@@ -1,0 +1,6 @@
+{
+  "name": "Between Stained Pages",
+  "description": "Cherished vintage culinary archive for scanning handwritten recipe cards, organizing beloved family cookbooks, and preserving timeless kitchen heritage.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
