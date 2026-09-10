@@ -19,16 +19,16 @@
     <!-- Web Manifest (Self-Contained Data URI) -->
     <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkJldHdlZW4gU3RhaW5lZCBQYWdlcyIsCiAgInNob3J0X25hbWUiOiAiU3RhaW5lZFBhZ2VzIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNGREZCRjciLAogICJ0aGVtZV9jb2xvciI6ICIjRkRGQkY3IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9pbWFnZXMudW5zcGxhc2guY29tL3Bob3RvLTE1Njg1NzE3ODA3NjUtOTI3NmFjOGI3NWEyP2F1dG89Zm9ybWF0JmZpdD1jcm9wJnc9MTkyJmg9MTkyJnE9ODAiLAogICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNreWJsZSIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9pbWFnZXMudW5zcGxhc2guY29tL3Bob3RvLTE1Njg1NzE3ODA3NjUtOTI3NmFjOGI3NWEyP2F1dG89Zm9ybWF0JmZpdD1jcm9wJnc9NTEyJmg9NTEyJnE9ODAiLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0KICBdCn0=" />
 
-    <!-- Google Fonts (Optimized & Preconnected) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Supabase JS Client & Lucide Icons (Deferred so they do NOT block initial render) -->
+    <!-- Supabase JS Client & Lucide Icons (Self-healing load) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="https://unpkg.com/lucide@latest" defer onload="if(window.lucide){lucide.createIcons();}"></script>
 
-    <!-- Embedded Pure CSS: Replaces Tailwind CDN for Instant Main-Thread Rendering -->
+    <!-- Embedded Pure CSS -->
     <style>
         :root {
             --cream-50: #FDFBF7;
@@ -75,7 +75,6 @@
             font-family: 'Playfair Display', Georgia, serif;
         }
 
-        /* Layout & Containers */
         .max-container {
             max-width: 72rem;
             margin-left: auto;
@@ -113,7 +112,6 @@
             main { grid-template-columns: 280px 1fr; }
         }
 
-        /* Textures & Borders */
         .vintage-border { border: 1px solid rgba(138, 154, 134, 0.2); }
         .parchment-texture {
             background-image: radial-gradient(rgba(197, 180, 150, 0.18) 1px, transparent 0),
@@ -122,7 +120,6 @@
             background-position: 0 0, 4px 4px;
         }
 
-        /* Buttons & Badges */
         button { font-family: inherit; cursor: pointer; border: none; }
         .btn-sage {
             background-color: var(--sage-600);
@@ -154,7 +151,6 @@
         }
         .btn-terracotta:hover { background-color: var(--terracotta-700); }
 
-        /* Utility Grids */
         .recipe-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -173,7 +169,6 @@
             .pantry-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
-        /* Checklist Strikethrough */
         .checklist-item input:checked + span {
             position: relative;
             color: var(--sage-500);
@@ -193,7 +188,6 @@
         }
         @keyframes strikethrough { to { transform: scaleX(1); } }
 
-        /* Scanning Animation */
         @keyframes scan {
             0% { top: 0%; opacity: 0.8; }
             50% { top: 100%; opacity: 0.8; }
@@ -415,7 +409,6 @@
                     </div>
 
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-                        <!-- Ingredients & Scaler -->
                         <div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
                                 <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--sage-800);">Ingredients</h3>
@@ -429,7 +422,6 @@
                             <ul id="detailIngredientsList" style="list-style: none; display: flex; flex-direction: column; gap: 0.65rem;"></ul>
                         </div>
 
-                        <!-- Steps -->
                         <div>
                             <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--sage-800); margin-bottom: 1rem;">Preparation</h3>
                             <ol id="detailStepsList" style="list-style: none; display: flex; flex-direction: column; gap: 1rem;"></ol>
@@ -568,6 +560,7 @@
         const SUPABASE_KEY = "sb_publishable_fngegDh8DniH9zJAPpchGA_jVQkiLr-";
         
         let supabase = null;
+        let wakeLock = null; // Screen Wake Lock reference
 
         const demoRecipes = [
             {
@@ -645,6 +638,23 @@
         let cookTimerInterval = null;
         let cookSecondsElapsed = 0;
 
+        // Screen Wake Lock API Helpers
+        async function enableWakeLock() {
+            try {
+                if ('wakeLock' in navigator) {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                }
+            } catch (err) {
+                console.warn('Wake Lock failed:', err);
+            }
+        }
+
+        function disableWakeLock() {
+            if (wakeLock !== null) {
+                wakeLock.release().then(() => { wakeLock = null; });
+            }
+        }
+
         function initApp() {
             try {
                 if (window.supabase) {
@@ -677,8 +687,12 @@
         }
 
         function refreshIcons() {
-            if (window.lucide) {
+            if (window.lucide && typeof lucide.createIcons === 'function') {
                 lucide.createIcons();
+            } else {
+                setTimeout(() => {
+                    if (window.lucide) lucide.createIcons();
+                }, 150);
             }
         }
 
@@ -940,6 +954,7 @@
             document.getElementById('cookTimerControl').innerText = "Start";
             if (cookTimerInterval) clearInterval(cookTimerInterval);
 
+            enableWakeLock(); // Keeps screen awake while cooking
             renderCookModeStep();
             showSection('cook');
         }
@@ -994,6 +1009,7 @@
         function exitCookMode() {
             if (cookTimerInterval) clearInterval(cookTimerInterval);
             cookTimerInterval = null;
+            disableWakeLock(); // Releases screen lock
             showSection('detail');
         }
 
@@ -1365,7 +1381,6 @@
             setAuthMode('signIn');
         }
 
-        // Run initialization once the DOM is ready without waiting for heavy external assets
         document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
