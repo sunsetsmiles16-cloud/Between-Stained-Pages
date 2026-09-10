@@ -98,6 +98,29 @@ class ExampleRobolectricTest {
 
   @Test
   fun `recipe search filter matches by title and ingredients`() {
+    // Seed test recipes into the repository state flow to make test independent of authentication
+    val testRecipe1 = com.example.data.Recipe(
+        id = "rec-test-1",
+        userId = "user_test",
+        title = "Grandma's Apple Cinnamon Cobbler",
+        source = "Test Source",
+        sourceType = com.example.data.RecipeSourceType.FAMILY_NOTE,
+        description = "Tasty cobbler",
+        imageUrl = "",
+        prepTime = "10m",
+        cookTime = "30m",
+        servings = 4,
+        difficulty = "Easy",
+        binderCategory = "Bakes",
+        pantryStatusText = "",
+        allIngredientsInPantry = true,
+        ingredients = listOf(
+            com.example.data.IngredientItem("i1", "2 cups flour", category = "Pantry")
+        ),
+        steps = emptyList()
+    )
+    com.example.data.HeirloomRepository.addRecipe(testRecipe1)
+
     val recipes = com.example.data.HeirloomRepository.recipes.value
     val flourQuery = "flour"
     val matchingByIngredient = recipes.filter { r ->
