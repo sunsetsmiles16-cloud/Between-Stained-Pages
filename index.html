@@ -1,5 +1,4 @@
-
-       <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -284,7 +283,7 @@
                     </div>
                     <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--sage-800); margin-bottom: 0.5rem;">Your recipe tin is empty!</h3>
                     <p style="font-size: 0.75rem; color: var(--sage-600); max-width: 24rem; margin: 0 auto 1.25rem; line-height: 1.5;">
-                        Upload photos of handwritten cards, paste recipe text, or sign in to synchronize your existing cloud recipes.
+                        Upload photos of handwritten cards, paste recipe links, or sign in to synchronize your existing cloud recipes.
                     </p>
                     <button onclick="showSection('import')" class="btn-sage">Add Your First Recipe</button>
                 </div>
@@ -294,7 +293,7 @@
             <div id="section-import" class="hidden" style="background: rgba(250, 245, 237, 0.65); border-radius: 1.5rem; padding: 1.5rem; border: 1px solid var(--sage-100);">
                 <div style="margin-bottom: 1.25rem;">
                     <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--sage-800);">Import Loved Family Recipes</h2>
-                    <p style="font-size: 0.75rem; color: var(--sage-600); margin-top: 0.25rem;">Snap a photo of your handwritten cards or paste recipe text directly to format it into your tin.</p>
+                    <p style="font-size: 0.75rem; color: var(--sage-600); margin-top: 0.25rem;">Snap a photo of your handwritten cards or paste recipe website/video links directly.</p>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
@@ -303,7 +302,7 @@
                         <div>
                             <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: var(--terracotta-100); color: var(--terracotta-600); font-size: 0.625rem; font-weight: 700; text-transform: uppercase;">Vision OCR</span>
                             <h3 style="font-size: 1rem; font-weight: 700; color: var(--sage-800); margin: 0.5rem 0 0.25rem;">Scan Handwritten Card</h3>
-                            <p style="font-size: 0.7rem; color: var(--sage-600); line-height: 1.4;">Take a photo of any handwritten recipe card or cookbook page. The system will extract the title, ingredients, and steps automatically.</p>
+                            <p style="font-size: 0.7rem; color: var(--sage-600); line-height: 1.4;">Take a photo of an index card or cookbook page. The system will extract the title, ingredients, and steps automatically.</p>
                         </div>
 
                         <div id="scanPreviewArea" class="hidden" style="position: relative; height: 10rem; width: 100%; border-radius: 0.75rem; overflow: hidden; background: #000;">
@@ -313,24 +312,24 @@
 
                         <label class="btn-sage" style="cursor: pointer; width: 100%;">
                             <i data-lucide="camera" style="width: 1rem; height: 1rem;"></i>
-                            <span>Upload Recipe Photo</span>
+                            <span>Upload Card Photo</span>
                             <input type="file" accept="image/*" class="hidden" onchange="runGeminiOCR(this)">
                         </label>
                     </div>
 
-                    <!-- Direct Text Parser -->
+                    <!-- Web URL / Video Link Parser -->
                     <div style="background: var(--cream-50); border-radius: 1rem; padding: 1.25rem; border: 1px solid rgba(138, 154, 134, 0.25); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
                         <div>
-                            <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: var(--sage-100); color: var(--sage-700); font-size: 0.625rem; font-weight: 700; text-transform: uppercase;">Instant Text Parser</span>
-                            <h3 style="font-size: 1rem; font-weight: 700; color: var(--sage-800); margin: 0.5rem 0 0.25rem;">Paste Recipe Text</h3>
-                            <p style="font-size: 0.7rem; color: var(--sage-600); line-height: 1.4;">Paste messy recipe notes, website ingredients, or emails. The system will clean and organize them into an heirloom recipe card.</p>
+                            <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: var(--sage-100); color: var(--sage-700); font-size: 0.625rem; font-weight: 700; text-transform: uppercase;">Zero-Sponsor Extraction</span>
+                            <h3 style="font-size: 1rem; font-weight: 700; color: var(--sage-800); margin: 0.5rem 0 0.25rem;">Paste Recipe URL</h3>
+                            <p style="font-size: 0.7rem; color: var(--sage-600); line-height: 1.4;">Paste any cooking blog, website, or YouTube link to extract clean, ad-free ingredients and steps.</p>
                         </div>
 
                         <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                            <textarea id="recipeTextInput" rows="3" placeholder="Paste recipe text or ingredients here..." style="width: 100%; background: rgba(250, 245, 237, 0.5); padding: 0.625rem 0.85rem; border-radius: 0.75rem; border: 1px solid var(--sage-200); font-size: 0.75rem; color: var(--sage-800); outline: none; resize: none; font-family: inherit;"></textarea>
-                            <button onclick="parseRecipeTextWithGemini()" class="btn-sage" style="width: 100%;">
+                            <input type="url" id="recipeUrlInput" placeholder="https://cooking.nytimes.com/recipes/..." style="width: 100%; background: rgba(250, 245, 237, 0.5); padding: 0.625rem 0.85rem; border-radius: 0.75rem; border: 1px solid var(--sage-200); font-size: 0.75rem; color: var(--sage-800); outline: none;">
+                            <button onclick="parseRecipeUrlWithGemini()" class="btn-sage" style="width: 100%;">
                                 <i data-lucide="sparkles" style="width: 1rem; height: 1rem;"></i>
-                                <span>Format Recipe</span>
+                                <span>Parse Link Recipe</span>
                             </button>
                         </div>
                     </div>
@@ -456,7 +455,7 @@
                     <button onclick="exitCookMode()" style="padding: 0.35rem 0.75rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.25); background: transparent; color: #fff; font-size: 0.75rem;">Exit Cook Mode</button>
                 </div>
 
-                <div style="display: justify-content: space-between; align-items: center; display: flex;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span id="cookStepHeader" style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.1em; color: var(--sage-200);">Step 1 of 3</span>
                     <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(0,0,0,0.2); padding: 0.35rem 0.85rem; border-radius: 9999px;">
                         <i data-lucide="timer" style="width: 1rem; height: 1rem; color: var(--terracotta-500);"></i>
@@ -1144,35 +1143,39 @@
             reader.readAsDataURL(file);
         }
 
-        async function parseRecipeTextWithGemini() {
-            const rawText = document.getElementById('recipeTextInput').value.trim();
-            if (!rawText) return alert("Please paste recipe text first!");
+        async function parseRecipeUrlWithGemini() {
+            const urlInput = document.getElementById('recipeUrlInput');
+            const url = urlInput.value.trim();
+            if (!url || !url.startsWith('http')) {
+                alert("Please paste a valid recipe URL.");
+                return;
+            }
 
             const banner = document.getElementById('parseStatusBanner');
             const bar = document.getElementById('parseProgressBar');
             const pText = document.getElementById('parseStatusText');
 
             banner.classList.remove('hidden');
-            bar.style.width = '40%';
-            pText.innerText = "Structuring recipe with AI...";
+            bar.style.width = '30%';
+            pText.innerText = "Visiting link and extracting recipe...";
 
             try {
-                bar.style.width = '70%';
+                bar.style.width = '65%';
                 const res = await fetch('/api/parse', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ text: rawText })
+                    body: JSON.stringify({ text: `Extract the full recipe from this link: ${url}` })
                 });
 
                 const parsed = await res.json();
-                if (!res.ok) throw new Error(parsed.error || 'Formatting failed');
+                if (!res.ok) throw new Error(parsed.error || 'Could not parse link');
 
                 const newRecipe = {
                     id: "rec-" + Date.now(),
-                    title: parsed.title || "Kitchen Recipe",
-                    source: "Digital Text Entry",
+                    title: parsed.title || "Web Recipe",
+                    source: url.replace('https://', '').split('/')[0],
                     source_type: "FAMILY_NOTE",
-                    description: parsed.description || "Formatted culinary recipe.",
+                    description: parsed.description || "Imported web recipe.",
                     image_url: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&w=600&q=80",
                     prep_time: parsed.prep_time || "15m",
                     cook_time: parsed.cook_time || "30m",
@@ -1189,15 +1192,16 @@
                 localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
                 syncRecipeToSupabase(newRecipe);
 
-                document.getElementById('recipeTextInput').value = "";
                 bar.style.width = '100%';
-                pText.innerText = "Saved to tin!";
-                setTimeout(() => { 
-                    banner.classList.add('hidden'); 
-                    showSection('feed'); 
+                pText.innerText = "Recipe parsed and added!";
+                urlInput.value = '';
+
+                setTimeout(() => {
+                    banner.classList.add('hidden');
+                    showSection('feed');
                 }, 800);
             } catch (err) {
-                alert("Failed to format: " + err.message);
+                alert("Failed to parse link: " + err.message);
                 banner.classList.add('hidden');
             }
         }
