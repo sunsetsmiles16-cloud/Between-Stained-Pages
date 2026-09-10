@@ -215,12 +215,7 @@
             </div>
         </div>
         
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <!-- AI Settings Button -->
-            <button onclick="toggleKeyModal()" title="Gemini API Key Settings" style="width: 2.25rem; height: 2.25rem; border-radius: 9999px; border: 1px solid var(--sage-200); background: transparent; display: flex; align-items: center; justify-content: center; color: var(--sage-700);">
-                <i data-lucide="key" style="width: 0.95rem; height: 0.95rem;"></i>
-            </button>
-
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
             <button id="pantrySyncBadge" onclick="showSection('pantry')" style="display: none; align-items: center; gap: 0.35rem; padding: 0.35rem 0.75rem; border-radius: 9999px; background: var(--sage-100); color: var(--sage-700); font-size: 0.75rem; font-weight: 600;">
                 <i data-lucide="shopping-basket" style="width: 1rem; height: 1rem;"></i>
                 <span id="pantryCount">0</span> In Pantry
@@ -299,16 +294,16 @@
             <div id="section-import" class="hidden" style="background: rgba(250, 245, 237, 0.65); border-radius: 1.5rem; padding: 1.5rem; border: 1px solid var(--sage-100);">
                 <div style="margin-bottom: 1.25rem;">
                     <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--sage-800);">Import Loved Family Recipes</h2>
-                    <p style="font-size: 0.75rem; color: var(--sage-600); margin-top: 0.25rem;">Preserve physical handwritten cards using the Gemini Vision scanner, or paste ingredients and steps directly.</p>
+                    <p style="font-size: 0.75rem; color: var(--sage-600); margin-top: 0.25rem;">Snap a photo of your handwritten cards or paste recipe text directly to format it into your tin.</p>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
-                    <!-- Photo OCR via Gemini -->
+                    <!-- Photo OCR -->
                     <div style="background: var(--cream-50); border-radius: 1rem; padding: 1.25rem; border: 1px solid rgba(138, 154, 134, 0.25); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
                         <div>
-                            <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: var(--terracotta-100); color: var(--terracotta-600); font-size: 0.625rem; font-weight: 700; text-transform: uppercase;">Gemini Vision OCR</span>
+                            <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: var(--terracotta-100); color: var(--terracotta-600); font-size: 0.625rem; font-weight: 700; text-transform: uppercase;">Vision OCR</span>
                             <h3 style="font-size: 1rem; font-weight: 700; color: var(--sage-800); margin: 0.5rem 0 0.25rem;">Scan Handwritten Card</h3>
-                            <p style="font-size: 0.7rem; color: var(--sage-600); line-height: 1.4;">Take a photo of any handwritten recipe card or cookbook page. Gemini will extract the ingredients, amounts, and directions automatically.</p>
+                            <p style="font-size: 0.7rem; color: var(--sage-600); line-height: 1.4;">Take a photo of any handwritten recipe card or cookbook page. The system will extract the title, ingredients, and steps automatically.</p>
                         </div>
 
                         <div id="scanPreviewArea" class="hidden" style="position: relative; height: 10rem; width: 100%; border-radius: 0.75rem; overflow: hidden; background: #000;">
@@ -323,16 +318,16 @@
                         </label>
                     </div>
 
-                    <!-- Text / Quick Recipe Parser -->
+                    <!-- Direct Text Parser -->
                     <div style="background: var(--cream-50); border-radius: 1rem; padding: 1.25rem; border: 1px solid rgba(138, 154, 134, 0.25); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
                         <div>
-                            <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: var(--sage-100); color: var(--sage-700); font-size: 0.625rem; font-weight: 700; text-transform: uppercase;">Instant AI Text Parser</span>
+                            <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: var(--sage-100); color: var(--sage-700); font-size: 0.625rem; font-weight: 700; text-transform: uppercase;">Instant Text Parser</span>
                             <h3 style="font-size: 1rem; font-weight: 700; color: var(--sage-800); margin: 0.5rem 0 0.25rem;">Paste Recipe Text</h3>
-                            <p style="font-size: 0.7rem; color: var(--sage-600); line-height: 1.4;">Paste recipe text from an email, website, or notes app. Gemini will organize it into a structured kitchen card.</p>
+                            <p style="font-size: 0.7rem; color: var(--sage-600); line-height: 1.4;">Paste messy recipe notes, website ingredients, or emails. The system will clean and organize them into an heirloom recipe card.</p>
                         </div>
 
                         <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                            <textarea id="recipeTextInput" rows="3" placeholder="Paste recipe text, ingredients, or notes here..." style="width: 100%; background: rgba(250, 245, 237, 0.5); padding: 0.625rem 0.85rem; border-radius: 0.75rem; border: 1px solid var(--sage-200); font-size: 0.75rem; color: var(--sage-800); outline: none; resize: none; font-family: inherit;"></textarea>
+                            <textarea id="recipeTextInput" rows="3" placeholder="Paste recipe text or ingredients here..." style="width: 100%; background: rgba(250, 245, 237, 0.5); padding: 0.625rem 0.85rem; border-radius: 0.75rem; border: 1px solid var(--sage-200); font-size: 0.75rem; color: var(--sage-800); outline: none; resize: none; font-family: inherit;"></textarea>
                             <button onclick="parseRecipeTextWithGemini()" class="btn-sage" style="width: 100%;">
                                 <i data-lucide="sparkles" style="width: 1rem; height: 1rem;"></i>
                                 <span>Format Recipe</span>
@@ -345,7 +340,7 @@
                 <div id="parseStatusBanner" class="hidden" style="margin-top: 1rem; padding: 1rem; border-radius: 1rem; background: var(--sage-50); border: 1px solid var(--sage-100); display: flex; align-items: center; gap: 0.75rem;">
                     <i data-lucide="refresh-cw" style="width: 1.25rem; height: 1.25rem; color: var(--sage-600); animation: spin 1s linear infinite;"></i>
                     <div style="flex-grow: 1;">
-                        <p id="parseStatusText" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800);">Reading handwritten ink with Gemini...</p>
+                        <p id="parseStatusText" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800);">Reading handwritten ink...</p>
                         <div style="width: 100%; max-width: 16rem; height: 6px; background: var(--sage-100); border-radius: 9999px; margin-top: 0.35rem; overflow: hidden;">
                             <div id="parseProgressBar" style="height: 100%; background: var(--sage-500); width: 0%; transition: width 0.3s ease;"></div>
                         </div>
@@ -461,7 +456,7 @@
                     <button onclick="exitCookMode()" style="padding: 0.35rem 0.75rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.25); background: transparent; color: #fff; font-size: 0.75rem;">Exit Cook Mode</button>
                 </div>
 
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: justify-content: space-between; align-items: center; display: flex;">
                     <span id="cookStepHeader" style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.1em; color: var(--sage-200);">Step 1 of 3</span>
                     <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(0,0,0,0.2); padding: 0.35rem 0.85rem; border-radius: 9999px;">
                         <i data-lucide="timer" style="width: 1rem; height: 1rem; color: var(--terracotta-500);"></i>
@@ -505,27 +500,6 @@
             <span style="font-size: 0.6rem; font-weight: 600;">Pantry</span>
         </button>
     </nav>
-
-    <!-- GEMINI API KEY MODAL -->
-    <div id="keyModal" class="hidden" style="position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; padding: 1rem;">
-        <div style="background: var(--cream-50); max-width: 24rem; width: 100%; border-radius: 1.5rem; padding: 1.5rem; border: 1px solid var(--sage-100); position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);">
-            <button onclick="toggleKeyModal()" style="position: absolute; right: 1rem; top: 1rem; width: 1.75rem; height: 1.75rem; background: var(--cream-100); border-radius: 9999px; display: flex; align-items: center; justify-content: center; color: var(--sage-600);">
-                <i data-lucide="x" style="width: 1rem; height: 1rem;"></i>
-            </button>
-            <div style="text-align: center; margin-bottom: 1.25rem;">
-                <div style="width: 3rem; height: 3rem; background: var(--sage-100); color: var(--sage-700); border-radius: 9999px; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem;">
-                    <i data-lucide="sparkles" style="width: 1.5rem; height: 1.5rem;"></i>
-                </div>
-                <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--terracotta-700);">Gemini AI Key</h3>
-                <p style="font-size: 0.75rem; color: var(--sage-600); margin-top: 0.25rem; line-height: 1.4;">Paste your free Google AI Studio key to enable live handwriting OCR and text formatting.</p>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                <input type="password" id="geminiApiKeyInput" placeholder="AIzaSy..." style="background: rgba(250, 245, 237, 0.5); padding: 0.625rem 0.85rem; border-radius: 0.75rem; border: 1px solid var(--sage-200); font-size: 0.75rem; color: var(--sage-800); outline: none;">
-                <button onclick="saveGeminiKey()" class="btn-sage" style="width: 100%;">Save Key to Device</button>
-                <p style="font-size: 0.65rem; color: var(--sage-500); text-align: center;">Get your free key at <a href="https://aistudio.google.com" target="_blank" style="color: var(--terracotta-600); font-weight: 700;">aistudio.google.com</a>. It is stored only in your phone's browser.</p>
-            </div>
-        </div>
-    </div>
 
     <!-- Auth Modal -->
     <div id="authModal" class="hidden" style="position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; padding: 1rem;">
@@ -706,10 +680,6 @@
                 pantryItems = [...defaultPantry];
                 localStorage.setItem(`pantry_${currentUserId}`, JSON.stringify(pantryItems));
             }
-
-            // Fill saved key if present
-            const savedKey = localStorage.getItem("GEMINI_API_KEY") || "";
-            document.getElementById('geminiApiKeyInput').value = savedKey;
 
             updateAuthControls();
             showSection('feed');
@@ -1098,39 +1068,9 @@
             if (badge) badge.innerText = count;
         }
 
-        // ================= GEMINI REAL VISION OCR & PARSER =================
-        function toggleKeyModal() {
-            const modal = document.getElementById('keyModal');
-            modal.classList.toggle('hidden');
-            refreshIcons();
-        }
-
-        function saveGeminiKey() {
-            const val = document.getElementById('geminiApiKeyInput').value.trim();
-            if (val) {
-                localStorage.setItem("GEMINI_API_KEY", val);
-                alert("Gemini Key saved! You can now scan recipe cards with your camera.");
-                toggleKeyModal();
-            } else {
-                alert("Please enter a valid key from Google AI Studio.");
-            }
-        }
-
-        function getGeminiKey() {
-            return localStorage.getItem("GEMINI_API_KEY") || "";
-        }
-
+        // ================= SEAMLESS BACKEND AI PARSING =================
         async function runGeminiOCR(input) {
             if (!input.files || !input.files[0]) return;
-
-            const apiKey = getGeminiKey();
-            if (!apiKey) {
-                alert("Please add your free Gemini API Key first by clicking the key icon at the top!");
-                toggleKeyModal();
-                input.value = "";
-                return;
-            }
-
             const file = input.files[0];
             const reader = new FileReader();
 
@@ -1149,63 +1089,24 @@
                 const pText = document.getElementById('parseStatusText');
 
                 banner.classList.remove('hidden');
-                bar.style.width = '25%';
-                pText.innerText = "Analyzing handwritten card with Gemini Vision...";
-
-                const prompt = `You are a vintage cookbook archivist. Carefully examine this handwritten recipe card photo. 
-Extract the recipe into valid JSON only (no markdown, no backticks, just raw JSON) matching this exact format:
-{
-  "title": "Title of Recipe",
-  "binder_category": "Desserts" or "Sunday Bakes" or "Mains",
-  "description": "Short 1-2 sentence description",
-  "prep_time": "e.g. 15m",
-  "cook_time": "e.g. 35m",
-  "difficulty": "Easy" or "Medium" or "Advanced",
-  "servings": 6,
-  "ingredients": [
-    { "id": "i1", "name": "Ingredient with unit", "quantity": 1, "note": "optional notes" }
-  ],
-  "steps": [
-    { "step_number": 1, "title": "Short Step Title", "instruction": "Full instruction sentence" }
-  ],
-  "secret_note": "Any notes or marginalia on the card, or empty string"
-}`;
+                bar.style.width = '30%';
+                pText.innerText = "Transcribing handwritten card...";
 
                 try {
-                    bar.style.width = '60%';
-                    pText.innerText = "Transcribing ingredients and kitchen marginalia...";
-
-                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+                    bar.style.width = '65%';
+                    const res = await fetch('/api/parse', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            contents: [{
-                                parts: [
-                                    { text: prompt },
-                                    { inline_data: { mime_type: mimeType, data: base64Data } }
-                                ]
-                            }],
-                            generationConfig: {
-                                response_mime_type: "application/json"
-                            }
-                        })
+                        body: JSON.stringify({ imageBase64: base64Data, mimeType: mimeType })
                     });
 
-                    if (!response.ok) {
-                        const err = await response.json();
-                        throw new Error(err.error?.message || "Gemini API request failed.");
-                    }
+                    const parsed = await res.json();
+                    if (!res.ok) throw new Error(parsed.error || 'Parsing failed');
 
-                    bar.style.width = '90%';
-                    const result = await response.json();
-                    const text = result.candidates[0].content.parts[0].text;
-                    const parsed = JSON.parse(text);
-
-                    // Add structured recipe
                     const newRecipe = {
                         id: "rec-" + Date.now(),
                         title: parsed.title || "Handwritten Family Recipe",
-                        source: "Vintage Hand-written Scan",
+                        source: "Vintage Handwritten Scan",
                         source_type: "VINTAGE_SCAN",
                         description: parsed.description || "A cherished handwritten heirloom recipe.",
                         image_url: dataUrl,
@@ -1233,10 +1134,8 @@ Extract the recipe into valid JSON only (no markdown, no backticks, just raw JSO
                         input.value = "";
                         showSection('feed');
                     }, 800);
-
-                } catch (error) {
-                    console.error("Gemini OCR Error:", error);
-                    alert("Could not parse recipe: " + error.message);
+                } catch (err) {
+                    alert("Scan failed: " + err.message);
                     banner.classList.add('hidden');
                     previewArea.classList.add('hidden');
                     input.value = "";
@@ -1247,17 +1146,7 @@ Extract the recipe into valid JSON only (no markdown, no backticks, just raw JSO
 
         async function parseRecipeTextWithGemini() {
             const rawText = document.getElementById('recipeTextInput').value.trim();
-            if (!rawText) {
-                alert("Please paste some recipe text first!");
-                return;
-            }
-
-            const apiKey = getGeminiKey();
-            if (!apiKey) {
-                alert("Please add your Gemini API Key first by clicking the key icon at the top!");
-                toggleKeyModal();
-                return;
-            }
+            if (!rawText) return alert("Please paste recipe text first!");
 
             const banner = document.getElementById('parseStatusBanner');
             const bar = document.getElementById('parseProgressBar');
@@ -1265,43 +1154,18 @@ Extract the recipe into valid JSON only (no markdown, no backticks, just raw JSO
 
             banner.classList.remove('hidden');
             bar.style.width = '40%';
-            pText.innerText = "Structuring recipe with Gemini...";
-
-            const prompt = `Parse this recipe text into structured JSON matching this exact format (no backticks, just raw JSON):
-{
-  "title": "Title",
-  "binder_category": "Desserts" or "Sunday Bakes" or "Mains",
-  "description": "Short description",
-  "prep_time": "15m",
-  "cook_time": "30m",
-  "difficulty": "Easy",
-  "servings": 4,
-  "ingredients": [{ "id": "i1", "name": "Ingredient description", "quantity": 1 }],
-  "steps": [{ "step_number": 1, "title": "Step title", "instruction": "Step instruction" }],
-  "secret_note": ""
-}
-
-Recipe text:
-${rawText}`;
+            pText.innerText = "Structuring recipe with AI...";
 
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+                bar.style.width = '70%';
+                const res = await fetch('/api/parse', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: prompt }] }],
-                        generationConfig: { response_mime_type: "application/json" }
-                    })
+                    body: JSON.stringify({ text: rawText })
                 });
 
-                if (!response.ok) {
-                    const err = await response.json();
-                    throw new Error(err.error?.message || "Failed to process text.");
-                }
-
-                bar.style.width = '90%';
-                const result = await response.json();
-                const parsed = JSON.parse(result.candidates[0].content.parts[0].text);
+                const parsed = await res.json();
+                if (!res.ok) throw new Error(parsed.error || 'Formatting failed');
 
                 const newRecipe = {
                     id: "rec-" + Date.now(),
@@ -1327,16 +1191,13 @@ ${rawText}`;
 
                 document.getElementById('recipeTextInput').value = "";
                 bar.style.width = '100%';
-                pText.innerText = "Recipe parsed and saved!";
-
-                setTimeout(() => {
-                    banner.classList.add('hidden');
-                    showSection('feed');
+                pText.innerText = "Saved to tin!";
+                setTimeout(() => { 
+                    banner.classList.add('hidden'); 
+                    showSection('feed'); 
                 }, 800);
-
             } catch (err) {
-                console.error("Text parsing error:", err);
-                alert("Could not parse recipe: " + err.message);
+                alert("Failed to format: " + err.message);
                 banner.classList.add('hidden');
             }
         }
