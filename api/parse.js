@@ -13,12 +13,12 @@ export default async function handler(req, res) {
   const systemPrompt = `You are a vintage culinary archivist and precision recipe OCR engine.
 Analyze the provided image or text. It may be:
 - A handwritten vintage recipe card or notebook page
-- A phone screenshot (TikTok overlay, Instagram reel, Notes app, blog screenshot)
+- A phone screenshot (TikTok recipe overlay, Instagram reel text, Apple Notes, website screenshot)
 - A printed cookbook page
 
 Transcribe all ingredients with measurements and step-by-step directions into standard kitchen units.
 
-Return strictly valid raw JSON with NO markdown formatting, NO backticks, and NO conversational chatter:
+Return strictly valid raw JSON with NO markdown backticks, NO backtick fences, and NO conversational text:
 {
   "title": "Recipe Title",
   "binder_category": "Sunday Bakes",
@@ -70,14 +70,14 @@ Return strictly valid raw JSON with NO markdown formatting, NO backticks, and NO
     return res.status(400).json({ error: 'No image or text provided' });
   }
 
-  // Use the verified current endpoints: primary 3.6-flash, fallback to stable 2.5-flash
-  const activeModels = ['gemini-3.6-flash', 'gemini-2.5-flash'];
+  // Target exclusively gemini-3.6-flash with automated exponential backoff
+  const maxRetries = 3;
   let lastError = null;
 
-  for (const model of activeModels) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -88,14 +88,16 @@ Return strictly valid raw JSON with NO markdown formatting, NO backticks, and NO
       const data = await response.json();
 
       if (!response.ok) {
-        const msg = data.error?.message || `HTTP ${response.status}`;
-        // If high demand (503/429), fall back to the next valid model in the list
-        if (response.status === 503 || response.status === 429 || msg.includes('high demand')) {
-          console.warn(`Model ${model} busy. Trying next endpoint...`);
-          lastError = new Error(msg);
+        const errorMsg = data.error?.message || `HTTP ${response.status}`;
+        
+        // If Google servers are busy (503/429/high demand), wait and retry automatically
+        if (response.status === 503 || response.status === 429 || errorMsg.includes('high demand')) {
+          console.warn(`Attempt ${attempt} hit high demand. Retrying in 1.5s...`);
+          lastError = new Error(errorMsg);
+          await new Promise((resolve) => setTimeout(resolve, 1500 * attempt));
           continue;
         }
-        throw new Error(msg);
+        throw new Error(errorMsg);
       }
 
       const rawOutput = data.candidates?.[0]?.content?.parts?.[0]?.text;
@@ -121,11 +123,13 @@ Return strictly valid raw JSON with NO markdown formatting, NO backticks, and NO
 
     } catch (err) {
       lastError = err;
-      console.warn(`Error on ${model}:`, err.message);
+      if (attempt < maxRetries) {
+        await new Promise((resolve) => setTimeout(resolve, 1500 * attempt));
+      }
     }
   }
 
   return res.status(500).json({
-    error: lastError ? lastError.message : 'The scanning service is momentarily busy. Please tap scan again.'
+    error: lastError ? lastError.message : 'Google API service busy. Please try scanning again in a moment.'
   });
 }
