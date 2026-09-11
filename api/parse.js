@@ -11,39 +11,48 @@ export default async function handler(req, res) {
   const { imageBase64, mimeType, text } = req.body;
 
   const systemPrompt = `You are a vintage culinary archivist and precision recipe OCR engine.
-Analyze the provided image or text. It may be:
-- A handwritten vintage recipe card or notebook page
-- A phone screenshot (TikTok recipe overlay, Instagram reel text, Apple Notes, website screenshot)
-- A printed cookbook page
+Analyze the provided image or text carefully.
 
-Transcribe all ingredients with measurements and step-by-step directions into standard kitchen units.
+CRITICAL INGREDIENTS RULE:
+Recipes frequently contain MULTIPLE distinct ingredient subsections (e.g., "For the Crust", "For the Toppings", "For the Filling", "For the Sauce", "Garnish").
+You MUST capture EVERY SINGLE ingredient across ALL sections. Do NOT stop after reading the first section.
+Assign each ingredient a "section" field matching its subsection header (e.g., "For the High-Protein Crust", "For the Toppings", or "Main" if no subsection exists).
 
 Return strictly valid raw JSON with NO markdown backticks, NO backtick fences, and NO conversational text:
 {
   "title": "Recipe Title",
-  "binder_category": "Sunday Bakes",
-  "description": "A warm 1-2 sentence description of the dish",
+  "binder_category": "Mains",
+  "description": "Short description or nutritional overview if present",
   "prep_time": "15m",
-  "cook_time": "30m",
+  "cook_time": "20m",
   "difficulty": "Easy",
   "servings": 4,
   "ingredients": [
     {
       "id": "i1",
-      "name": "All-purpose flour",
-      "quantity": 2,
-      "unit": "cups",
-      "note": "sifted"
+      "section": "For the High-Protein Crust",
+      "name": "plain nonfat Greek yogurt",
+      "quantity": 1,
+      "unit": "cup",
+      "note": ""
+    },
+    {
+      "id": "i2",
+      "section": "For the Toppings",
+      "name": "pizza sauce",
+      "quantity": 0.5,
+      "unit": "cup",
+      "note": ""
     }
   ],
   "steps": [
     {
       "step_number": 1,
-      "title": "Prep Step",
-      "instruction": "Detailed directions for this step."
+      "title": "Prepare the Dough",
+      "instruction": "Preheat oven to 450°F. In a bowl, mix Greek yogurt, self-rising flour, and protein powder."
     }
   ],
-  "secret_note": "Any handwritten notes, family tips, or empty string"
+  "secret_note": "Any serving size notes, calories, or marginalia"
 }`;
 
   let parts = [];
@@ -70,7 +79,6 @@ Return strictly valid raw JSON with NO markdown backticks, NO backtick fences, a
     return res.status(400).json({ error: 'No image or text provided' });
   }
 
-  // Target exclusively gemini-3.6-flash with automated exponential backoff
   const maxRetries = 3;
   let lastError = null;
 
@@ -89,10 +97,7 @@ Return strictly valid raw JSON with NO markdown backticks, NO backtick fences, a
 
       if (!response.ok) {
         const errorMsg = data.error?.message || `HTTP ${response.status}`;
-        
-        // If Google servers are busy (503/429/high demand), wait and retry automatically
         if (response.status === 503 || response.status === 429 || errorMsg.includes('high demand')) {
-          console.warn(`Attempt ${attempt} hit high demand. Retrying in 1.5s...`);
           lastError = new Error(errorMsg);
           await new Promise((resolve) => setTimeout(resolve, 1500 * attempt));
           continue;
@@ -130,6 +135,6 @@ Return strictly valid raw JSON with NO markdown backticks, NO backtick fences, a
   }
 
   return res.status(500).json({
-    error: lastError ? lastError.message : 'Google API service busy. Please try scanning again in a moment.'
+    error: lastError ? lastError.message : 'Scanner busy. Please try again.'
   });
 }
