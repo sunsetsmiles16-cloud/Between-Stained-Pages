@@ -332,7 +332,7 @@
         /* VINTAGE TOAST NOTIFICATION POPUPS */
         #vintageToastContainer {
             position: fixed;
-            bottom: 5.5rem;
+            bottom: 5rem;
             right: 1rem;
             z-index: 150;
             display: flex;
@@ -353,8 +353,8 @@
             align-items: center;
             gap: 0.6rem;
             pointer-events: auto;
-            animation: slideInToast 0.3s ease forwards, fadeOutToast 0.3s ease 3.5s forwards;
-            max-width: 23rem;
+            animation: slideInToast 0.3s ease forwards, fadeOutToast 0.3s ease 3.2s forwards;
+            max-width: 22rem;
         }
         @keyframes slideInToast { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes fadeOutToast { to { opacity: 0; transform: translateY(10px); } }
@@ -541,7 +541,7 @@
 
     <div class="retro-stripe"></div>
 
-    <!-- Vintage Toast Container -->
+    <!-- Toast Notification Container -->
     <div id="vintageToastContainer"></div>
 
     <!-- Header Navigation -->
@@ -691,7 +691,7 @@
                         <input type="range" id="textSizeSlider" min="0.85" max="1.4" step="0.05" value="1.0" oninput="adjustTextAccessibility(this.value)" style="accent-color: var(--accent-primary); cursor: pointer; width: 100%;">
                     </div>
 
-                    <!-- Global Era Theme (All 10 Decades 1920s - 2010s) -->
+                    <!-- Global Era Theme (All 10 Decades) -->
                     <div style="background: var(--bg-tint); padding: 1rem; border-radius: 1rem; border: 1px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.5rem;">
                         <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary); letter-spacing: 0.05em;">Global App Timeline Era</label>
                         <select id="settingsEraSelect" onchange="applyDecadeTheme(this.value)" style="background: var(--bg-card); padding: 0.7rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; font-weight: 700; color: var(--text-primary); outline: none; font-family: inherit;">
@@ -1405,8 +1405,8 @@
                     supabase.auth.signOut();
                 }
                 localStorage.clear();
-                showVintageToast("Your account data has been cleared from the tin.", 'user-x');
-                setTimeout(() => { window.location.reload(); }, 1200);
+                alert("Your account data has been deleted.");
+                window.location.reload();
             }
         }
 
@@ -1467,9 +1467,9 @@
                 adjustTextAccessibility(userProfile.fontSizeScale);
             }
 
-            // Unauthenticated Guest Warning Check
+            // Unauthenticated Guest Session Warning Check
             if (!currentUserId || currentUserId === 'demo-user') {
-                showVintageToast("Notice: Guest session active. Unsaved cards will vanish if you leave!", "alert-circle");
+                showVintageToast("Notice: You are browsing as a guest. Unsaved recipe cards will vanish if you leave!", "alert-circle");
             }
 
             handleHashChange();
@@ -2091,52 +2091,410 @@
             updatePantryCounters();
         }
 
-        // RECIPE EDITOR
-        function openRecipeEditorModal() {
+        function deleteRecipeDetail() {
             if (!activeRecipe) return;
-            document.getElementById('editRecipeTitle').value = activeRecipe.title || '';
-            document.getElementById('editRecipeDesc').value = activeRecipe.description || '';
-            document.getElementById('editRecipeTips').value = activeRecipe.tips_note || '';
+            if (confirm(`Do you want to delete "${activeRecipe.title}" from your tin?`)) {
+                userRecipes = userRecipes.filter(r => r.id !== activeRecipe.id);
+                localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
+                deleteRecipeFromSupabase(activeRecipe.id);
+                showVintageToast("Recipe card removed from tin.", 'trash-2');
+                navigate('feed');
+            }
+        }
 
-            const ingText = (activeRecipe.ingredients || []).map(i => {
-                const q = i.quantity || '';
-                const u = i.unit || '';
-                const n = i.name || i.ingredient || '';
-                return `${q} ${u} ${n}`.trim();
-            }).join('\n');
-            document.getElementById('editRecipeIngredients').value = ingText;
+        // COOK MODE
+        function startCookMode() {
+            if (!activeRecipe || (activeRecipe.steps || []).length === 0) return;
+            cookStepIndex = 0;
+            cookSecondsElapsed = 0;
+            document.getElementById('cookTimer').innerText = "00:00";
+            document.getElementById('cookTimerControl').innerText = "Start";
+            if (cookTimerInterval) clearInterval(cookTimerInterval);
 
-            const stepText = (activeRecipe.steps || []).map(s => s.instruction || '').join('\n');
-            document.getElementById('editRecipeSteps').value = stepText;
+            enableWakeLock();
+            renderCookModeStep();
+            showSection('cook');
+        }
 
-            document.getElementById('recipeEditorModal').classList.remove('hidden');
+        function renderCookModeStep() {
+            const step = activeRecipe.steps[cookStepIndex];
+            document.getElementById('cookStepHeader').innerText = `Step ${cookStepIndex + 1} of ${activeRecipe.steps.length}`;
+            document.getElementById('cookStepTitle').innerText = step.title || `Step ${cookStepIndex + 1}`;
+            document.getElementById('cookStepInstruction').innerText = step.instruction || '';
+
+            const prevBtn = document.getElementById('prevStepBtn');
+            prevBtn.disabled = cookStepIndex === 0;
+            prevBtn.style.opacity = cookStepIndex === 0 ? '0.4' : '1.0';
+
+            const nextBtn = document.getElementById('nextStepBtn');
+            if (cookStepIndex === activeRecipe.steps.length - 1) {
+                nextBtn.innerHTML = `<span>Finish Cooking</span><i data-lucide="check" style="width: 1rem; height: 1rem;"></i>`;
+            } else {
+                nextBtn.innerHTML = `<span>Next Step</span><i data-lucide="chevron-right" style="width: 1rem; height: 1rem;"></i>`;
+            }
             refreshIcons();
         }
 
-        function closeRecipeEditorModal() {
-            document.getElementById('recipeEditorModal').classList.add('hidden');
+        function navigateCookStep(diff) {
+            const target = cookStepIndex + diff;
+            if (target >= 0 && target < activeRecipe.steps.length) {
+                cookStepIndex = target;
+                renderCookModeStep();
+            } else if (target === activeRecipe.steps.length) {
+                exitCookMode();
+                showVintageToast(`Splendid! You finished cooking "${activeRecipe.title}".`, 'award');
+            }
         }
 
-        function saveRecipeEdits(event) {
+        function toggleCookTimer() {
+            const control = document.getElementById('cookTimerControl');
+            if (cookTimerInterval) {
+                clearInterval(cookTimerInterval);
+                cookTimerInterval = null;
+                control.innerText = "Start";
+            } else {
+                control.innerText = "Pause";
+                cookTimerInterval = setInterval(() => {
+                    cookSecondsElapsed++;
+                    const mins = String(Math.floor(cookSecondsElapsed / 60)).padStart(2, '0');
+                    const secs = String(cookSecondsElapsed % 60).padStart(2, '0');
+                    document.getElementById('cookTimer').innerText = `${mins}:${secs}`;
+                }, 1000);
+            }
+        }
+
+        function exitCookMode() {
+            if (cookTimerInterval) clearInterval(cookTimerInterval);
+            cookTimerInterval = null;
+            disableWakeLock();
+            showSection('detail', false);
+        }
+
+        // PANTRY
+        function renderPantry() {
+            const grid = document.getElementById('pantryGrid');
+            grid.innerHTML = '';
+
+            const filteredPantry = pantryItems.filter(item => {
+                if (pantryFilterCategory === 'All') return true;
+                return item.category === pantryFilterCategory;
+            });
+
+            if (filteredPantry.length === 0) {
+                grid.innerHTML = '<p style="font-size:0.75rem; color:var(--text-muted); font-style:italic; grid-column:1/-1;">No items in this category.</p>';
+                return;
+            }
+
+            filteredPantry.forEach(item => {
+                const chip = document.createElement('div');
+                chip.style.cssText = `padding: 1rem; border-radius: 1rem; border: 1.5px solid ${item.stocked ? 'var(--accent-secondary)' : 'var(--border-primary)'}; background: ${item.stocked ? 'var(--bg-tint)' : 'var(--bg-card)'}; display: flex; flex-direction: column; justify-content: space-between; gap: 0.75rem; cursor: pointer; transition: all 0.15s ease;`;
+                chip.onclick = () => togglePantryItemStock(item.id);
+                
+                chip.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <span style="font-size: 0.75rem; font-weight: 800; color: ${item.stocked ? 'var(--text-primary)' : 'var(--text-muted)'};">${item.name}</span>
+                        <div style="width: 1.25rem; height: 1.25rem; border-radius: 50%; background: ${item.stocked ? 'var(--accent-secondary)' : 'transparent'}; border: 1.5px solid ${item.stocked ? 'var(--accent-secondary)' : 'var(--border-primary)'}; color: #fff; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="check" style="width: 0.85rem; height: 0.85rem; ${item.stocked ? '' : 'display:none;'}"></i>
+                        </div>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-size: 0.58rem; text-transform: uppercase; font-weight: 800; color: var(--accent-primary);">${item.category}</span>
+                        <button onclick="event.stopPropagation(); deletePantryItem('${item.id}')" style="font-size:0.6rem; color:#C62828; background:transparent;">Delete</button>
+                    </div>
+                `;
+                grid.appendChild(chip);
+            });
+            refreshIcons();
+        }
+
+        function filterPantryCategory(cat) {
+            pantryFilterCategory = cat;
+            renderPantry();
+        }
+
+        function deletePantryItem(id) {
+            pantryItems = pantryItems.filter(p => p.id !== id);
+            localStorage.setItem(`pantry_${currentUserId}`, JSON.stringify(pantryItems));
+            renderPantry();
+            updatePantryCounters();
+            showVintageToast("Pantry item removed from inventory.", 'shopping-basket');
+        }
+
+        function addPantryItemPrompt() {
+            const name = prompt("Enter pantry item name (e.g. Eggs, Olive Oil):");
+            if (name && name.trim()) {
+                const cat = prompt("Enter category (Dairy & Refrigerated, Baking, Spices & Pantry, Oils & Vinegars):") || "Pantry";
+                pantryItems.push({ id: "p-" + Date.now(), name: name.trim(), category: cat, stocked: true });
+                localStorage.setItem(`pantry_${currentUserId}`, JSON.stringify(pantryItems));
+                renderPantry();
+                updatePantryCounters();
+                showVintageToast(`"${name}" added to your kitchen pantry!`, 'check-circle-2');
+            }
+        }
+
+        function updatePantryCounters() {
+            const count = pantryItems.filter(p => p.stocked).length;
+            const badge = document.getElementById('pantryCount');
+            if (badge) badge.innerText = count;
+        }
+
+        // ================= GEMINI UNIVERSAL OCR =================
+        async function runMultiPageGeminiOCR() {
+            const validImages = multiScanImages.filter(img => img !== null);
+            if (validImages.length === 0) return alert("Please upload at least one recipe page or screenshot.");
+
+            const banner = document.getElementById('parseStatusBanner');
+            const bar = document.getElementById('parseProgressBar');
+            const pText = document.getElementById('parseStatusText');
+
+            banner.classList.remove('hidden');
+            bar.style.width = '30%';
+            pText.innerText = `Transcribing ${validImages.length} attached page(s)...`;
+
+            try {
+                bar.style.width = '70%';
+                const res = await fetch('/api/parse', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ imageBase64: validImages[0].split(',')[1], mimeType: 'image/jpeg' })
+                });
+
+                const parsed = await res.json();
+                if (!res.ok) throw new Error(parsed.error || 'Multi-page transcription failed');
+
+                const newRecipe = {
+                    id: "rec-" + Date.now(),
+                    title: parsed.title || "Multi-Page Scanned Recipe",
+                    source: `Multi-Page Scan (${validImages.length} pages)`,
+                    source_type: "VINTAGE_SCAN",
+                    description: parsed.description || "Preserved multi-page recipe.",
+                    image_url: validImages[0],
+                    prep_time: parsed.prep_time || "15m",
+                    cook_time: parsed.cook_time || "30m",
+                    difficulty: parsed.difficulty || "Easy",
+                    binder_category: parsed.binder_category || "Sunday Bakes",
+                    servings: parsed.servings || 4,
+                    ingredients: parsed.ingredients || [],
+                    steps: parsed.steps || [],
+                    secret_note: parsed.secret_note || "",
+                    tips_note: "",
+                    bookmarked: false
+                };
+
+                userRecipes.unshift(newRecipe);
+                localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
+                syncRecipeToSupabase(newRecipe);
+
+                bar.style.width = '100%';
+                pText.innerText = "Success! Opening recipe...";
+
+                setTimeout(() => {
+                    banner.classList.add('hidden');
+                    multiScanImages = [null, null, null];
+                    for (let i = 0; i < 3; i++) {
+                        document.getElementById(`slotImg${i}`).classList.add('hidden');
+                        document.getElementById(`slotPlaceholder${i}`).classList.remove('hidden');
+                    }
+                    showVintageToast("Your multi-page recipe was transcribed and filed!", 'sparkles');
+                    viewRecipeDetail(newRecipe.id);
+                }, 800);
+            } catch (err) {
+                alert("Scan failed: " + err.message);
+                banner.classList.add('hidden');
+            }
+        }
+
+        async function parseRecipeUrlWithGemini() {
+            const urlInput = document.getElementById('recipeUrlInput');
+            const url = urlInput.value.trim();
+            if (!url || !url.startsWith('http')) return alert("Please paste a valid recipe URL.");
+
+            const banner = document.getElementById('parseStatusBanner');
+            const bar = document.getElementById('parseProgressBar');
+            const pText = document.getElementById('parseStatusText');
+
+            banner.classList.remove('hidden');
+            bar.style.width = '30%';
+            pText.innerText = "Extracting ingredients & directions...";
+
+            try {
+                bar.style.width = '65%';
+                const res = await fetch('/api/parse', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: `Extract the recipe from: ${url}` })
+                });
+
+                const parsed = await res.json();
+                if (!res.ok) throw new Error(parsed.error || 'Failed to parse link');
+
+                const newRecipe = {
+                    id: "rec-" + Date.now(),
+                    title: parsed.title || "Web Recipe",
+                    source: url.replace('https://', '').split('/')[0],
+                    source_type: "FAMILY_NOTE",
+                    description: parsed.description || "Clean extracted recipe.",
+                    image_url: "",
+                    prep_time: parsed.prep_time || "15m",
+                    cook_time: parsed.cook_time || "30m",
+                    difficulty: parsed.difficulty || "Easy",
+                    binder_category: parsed.binder_category || "Sunday Bakes",
+                    servings: parsed.servings || 4,
+                    ingredients: parsed.ingredients || [],
+                    steps: parsed.steps || [],
+                    secret_note: parsed.secret_note || "",
+                    tips_note: "",
+                    bookmarked: false
+                };
+
+                userRecipes.unshift(newRecipe);
+                localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
+                syncRecipeToSupabase(newRecipe);
+
+                bar.style.width = '100%';
+                pText.innerText = "Recipe parsed!";
+                urlInput.value = '';
+
+                setTimeout(() => {
+                    banner.classList.add('hidden');
+                    showVintageToast("Web recipe successfully parsed into your tin!", 'globe');
+                    viewRecipeDetail(newRecipe.id);
+                }, 800);
+            } catch (err) {
+                alert("Failed to parse link: " + err.message);
+                banner.classList.add('hidden');
+            }
+        }
+
+        async function syncRecipeToSupabase(recipe) {
+            if (!supabase || currentUserId === 'demo-user') return;
+            try {
+                await supabase.from('recipes').upsert({ ...recipe, user_id: currentUserId, id: recipe.id }, { onConflict: 'id' });
+            } catch(e) { console.warn("Retained locally.", e); }
+        }
+
+        async function deleteRecipeFromSupabase(id) {
+            if (!supabase || currentUserId === 'demo-user') return;
+            try { await supabase.from('recipes').delete().eq('id', id); } catch(e) { console.warn("Local deletion only.", e); }
+        }
+
+        function toggleAuthModal() {
+            const modal = document.getElementById('authModal');
+            modal.classList.toggle('hidden');
+            document.getElementById('authError').classList.add('hidden');
+            refreshIcons();
+        }
+
+        function setAuthMode(mode) {
+            authMode = mode;
+            const tabSignUp = document.getElementById('authTabSignUp');
+            const tabSignIn = document.getElementById('authTabSignIn');
+            const nameField = document.getElementById('authNameField');
+            const submitBtn = document.getElementById('authSubmitBtn');
+            const subtitle = document.getElementById('authSubtitle');
+
+            if (mode === 'signUp') {
+                tabSignUp.style.background = 'var(--accent-primary)';
+                tabSignUp.style.color = '#fff';
+                tabSignIn.style.background = 'transparent';
+                tabSignIn.style.color = 'var(--text-muted)';
+                nameField.classList.remove('hidden');
+                submitBtn.innerText = "Create Account & Open Tin";
+                subtitle.innerText = "Every family recipe tells a story—what will you create today?";
+            } else {
+                tabSignUp.style.background = 'transparent';
+                tabSignUp.style.color = 'var(--text-muted)';
+                tabSignIn.style.background = 'var(--accent-primary)';
+                tabSignIn.style.color = '#fff';
+                nameField.classList.add('hidden');
+                submitBtn.innerText = "Log In to My Recipe Tin";
+                subtitle.innerText = "Welcome back! Sign in to synchronize your kitchen archive.";
+            }
+        }
+
+        async function handleAuthSubmit(event) {
             event.preventDefault();
-            if (!activeRecipe) return;
+            document.getElementById('authError').classList.add('hidden');
 
-            activeRecipe.title = document.getElementById('editRecipeTitle').value.trim();
-            activeRecipe.description = document.getElementById('editRecipeDesc').value.trim();
-            activeRecipe.tips_note = document.getElementById('editRecipeTips').value.trim();
+            const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value.trim();
+            const firstName = document.getElementById('authName').value.trim() || "Cook";
 
-            const rawIngs = document.getElementById('editRecipeIngredients').value.split('\n').filter(l => l.trim() !== '');
-            activeRecipe.ingredients = rawIngs.map(line => ({ name: line.trim() }));
+            if (!supabase) {
+                currentUserId = email.replace(/[^a-zA-Z0-9]/g, '');
+                localStorage.setItem("currentUserId", currentUserId);
+                userProfile.name = firstName;
+                userProfile.email = email;
+                localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+                toggleAuthModal();
+                updateAuthControls();
+                applyProfileUI();
+                showVintageToast(`Welcome aboard, ${firstName}! Your archive is now securely tethered.`, 'sparkles');
+                navigate('feed');
+                return;
+            }
 
-            const rawSteps = document.getElementById('editRecipeSteps').value.split('\n').filter(l => l.trim() !== '');
-            activeRecipe.steps = rawSteps.map((st, idx) => ({ step_number: idx + 1, instruction: st.trim() }));
+            try {
+                if (authMode === 'signUp') {
+                    const { data, error } = await supabase.auth.signUp({
+                        email: email,
+                        password: password,
+                        options: { data: { name: firstName } }
+                    });
+                    if (error) throw error;
+                    if (data?.user) {
+                        currentUserId = data.user.id;
+                        localStorage.setItem("currentUserId", currentUserId);
+                        userProfile.name = firstName;
+                        userProfile.email = email;
+                        localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+                        toggleAuthModal();
+                        updateAuthControls();
+                        applyProfileUI();
+                        showVintageToast(`Welcome aboard, ${firstName}! Your archive is now securely tethered.`, 'sparkles');
+                        navigate('feed');
+                    }
+                } else {
+                    const { data, error } = await supabase.auth.signInWithPassword({
+                        email: email,
+                        password: password
+                    });
+                    if (error) throw error;
+                    if (data?.user) {
+                        currentUserId = data.user.id;
+                        localStorage.setItem("currentUserId", currentUserId);
+                        userProfile.name = data.user.user_metadata?.name || firstName;
+                        userProfile.email = email;
+                        localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+                        toggleAuthModal();
+                        updateAuthControls();
+                        applyProfileUI();
+                        showVintageToast(`Welcome back, ${userProfile.name}! Your recipe tin is synced.`, 'cloud-check');
+                        navigate('feed');
+                    }
+                }
+            } catch(error) {
+                document.getElementById('authError').classList.remove('hidden');
+                document.getElementById('authErrorText').innerText = error.message || "Authentication failed.";
+            }
+        }
 
-            localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
-            syncRecipeToSupabase(activeRecipe);
+        function updateAuthControls() {
+            applyProfileUI();
+        }
 
-            closeRecipeEditorModal();
-            viewRecipeDetail(activeRecipe.id, false);
-            showVintageToast("Your recipe card notes have been faithfully updated.", 'edit-3');
+        function handleSignOut() {
+            if (confirm("Log out of your Stained Pages session?")) {
+                if (supabase) supabase.auth.signOut();
+                currentUserId = "demo-user";
+                localStorage.setItem("currentUserId", currentUserId);
+                userProfile = { name: "Cook", email: "", avatar: "", wreath: "wreath-flowers", unitSystem: "imperial", fontSizeScale: 1.0 };
+                toggleAccountModal();
+                updateAuthControls();
+                applyProfileUI();
+                showVintageToast("Logged out successfully. See you in the kitchen soon!", 'log-out');
+                navigate('feed');
+            }
         }
 
         document.addEventListener('DOMContentLoaded', initApp);
