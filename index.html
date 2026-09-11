@@ -17,7 +17,7 @@
     
     <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkJldHdlZW4gU3RhaW5lZCBQYWdlcyIsCiAgInNob3J0X25hbWUiOiAiU3RhaW5lZFBhZ2VzIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNGQUY0RTgiLAogICJ0aGVtZV9jb2xvciI6ICIjREU1RTJFIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA1MTIgNTEyJyUzRSUzQ3JlY3Qgd2lkdGg9JzUxMicgaGVpZ2h0PSc1MTInIHJ4PScxMjgnIGZpbGw9JyUyM0RFNUUyRScvJTNFJTNDY2lyY2xlIGN4PScyNTYnIGN5PScyNTYnIHI9JzE4MCcgZmlsbD0nJTIzRkFGNEU4Jy8lM0UlM0NjaXJjbGUgY3g9JzI1NicgY3k9JzI1Nicgcj0nMTQwJyBmaWxsPSclMjNFQUE4MjMnLyUzRSUzQ2NpcmNsZSBjeD0nMjU2JyBjeT0nMjU2JyByPScxMDAnIGZpbGw9JyUyMzdDREQ2RCcvJTNFJTNDY2lyY2xlIGN4PScyNTYnIGN5PScyNTYnIHI9JzYwJyBmaWxsPSclMjNGQUY0RTgnLyUzRSUzQy9zdmclM0UiLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNreWJsZSIKICAgIH0KICBdCn0=" />
 
-    <!-- Multi-Decade Google Fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,400&family=Limelight&family=Pacifico&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Righteous&family=Shrikhand&family=Special+Elite&display=swap" rel="stylesheet">
@@ -27,7 +27,6 @@
     <script src="https://unpkg.com/lucide@latest" defer onload="if(window.lucide){lucide.createIcons();}"></script>
 
     <style>
-        /* DECADE DESIGN TOKENS */
         body, body.era-1970s {
             --bg-canvas: #FAF4E8;
             --bg-card: #FFFDF9;
@@ -62,40 +61,6 @@
             --top-stripe: linear-gradient(90deg, #D4AF37 0%, #F9F5EC 50%, #D4AF37 100%);
         }
 
-        body.era-1930s {
-            --bg-canvas: #F4EFE6;
-            --bg-card: #FAF7F2;
-            --bg-tint: #E8E0D2;
-            --accent-primary: #5B1426;
-            --accent-secondary: #A08C75;
-            --accent-tertiary: #CBD5E1;
-            --text-primary: #2B1810;
-            --text-muted: #6B5B52;
-            --border-primary: rgba(91, 20, 38, 0.2);
-            --font-display: 'Limelight', cursive;
-            --font-sub: 'Playfair Display', serif;
-            --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
-            --radius-card: 1.25rem;
-            --top-stripe: linear-gradient(90deg, #5B1426 0%, #A08C75 100%);
-        }
-
-        body.era-1940s {
-            --bg-canvas: #EFE8D3;
-            --bg-card: #F7F3E6;
-            --bg-tint: #E3D9BE;
-            --accent-primary: #A82323;
-            --accent-secondary: #6B6943;
-            --accent-tertiary: #3A4B35;
-            --text-primary: #2D2A26;
-            --text-muted: #5C574F;
-            --border-primary: rgba(45, 42, 38, 0.25);
-            --font-display: 'Special Elite', cursive;
-            --font-sub: 'Special Elite', cursive;
-            --font-body: 'Special Elite', monospace;
-            --radius-card: 0.25rem;
-            --top-stripe: repeating-linear-gradient(90deg, #A82323, #A82323 15px, #EFE8D3 15px, #EFE8D3 30px);
-        }
-
         body.era-1950s {
             --bg-canvas: #FFFDF7;
             --bg-card: #FFFFFF;
@@ -111,74 +76,6 @@
             --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
             --radius-card: 1.5rem;
             --top-stripe: repeating-linear-gradient(45deg, #00BFA5, #00BFA5 10px, #FFF 10px, #FFF 20px);
-        }
-
-        body.era-1960s {
-            --bg-canvas: #FFF8E7;
-            --bg-card: #FFFFFF;
-            --bg-tint: #FFE082;
-            --accent-primary: #FF6F00;
-            --accent-secondary: #8BC34A;
-            --accent-tertiary: #212121;
-            --text-primary: #212121;
-            --text-muted: #616161;
-            --border-primary: #212121;
-            --font-display: 'Shrikhand', cursive;
-            --font-sub: 'Righteous', cursive;
-            --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
-            --radius-card: 2rem;
-            --top-stripe: linear-gradient(90deg, #FF6F00 0%, #8BC34A 50%, #212121 100%);
-        }
-
-        body.era-1980s {
-            --bg-canvas: #1A1026;
-            --bg-card: #251638;
-            --bg-tint: #341D4E;
-            --accent-primary: #FF007F;
-            --accent-secondary: #00F0FF;
-            --accent-tertiary: #FFE600;
-            --text-primary: #FFFFFF;
-            --text-muted: #B8A9CF;
-            --border-primary: rgba(255, 0, 127, 0.45);
-            --font-display: 'Righteous', cursive;
-            --font-sub: 'Righteous', cursive;
-            --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
-            --radius-card: 0.5rem;
-            --top-stripe: linear-gradient(90deg, #FF007F 0%, #00F0FF 50%, #FFE600 100%);
-        }
-
-        body.era-1990s {
-            --bg-canvas: #EAE6DF;
-            --bg-card: #F4F1EA;
-            --bg-tint: #D8D2C5;
-            --accent-primary: #7B341E;
-            --accent-secondary: #4A5568;
-            --accent-tertiary: #2D3748;
-            --text-primary: #1A202C;
-            --text-muted: #4A5568;
-            --border-primary: rgba(45, 55, 72, 0.28);
-            --font-display: 'Special Elite', monospace;
-            --font-sub: 'Playfair Display', serif;
-            --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
-            --radius-card: 0.25rem;
-            --top-stripe: linear-gradient(90deg, #7B341E, #4A5568);
-        }
-
-        body.era-2000s {
-            --bg-canvas: #EFF6FF;
-            --bg-card: #FFFFFF;
-            --bg-tint: #DBEAFE;
-            --accent-primary: #0284C7;
-            --accent-secondary: #9333EA;
-            --accent-tertiary: #06B6D4;
-            --text-primary: #0F172A;
-            --text-muted: #475569;
-            --border-primary: rgba(2, 132, 199, 0.25);
-            --font-display: 'Righteous', cursive;
-            --font-sub: 'Plus Jakarta Sans', sans-serif;
-            --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
-            --radius-card: 1.5rem;
-            --top-stripe: linear-gradient(90deg, #0284C7, #06B6D4, #9333EA);
         }
 
         body.era-2010s {
@@ -327,7 +224,36 @@
         }
         @keyframes strikethrough { to { transform: scaleX(1); } }
 
-        /* SKEUOMORPHIC 3D WALNUT BOOKSHELF */
+        /* AVATAR WREATH & BANNERS */
+        .avatar-frame-container {
+            position: relative;
+            width: 5.5rem;
+            height: 5.5rem;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .avatar-img {
+            width: 4.5rem;
+            height: 4.5rem;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-primary);
+            background: var(--bg-tint);
+        }
+        .avatar-wreath {
+            position: absolute;
+            inset: -4px;
+            pointer-events: none;
+            border-radius: 50%;
+        }
+        .wreath-flowers { box-shadow: 0 0 0 4px #F48FB1, 0 0 0 7px #C9DBC7; }
+        .wreath-cookies { box-shadow: 0 0 0 4px #C78B1D, 0 0 0 7px #8D5537; }
+        .wreath-citrus  { box-shadow: 0 0 0 4px #FFD54F, 0 0 0 7px #7C8D6D; }
+        .wreath-wheat   { box-shadow: 0 0 0 4px #EAA823, 0 0 0 7px #FAF4E8; }
+
+        /* 3D WALNUT BOOKSHELF */
         .bookcase-container {
             background: radial-gradient(circle at 50% 25%, #3a2215 0%, #1a0f08 100%);
             border: 12px solid #27160d;
@@ -497,13 +423,10 @@
                 <i data-lucide="settings" style="width: 1.15rem; height: 1.15rem; color: var(--accent-primary);"></i>
             </button>
 
-            <button id="pantrySyncBadge" onclick="navigate('pantry')" style="display: none; align-items: center; gap: 0.35rem; padding: 0.35rem 0.75rem; border-radius: 9999px; background: var(--bg-tint); color: var(--text-primary); font-size: 0.75rem; font-weight: 700; border: 1px solid var(--border-primary);">
-                <i data-lucide="shopping-basket" style="width: 1rem; height: 1rem; color: var(--accent-secondary);"></i>
-                <span id="pantryCount">0</span> Stocked
-            </button>
-            
-            <button id="authBtn" onclick="toggleAuthModal()" style="display: flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.85rem; border-radius: 9999px; border: 1.5px solid var(--border-primary); background: var(--bg-card); font-size: 0.75rem; font-weight: 700; color: var(--text-primary);">
-                <i data-lucide="user" style="width: 0.95rem; height: 0.95rem;"></i>
+            <!-- User Account / Profile Badge -->
+            <button id="authBtn" onclick="handleProfileHeaderClick()" style="display: flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.85rem; border-radius: 9999px; border: 1.5px solid var(--border-primary); background: var(--bg-card); font-size: 0.75rem; font-weight: 700; color: var(--text-primary);">
+                <img id="headerAvatarImg" src="" class="hidden" style="width: 1.25rem; height: 1.25rem; border-radius: 50%; object-fit: cover;">
+                <i id="headerAvatarIcon" data-lucide="user" style="width: 0.95rem; height: 0.95rem;"></i>
                 <span id="authBtnText">Sign In</span>
             </button>
         </div>
@@ -588,7 +511,6 @@
                         <span style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--accent-secondary); letter-spacing: 0.15em;">Private Culinary Library</span>
                         <h2 class="font-retro-title" style="font-size: 1.75rem; color: var(--accent-primary); margin-top: 0.2rem;">My Bookshelf</h2>
                     </div>
-                    <!-- Top-Right Plus to Create Cookbook -->
                     <button onclick="openCookbookCreatorModal()" class="btn-retro-orange" style="padding: 0.65rem 0.9rem; border-radius: 50%; width: 2.6rem; height: 2.6rem;" title="Bind New Cookbook">
                         <i data-lucide="plus" style="width: 1.25rem; height: 1.25rem;"></i>
                     </button>
@@ -601,7 +523,7 @@
             <div id="section-import" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.75rem; border: 2px solid var(--border-primary);">
                 <div style="margin-bottom: 1.5rem;">
                     <h2 class="font-retro-title" style="font-size: 1.75rem; color: var(--accent-primary);">Import Cherished Recipes</h2>
-                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Transcribe physical heirloom cards or phone screenshots (TikTok, Instagram, Apple Notes) with dual AI OCR.</p>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Transcribe physical heirloom cards or phone screenshots with dual AI OCR.</p>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
@@ -609,7 +531,7 @@
                         <div>
                             <span style="padding: 0.25rem 0.65rem; border-radius: 9999px; background: var(--accent-secondary); color: #fff; font-size: 0.65rem; font-weight: 800; text-transform: uppercase;">Universal Vision OCR</span>
                             <h3 class="font-retro-sub" style="font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin: 0.65rem 0 0.25rem;">Scan Card or Screenshot</h3>
-                            <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">Snap a photo of an index card or choose a screenshot from your photo roll. The image is preserved above your recipe card.</p>
+                            <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">Snap a photo of an index card or choose a screenshot from your photo roll.</p>
                         </div>
 
                         <div id="scanPreviewArea" class="hidden" style="position: relative; height: 10rem; width: 100%; border-radius: 1rem; overflow: hidden; background: #000;">
@@ -673,7 +595,6 @@
                         <i data-lucide="arrow-left" style="width: 1.15rem; height: 1.15rem;"></i>
                         <span>Back to Recipe Tin</span>
                     </button>
-                    
                     <button onclick="window.print()" class="btn-retro-avocado" style="padding: 0.5rem 0.95rem; font-size: 0.75rem;">
                         <i data-lucide="printer" style="width: 1rem; height: 1rem;"></i>
                         <span>Print 4x6 Index Card</span>
@@ -800,12 +721,12 @@
         </section>
     </main>
 
-    <!-- Lightbox Modal for High-Resolution Card View -->
+    <!-- Lightbox Modal -->
     <div id="lightboxModal" class="hidden" onclick="closeLightbox()">
         <img id="lightboxImg" src="" onclick="event.stopPropagation()">
     </div>
 
-    <!-- Mobile Bottom Navigation Bar (Now Includes Bookshelf) -->
+    <!-- Mobile Bottom Navigation Bar -->
     <nav style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 40; background: var(--bg-card); border-top: 2px solid var(--border-primary); padding: 0.65rem 1.5rem; display: flex; justify-content: space-around; align-items: center;" id="mobileNav">
         <button onclick="navigate('feed')" class="mobile-nav-btn" id="mbtn-feed" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem; color: var(--accent-primary); background: transparent;">
             <i data-lucide="layout-grid" style="width: 1.35rem; height: 1.35rem; color: var(--accent-primary);"></i>
@@ -825,42 +746,141 @@
         </button>
     </nav>
 
-    <!-- App Settings Modal (Includes Custom Era per Cookbook) -->
-    <div id="settingsModal" class="hidden" style="position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; padding: 1rem;">
+    <!-- MY ACCOUNT PROFILE DRAWER / MODAL (WITH ALL 5 CORE PILLARS) -->
+    <div id="accountModal" class="hidden" style="position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; padding: 1rem;">
+        <div style="background: var(--bg-card); max-width: 27rem; width: 100%; border-radius: var(--radius-card); padding: 1.75rem; border: 2px solid var(--border-primary); position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.35); max-height: 90vh; overflow-y: auto;">
+            <button onclick="toggleAccountModal()" style="position: absolute; right: 1rem; top: 1rem; width: 2rem; height: 2rem; background: var(--bg-tint); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
+                <i data-lucide="x" style="width: 1.1rem; height: 1.1rem;"></i>
+            </button>
+
+            <!-- 1. Identity & Cloud Sync: Cook Profile Avatar with Wreaths -->
+            <div style="text-align: center; margin-bottom: 1.25rem;">
+                <div class="avatar-frame-container" id="profileAvatarContainer">
+                    <img id="myAccountAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23DE5E2E'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M12 14c-6 0-8 3-8 6v1h16v-1c0-3-2-6-8-6z'/%3E%3C/svg%3E" class="avatar-img">
+                    <div id="myAccountWreath" class="avatar-wreath wreath-flowers"></div>
+                </div>
+                
+                <label style="cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; font-weight: 800; color: var(--accent-primary); margin-top: 0.75rem;">
+                    <i data-lucide="camera" style="width: 0.9rem; height: 0.9rem;"></i>
+                    <span>Change Profile Photo</span>
+                    <input type="file" accept="image/*" class="hidden" onchange="handleAvatarUpload(this)">
+                </label>
+
+                <h3 id="myAccountDisplayName" class="font-retro-title" style="font-size: 1.5rem; color: var(--accent-primary); margin-top: 0.35rem;">Cook</h3>
+                <p id="myAccountEmail" style="font-size: 0.75rem; color: var(--text-muted);"></p>
+                
+                <div style="display: inline-flex; align-items: center; gap: 0.35rem; background: var(--bg-tint); padding: 0.25rem 0.65rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 800; color: var(--accent-secondary); margin-top: 0.4rem; border: 1px solid var(--border-primary);">
+                    <i data-lucide="cloud" style="width: 0.85rem; height: 0.85rem;"></i>
+                    <span>Cloud Archive Sync Active (Phone, iPad & Web)</span>
+                </div>
+
+                <div style="margin-top: 0.4rem;">
+                    <button onclick="handlePasswordReset()" style="font-size: 0.65rem; font-weight: 700; color: var(--text-muted); text-decoration: underline; background: transparent;">Reset Account Password</button>
+                </div>
+            </div>
+
+            <!-- Profile Banner / Wreath Selector -->
+            <div style="margin-bottom: 1.25rem;">
+                <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Profile Picture Banner Frame</label>
+                <div style="display: flex; gap: 0.5rem; margin-top: 0.4rem; overflow-x: auto;" class="no-scrollbar">
+                    <button type="button" onclick="setProfileWreath('wreath-flowers')" style="padding: 0.35rem 0.65rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; background: var(--bg-tint); border: 1.5px solid var(--border-primary);">🌸 Spring Flowers</button>
+                    <button type="button" onclick="setProfileWreath('wreath-cookies')" style="padding: 0.35rem 0.65rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; background: var(--bg-tint); border: 1.5px solid var(--border-primary);">🍪 Baker's Cookies</button>
+                    <button type="button" onclick="setProfileWreath('wreath-citrus')" style="padding: 0.35rem 0.65rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; background: var(--bg-tint); border: 1.5px solid var(--border-primary);">🍋 Citrus Orchard</button>
+                    <button type="button" onclick="setProfileWreath('wreath-wheat')" style="padding: 0.35rem 0.65rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; background: var(--bg-tint); border: 1.5px solid var(--border-primary);">🌾 Harvest Wheat</button>
+                    <button type="button" onclick="setProfileWreath('')" style="padding: 0.35rem 0.65rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; background: var(--bg-tint); border: 1.5px solid var(--border-primary);">Plain</button>
+                </div>
+            </div>
+
+            <!-- 2. Kitchen Stats -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; background: var(--bg-tint); padding: 0.85rem; border-radius: 1rem; border: 1.5px solid var(--border-primary); text-align: center; margin-bottom: 1.25rem;">
+                <div>
+                    <span id="statRecipeCount" style="display: block; font-size: 1.15rem; font-weight: 800; color: var(--accent-primary);">0</span>
+                    <span style="font-size: 0.6rem; text-transform: uppercase; font-weight: 800; color: var(--text-muted);">Recipes</span>
+                </div>
+                <div style="border-left: 1px solid var(--border-primary); border-right: 1px solid var(--border-primary);">
+                    <span id="statBooksCount" style="display: block; font-size: 1.15rem; font-weight: 800; color: var(--accent-primary);">0</span>
+                    <span style="font-size: 0.6rem; text-transform: uppercase; font-weight: 800; color: var(--text-muted);">Books</span>
+                </div>
+                <div>
+                    <span id="statPantryCount" style="display: block; font-size: 1.15rem; font-weight: 800; color: var(--accent-primary);">0</span>
+                    <span style="font-size: 0.6rem; text-transform: uppercase; font-weight: 800; color: var(--text-muted);">Pantry</span>
+                </div>
+            </div>
+
+            <!-- 4. Measurement & Unit Preferences -->
+            <div style="background: var(--bg-tint); padding: 0.85rem 1rem; border-radius: 1rem; border: 1.5px solid var(--border-primary); margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                    <span style="display: block; font-size: 0.75rem; font-weight: 800; color: var(--text-primary);">Kitchen Measurement Units</span>
+                    <span id="unitPreferenceLabel" style="font-size: 0.65rem; color: var(--text-muted);">Imperial (cups, tbsp, oz)</span>
+                </div>
+                <button type="button" onclick="toggleUnitPreference()" id="unitToggleBtn" style="padding: 0.35rem 0.85rem; border-radius: 9999px; background: var(--accent-secondary); color: #fff; font-size: 0.7rem; font-weight: 800; border: 1px solid var(--border-primary);">
+                    Imperial
+                </button>
+            </div>
+
+            <!-- 5. Backup & Export Data -->
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1.25rem;">
+                <button type="button" onclick="exportArchiveData()" class="btn-retro-avocado" style="flex: 1; padding: 0.65rem; font-size: 0.72rem;">
+                    <i data-lucide="download" style="width: 0.95rem; height: 0.95rem;"></i>
+                    <span>Export JSON</span>
+                </button>
+                <button type="button" onclick="window.print()" class="btn-retro-orange" style="flex: 1; padding: 0.65rem; font-size: 0.72rem;">
+                    <i data-lucide="printer" style="width: 0.95rem; height: 0.95rem;"></i>
+                    <span>Print Archive</span>
+                </button>
+            </div>
+
+            <button onclick="handleSignOut()" style="width: 100%; padding: 0.75rem; border-radius: 9999px; border: 1.5px solid #FFCDD2; background: #FFEBEE; color: #C62828; font-size: 0.75rem; font-weight: 800;">Log Out of Tin</button>
+        </div>
+    </div>
+
+    <!-- ONBOARDING WELCOME & SIGN UP MODAL -->
+    <div id="authModal" class="hidden" style="position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; padding: 1rem;">
         <div style="background: var(--bg-card); max-width: 24rem; width: 100%; border-radius: var(--radius-card); padding: 1.75rem; border: 2px solid var(--border-primary); position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25);">
-            <button onclick="toggleSettingsModal()" style="position: absolute; right: 1rem; top: 1rem; width: 2rem; height: 2rem; background: var(--bg-tint); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
+            <button onclick="toggleAuthModal()" style="position: absolute; right: 1rem; top: 1rem; width: 2rem; height: 2rem; background: var(--bg-tint); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
                 <i data-lucide="x" style="width: 1.15rem; height: 1.15rem;"></i>
             </button>
 
-            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
-                <i data-lucide="palette" style="width: 1.25rem; height: 1.25rem; color: var(--accent-primary);"></i>
-                <h3 class="font-retro-title" style="font-size: 1.35rem; color: var(--accent-primary);">Kitchen Aesthetics</h3>
-            </div>
-            <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.25rem;">Switch your app timeline or assign decade skins to individual cookbooks.</p>
-
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem;">
-                <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Global App Timeline Era</label>
-                <select id="settingsEraSelect" onchange="applyDecadeTheme(this.value)" style="background: var(--bg-tint); padding: 0.75rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; font-weight: 700; color: var(--text-primary); outline: none; font-family: inherit;">
-                    <option value="1970s">1970s: Earthy Harvest & Disco Kitchen (Default)</option>
-                    <option value="1920s">1920s: Art Deco & Gilded Jazz Age</option>
-                    <option value="1930s">1930s: Streamline Moderne & Hollywood Glamour</option>
-                    <option value="1940s">1940s: Victory Utility & Handwritten Rations</option>
-                    <option value="1950s">1950s: Mid-Century Atomic Pastel Diner</option>
-                    <option value="1960s">1960s: Mod Pop & Psychedelic Sunshine</option>
-                    <option value="1980s">1980s: Memphis Neon & Radical Bakes</option>
-                    <option value="1990s">1990s: Minimal Raw Slate & Grunge Notebook</option>
-                    <option value="2000s">2000s: Y2K Cyber Glaze & Glossy Bling</option>
-                    <option value="2010s">2010s: Rustic Edison & Millennial Pastel</option>
-                </select>
+            <div style="text-align: center; margin-bottom: 1.25rem;">
+                <div style="width: 3.5rem; height: 3.5rem; background: var(--accent-secondary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.65rem; box-shadow: 0 3px 6px rgba(0,0,0,0.1);">
+                    <i data-lucide="book-open" style="width: 1.75rem; height: 1.75rem;"></i>
+                </div>
+                <h3 class="font-retro-title" style="font-size: 1.35rem; color: var(--accent-primary);">Welcome to Between Stained Pages</h3>
+                <p id="authSubtitle" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4;">Every family recipe tells a story—what will you create today?</p>
             </div>
 
-            <!-- Manage Era Per Cookbook -->
-            <div id="settingsCookbookErasContainer" style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.5rem;">
-                <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Cookbook Decades</label>
-                <div id="settingsCookbooksList" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 8rem; overflow-y: auto;"></div>
+            <div style="display: flex; border-radius: 9999px; background: var(--bg-tint); padding: 0.25rem; margin-bottom: 1rem; border: 1.5px solid var(--border-primary);">
+                <button onclick="setAuthMode('signUp')" id="authTabSignUp" style="flex: 1; padding: 0.45rem; font-size: 0.75rem; font-weight: 800; border-radius: 9999px; background: var(--accent-primary); color: #fff;">Create Account</button>
+                <button onclick="setAuthMode('signIn')" id="authTabSignIn" style="flex: 1; padding: 0.45rem; font-size: 0.75rem; font-weight: 800; border-radius: 9999px; background: transparent; color: var(--text-muted);">Log In</button>
             </div>
 
-            <button onclick="toggleSettingsModal()" class="btn-retro-orange" style="width: 100%; padding: 0.8rem;">Save & Close</button>
+            <div id="authError" class="hidden" style="margin-bottom: 1rem; padding: 0.75rem; border-radius: 0.75rem; background: #FFEBEE; border: 1.5px solid #FFCDD2; font-size: 0.75rem; color: #C62828; display: flex; align-items: center; gap: 0.5rem;">
+                <i data-lucide="alert-circle" style="width: 1rem; height: 1rem;"></i>
+                <span id="authErrorText">Invalid Credentials</span>
+            </div>
+
+            <form id="authForm" style="display: flex; flex-direction: column; gap: 0.75rem;" onsubmit="handleAuthSubmit(event)">
+                <div id="authNameField" style="display: flex; flex-direction: column; gap: 0.25rem;">
+                    <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">First Name</label>
+                    <input type="text" id="authName" placeholder="e.g., Clara" style="background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; font-family: inherit;">
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                    <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Email Address</label>
+                    <input type="email" id="authEmail" required placeholder="cook@stainedpages.app" style="background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; font-family: inherit;">
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                    <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Password</label>
+                    <input type="password" id="authPassword" required placeholder="Min 6 characters" style="background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; font-family: inherit;">
+                </div>
+
+                <p style="font-size: 0.68rem; color: var(--text-muted); font-style: italic; line-height: 1.35; padding: 0.35rem 0;">
+                    Your account keeps all family recipes safely backed up so you can access them on your phone, iPad, or any device.
+                </p>
+
+                <button type="submit" id="authSubmitBtn" class="btn-retro-orange" style="width: 100%; padding: 0.85rem; margin-top: 0.25rem;">Create Account & Open Tin</button>
+            </form>
         </div>
     </div>
 
@@ -894,7 +914,6 @@
                         <input type="text" id="newBookSubtitle" value="All of Nana's Baked Goods" oninput="updateCoverPreview()" placeholder="e.g. All of Nana's Baked Goods" style="width: 100%; background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.85rem; color: var(--text-primary); outline: none; margin-top: 0.25rem; font-family: inherit;">
                     </div>
 
-                    <!-- Color Wheel & Pickers -->
                     <div>
                         <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Cover Color (Picker / Wheel)</label>
                         <div style="display: flex; align-items: center; gap: 0.75rem; margin-top: 0.35rem;">
@@ -903,7 +922,6 @@
                         </div>
                     </div>
 
-                    <!-- Front Font Color: Black, White, Brown -->
                     <div>
                         <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Front Font Color</label>
                         <div style="display: flex; gap: 1rem; margin-top: 0.35rem;">
@@ -919,7 +937,6 @@
                         </div>
                     </div>
 
-                    <!-- Spine UI Icon / Food Emoji -->
                     <div>
                         <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Spine Icon Badge</label>
                         <div id="spineEmojiPicker" style="display: flex; gap: 0.4rem; overflow-x: auto; padding: 0.4rem 0;" class="no-scrollbar">
@@ -947,9 +964,8 @@
                     <h3 class="font-retro-title" style="font-size: 1.4rem; color: var(--accent-primary);">Select Recipes</h3>
                     <button type="button" onclick="goToBookStep1()" style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); background: transparent;">Back</button>
                 </div>
-                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.15rem;">Check the recipes to tuck inside this cookbook volume. You can add or remove them anytime.</p>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.15rem;">Check the recipes to tuck inside this cookbook. You can add or remove them anytime.</p>
 
-                <!-- Checkbox list of all existing recipes -->
                 <div id="cookbookRecipeChecklist" style="display: flex; flex-direction: column; gap: 0.65rem; max-height: 16rem; overflow-y: auto; margin-bottom: 1.25rem; padding-right: 0.25rem;"></div>
 
                 <button type="button" onclick="finishCookbookBinding()" class="btn-retro-orange" style="width: 100%; padding: 0.85rem;">
@@ -957,73 +973,6 @@
                     <span>Save & Complete</span>
                 </button>
             </div>
-        </div>
-    </div>
-
-    <!-- Supabase Auth Modal with Onboarding Decade Picker -->
-    <div id="authModal" class="hidden" style="position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; padding: 1rem;">
-        <div style="background: var(--bg-card); max-width: 24rem; width: 100%; border-radius: var(--radius-card); padding: 1.75rem; border: 2px solid var(--border-primary); position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25);">
-            <button onclick="toggleAuthModal()" style="position: absolute; right: 1rem; top: 1rem; width: 2rem; height: 2rem; background: var(--bg-tint); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
-                <i data-lucide="x" style="width: 1.15rem; height: 1.15rem;"></i>
-            </button>
-
-            <div style="text-align: center; margin-bottom: 1.25rem;">
-                <div style="width: 3.5rem; height: 3.5rem; background: var(--accent-secondary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.65rem; box-shadow: 0 3px 6px rgba(0,0,0,0.1);">
-                    <i data-lucide="book-open" style="width: 1.75rem; height: 1.75rem;"></i>
-                </div>
-                <h3 class="font-retro-title" style="font-size: 1.35rem; color: var(--accent-primary);">Between Stained Pages</h3>
-                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4;">Synchronize your heirloom kitchen recipes across all family devices.</p>
-            </div>
-
-            <div style="display: flex; border-radius: 9999px; background: var(--bg-tint); padding: 0.25rem; margin-bottom: 1rem; border: 1.5px solid var(--border-primary);">
-                <button onclick="setAuthMode('signUp')" id="authTabSignUp" style="flex: 1; padding: 0.45rem; font-size: 0.75rem; font-weight: 800; border-radius: 9999px; background: var(--accent-primary); color: #fff;">Create Account</button>
-                <button onclick="setAuthMode('signIn')" id="authTabSignIn" style="flex: 1; padding: 0.45rem; font-size: 0.75rem; font-weight: 800; border-radius: 9999px; background: transparent; color: var(--text-muted);">Log In</button>
-            </div>
-
-            <div id="authError" class="hidden" style="margin-bottom: 1rem; padding: 0.75rem; border-radius: 0.75rem; background: #FFEBEE; border: 1.5px solid #FFCDD2; font-size: 0.75rem; color: #C62828; display: flex; align-items: center; gap: 0.5rem;">
-                <i data-lucide="alert-circle" style="width: 1rem; height: 1rem;"></i>
-                <span id="authErrorText">Invalid Credentials</span>
-            </div>
-
-            <form id="authForm" style="display: flex; flex-direction: column; gap: 0.75rem;" onsubmit="handleAuthSubmit(event)">
-                <div id="authNameField" style="display: flex; flex-direction: column; gap: 0.25rem;">
-                    <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Your Cook Name</label>
-                    <input type="text" id="authName" placeholder="e.g., Betty" style="background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; font-family: inherit;">
-                </div>
-
-                <div style="display: flex; flex-direction: column; gap: 0.25rem;">
-                    <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Email Address</label>
-                    <input type="email" id="authEmail" required placeholder="cook@stainedpages.app" style="background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; font-family: inherit;">
-                </div>
-
-                <div style="display: flex; flex-direction: column; gap: 0.25rem;">
-                    <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Password</label>
-                    <input type="password" id="authPassword" required placeholder="Min 6 characters" style="background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; font-family: inherit;">
-                </div>
-
-                <div id="authEraField" style="display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.25rem; padding-top: 0.65rem; border-top: 1.5px dashed var(--border-primary);">
-                    <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">
-                        Your Kitchen's Golden Era
-                    </label>
-                    <p style="font-size: 0.72rem; color: var(--text-muted); font-style: italic; line-height: 1.35;">
-                        Every kitchen has its golden age. Would you like to style your tin in a specific decade?
-                    </p>
-                    <select id="authEraSelect" style="background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; font-weight: 700; color: var(--text-primary); outline: none; font-family: inherit;">
-                        <option value="1970s" selected>1970s: Earthy Harvest & Disco Kitchen (Default)</option>
-                        <option value="1920s">1920s: Art Deco & Gilded Jazz Age</option>
-                        <option value="1930s">1930s: Streamline Moderne & Hollywood Glamour</option>
-                        <option value="1940s">1940s: Victory Utility & Handwritten Rations</option>
-                        <option value="1950s">1950s: Mid-Century Atomic Pastel Diner</option>
-                        <option value="1960s">1960s: Mod Pop & Psychedelic Sunshine</option>
-                        <option value="1980s">1980s: Memphis Neon & Radical Bakes</option>
-                        <option value="1990s">1990s: Minimal Raw Slate & Grunge Notebook</option>
-                        <option value="2000s">2000s: Y2K Cyber Glaze & Glossy Bling</option>
-                        <option value="2010s">2010s: Rustic Edison & Millennial Pastel</option>
-                    </select>
-                </div>
-
-                <button type="submit" id="authSubmitBtn" class="btn-retro-orange" style="width: 100%; padding: 0.85rem; margin-top: 0.5rem;">Create Account & Open Tin</button>
-            </form>
         </div>
     </div>
 
@@ -1042,6 +991,8 @@
         let userBinders = JSON.parse(localStorage.getItem(`binders_${currentUserId}`)) || defaultBinders;
         let userCookbooks = JSON.parse(localStorage.getItem(`cookbooks_${currentUserId}`)) || [];
         let pantryItems = JSON.parse(localStorage.getItem(`pantry_${currentUserId}`)) || [];
+        let userProfile = JSON.parse(localStorage.getItem(`profile_${currentUserId}`)) || { name: "Cook", email: "", avatar: "", wreath: "wreath-flowers", unitSystem: "imperial" };
+        
         let selectedCategory = "All";
         let activeRecipe = null;
         let activeScaleFactor = 1.0;
@@ -1079,8 +1030,6 @@
 
             const sSelect = document.getElementById('settingsEraSelect');
             if (sSelect) sSelect.value = era;
-            const aSelect = document.getElementById('authEraSelect');
-            if (aSelect) aSelect.value = era;
         }
 
         function initDecadeTheme() {
@@ -1134,15 +1083,14 @@
 
             if (window.innerWidth >= 768) {
                 const aside = document.getElementById('desktopSidebar');
-                const badge = document.getElementById('pantrySyncBadge');
                 if (aside) aside.style.display = 'block';
-                if (badge) badge.style.display = 'flex';
             }
 
             initDecadeTheme();
             renderBinders();
             updateAuthControls();
             updatePantryCounters();
+            applyProfileUI();
 
             handleHashChange();
             window.addEventListener('hashchange', handleHashChange);
@@ -1206,7 +1154,7 @@
             refreshIcons();
         }
 
-        // ================= TWO-STEP COOKBOOK CREATOR & SHELF =================
+        // ================= 3D WALNUT BOOKSHELF LOGIC =================
         function renderBookshelf() {
             const bookcase = document.getElementById('bookcaseDisplay');
             bookcase.innerHTML = '';
@@ -1214,7 +1162,6 @@
             const shelfRow = document.createElement('div');
             shelfRow.className = 'bookshelf-row';
 
-            // Brass Add Card (Shelf sits blank by default until volumes are bound)
             const addCard = document.createElement('div');
             addCard.className = 'brass-add-card';
             addCard.onclick = openCookbookCreatorModal;
@@ -1376,7 +1323,6 @@
 
             const selectedRecipeIds = Array.from(document.querySelectorAll('.book-recipe-checkbox:checked')).map(cb => cb.value);
 
-            // Update binder category on chosen recipes
             userRecipes.forEach(r => {
                 if (selectedRecipeIds.includes(r.id)) {
                     r.binder_category = title;
@@ -1419,6 +1365,130 @@
             closeCookbookModal();
             renderBookshelf();
             navigate('bookshelf');
+        }
+
+        // ================= USER ACCOUNT: 5 CORE PILLARS =================
+        function handleProfileHeaderClick() {
+            if (currentUserId && currentUserId !== 'demo-user') {
+                toggleAccountModal();
+            } else {
+                toggleAuthModal();
+            }
+        }
+
+        function toggleAccountModal() {
+            const modal = document.getElementById('accountModal');
+            modal.classList.toggle('hidden');
+
+            document.getElementById('statRecipeCount').innerText = userRecipes.length;
+            document.getElementById('statBooksCount').innerText = userCookbooks.length;
+            document.getElementById('statPantryCount').innerText = pantryItems.length;
+
+            refreshIcons();
+        }
+
+        function applyProfileUI() {
+            const btnText = document.getElementById('authBtnText');
+            const hImg = document.getElementById('headerAvatarImg');
+            const hIcon = document.getElementById('headerAvatarIcon');
+            const accName = document.getElementById('myAccountDisplayName');
+            const accEmail = document.getElementById('myAccountEmail');
+            const accImg = document.getElementById('myAccountAvatarImg');
+            const accWreath = document.getElementById('myAccountWreath');
+            const unitBtn = document.getElementById('unitToggleBtn');
+            const unitLabel = document.getElementById('unitPreferenceLabel');
+
+            if (currentUserId && currentUserId !== 'demo-user') {
+                btnText.innerText = userProfile.name || "Cook";
+                accName.innerText = userProfile.name || "Cook";
+                accEmail.innerText = userProfile.email || "";
+
+                if (userProfile.avatar) {
+                    hImg.src = userProfile.avatar;
+                    hImg.classList.remove('hidden');
+                    hIcon.classList.add('hidden');
+                    accImg.src = userProfile.avatar;
+                } else {
+                    hImg.classList.add('hidden');
+                    hIcon.classList.remove('hidden');
+                }
+
+                if (accWreath) {
+                    accWreath.className = "avatar-wreath " + (userProfile.wreath || '');
+                }
+
+                const isMetric = userProfile.unitSystem === 'metric';
+                if (unitBtn) unitBtn.innerText = isMetric ? "Metric" : "Imperial";
+                if (unitLabel) unitLabel.innerText = isMetric ? "Metric (grams, ml, kg)" : "Imperial (cups, tbsp, oz)";
+            } else {
+                btnText.innerText = "Sign In";
+                hImg.classList.add('hidden');
+                hIcon.classList.remove('hidden');
+            }
+        }
+
+        function handleAvatarUpload(input) {
+            if (!input.files || !input.files[0]) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                userProfile.avatar = e.target.result;
+                localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+                applyProfileUI();
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        function setProfileWreath(wreathClass) {
+            userProfile.wreath = wreathClass;
+            localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+            applyProfileUI();
+        }
+
+        // Toggle Imperial / Metric
+        function toggleUnitPreference() {
+            userProfile.unitSystem = userProfile.unitSystem === 'metric' ? 'imperial' : 'metric';
+            localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+            applyProfileUI();
+            if (activeRecipe) renderDetailIngredientsAndSteps();
+        }
+
+        // Direct Password Reset
+        async function handlePasswordReset() {
+            const email = userProfile.email || prompt("Enter your email address to receive a password reset link:");
+            if (!email) return;
+
+            if (supabase) {
+                try {
+                    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                        redirectTo: window.location.origin
+                    });
+                    if (error) throw error;
+                    alert(`Password reset instructions sent to ${email}. Check your inbox!`);
+                } catch(err) {
+                    alert("Reset request failed: " + err.message);
+                }
+            } else {
+                alert(`Password reset link queued for ${email}.`);
+            }
+        }
+
+        // Backup & Export Data
+        function exportArchiveData() {
+            const exportPayload = {
+                exportedAt: new Date().toISOString(),
+                user: userProfile.name,
+                recipes: userRecipes,
+                cookbooks: userCookbooks,
+                pantry: pantryItems
+            };
+
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportPayload, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `StainedPages_Archive_${new Date().toISOString().slice(0, 10)}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
         }
 
         // BINDERS
@@ -1587,11 +1657,13 @@
             document.getElementById('lightboxModal').classList.add('hidden');
         }
 
+        // Render Ingredients with Metric / Imperial Conversions
         function renderDetailIngredientsAndSteps() {
             const ingList = document.getElementById('detailIngredientsList');
             ingList.innerHTML = '';
 
             let currentSection = '';
+            const isMetric = userProfile.unitSystem === 'metric';
 
             (activeRecipe.ingredients || []).forEach(ing => {
                 if (ing.section && ing.section !== currentSection && ing.section.toLowerCase() !== 'main') {
@@ -1604,13 +1676,37 @@
                 }
 
                 let displayQty = '';
+                let displayUnit = ing.unit || '';
+
                 if (typeof ing.quantity === 'number') {
-                    displayQty = (ing.quantity * activeScaleFactor).toFixed(1).replace(/\.0$/, '');
+                    let scaled = ing.quantity * activeScaleFactor;
+
+                    if (isMetric) {
+                        const u = (ing.unit || '').toLowerCase();
+                        if (u.includes('cup')) {
+                            scaled = Math.round(scaled * 240);
+                            displayUnit = 'ml';
+                        } else if (u.includes('tbsp') || u.includes('tablespoon')) {
+                            scaled = Math.round(scaled * 15);
+                            displayUnit = 'ml';
+                        } else if (u.includes('tsp') || u.includes('teaspoon')) {
+                            scaled = Math.round(scaled * 5);
+                            displayUnit = 'ml';
+                        } else if (u.includes('oz') || u.includes('ounce')) {
+                            scaled = Math.round(scaled * 28.35);
+                            displayUnit = 'g';
+                        } else if (u.includes('lb') || u.includes('pound')) {
+                            scaled = (scaled * 0.4535).toFixed(2);
+                            displayUnit = 'kg';
+                        }
+                    }
+
+                    displayQty = typeof scaled === 'number' ? (Number.isInteger(scaled) ? scaled : scaled.toFixed(1)) : scaled;
                 } else if (ing.quantity) {
                     displayQty = ing.quantity;
                 }
 
-                const unit = ing.unit ? `${ing.unit} ` : '';
+                const unit = displayUnit ? `${displayUnit} ` : '';
                 const name = ing.name || ing.ingredient || 'Ingredient';
                 const note = ing.note ? ` (${ing.note})` : '';
                 const fullText = `${displayQty ? displayQty + ' ' : ''}${unit}${name}${note}`.trim();
@@ -1972,8 +2068,8 @@
             const tabSignUp = document.getElementById('authTabSignUp');
             const tabSignIn = document.getElementById('authTabSignIn');
             const nameField = document.getElementById('authNameField');
-            const eraField = document.getElementById('authEraField');
             const submitBtn = document.getElementById('authSubmitBtn');
+            const subtitle = document.getElementById('authSubtitle');
 
             if (mode === 'signUp') {
                 tabSignUp.style.background = 'var(--accent-primary)';
@@ -1981,16 +2077,16 @@
                 tabSignIn.style.background = 'transparent';
                 tabSignIn.style.color = 'var(--text-muted)';
                 nameField.classList.remove('hidden');
-                eraField.classList.remove('hidden');
                 submitBtn.innerText = "Create Account & Open Tin";
+                subtitle.innerText = "Every family recipe tells a story—what will you create today?";
             } else {
                 tabSignUp.style.background = 'transparent';
                 tabSignUp.style.color = 'var(--text-muted)';
                 tabSignIn.style.background = 'var(--accent-primary)';
                 tabSignIn.style.color = '#fff';
                 nameField.classList.add('hidden');
-                eraField.classList.add('hidden');
                 submitBtn.innerText = "Log In to My Recipe Tin";
+                subtitle.innerText = "Welcome back! Sign in to synchronize your kitchen archive.";
             }
         }
 
@@ -2000,18 +2096,17 @@
 
             const email = document.getElementById('authEmail').value.trim();
             const password = document.getElementById('authPassword').value.trim();
-            const name = document.getElementById('authName').value.trim();
-            
-            if (authMode === 'signUp') {
-                const chosenEra = document.getElementById('authEraSelect').value || '1970s';
-                applyDecadeTheme(chosenEra);
-            }
+            const firstName = document.getElementById('authName').value.trim() || "Cook";
 
             if (!supabase) {
                 currentUserId = email.replace(/[^a-zA-Z0-9]/g, '');
                 localStorage.setItem("currentUserId", currentUserId);
+                userProfile.name = firstName;
+                userProfile.email = email;
+                localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
                 toggleAuthModal();
                 updateAuthControls();
+                applyProfileUI();
                 navigate('feed');
                 return;
             }
@@ -2021,14 +2116,18 @@
                     const { data, error } = await supabase.auth.signUp({
                         email: email,
                         password: password,
-                        options: { data: { name: name } }
+                        options: { data: { name: firstName } }
                     });
                     if (error) throw error;
                     if (data?.user) {
                         currentUserId = data.user.id;
                         localStorage.setItem("currentUserId", currentUserId);
+                        userProfile.name = firstName;
+                        userProfile.email = email;
+                        localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
                         toggleAuthModal();
                         updateAuthControls();
+                        applyProfileUI();
                         navigate('feed');
                     }
                 } else {
@@ -2040,8 +2139,12 @@
                     if (data?.user) {
                         currentUserId = data.user.id;
                         localStorage.setItem("currentUserId", currentUserId);
+                        userProfile.name = data.user.user_metadata?.name || firstName;
+                        userProfile.email = email;
+                        localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
                         toggleAuthModal();
                         updateAuthControls();
+                        applyProfileUI();
                         navigate('feed');
                     }
                 }
@@ -2052,14 +2155,7 @@
         }
 
         function updateAuthControls() {
-            const btnText = document.getElementById('authBtnText');
-            if (currentUserId && currentUserId !== 'demo-user') {
-                btnText.innerText = "Sign Out";
-                document.getElementById('authBtn').setAttribute('onclick', 'handleSignOut()');
-            } else {
-                btnText.innerText = "Sign In";
-                document.getElementById('authBtn').setAttribute('onclick', 'toggleAuthModal()');
-            }
+            applyProfileUI();
         }
 
         function handleSignOut() {
@@ -2067,7 +2163,10 @@
                 if (supabase) supabase.auth.signOut();
                 currentUserId = "demo-user";
                 localStorage.setItem("currentUserId", currentUserId);
+                userProfile = { name: "Cook", email: "", avatar: "", wreath: "wreath-flowers", unitSystem: "imperial" };
+                toggleAccountModal();
                 updateAuthControls();
+                applyProfileUI();
                 navigate('feed');
             }
         }
