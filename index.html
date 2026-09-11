@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +16,7 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%236B4423'/%3E%3Cpath d='M96 80h320a32 32 0 0 1 32 32v288a32 32 0 0 1-32 32H96a32 32 0 0 1-32-32V112a32 32 0 0 1 32-32z' fill='%23E8DFD1'/%3E%3Cpath d='M96 80h32v352H96z' fill='%23523318'/%3E%3Cpath d='M160 140h160v16H160zM160 180h200v12H160z' fill='%23C2785C' opacity='0.7'/%3E%3Ccircle cx='320' cy='320' r='60' fill='%23E5989B' opacity='0.8'/%3E%3Cpath d='M300 320c0-25 40-45 40-45s0 40-40 45zm0 0c-25 0-45 40-45 40s40 0 45-40z' fill='%238A9A86'/%3E%3C/svg%3E">
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%236B4423'/%3E%3Cpath d='M96 80h320a32 32 0 0 1 32 32v288a32 32 0 0 1-32 32H96a32 32 0 0 1-32-32V112a32 32 0 0 1 32-32z' fill='%23E8DFD1'/%3E%3Cpath d='M96 80h32v352H96z' fill='%23523318'/%3E%3Cpath d='M160 140h160v16H160zM160 180h200v12H160z' fill='%23C2785C' opacity='0.7'/%3E%3Ccircle cx='320' cy='320' r='60' fill='%23E5989B' opacity='0.8'/%3E%3Cpath d='M300 320c0-25 40-45 40-45s0 40-40 45zm0 0c-25 0-45 40-45 40s40 0 45-40z' fill='%238A9A86'/%3E%3C/svg%3E">
     
-    <!-- Google Fonts for All Decades (1920s through 2010s) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,400&family=Limelight&family=Monoton&family=Pacifico&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rajdhani:wght@600;700&family=Righteous&family=Shrikhand&family=Special+Elite&display=swap" rel="stylesheet">
@@ -25,9 +26,10 @@
     <script src="https://unpkg.com/lucide@latest" defer onload="if(window.lucide){lucide.createIcons();}"></script>
 
     <style>
-        /* =========================================================
-           ALL 10 DECADE DESIGN SYSTEMS (1920s - 2010s)
-           ========================================================= */
+        :root {
+            --base-font-size: 1rem;
+        }
+
         body, body.era-1970s {
             --bg-canvas: #F7F3EC;
             --bg-card: #FFFFFF;
@@ -37,13 +39,12 @@
             --accent-tertiary: #8A9A86;
             --text-primary: #2C221E;
             --text-muted: #6B5B53;
-            --border-primary: rgba(107, 91, 83, 0.15);
+            --border-primary: rgba(107, 91, 83, 0.18);
             --font-display: 'Shrikhand', cursive;
             --font-sub: 'Fraunces', serif;
             --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
             --radius-card: 1.25rem;
             --top-stripe: linear-gradient(90deg, #C2785C 0%, #D4A373 50%, #8A9A86 100%);
-            --base-font-size: 1rem;
         }
 
         body.era-1920s {
@@ -201,9 +202,12 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
+        html {
+            font-size: var(--base-font-size, 1rem);
+        }
+
         body {
             font-family: var(--font-body);
-            font-size: var(--base-font-size, 1rem);
             background-color: var(--bg-canvas);
             color: var(--text-primary);
             -webkit-tap-highlight-color: transparent;
@@ -211,11 +215,13 @@
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
-            padding-bottom: 5.5rem;
+            padding-bottom: 6rem;
             transition: background-color 0.25s ease, color 0.25s ease;
         }
 
-        @media (min-width: 768px) { body { padding-bottom: 0; } }
+        @media (min-width: 768px) { 
+            body { padding-bottom: 0; } 
+        }
 
         .font-retro-title { font-family: var(--font-display); letter-spacing: 0.02em; }
         .font-retro-sub { font-family: var(--font-sub); }
@@ -225,8 +231,8 @@
             margin-left: auto;
             margin-right: auto;
             width: 100%;
-            padding-left: 1rem;
-            padding-right: 1rem;
+            padding-left: 0.85rem;
+            padding-right: 0.85rem;
         }
 
         header {
@@ -237,7 +243,7 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-bottom: 1.5px solid var(--border-primary);
-            padding: 0.65rem 1rem;
+            padding: 0.65rem 0.85rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -252,14 +258,16 @@
         main {
             flex-grow: 1;
             padding-top: 1rem;
-            padding-bottom: 1.25rem;
+            padding-bottom: 1.5rem;
             display: grid;
             grid-template-columns: 1fr;
             gap: 1.25rem;
             align-items: start;
         }
 
-        @media (min-width: 768px) { main { grid-template-columns: 260px 1fr; } }
+        @media (min-width: 768px) { 
+            main { grid-template-columns: 260px 1fr; } 
+        }
 
         button { font-family: inherit; cursor: pointer; border: none; }
 
@@ -275,6 +283,7 @@
             justify-content: center;
             gap: 0.4rem;
             box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            white-space: nowrap;
             transition: transform 0.1s ease, filter 0.15s ease;
         }
         .btn-retro-orange:hover { filter: brightness(1.06); }
@@ -292,6 +301,7 @@
             justify-content: center;
             gap: 0.4rem;
             box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            white-space: nowrap;
             transition: transform 0.1s ease, filter 0.15s ease;
         }
         .btn-retro-avocado:hover { filter: brightness(1.06); }
@@ -354,7 +364,7 @@
             gap: 0.6rem;
             pointer-events: auto;
             animation: slideInToast 0.3s ease forwards, fadeOutToast 0.3s ease 3.5s forwards;
-            max-width: 23rem;
+            max-width: 22rem;
         }
         @keyframes slideInToast { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes fadeOutToast { to { opacity: 0; transform: translateY(10px); } }
@@ -546,26 +556,24 @@
 
     <!-- Header Navigation -->
     <header class="max-container">
-        <div style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer;" onclick="navigate('feed')">
-            <div style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--accent-secondary); display: flex; align-items: center; justify-content: center; color: var(--bg-card); box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                <i data-lucide="book-open" style="width: 1.25rem; height: 1.25rem;"></i>
+        <div style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; min-width: 0;" onclick="navigate('feed')">
+            <div style="width: 2.35rem; height: 2.35rem; border-radius: 50%; background: var(--accent-secondary); display: flex; align-items: center; justify-content: center; color: var(--bg-card); flex-shrink: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                <i data-lucide="book-open" style="width: 1.15rem; height: 1.15rem;"></i>
             </div>
-            <div>
-                <h1 class="font-retro-title" style="font-size: 1.15rem; color: var(--accent-primary); line-height: 1.1;">Between Stained Pages</h1>
-                <p style="font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 700;">Heirloom Archive</p>
+            <div style="min-width: 0; overflow: hidden;">
+                <h1 class="font-retro-title" style="font-size: 1rem; color: var(--accent-primary); line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Stained Pages</h1>
+                <p style="font-size: 0.52rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 700;">Heirloom Archive</p>
             </div>
         </div>
         
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <!-- Settings Navigation Button -->
-            <button onclick="navigate('settings')" title="App Settings" style="width: 2.15rem; height: 2.15rem; border-radius: 50%; background: var(--bg-tint); border: 1px solid var(--border-primary); color: var(--text-primary); display: flex; align-items: center; justify-content: center;">
-                <i data-lucide="settings" style="width: 1rem; height: 1rem; color: var(--accent-primary);"></i>
+        <div style="display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0;">
+            <button onclick="navigate('settings')" title="App Settings" style="width: 2rem; height: 2rem; border-radius: 50%; background: var(--bg-tint); border: 1px solid var(--border-primary); color: var(--text-primary); display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="settings" style="width: 0.95rem; height: 0.95rem; color: var(--accent-primary);"></i>
             </button>
 
-            <!-- User Account / Profile Badge -->
-            <button id="authBtn" onclick="handleProfileHeaderClick()" style="display: flex; align-items: center; gap: 0.35rem; padding: 0.35rem 0.75rem; border-radius: 9999px; border: 1.5px solid var(--border-primary); background: var(--bg-card); font-size: 0.72rem; font-weight: 700; color: var(--text-primary);">
-                <img id="headerAvatarImg" src="" class="hidden" style="width: 1.15rem; height: 1.15rem; border-radius: 50%; object-fit: cover;">
-                <i id="headerAvatarIcon" data-lucide="user" style="width: 0.85rem; height: 0.85rem;"></i>
+            <button id="authBtn" onclick="handleProfileHeaderClick()" style="display: flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.65rem; border-radius: 9999px; border: 1.5px solid var(--border-primary); background: var(--bg-card); font-size: 0.7rem; font-weight: 700; color: var(--text-primary);">
+                <img id="headerAvatarImg" src="" class="hidden" style="width: 1rem; height: 1rem; border-radius: 50%; object-fit: cover;">
+                <i id="headerAvatarIcon" data-lucide="user" style="width: 0.8rem; height: 0.8rem;"></i>
                 <span id="authBtnText">Sign In</span>
             </button>
         </div>
@@ -606,15 +614,15 @@
         </aside>
 
         <!-- Dynamic Main Views -->
-        <section style="display: flex; flex-direction: column; gap: 1.25rem;">
+        <section style="display: flex; flex-direction: column; gap: 1.25rem; min-width: 0;">
             
             <!-- VIEW 1: RECIPE TIN FEED -->
             <div id="section-feed" style="display: flex; flex-direction: column; gap: 1.25rem;">
-                <div style="background: var(--bg-card); border: 1.5px solid var(--border-primary); border-radius: var(--radius-card); padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+                <div style="background: var(--bg-card); border: 1.5px solid var(--border-primary); border-radius: var(--radius-card); padding: 1.25rem; display: flex; justify-content: space-between; align-items: center; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.03); flex-wrap: wrap; gap: 1rem;">
                     <div style="position: absolute; right: -15px; top: -15px; width: 100px; height: 100px; border-radius: 50%; background: var(--accent-secondary); opacity: 0.1;"></div>
                     <div style="z-index: 1;">
-                        <span style="font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); font-weight: 800;">Welcome to your vintage tin</span>
-                        <h2 class="font-retro-title" style="font-size: 1.75rem; color: var(--accent-primary); margin-top: 0.2rem;">Let's get cooking!</h2>
+                        <span style="font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); font-weight: 800;">Welcome to your vintage tin</span>
+                        <h2 class="font-retro-title" style="font-size: 1.6rem; color: var(--accent-primary); margin-top: 0.2rem;">Let's get cooking!</h2>
                     </div>
                     <button onclick="navigate('import')" class="btn-retro-orange" style="z-index: 1;">
                         <i data-lucide="plus" style="width: 1rem; height: 1rem;"></i>
@@ -625,7 +633,7 @@
                 <div style="background: var(--bg-card); padding: 0.85rem; border-radius: var(--radius-card); border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.75rem;">
                     <div style="position: relative; width: 100%;">
                         <i data-lucide="search" style="position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); width: 1.05rem; height: 1.05rem; color: var(--text-muted);"></i>
-                        <input type="text" id="recipeSearch" oninput="filterRecipes()" placeholder="Search your recipe binders, cards, ingredients..." style="width: 100%; background: var(--bg-canvas); padding: 0.55rem 1rem 0.55rem 2.5rem; border-radius: 9999px; font-size: 0.8rem; border: 1px solid var(--border-primary); color: var(--text-primary); outline: none; font-family: inherit;">
+                        <input type="text" id="recipeSearch" oninput="filterRecipes()" placeholder="Search recipes, ingredients..." style="width: 100%; background: var(--bg-canvas); padding: 0.55rem 1rem 0.55rem 2.5rem; border-radius: 9999px; font-size: 0.8rem; border: 1px solid var(--border-primary); color: var(--text-primary); outline: none; font-family: inherit;">
                     </div>
                     <div id="bindersList" style="display: flex; align-items: center; gap: 0.4rem; overflow-x: auto;" class="no-scrollbar"></div>
                 </div>
@@ -646,7 +654,7 @@
 
             <!-- VIEW: MY BOOKSHELF (3D WALNUT SKEUOMORPHIC SHELVES) -->
             <div id="section-bookshelf" class="hidden" style="display: flex; flex-direction: column; gap: 1.25rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 1.15rem 1.35rem; border-radius: var(--radius-card); border: 1.5px solid var(--border-primary);">
+                <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 1.15rem 1.35rem; border-radius: var(--radius-card); border: 1.5px solid var(--border-primary); flex-wrap: wrap; gap: 0.75rem;">
                     <div>
                         <span style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.12em;">Private Culinary Library</span>
                         <h2 class="font-retro-title" style="font-size: 1.5rem; color: var(--accent-primary); margin-top: 0.15rem;">My Bookshelf</h2>
@@ -660,41 +668,41 @@
             </div>
 
             <!-- VIEW: FOOD SUBSTITUTIONS -->
-            <div id="section-substitutions" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.75rem; border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; gap: 1.25rem;">
+            <div id="section-substitutions" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.25rem; border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; gap: 1.25rem;">
                 <div>
-                    <span style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.12em;">Kitchen Reference</span>
-                    <h2 class="font-retro-title" style="font-size: 1.75rem; color: var(--accent-primary); margin-top: 0.2rem;">Common Food Substitutions</h2>
+                    <span style="font-size: 0.62rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.12em;">Kitchen Reference</span>
+                    <h2 class="font-retro-title" style="font-size: 1.5rem; color: var(--accent-primary); margin-top: 0.2rem;">Common Food Substitutions</h2>
                 </div>
 
                 <div style="position: relative; width: 100%;">
                     <i data-lucide="search" style="position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); width: 1.05rem; height: 1.05rem; color: var(--text-muted);"></i>
-                    <input type="text" id="subSearchInput" oninput="filterSubstitutions()" placeholder="Search ingredient or substitute (e.g. Greek yogurt, buttermilk)..." style="width: 100%; background: var(--bg-canvas); padding: 0.55rem 1rem 0.55rem 2.5rem; border-radius: 9999px; font-size: 0.8rem; border: 1px solid var(--border-primary); color: var(--text-primary); outline: none; font-family: inherit;">
+                    <input type="text" id="subSearchInput" oninput="filterSubstitutions()" placeholder="Search ingredient or substitute..." style="width: 100%; background: var(--bg-canvas); padding: 0.55rem 1rem 0.55rem 2.5rem; border-radius: 9999px; font-size: 0.8rem; border: 1px solid var(--border-primary); color: var(--text-primary); outline: none; font-family: inherit;">
                 </div>
 
-                <div id="substitutionsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.85rem; margin-top: 0.5rem;"></div>
+                <div id="substitutionsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;"></div>
             </div>
 
             <!-- VIEW: DEDICATED SETTINGS SCREEN -->
-            <div id="section-settings" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.75rem; border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; gap: 1.5rem;">
+            <div id="section-settings" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.25rem; border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; gap: 1.25rem;">
                 <div>
-                    <span style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.12em;">Preferences</span>
-                    <h2 class="font-retro-title" style="font-size: 1.75rem; color: var(--accent-primary); margin-top: 0.2rem;">App Settings</h2>
+                    <span style="font-size: 0.62rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.12em;">Preferences</span>
+                    <h2 class="font-retro-title" style="font-size: 1.5rem; color: var(--accent-primary); margin-top: 0.2rem;">App Settings</h2>
                 </div>
 
-                <div style="display: flex; flex-direction: column; gap: 1.25rem; max-width: 34rem;">
+                <div style="display: flex; flex-direction: column; gap: 1rem; width: 100%;">
                     <!-- Text Size Accessibility Slider -->
-                    <div style="background: var(--bg-tint); padding: 1rem; border-radius: 1rem; border: 1px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.5rem;">
+                    <div style="background: var(--bg-tint); padding: 0.85rem; border-radius: 0.85rem; border: 1px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.4rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary); letter-spacing: 0.05em;">Text Size Accessibility</label>
-                            <span id="fontSizeDisplay" style="font-size: 0.75rem; font-weight: 800; color: var(--accent-primary);">Medium (100%)</span>
+                            <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary);">Text Size Accessibility</label>
+                            <span id="fontSizeDisplay" style="font-size: 0.7rem; font-weight: 800; color: var(--accent-primary);">100%</span>
                         </div>
                         <input type="range" id="textSizeSlider" min="0.85" max="1.4" step="0.05" value="1.0" oninput="adjustTextAccessibility(this.value)" style="accent-color: var(--accent-primary); cursor: pointer; width: 100%;">
                     </div>
 
-                    <!-- Global Era Theme (All 10 Decades) -->
-                    <div style="background: var(--bg-tint); padding: 1rem; border-radius: 1rem; border: 1px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary); letter-spacing: 0.05em;">Global App Timeline Era</label>
-                        <select id="settingsEraSelect" onchange="applyDecadeTheme(this.value)" style="background: var(--bg-card); padding: 0.7rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; font-weight: 700; color: var(--text-primary); outline: none; font-family: inherit;">
+                    <!-- Global Era Theme -->
+                    <div style="background: var(--bg-tint); padding: 0.85rem; border-radius: 0.85rem; border: 1px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.4rem;">
+                        <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary);">Global App Timeline Era</label>
+                        <select id="settingsEraSelect" onchange="applyDecadeTheme(this.value)" style="background: var(--bg-card); padding: 0.6rem 0.75rem; border-radius: 0.65rem; border: 1.5px solid var(--border-primary); font-size: 0.78rem; font-weight: 700; color: var(--text-primary); outline: none; font-family: inherit; width: 100%;">
                             <option value="1920s">1920s: Art Deco & Gilded Jazz Age</option>
                             <option value="1930s">1930s: Streamline Moderne & Hollywood Glamour</option>
                             <option value="1940s">1940s: Victory Utility & Handwritten Rations</option>
@@ -709,87 +717,87 @@
                     </div>
 
                     <!-- Cookbook Decades -->
-                    <div style="background: var(--bg-tint); padding: 1rem; border-radius: 1rem; border: 1px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.65rem;">
-                        <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary); letter-spacing: 0.05em;">Custom Cookbook Decades</label>
-                        <div id="settingsCookbooksList" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 10rem; overflow-y: auto;"></div>
+                    <div style="background: var(--bg-tint); padding: 0.85rem; border-radius: 0.85rem; border: 1px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary);">Custom Cookbook Decades</label>
+                        <div id="settingsCookbooksList" style="display: flex; flex-direction: column; gap: 0.4rem; max-height: 8rem; overflow-y: auto;"></div>
                     </div>
 
-                    <!-- General App Settings & Account Management -->
-                    <div style="background: var(--bg-tint); padding: 1rem; border-radius: 1rem; border: 1px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.85rem;">
-                        <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary); letter-spacing: 0.05em;">Account & Data Management</label>
+                    <!-- Account Management -->
+                    <div style="background: var(--bg-tint); padding: 0.85rem; border-radius: 0.85rem; border: 1px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.75rem;">
+                        <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary);">Account & Data Management</label>
                         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                            <button onclick="exportArchiveData()" class="btn-retro-avocado" style="font-size: 0.75rem; padding: 0.5rem 0.85rem;">
-                                <i data-lucide="download" style="width: 0.9rem; height: 0.9rem;"></i> Export Backup JSON
+                            <button onclick="exportArchiveData()" class="btn-retro-avocado" style="font-size: 0.72rem; padding: 0.45rem 0.75rem;">
+                                <i data-lucide="download" style="width: 0.85rem; height: 0.85rem;"></i> Export JSON
                             </button>
-                            <button onclick="handlePasswordReset()" style="font-size: 0.75rem; padding: 0.5rem 0.85rem; border-radius: 9999px; background: var(--bg-card); border: 1px solid var(--border-primary); font-weight: 700;">
+                            <button onclick="handlePasswordReset()" style="font-size: 0.72rem; padding: 0.45rem 0.75rem; border-radius: 9999px; background: var(--bg-card); border: 1px solid var(--border-primary); font-weight: 700;">
                                 Reset Password
                             </button>
                         </div>
-                        <div style="border-top: 1px solid var(--border-primary); padding-top: 0.75rem; margin-top: 0.25rem;">
-                            <button onclick="handleDeleteAccount()" style="width: 100%; padding: 0.7rem; border-radius: 9999px; border: 1.5px solid #FFCDD2; background: #FFEBEE; color: #C62828; font-size: 0.75rem; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;">
-                                <i data-lucide="user-x" style="width: 1rem; height: 1rem;"></i> Delete Account & All Data
+                        <div style="border-top: 1px solid var(--border-primary); padding-top: 0.65rem;">
+                            <button onclick="handleDeleteAccount()" style="width: 100%; padding: 0.65rem; border-radius: 9999px; border: 1.5px solid #FFCDD2; background: #FFEBEE; color: #C62828; font-size: 0.72rem; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem;">
+                                <i data-lucide="user-x" style="width: 0.95rem; height: 0.95rem;"></i> Delete Account & Data
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- VIEW 2: MULTI-PAGE SCAN & IMPORT SCREEN (UP TO 3 IMAGES WITH BROWSER COMPRESSION) -->
-            <div id="section-import" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.5rem; border: 1.5px solid var(--border-primary);">
-                <div style="margin-bottom: 1.25rem;">
-                    <h2 class="font-retro-title" style="font-size: 1.5rem; color: var(--accent-primary);">Multi-Page Card & Screenshot Scan</h2>
-                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">Upload up to 3 photos of a long multi-page recipe card or continuous screenshot.</p>
+            <!-- VIEW 2: MULTI-PAGE SCAN & IMPORT SCREEN -->
+            <div id="section-import" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.25rem; border: 1.5px solid var(--border-primary);">
+                <div style="margin-bottom: 1.15rem;">
+                    <h2 class="font-retro-title" style="font-size: 1.5rem; color: var(--accent-primary);">Multi-Page Card Scan</h2>
+                    <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem;">Upload up to 3 photos of a long recipe card or continuous screenshot.</p>
                 </div>
 
-                <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;">
-                        <div style="background: var(--bg-tint); border: 2px dashed var(--border-primary); border-radius: 0.75rem; height: 8rem; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: pointer;">
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
+                        <div style="background: var(--bg-tint); border: 2px dashed var(--border-primary); border-radius: 0.65rem; height: 7rem; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: pointer;">
                             <img id="slotImg0" src="" class="hidden" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
-                            <div id="slotPlaceholder0" style="text-align:center; padding:0.5rem; color:var(--text-muted);">
-                                <i data-lucide="camera" style="width: 1.5rem; height: 1.5rem; margin-bottom: 0.25rem;"></i>
-                                <span style="display:block; font-size:0.65rem; font-weight:800;">Page 1</span>
+                            <div id="slotPlaceholder0" style="text-align:center; padding:0.35rem; color:var(--text-muted);">
+                                <i data-lucide="camera" style="width: 1.25rem; height: 1.25rem; margin-bottom: 0.2rem;"></i>
+                                <span style="display:block; font-size:0.6rem; font-weight:800;">Page 1</span>
                             </div>
                             <input type="file" accept="image/*" onchange="handleMultiScanUpload(this, 0)" style="position:absolute; inset:0; opacity:0; cursor:pointer;">
                         </div>
 
-                        <div style="background: var(--bg-tint); border: 2px dashed var(--border-primary); border-radius: 0.75rem; height: 8rem; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: pointer;">
+                        <div style="background: var(--bg-tint); border: 2px dashed var(--border-primary); border-radius: 0.65rem; height: 7rem; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: pointer;">
                             <img id="slotImg1" src="" class="hidden" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
-                            <div id="slotPlaceholder1" style="text-align:center; padding:0.5rem; color:var(--text-muted);">
-                                <i data-lucide="camera" style="width: 1.5rem; height: 1.5rem; margin-bottom: 0.25rem;"></i>
-                                <span style="display:block; font-size:0.65rem; font-weight:800;">Page 2</span>
+                            <div id="slotPlaceholder1" style="text-align:center; padding:0.35rem; color:var(--text-muted);">
+                                <i data-lucide="camera" style="width: 1.25rem; height: 1.25rem; margin-bottom: 0.2rem;"></i>
+                                <span style="display:block; font-size:0.6rem; font-weight:800;">Page 2</span>
                             </div>
                             <input type="file" accept="image/*" onchange="handleMultiScanUpload(this, 1)" style="position:absolute; inset:0; opacity:0; cursor:pointer;">
                         </div>
 
-                        <div style="background: var(--bg-tint); border: 2px dashed var(--border-primary); border-radius: 0.75rem; height: 8rem; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: pointer;">
+                        <div style="background: var(--bg-tint); border: 2px dashed var(--border-primary); border-radius: 0.65rem; height: 7rem; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: pointer;">
                             <img id="slotImg2" src="" class="hidden" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
-                            <div id="slotPlaceholder2" style="text-align:center; padding:0.5rem; color:var(--text-muted);">
-                                <i data-lucide="camera" style="width: 1.5rem; height: 1.5rem; margin-bottom: 0.25rem;"></i>
-                                <span style="display:block; font-size:0.65rem; font-weight:800;">Page 3</span>
+                            <div id="slotPlaceholder2" style="text-align:center; padding:0.35rem; color:var(--text-muted);">
+                                <i data-lucide="camera" style="width: 1.25rem; height: 1.25rem; margin-bottom: 0.2rem;"></i>
+                                <span style="display:block; font-size:0.6rem; font-weight:800;">Page 3</span>
                             </div>
                             <input type="file" accept="image/*" onchange="handleMultiScanUpload(this, 2)" style="position:absolute; inset:0; opacity:0; cursor:pointer;">
                         </div>
                     </div>
 
-                    <button onclick="runMultiPageGeminiOCR()" class="btn-retro-orange" style="width: 100%; padding: 0.75rem;">
-                        <i data-lucide="sparkles" style="width: 1.1rem; height: 1.1rem;"></i>
-                        <span>Transcribe All Attached Pages</span>
+                    <button onclick="runMultiPageGeminiOCR()" class="btn-retro-orange" style="width: 100%; padding: 0.7rem;">
+                        <i data-lucide="sparkles" style="width: 1rem; height: 1rem;"></i>
+                        <span>Transcribe All Pages</span>
                     </button>
 
-                    <div style="border-top: 1px solid var(--border-primary); padding-top: 1rem; margin-top: 0.5rem;">
-                        <h3 class="font-retro-sub" style="font-size: 1rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.5rem;">Or Paste Recipe Web URL</h3>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <input type="url" id="recipeUrlInput" placeholder="https://cooking.nytimes.com/recipes/..." style="flex-grow: 1; background: var(--bg-tint); padding: 0.55rem 0.75rem; border-radius: 0.65rem; border: 1px solid var(--border-primary); font-size: 0.75rem; color: var(--text-primary); outline: none; font-family: inherit;">
-                            <button onclick="parseRecipeUrlWithGemini()" class="btn-retro-avocado">Parse Link</button>
+                    <div style="border-top: 1px solid var(--border-primary); padding-top: 0.85rem; margin-top: 0.4rem;">
+                        <h3 class="font-retro-sub" style="font-size: 0.9rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.4rem;">Or Paste Recipe Web URL</h3>
+                        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                            <input type="url" id="recipeUrlInput" placeholder="https://cooking.nytimes.com/recipes/..." style="flex-grow: 1; min-width: 180px; background: var(--bg-tint); padding: 0.5rem 0.65rem; border-radius: 0.6rem; border: 1px solid var(--border-primary); font-size: 0.75rem; color: var(--text-primary); outline: none; font-family: inherit;">
+                            <button onclick="parseRecipeUrlWithGemini()" class="btn-retro-avocado" style="padding: 0.5rem 1rem;">Parse</button>
                         </div>
                     </div>
                 </div>
 
-                <div id="parseStatusBanner" class="hidden" style="margin-top: 1rem; padding: 1rem; border-radius: 0.85rem; background: var(--bg-tint); border: 1.5px solid var(--border-primary); display: flex; align-items: center; gap: 0.75rem;">
-                    <i data-lucide="refresh-cw" style="width: 1.25rem; height: 1.25rem; color: var(--accent-primary); animation: spin 1s linear infinite;"></i>
+                <div id="parseStatusBanner" class="hidden" style="margin-top: 0.85rem; padding: 0.85rem; border-radius: 0.75rem; background: var(--bg-tint); border: 1px solid var(--border-primary); display: flex; align-items: center; gap: 0.65rem;">
+                    <i data-lucide="refresh-cw" style="width: 1.15rem; height: 1.15rem; color: var(--accent-primary); animation: spin 1s linear infinite;"></i>
                     <div style="flex-grow: 1;">
-                        <p id="parseStatusText" style="font-size: 0.75rem; font-weight: 800; color: var(--text-primary);">Reading multi-page scan...</p>
-                        <div style="width: 100%; max-width: 16rem; height: 6px; background: var(--bg-canvas); border-radius: 9999px; margin-top: 0.35rem; overflow: hidden; border: 1px solid var(--border-primary);">
+                        <p id="parseStatusText" style="font-size: 0.72rem; font-weight: 800; color: var(--text-primary);">Reading multi-page scan...</p>
+                        <div style="width: 100%; max-width: 14rem; height: 5px; background: var(--bg-canvas); border-radius: 9999px; margin-top: 0.3rem; overflow: hidden; border: 1px solid var(--border-primary);">
                             <div id="parseProgressBar" style="height: 100%; background: var(--accent-primary); width: 0%; transition: width 0.3s ease;"></div>
                         </div>
                     </div>
@@ -797,23 +805,23 @@
             </div>
 
             <!-- VIEW 3: KITCHEN PANTRY SCREEN -->
-            <div id="section-pantry" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.5rem; border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; gap: 1.25rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div id="section-pantry" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.25rem; border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; gap: 1.15rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
                     <div>
-                        <span style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.12em;">Inventory & Stock</span>
-                        <h2 class="font-retro-title" style="font-size: 1.75rem; color: var(--accent-primary); margin-top: 0.2rem;">Kitchen Pantry</h2>
+                        <span style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.12em;">Inventory & Stock</span>
+                        <h2 class="font-retro-title" style="font-size: 1.5rem; color: var(--accent-primary); margin-top: 0.15rem;">Kitchen Pantry</h2>
                     </div>
-                    <button onclick="addPantryItemPrompt()" class="btn-retro-orange" style="padding: 0.5rem 0.9rem; font-size: 0.72rem;">
-                        <i data-lucide="plus" style="width: 0.95rem; height: 0.95rem;"></i>
+                    <button onclick="addPantryItemPrompt()" class="btn-retro-orange" style="padding: 0.45rem 0.85rem; font-size: 0.7rem;">
+                        <i data-lucide="plus" style="width: 0.9rem; height: 0.9rem;"></i>
                         <span>Add Item</span>
                     </button>
                 </div>
 
-                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                    <button onclick="filterPantryCategory('All')" class="pantry-cat-btn" style="padding: 0.3rem 0.8rem; border-radius: 9999px; background: var(--bg-tint); font-size: 0.7rem; font-weight: 700; border: 1px solid var(--border-primary);">All Stock</button>
-                    <button onclick="filterPantryCategory('Dairy & Refrigerated')" class="pantry-cat-btn" style="padding: 0.3rem 0.8rem; border-radius: 9999px; background: var(--bg-tint); font-size: 0.7rem; font-weight: 700; border: 1px solid var(--border-primary);">Dairy & Refrigerated</button>
-                    <button onclick="filterPantryCategory('Baking')" class="pantry-cat-btn" style="padding: 0.3rem 0.8rem; border-radius: 9999px; background: var(--bg-tint); font-size: 0.7rem; font-weight: 700; border: 1px solid var(--border-primary);">Baking</button>
-                    <button onclick="filterPantryCategory('Spices & Pantry')" class="pantry-cat-btn" style="padding: 0.3rem 0.8rem; border-radius: 9999px; background: var(--bg-tint); font-size: 0.7rem; font-weight: 700; border: 1px solid var(--border-primary);">Spices & Pantry</button>
+                <div style="display: flex; gap: 0.4rem; overflow-x: auto;" class="no-scrollbar">
+                    <button onclick="filterPantryCategory('All')" class="pantry-cat-btn" style="padding: 0.3rem 0.75rem; border-radius: 9999px; background: var(--bg-tint); font-size: 0.68rem; font-weight: 700; border: 1px solid var(--border-primary); white-space: nowrap;">All Stock</button>
+                    <button onclick="filterPantryCategory('Dairy & Refrigerated')" class="pantry-cat-btn" style="padding: 0.3rem 0.75rem; border-radius: 9999px; background: var(--bg-tint); font-size: 0.68rem; font-weight: 700; border: 1px solid var(--border-primary); white-space: nowrap;">Dairy & Fridge</button>
+                    <button onclick="filterPantryCategory('Baking')" class="pantry-cat-btn" style="padding: 0.3rem 0.75rem; border-radius: 9999px; background: var(--bg-tint); font-size: 0.68rem; font-weight: 700; border: 1px solid var(--border-primary); white-space: nowrap;">Baking</button>
+                    <button onclick="filterPantryCategory('Spices & Pantry')" class="pantry-cat-btn" style="padding: 0.3rem 0.75rem; border-radius: 9999px; background: var(--bg-tint); font-size: 0.68rem; font-weight: 700; border: 1px solid var(--border-primary); white-space: nowrap;">Spices</button>
                 </div>
 
                 <div id="pantryGrid" class="pantry-grid"></div>
@@ -821,99 +829,99 @@
 
             <!-- VIEW 4: RECIPE DETAIL CARD VIEW -->
             <div id="section-detail" class="hidden" style="display: flex; flex-direction: column; gap: 0.85rem;">
-                <div class="no-print" style="display: flex; justify-content: space-between; align-items: center;">
-                    <button onclick="navigate('feed')" style="display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; font-weight: 800; color: var(--text-primary); background: transparent;">
-                        <i data-lucide="arrow-left" style="width: 1.05rem; height: 1.05rem;"></i>
-                        <span>Back to Recipe Tin</span>
+                <div class="no-print" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                    <button onclick="navigate('feed')" style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; font-weight: 800; color: var(--text-primary); background: transparent;">
+                        <i data-lucide="arrow-left" style="width: 1rem; height: 1rem;"></i>
+                        <span>Back to Tin</span>
                     </button>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <button onclick="openRecipeEditorModal()" class="btn-retro-avocado" style="padding: 0.4rem 0.85rem; font-size: 0.7rem;">
-                            <i data-lucide="edit-3" style="width: 0.9rem; height: 0.9rem;"></i>
-                            <span>Edit Recipe</span>
+                    <div style="display: flex; gap: 0.4rem;">
+                        <button onclick="openRecipeEditorModal()" class="btn-retro-avocado" style="padding: 0.35rem 0.75rem; font-size: 0.68rem;">
+                            <i data-lucide="edit-3" style="width: 0.85rem; height: 0.85rem;"></i>
+                            <span>Edit</span>
                         </button>
-                        <button onclick="window.print()" class="btn-retro-orange" style="padding: 0.4rem 0.85rem; font-size: 0.7rem;">
-                            <i data-lucide="printer" style="width: 0.9rem; height: 0.9rem;"></i>
-                            <span>Print Card</span>
+                        <button onclick="window.print()" class="btn-retro-orange" style="padding: 0.35rem 0.75rem; font-size: 0.68rem;">
+                            <i data-lucide="printer" style="width: 0.85rem; height: 0.85rem;"></i>
+                            <span>Print</span>
                         </button>
                     </div>
                 </div>
 
-                <div class="print-card-box" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.5rem; border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; gap: 1.25rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-                    <div id="detailImageContainer" onclick="openLightbox()" style="position: relative; height: 15rem; width: 100%; border-radius: 1rem; overflow: hidden; background: var(--bg-tint); cursor: pointer; border: 1.5px solid var(--border-primary);">
+                <div class="print-card-box" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.25rem; border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; gap: 1.15rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <div id="detailImageContainer" onclick="openLightbox()" style="position: relative; height: 13rem; width: 100%; border-radius: 0.85rem; overflow: hidden; background: var(--bg-tint); cursor: pointer; border: 1px solid var(--border-primary);">
                         <img id="detailImg" src="" style="width: 100%; height: 100%; object-fit: cover;">
-                        <div style="position: absolute; bottom: 0.75rem; right: 0.75rem; background: rgba(0, 0, 0, 0.75); color: #fff; padding: 0.35rem 0.65rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 700; display: flex; align-items: center; gap: 0.35rem;">
-                            <i data-lucide="maximize-2" style="width: 0.85rem; height: 0.85rem;"></i>
-                            <span>Tap to view full-size card</span>
+                        <div style="position: absolute; bottom: 0.65rem; right: 0.65rem; background: rgba(0, 0, 0, 0.75); color: #fff; padding: 0.3rem 0.6rem; border-radius: 9999px; font-size: 0.6rem; font-weight: 700; display: flex; align-items: center; gap: 0.3rem;">
+                            <i data-lucide="maximize-2" style="width: 0.8rem; height: 0.8rem;"></i>
+                            <span>Tap card photo</span>
                         </div>
                     </div>
 
-                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 0.85rem;">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 0.75rem;">
                         <div>
-                            <span id="detailCategory" style="padding: 0.25rem 0.75rem; border-radius: 9999px; background: var(--accent-secondary); color: #fff; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;">Sunday Bakes</span>
-                            <h2 id="detailTitle" class="font-retro-title" style="font-size: 1.75rem; color: var(--accent-primary); margin: 0.5rem 0 0.2rem; line-height: 1.2;"></h2>
-                            <p id="detailSource" style="font-size: 0.7rem; color: var(--text-muted); font-style: italic;"></p>
+                            <span id="detailCategory" style="padding: 0.2rem 0.65rem; border-radius: 9999px; background: var(--accent-secondary); color: #fff; font-size: 0.58rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;">Sunday Bakes</span>
+                            <h2 id="detailTitle" class="font-retro-title" style="font-size: 1.5rem; color: var(--accent-primary); margin: 0.4rem 0 0.15rem; line-height: 1.2;"></h2>
+                            <p id="detailSource" style="font-size: 0.68rem; color: var(--text-muted); font-style: italic;"></p>
                         </div>
 
-                        <div class="no-print" style="display: flex; align-items: center; gap: 0.4rem;">
-                            <button id="detailBookmarkBtn" onclick="toggleDetailBookmark()" style="width: 2.5rem; height: 2.5rem; border-radius: 50%; border: 1.5px solid var(--border-primary); background: var(--bg-card); display: flex; align-items: center; justify-content: center; color: var(--accent-primary);">
-                                <i data-lucide="heart" style="width: 1.2rem; height: 1.2rem;"></i>
+                        <div class="no-print" style="display: flex; align-items: center; gap: 0.35rem;">
+                            <button id="detailBookmarkBtn" onclick="toggleDetailBookmark()" style="width: 2.35rem; height: 2.35rem; border-radius: 50%; border: 1.5px solid var(--border-primary); background: var(--bg-card); display: flex; align-items: center; justify-content: center; color: var(--accent-primary);">
+                                <i data-lucide="heart" style="width: 1.1rem; height: 1.1rem;"></i>
                             </button>
-                            <button onclick="startCookMode()" class="btn-retro-orange">
-                                <i data-lucide="flame" style="width: 1rem; height: 1rem;"></i>
-                                <span>Start Cook Mode</span>
+                            <button onclick="startCookMode()" class="btn-retro-orange" style="padding: 0.5rem 0.95rem; font-size: 0.75rem;">
+                                <i data-lucide="flame" style="width: 0.95rem; height: 0.95rem;"></i>
+                                <span>Cook Mode</span>
                             </button>
                         </div>
                     </div>
 
-                    <p id="detailDescription" class="font-retro-sub" style="font-size: 0.85rem; color: var(--text-primary); font-style: italic; line-height: 1.5; padding: 1rem; border-radius: 0.85rem; border: 1.5px dashed var(--border-primary); background: var(--bg-tint);"></p>
+                    <p id="detailDescription" class="font-retro-sub" style="font-size: 0.8rem; color: var(--text-primary); font-style: italic; line-height: 1.45; padding: 0.85rem; border-radius: 0.75rem; border: 1px dashed var(--border-primary); background: var(--bg-tint);"></p>
 
                     <!-- EXTRA TIPS / MOM'S NOTEBOX -->
-                    <div id="detailTipsContainer" class="hidden" style="padding: 1rem; border-radius: 0.85rem; background: rgba(212, 163, 115, 0.12); border: 1.5px solid var(--accent-secondary);">
-                        <div style="display: flex; align-items: center; gap: 0.35rem; color: var(--accent-primary); font-weight: 800; font-size: 0.7rem; text-transform: uppercase;">
-                            <i data-lucide="lightbulb" style="width: 1rem; height: 1rem;"></i>
+                    <div id="detailTipsContainer" class="hidden" style="padding: 0.85rem; border-radius: 0.75rem; background: rgba(212, 163, 115, 0.12); border: 1.5px solid var(--accent-secondary);">
+                        <div style="display: flex; align-items: center; gap: 0.3rem; color: var(--accent-primary); font-weight: 800; font-size: 0.68rem; text-transform: uppercase;">
+                            <i data-lucide="lightbulb" style="width: 0.9rem; height: 0.9rem;"></i>
                             <span>Kitchen Tips & Family Notes</span>
                         </div>
-                        <p id="detailTipsText" class="font-retro-sub" style="font-style: italic; font-size: 0.82rem; color: var(--text-primary); margin-top: 0.35rem; line-height: 1.45;"></p>
+                        <p id="detailTipsText" class="font-retro-sub" style="font-style: italic; font-size: 0.78rem; color: var(--text-primary); margin-top: 0.3rem; line-height: 1.4;"></p>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); padding: 0.75rem; background: var(--bg-tint); border-radius: 0.85rem; border: 1px solid var(--border-primary); text-align: center;">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); padding: 0.65rem; background: var(--bg-tint); border-radius: 0.75rem; border: 1px solid var(--border-primary); text-align: center;">
                         <div>
-                            <span style="display: block; font-size: 0.6rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800;">Prep Time</span>
-                            <span id="detailPrepTime" style="font-size: 0.8rem; font-weight: 800; color: var(--text-primary);">15m</span>
+                            <span style="display: block; font-size: 0.58rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800;">Prep Time</span>
+                            <span id="detailPrepTime" style="font-size: 0.75rem; font-weight: 800; color: var(--text-primary);">15m</span>
                         </div>
                         <div style="border-left: 1px solid var(--border-primary); border-right: 1px solid var(--border-primary);">
-                            <span style="display: block; font-size: 0.6rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800;">Cook Time</span>
-                            <span id="detailCookTime" style="font-size: 0.8rem; font-weight: 800; color: var(--text-primary);">30m</span>
+                            <span style="display: block; font-size: 0.58rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800;">Cook Time</span>
+                            <span id="detailCookTime" style="font-size: 0.75rem; font-weight: 800; color: var(--text-primary);">30m</span>
                         </div>
                         <div>
-                            <span style="display: block; font-size: 0.6rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800;">Difficulty</span>
-                            <span id="detailDifficulty" style="font-size: 0.8rem; font-weight: 800; color: var(--text-primary);">Easy</span>
+                            <span style="display: block; font-size: 0.58rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800;">Difficulty</span>
+                            <span id="detailDifficulty" style="font-size: 0.75rem; font-weight: 800; color: var(--text-primary);">Easy</span>
                         </div>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 1.25rem;">
                         <div>
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-                                <h3 class="font-retro-title" style="font-size: 1.25rem; color: var(--text-primary);">Ingredients</h3>
-                                <div class="no-print" style="display: flex; align-items: center; gap: 0.4rem; background: var(--bg-tint); padding: 0.3rem 0.65rem; border-radius: 9999px; border: 1px solid var(--border-primary);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <h3 class="font-retro-title" style="font-size: 1.15rem; color: var(--text-primary);">Ingredients</h3>
+                                <div class="no-print" style="display: flex; align-items: center; gap: 0.35rem; background: var(--bg-tint); padding: 0.25rem 0.6rem; border-radius: 9999px; border: 1px solid var(--border-primary);">
                                     <button onclick="scaleServings(-1)" style="font-weight: 800; color: var(--text-primary); background: transparent; padding: 0 0.2rem;">-</button>
-                                    <span id="scaledServingsCount" style="font-size: 0.75rem; font-weight: 800; color: var(--text-primary); min-width: 0.85rem; text-align: center;">4</span>
+                                    <span id="scaledServingsCount" style="font-size: 0.72rem; font-weight: 800; color: var(--text-primary); min-width: 0.75rem; text-align: center;">4</span>
                                     <button onclick="scaleServings(1)" style="font-weight: 800; color: var(--text-primary); background: transparent; padding: 0 0.2rem;">+</button>
-                                    <span style="font-size: 0.58rem; color: var(--text-muted); text-transform: uppercase; font-weight: 800;">serv</span>
+                                    <span style="font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; font-weight: 800;">serv</span>
                                 </div>
                             </div>
-                            <ul id="detailIngredientsList" style="list-style: none; display: flex; flex-direction: column; gap: 0.65rem;"></ul>
+                            <ul id="detailIngredientsList" style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem;"></ul>
                         </div>
 
                         <div>
-                            <h3 class="font-retro-title" style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 1rem;">Instructions</h3>
-                            <ol id="detailStepsList" style="list-style: none; display: flex; flex-direction: column; gap: 1rem;"></ol>
+                            <h3 class="font-retro-title" style="font-size: 1.15rem; color: var(--text-primary); margin-bottom: 0.75rem;">Instructions</h3>
+                            <ol id="detailStepsList" style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem;"></ol>
                         </div>
                     </div>
 
-                    <div class="no-print" style="display: flex; justify-content: flex-end; padding-top: 0.4rem;">
-                        <button onclick="deleteRecipeDetail()" style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.45rem 0.85rem; border-radius: 9999px; border: 1.5px solid #E57373; background: transparent; color: #C62828; font-size: 0.7rem; font-weight: 800;">
-                            <i data-lucide="trash-2" style="width: 0.9rem; height: 0.9rem;"></i>
+                    <div class="no-print" style="display: flex; justify-content: flex-end; padding-top: 0.3rem;">
+                        <button onclick="deleteRecipeDetail()" style="display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.4rem 0.75rem; border-radius: 9999px; border: 1.5px solid #FFCDD2; background: transparent; color: #C62828; font-size: 0.68rem; font-weight: 800;">
+                            <i data-lucide="trash-2" style="width: 0.85rem; height: 0.85rem;"></i>
                             <span>Delete Recipe</span>
                         </button>
                     </div>
@@ -921,37 +929,37 @@
             </div>
 
             <!-- VIEW 5: AWAKE SCREEN COOK MODE -->
-            <div id="section-cook" class="hidden" style="background: var(--bg-tint); color: var(--text-primary); border-radius: var(--radius-card); padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; border: 1.5px solid var(--border-primary);">
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-primary); padding-bottom: 0.85rem;">
+            <div id="section-cook" class="hidden" style="background: var(--bg-tint); color: var(--text-primary); border-radius: var(--radius-card); padding: 1.25rem; display: flex; flex-direction: column; gap: 1.15rem; border: 1.5px solid var(--border-primary);">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-primary); padding-bottom: 0.75rem;">
                     <div>
-                        <h2 class="font-retro-title" style="font-size: 1.35rem; color: var(--accent-primary);">Cook Mode Active</h2>
-                        <p style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; font-weight: 800;">Keep-Screen-Awake Enabled</p>
+                        <h2 class="font-retro-title" style="font-size: 1.25rem; color: var(--accent-primary);">Cook Mode Active</h2>
+                        <p style="font-size: 0.58rem; color: var(--text-muted); text-transform: uppercase; font-weight: 800;">Screen-Awake Enabled</p>
                     </div>
-                    <button onclick="exitCookMode()" style="padding: 0.35rem 0.75rem; border-radius: 9999px; border: 1px solid var(--border-primary); background: transparent; color: var(--text-primary); font-size: 0.7rem; font-weight: 700;">Exit Cook Mode</button>
+                    <button onclick="exitCookMode()" style="padding: 0.3rem 0.65rem; border-radius: 9999px; border: 1px solid var(--border-primary); background: transparent; color: var(--text-primary); font-size: 0.68rem; font-weight: 700;">Exit</button>
                 </div>
 
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span id="cookStepHeader" style="font-size: 0.75rem; text-transform: uppercase; font-weight: 800; letter-spacing: 0.1em; color: var(--accent-secondary);">Step 1 of 3</span>
-                    <div style="display: flex; align-items: center; gap: 0.4rem; background: var(--bg-card); padding: 0.35rem 0.85rem; border-radius: 9999px; border: 1px solid var(--border-primary);">
-                        <i data-lucide="timer" style="width: 1rem; height: 1rem; color: var(--accent-primary);"></i>
-                        <span id="cookTimer" style="font-family: monospace; font-size: 0.8rem; font-weight: 800;">00:00</span>
-                        <button onclick="toggleCookTimer()" id="cookTimerControl" style="font-size: 0.65rem; text-transform: uppercase; font-weight: 800; color: var(--accent-secondary); background: transparent;">Start</button>
+                    <span id="cookStepHeader" style="font-size: 0.7rem; text-transform: uppercase; font-weight: 800; letter-spacing: 0.08em; color: var(--accent-secondary);">Step 1 of 3</span>
+                    <div style="display: flex; align-items: center; gap: 0.35rem; background: var(--bg-card); padding: 0.3rem 0.75rem; border-radius: 9999px; border: 1px solid var(--border-primary);">
+                        <i data-lucide="timer" style="width: 0.9rem; height: 0.9rem; color: var(--accent-primary);"></i>
+                        <span id="cookTimer" style="font-family: monospace; font-size: 0.78rem; font-weight: 800;">00:00</span>
+                        <button onclick="toggleCookTimer()" id="cookTimerControl" style="font-size: 0.62rem; text-transform: uppercase; font-weight: 800; color: var(--accent-secondary); background: transparent;">Start</button>
                     </div>
                 </div>
 
-                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 1rem; border: 1px solid var(--border-primary);">
-                    <h3 id="cookStepTitle" class="font-retro-title" style="font-size: 1.35rem; color: var(--accent-primary); margin-bottom: 0.5rem;"></h3>
-                    <p id="cookStepInstruction" style="font-size: 1rem; line-height: 1.5; color: var(--text-primary);"></p>
+                <div style="background: var(--bg-card); padding: 1.25rem; border-radius: 0.85rem; border: 1px solid var(--border-primary);">
+                    <h3 id="cookStepTitle" class="font-retro-title" style="font-size: 1.25rem; color: var(--accent-primary); margin-bottom: 0.4rem;"></h3>
+                    <p id="cookStepInstruction" style="font-size: 0.95rem; line-height: 1.5; color: var(--text-primary);"></p>
                 </div>
 
-                <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.85rem;">
-                    <button onclick="navigateCookStep(-1)" id="prevStepBtn" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.75rem; border-radius: 9999px; background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-primary); font-size: 0.75rem; font-weight: 800;">
-                        <i data-lucide="chevron-left" style="width: 1rem; height: 1rem;"></i>
-                        <span>Previous Step</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;">
+                    <button onclick="navigateCookStep(-1)" id="prevStepBtn" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.35rem; padding: 0.65rem; border-radius: 9999px; background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-primary); font-size: 0.72rem; font-weight: 800;">
+                        <i data-lucide="chevron-left" style="width: 0.95rem; height: 0.95rem;"></i>
+                        <span>Prev</span>
                     </button>
-                    <button onclick="navigateCookStep(1)" id="nextStepBtn" class="btn-retro-orange" style="flex: 1; padding: 0.75rem;">
-                        <span>Next Step</span>
-                        <i data-lucide="chevron-right" style="width: 1rem; height: 1rem;"></i>
+                    <button onclick="navigateCookStep(1)" id="nextStepBtn" class="btn-retro-orange" style="flex: 1; padding: 0.65rem;">
+                        <span>Next</span>
+                        <i data-lucide="chevron-right" style="width: 0.95rem; height: 0.95rem;"></i>
                     </button>
                 </div>
             </div>
@@ -965,70 +973,70 @@
     </div>
 
     <!-- Mobile Bottom Navigation Bar -->
-    <nav style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 40; background: var(--bg-card); border-top: 1.5px solid var(--border-primary); padding: 0.55rem 1rem; display: flex; justify-content: space-around; align-items: center;" id="mobileNav">
-        <button onclick="navigate('feed')" class="mobile-nav-btn" id="mbtn-feed" style="display: flex; flex-direction: column; align-items: center; gap: 0.2rem; color: var(--accent-primary); background: transparent;">
-            <i data-lucide="layout-grid" style="width: 1.2rem; height: 1.2rem; color: var(--accent-primary);"></i>
-            <span style="font-size: 0.6rem; font-weight: 800;">Tin</span>
+    <nav style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 40; background: var(--bg-card); border-top: 1.5px solid var(--border-primary); padding: 0.5rem 0.5rem; display: flex; justify-content: space-around; align-items: center;" id="mobileNav">
+        <button onclick="navigate('feed')" class="mobile-nav-btn" id="mbtn-feed" style="display: flex; flex-direction: column; align-items: center; gap: 0.15rem; color: var(--accent-primary); background: transparent; padding: 0.2rem;">
+            <i data-lucide="layout-grid" style="width: 1.15rem; height: 1.15rem; color: var(--accent-primary);"></i>
+            <span style="font-size: 0.55rem; font-weight: 800;">Tin</span>
         </button>
-        <button onclick="navigate('bookshelf')" class="mobile-nav-btn" id="mbtn-bookshelf" style="display: flex; flex-direction: column; align-items: center; gap: 0.2rem; color: var(--text-muted); background: transparent;">
-            <i data-lucide="library" style="width: 1.2rem; height: 1.2rem;"></i>
-            <span style="font-size: 0.6rem; font-weight: 700;">Library</span>
+        <button onclick="navigate('bookshelf')" class="mobile-nav-btn" id="mbtn-bookshelf" style="display: flex; flex-direction: column; align-items: center; gap: 0.15rem; color: var(--text-muted); background: transparent; padding: 0.2rem;">
+            <i data-lucide="library" style="width: 1.15rem; height: 1.15rem;"></i>
+            <span style="font-size: 0.55rem; font-weight: 700;">Library</span>
         </button>
-        <button onclick="navigate('substitutions')" class="mobile-nav-btn" id="mbtn-substitutions" style="display: flex; flex-direction: column; align-items: center; gap: 0.2rem; color: var(--text-muted); background: transparent;">
-            <i data-lucide="scale" style="width: 1.2rem; height: 1.2rem;"></i>
-            <span style="font-size: 0.6rem; font-weight: 700;">Subs</span>
+        <button onclick="navigate('substitutions')" class="mobile-nav-btn" id="mbtn-substitutions" style="display: flex; flex-direction: column; align-items: center; gap: 0.15rem; color: var(--text-muted); background: transparent; padding: 0.2rem;">
+            <i data-lucide="scale" style="width: 1.15rem; height: 1.15rem;"></i>
+            <span style="font-size: 0.55rem; font-weight: 700;">Subs</span>
         </button>
-        <button onclick="navigate('import')" class="mobile-nav-btn" id="mbtn-import" style="display: flex; flex-direction: column; align-items: center; gap: 0.2rem; color: var(--text-muted); background: transparent;">
-            <i data-lucide="camera" style="width: 1.2rem; height: 1.2rem;"></i>
-            <span style="font-size: 0.6rem; font-weight: 700;">Scan</span>
+        <button onclick="navigate('import')" class="mobile-nav-btn" id="mbtn-import" style="display: flex; flex-direction: column; align-items: center; gap: 0.15rem; color: var(--text-muted); background: transparent; padding: 0.2rem;">
+            <i data-lucide="camera" style="width: 1.15rem; height: 1.15rem;"></i>
+            <span style="font-size: 0.55rem; font-weight: 700;">Scan</span>
         </button>
-        <button onclick="navigate('pantry')" class="mobile-nav-btn" id="mbtn-pantry" style="display: flex; flex-direction: column; align-items: center; gap: 0.2rem; color: var(--text-muted); background: transparent;">
-            <i data-lucide="shopping-basket" style="width: 1.2rem; height: 1.2rem;"></i>
-            <span style="font-size: 0.6rem; font-weight: 700;">Pantry</span>
+        <button onclick="navigate('pantry')" class="mobile-nav-btn" id="mbtn-pantry" style="display: flex; flex-direction: column; align-items: center; gap: 0.15rem; color: var(--text-muted); background: transparent; padding: 0.2rem;">
+            <i data-lucide="shopping-basket" style="width: 1.15rem; height: 1.15rem;"></i>
+            <span style="font-size: 0.55rem; font-weight: 700;">Pantry</span>
         </button>
-        <button onclick="navigate('settings')" class="mobile-nav-btn" id="mbtn-settings" style="display: flex; flex-direction: column; align-items: center; gap: 0.2rem; color: var(--text-muted); background: transparent;">
-            <i data-lucide="settings" style="width: 1.2rem; height: 1.2rem;"></i>
-            <span style="font-size: 0.6rem; font-weight: 700;">Settings</span>
+        <button onclick="navigate('settings')" class="mobile-nav-btn" id="mbtn-settings" style="display: flex; flex-direction: column; align-items: center; gap: 0.15rem; color: var(--text-muted); background: transparent; padding: 0.2rem;">
+            <i data-lucide="settings" style="width: 1.15rem; height: 1.15rem;"></i>
+            <span style="font-size: 0.55rem; font-weight: 700;">Settings</span>
         </button>
     </nav>
 
     <!-- RECIPE EDITOR MODAL -->
     <div id="recipeEditorModal" class="hidden" style="position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; padding: 1rem;">
-        <div style="background: var(--bg-card); max-width: 32rem; width: 100%; border-radius: var(--radius-card); padding: 1.75rem; border: 1.5px solid var(--border-primary); position: relative; box-shadow: 0 20px 25px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto;">
+        <div style="background: var(--bg-card); max-width: 32rem; width: 100%; border-radius: var(--radius-card); padding: 1.5rem; border: 1.5px solid var(--border-primary); position: relative; box-shadow: 0 20px 25px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto;">
             <button onclick="closeRecipeEditorModal()" style="position: absolute; right: 0.85rem; top: 0.85rem; width: 1.85rem; height: 1.85rem; background: var(--bg-tint); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
                 <i data-lucide="x" style="width: 1rem; height: 1rem;"></i>
             </button>
 
-            <h3 class="font-retro-title" style="font-size: 1.35rem; color: var(--accent-primary); margin-bottom: 0.25rem;">Edit Recipe Details</h3>
-            <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1.25rem;">Modify ingredients, instructions, or add family tips & notes.</p>
+            <h3 class="font-retro-title" style="font-size: 1.25rem; color: var(--accent-primary); margin-bottom: 0.25rem;">Edit Recipe Details</h3>
+            <p style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 1rem;">Modify ingredients, instructions, or add family tips & notes.</p>
 
-            <form onsubmit="saveRecipeEdits(event)" style="display: flex; flex-direction: column; gap: 1rem;">
+            <form onsubmit="saveRecipeEdits(event)" style="display: flex; flex-direction: column; gap: 0.85rem;">
                 <div>
                     <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Recipe Title</label>
-                    <input type="text" id="editRecipeTitle" required style="width: 100%; background: var(--bg-tint); padding: 0.55rem 0.75rem; border-radius: 0.65rem; border: 1px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit;">
+                    <input type="text" id="editRecipeTitle" required style="width: 100%; background: var(--bg-tint); padding: 0.5rem 0.65rem; border-radius: 0.55rem; border: 1px solid var(--border-primary); font-size: 0.78rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit;">
                 </div>
 
                 <div>
                     <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Description</label>
-                    <textarea id="editRecipeDesc" rows="2" style="width: 100%; background: var(--bg-tint); padding: 0.55rem 0.75rem; border-radius: 0.65rem; border: 1px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit; resize: vertical;"></textarea>
+                    <textarea id="editRecipeDesc" rows="2" style="width: 100%; background: var(--bg-tint); padding: 0.5rem 0.65rem; border-radius: 0.55rem; border: 1px solid var(--border-primary); font-size: 0.78rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit; resize: vertical;"></textarea>
                 </div>
 
                 <div>
-                    <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Kitchen Tips & Family Notes (e.g. Mom said boil naturally)</label>
-                    <textarea id="editRecipeTips" rows="2" placeholder="Add family secrets, tips, or notes here..." style="width: 100%; background: var(--bg-tint); padding: 0.55rem 0.75rem; border-radius: 0.65rem; border: 1px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit; resize: vertical;"></textarea>
+                    <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Kitchen Tips & Family Notes</label>
+                    <textarea id="editRecipeTips" rows="2" placeholder="Add family secrets, tips, or notes here..." style="width: 100%; background: var(--bg-tint); padding: 0.5rem 0.65rem; border-radius: 0.55rem; border: 1px solid var(--border-primary); font-size: 0.78rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit; resize: vertical;"></textarea>
                 </div>
 
                 <div>
                     <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Ingredients (One per line)</label>
-                    <textarea id="editRecipeIngredients" rows="4" placeholder="1 cup flour&#10;2 eggs" style="width: 100%; background: var(--bg-tint); padding: 0.55rem 0.75rem; border-radius: 0.65rem; border: 1px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit; resize: vertical;"></textarea>
+                    <textarea id="editRecipeIngredients" rows="3" placeholder="1 cup flour&#10;2 eggs" style="width: 100%; background: var(--bg-tint); padding: 0.5rem 0.65rem; border-radius: 0.55rem; border: 1px solid var(--border-primary); font-size: 0.78rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit; resize: vertical;"></textarea>
                 </div>
 
                 <div>
                     <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Instructions (One per line per step)</label>
-                    <textarea id="editRecipeSteps" rows="4" placeholder="Mix dry ingredients.&#10;Bake at 350°F for 30 minutes." style="width: 100%; background: var(--bg-tint); padding: 0.55rem 0.75rem; border-radius: 0.65rem; border: 1px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit; resize: vertical;"></textarea>
+                    <textarea id="editRecipeSteps" rows="3" placeholder="Mix dry ingredients.&#10;Bake at 350°F for 30 minutes." style="width: 100%; background: var(--bg-tint); padding: 0.5rem 0.65rem; border-radius: 0.55rem; border: 1px solid var(--border-primary); font-size: 0.78rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit; resize: vertical;"></textarea>
                 </div>
 
-                <button type="submit" class="btn-retro-orange" style="width: 100%; padding: 0.75rem; margin-top: 0.5rem;">Save Recipe Updates</button>
+                <button type="submit" class="btn-retro-orange" style="width: 100%; padding: 0.7rem; margin-top: 0.4rem;">Save Recipe Updates</button>
             </form>
         </div>
     </div>
@@ -1430,10 +1438,10 @@
                 card.style.cssText = "background:var(--bg-tint); border-radius:0.85rem; padding:1rem; border:1px solid var(--border-primary); display:flex; flex-direction:column; gap:0.35rem;";
                 card.innerHTML = `
                     <div style="display:flex; justify-content:space-between; align-items:baseline;">
-                        <span style="font-size:0.75rem; font-weight:800; color:var(--text-muted); text-transform:uppercase;">Instead of ${sub.item}</span>
-                        <span style="font-size:0.68rem; font-weight:800; background:var(--accent-secondary); color:#fff; padding:0.1rem 0.4rem; border-radius:9999px;">${sub.ratio}</span>
+                        <span style="font-size:0.7rem; font-weight:800; color:var(--text-muted); text-transform:uppercase;">Instead of ${sub.item}</span>
+                        <span style="font-size:0.62rem; font-weight:800; background:var(--accent-secondary); color:#fff; padding:0.1rem 0.35rem; border-radius:9999px;">${sub.ratio}</span>
                     </div>
-                    <h4 class="font-retro-title" style="font-size:1.15rem; color:var(--accent-primary);">${sub.sub}</h4>
+                    <h4 class="font-retro-title" style="font-size:1.1rem; color:var(--accent-primary);">${sub.sub}</h4>
                     <p style="font-size:0.72rem; color:var(--text-primary); line-height:1.4; font-style:italic;">${sub.note}</p>
                 `;
                 grid.appendChild(card);
@@ -2237,52 +2245,316 @@
             if (badge) badge.innerText = count;
         }
 
-        // RECIPE EDITOR
-        function openRecipeEditorModal() {
-            if (!activeRecipe) return;
-            document.getElementById('editRecipeTitle').value = activeRecipe.title || '';
-            document.getElementById('editRecipeDesc').value = activeRecipe.description || '';
-            document.getElementById('editRecipeTips').value = activeRecipe.tips_note || '';
+        // ================= GEMINI MULTI-PAGE COMPRESSED OCR =================
+        async function compressImage(file, maxWidth = 1200, quality = 0.8) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
 
-            const ingText = (activeRecipe.ingredients || []).map(i => {
-                const q = i.quantity || '';
-                const u = i.unit || '';
-                const n = i.name || i.ingredient || '';
-                return `${q} ${u} ${n}`.trim();
-            }).join('\n');
-            document.getElementById('editRecipeIngredients').value = ingText;
+                        if (width > maxWidth) {
+                            height = Math.round((height * maxWidth) / width);
+                            width = maxWidth;
+                        }
 
-            const stepText = (activeRecipe.steps || []).map(s => s.instruction || '').join('\n');
-            document.getElementById('editRecipeSteps').value = stepText;
+                        canvas.width = width;
+                        canvas.height = height;
 
-            document.getElementById('recipeEditorModal').classList.remove('hidden');
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+                        resolve(compressedDataUrl);
+                    };
+                    img.onerror = (error) => reject(error);
+                };
+                reader.onerror = (error) => reject(error);
+            });
+        }
+
+        async function handleMultiScanUpload(input, index) {
+            if (!input.files || !input.files[0]) return;
+            const file = input.files[0];
+
+            try {
+                showVintageToast("Compressing image for the archive...", "cpu");
+                const compressedDataUrl = await compressImage(file, 1200, 0.8);
+                
+                multiScanImages[index] = compressedDataUrl;
+                const slotImg = document.getElementById(`slotImg${index}`);
+                const slotPh = document.getElementById(`slotPlaceholder${index}`);
+                slotImg.src = compressedDataUrl;
+                slotImg.classList.remove('hidden');
+                slotPh.classList.add('hidden');
+                
+                showVintageToast(`Page ${index + 1} compressed and attached!`, "check");
+            } catch (err) {
+                alert("Image compression failed: " + err.message);
+            }
+        }
+
+        async function runMultiPageGeminiOCR() {
+            const validImages = multiScanImages.filter(img => img !== null);
+            if (validImages.length === 0) return alert("Please upload at least one recipe page or screenshot.");
+
+            const banner = document.getElementById('parseStatusBanner');
+            const bar = document.getElementById('parseProgressBar');
+            const pText = document.getElementById('parseStatusText');
+
+            banner.classList.remove('hidden');
+            bar.style.width = '30%';
+            pText.innerText = `Transcribing ${validImages.length} attached page(s)...`;
+
+            try {
+                bar.style.width = '70%';
+                const res = await fetch('/api/parse', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ imageBase64: validImages[0].split(',')[1], mimeType: 'image/jpeg' })
+                });
+
+                const parsed = await res.json();
+                if (!res.ok) throw new Error(parsed.error || 'Multi-page transcription failed');
+
+                const newRecipe = {
+                    id: "rec-" + Date.now(),
+                    title: parsed.title || "Multi-Page Scanned Recipe",
+                    source: `Multi-Page Scan (${validImages.length} pages)`,
+                    source_type: "VINTAGE_SCAN",
+                    description: parsed.description || "Preserved multi-page recipe.",
+                    image_url: validImages[0],
+                    prep_time: parsed.prep_time || "15m",
+                    cook_time: parsed.cook_time || "30m",
+                    difficulty: parsed.difficulty || "Easy",
+                    binder_category: parsed.binder_category || "Sunday Bakes",
+                    servings: parsed.servings || 4,
+                    ingredients: parsed.ingredients || [],
+                    steps: parsed.steps || [],
+                    secret_note: parsed.secret_note || "",
+                    tips_note: "",
+                    bookmarked: false
+                };
+
+                userRecipes.unshift(newRecipe);
+                localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
+                syncRecipeToSupabase(newRecipe);
+
+                bar.style.width = '100%';
+                pText.innerText = "Success! Opening recipe...";
+
+                setTimeout(() => {
+                    banner.classList.add('hidden');
+                    multiScanImages = [null, null, null];
+                    for (let i = 0; i < 3; i++) {
+                        document.getElementById(`slotImg${i}`).classList.add('hidden');
+                        document.getElementById(`slotPlaceholder${i}`).classList.remove('hidden');
+                    }
+                    showVintageToast("Your multi-page recipe was transcribed and filed!", 'sparkles');
+                    viewRecipeDetail(newRecipe.id);
+                }, 800);
+            } catch (err) {
+                alert("Scan failed: " + err.message);
+                banner.classList.add('hidden');
+            }
+        }
+
+        async function parseRecipeUrlWithGemini() {
+            const urlInput = document.getElementById('recipeUrlInput');
+            const url = urlInput.value.trim();
+            if (!url || !url.startsWith('http')) return alert("Please paste a valid recipe URL.");
+
+            const banner = document.getElementById('parseStatusBanner');
+            const bar = document.getElementById('parseProgressBar');
+            const pText = document.getElementById('parseStatusText');
+
+            banner.classList.remove('hidden');
+            bar.style.width = '30%';
+            pText.innerText = "Extracting ingredients & directions...";
+
+            try {
+                bar.style.width = '65%';
+                const res = await fetch('/api/parse', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: `Extract the recipe from: ${url}` })
+                });
+
+                const parsed = await res.json();
+                if (!res.ok) throw new Error(parsed.error || 'Failed to parse link');
+
+                const newRecipe = {
+                    id: "rec-" + Date.now(),
+                    title: parsed.title || "Web Recipe",
+                    source: url.replace('https://', '').split('/')[0],
+                    source_type: "FAMILY_NOTE",
+                    description: parsed.description || "Clean extracted recipe.",
+                    image_url: "",
+                    prep_time: parsed.prep_time || "15m",
+                    cook_time: parsed.cook_time || "30m",
+                    difficulty: parsed.difficulty || "Easy",
+                    binder_category: parsed.binder_category || "Sunday Bakes",
+                    servings: parsed.servings || 4,
+                    ingredients: parsed.ingredients || [],
+                    steps: parsed.steps || [],
+                    secret_note: parsed.secret_note || "",
+                    tips_note: "",
+                    bookmarked: false
+                };
+
+                userRecipes.unshift(newRecipe);
+                localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
+                syncRecipeToSupabase(newRecipe);
+
+                bar.style.width = '100%';
+                pText.innerText = "Recipe parsed!";
+                urlInput.value = '';
+
+                setTimeout(() => {
+                    banner.classList.add('hidden');
+                    showVintageToast("Web recipe successfully parsed into your tin!", 'globe');
+                    viewRecipeDetail(newRecipe.id);
+                }, 800);
+            } catch (err) {
+                alert("Failed to parse link: " + err.message);
+                banner.classList.add('hidden');
+            }
+        }
+
+        async function syncRecipeToSupabase(recipe) {
+            if (!supabase || currentUserId === 'demo-user') return;
+            try {
+                await supabase.from('recipes').upsert({ ...recipe, user_id: currentUserId, id: recipe.id }, { onConflict: 'id' });
+            } catch(e) { console.warn("Retained locally.", e); }
+        }
+
+        async function deleteRecipeFromSupabase(id) {
+            if (!supabase || currentUserId === 'demo-user') return;
+            try { await supabase.from('recipes').delete().eq('id', id); } catch(e) { console.warn("Local deletion only.", e); }
+        }
+
+        function toggleAuthModal() {
+            const modal = document.getElementById('authModal');
+            modal.classList.toggle('hidden');
+            document.getElementById('authError').classList.add('hidden');
             refreshIcons();
         }
 
-        function closeRecipeEditorModal() {
-            document.getElementById('recipeEditorModal').classList.add('hidden');
+        function setAuthMode(mode) {
+            authMode = mode;
+            const tabSignUp = document.getElementById('authTabSignUp');
+            const tabSignIn = document.getElementById('authTabSignIn');
+            const nameField = document.getElementById('authNameField');
+            const submitBtn = document.getElementById('authSubmitBtn');
+            const subtitle = document.getElementById('authSubtitle');
+
+            if (mode === 'signUp') {
+                tabSignUp.style.background = 'var(--accent-primary)';
+                tabSignUp.style.color = '#fff';
+                tabSignIn.style.background = 'transparent';
+                tabSignIn.style.color = 'var(--text-muted)';
+                nameField.classList.remove('hidden');
+                submitBtn.innerText = "Create Account & Open Tin";
+                subtitle.innerText = "Every family recipe tells a story—what will you create today?";
+            } else {
+                tabSignUp.style.background = 'transparent';
+                tabSignUp.style.color = 'var(--text-muted)';
+                tabSignIn.style.background = 'var(--accent-primary)';
+                tabSignIn.style.color = '#fff';
+                nameField.classList.add('hidden');
+                submitBtn.innerText = "Log In to My Recipe Tin";
+                subtitle.innerText = "Welcome back! Sign in to synchronize your kitchen archive.";
+            }
         }
 
-        function saveRecipeEdits(event) {
+        async function handleAuthSubmit(event) {
             event.preventDefault();
-            if (!activeRecipe) return;
+            document.getElementById('authError').classList.add('hidden');
 
-            activeRecipe.title = document.getElementById('editRecipeTitle').value.trim();
-            activeRecipe.description = document.getElementById('editRecipeDesc').value.trim();
-            activeRecipe.tips_note = document.getElementById('editRecipeTips').value.trim();
+            const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value.trim();
+            const firstName = document.getElementById('authName').value.trim() || "Cook";
 
-            const rawIngs = document.getElementById('editRecipeIngredients').value.split('\n').filter(l => l.trim() !== '');
-            activeRecipe.ingredients = rawIngs.map(line => ({ name: line.trim() }));
+            if (!supabase) {
+                currentUserId = email.replace(/[^a-zA-Z0-9]/g, '');
+                localStorage.setItem("currentUserId", currentUserId);
+                userProfile.name = firstName;
+                userProfile.email = email;
+                localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+                toggleAuthModal();
+                updateAuthControls();
+                applyProfileUI();
+                showVintageToast(`Welcome aboard, ${firstName}! Your archive is now securely tethered.`, 'sparkles');
+                navigate('feed');
+                return;
+            }
 
-            const rawSteps = document.getElementById('editRecipeSteps').value.split('\n').filter(l => l.trim() !== '');
-            activeRecipe.steps = rawSteps.map((st, idx) => ({ step_number: idx + 1, instruction: st.trim() }));
+            try {
+                if (authMode === 'signUp') {
+                    const { data, error } = await supabase.auth.signUp({
+                        email: email,
+                        password: password,
+                        options: { data: { name: firstName } }
+                    });
+                    if (error) throw error;
+                    if (data?.user) {
+                        currentUserId = data.user.id;
+                        localStorage.setItem("currentUserId", currentUserId);
+                        userProfile.name = firstName;
+                        userProfile.email = email;
+                        localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+                        toggleAuthModal();
+                        updateAuthControls();
+                        applyProfileUI();
+                        showVintageToast(`Welcome aboard, ${firstName}! Your archive is now securely tethered.`, 'sparkles');
+                        navigate('feed');
+                    }
+                } else {
+                    const { data, error } = await supabase.auth.signInWithPassword({
+                        email: email,
+                        password: password
+                    });
+                    if (error) throw error;
+                    if (data?.user) {
+                        currentUserId = data.user.id;
+                        localStorage.setItem("currentUserId", currentUserId);
+                        userProfile.name = data.user.user_metadata?.name || firstName;
+                        userProfile.email = email;
+                        localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+                        toggleAuthModal();
+                        updateAuthControls();
+                        applyProfileUI();
+                        showVintageToast(`Welcome back, ${userProfile.name}! Your recipe tin is synced.`, 'cloud-check');
+                        navigate('feed');
+                    }
+                }
+            } catch(error) {
+                document.getElementById('authError').classList.remove('hidden');
+                document.getElementById('authErrorText').innerText = error.message || "Authentication failed.";
+            }
+        }
 
-            localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
-            syncRecipeToSupabase(activeRecipe);
+        function updateAuthControls() {
+            applyProfileUI();
+        }
 
-            closeRecipeEditorModal();
-            viewRecipeDetail(activeRecipe.id, false);
-            showVintageToast("Your recipe card notes have been faithfully updated.", 'edit-3');
+        function handleSignOut() {
+            if (confirm("Log out of your Stained Pages session?")) {
+                if (supabase) supabase.auth.signOut();
+                currentUserId = "demo-user";
+                localStorage.setItem("currentUserId", currentUserId);
+                userProfile = { name: "Cook", email: "", avatar: "", wreath: "wreath-flowers", unitSystem: "imperial", fontSizeScale: 1.0 };
+                toggleAccountModal();
+                updateAuthControls();
+                applyProfileUI();
+                showVintageToast("Logged out successfully. See you in the kitchen soon!", 'log-out');
+                navigate('feed');
+            }
         }
 
         document.addEventListener('DOMContentLoaded', initApp);
