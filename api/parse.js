@@ -10,30 +10,46 @@ export default async function handler(req, res) {
 
   const { imageBase64, mimeType, text } = req.body;
 
-  const systemPrompt = `You are a vintage culinary archivist. 
-Extract or transcribe the recipe into valid raw JSON only. Do not wrap in markdown or backticks. Return strictly raw JSON matching this structure:
+  const systemPrompt = `You are a vintage culinary archivist and precision recipe OCR engine.
+Analyze the provided image or text. It may be:
+- A handwritten vintage recipe card or notebook page
+- A phone screenshot (TikTok recipe overlay, Instagram reel text, Apple Notes, website screenshot)
+- A printed cookbook page
+
+Carefully transcribe all ingredients with measurements and step-by-step directions. If information is partially obscured or written in shorthand, interpret it cleanly into conventional kitchen units.
+
+Return strictly valid raw JSON with NO markdown formatting, NO backticks, and NO conversational chatter:
 {
   "title": "Recipe Title",
-  "binder_category": "Desserts" or "Sunday Bakes" or "Mains",
-  "description": "Short 1-2 sentence description",
+  "binder_category": "Sunday Bakes",
+  "description": "A warm 1-2 sentence description of the dish",
   "prep_time": "15m",
   "cook_time": "30m",
   "difficulty": "Easy",
   "servings": 4,
   "ingredients": [
-    { "id": "i1", "name": "Ingredient with measurement", "quantity": 1 }
+    {
+      "id": "i1",
+      "name": "All-purpose flour",
+      "quantity": 2,
+      "unit": "cups",
+      "note": "sifted"
+    }
   ],
   "steps": [
-    { "step_number": 1, "title": "Step title", "instruction": "Step instruction" }
+    {
+      "step_number": 1,
+      "title": "Prep Step",
+      "instruction": "Detailed directions for this step."
+    }
   ],
-  "secret_note": "Any tips, marginalia, or empty string"
+  "secret_note": "Any handwritten notes, family tips, or empty string"
 }`;
 
   let parts = [];
   let requestBody = {};
 
   if (imageBase64) {
-    // Multimodal OCR: Camera card scan
     parts = [
       { text: systemPrompt },
       { inline_data: { mime_type: mimeType || 'image/jpeg', data: imageBase64 } }
@@ -43,7 +59,6 @@ Extract or transcribe the recipe into valid raw JSON only. Do not wrap in markdo
       generationConfig: { response_mime_type: "application/json" }
     };
   } else if (text) {
-    // Web link or pasted recipe text: Enable Google Search Grounding to fetch the URL contents
     parts = [
       { text: `${systemPrompt}\n\nTarget content or URL:\n${text}` }
     ];
@@ -52,12 +67,12 @@ Extract or transcribe the recipe into valid raw JSON only. Do not wrap in markdo
       tools: [{ google_search: {} }]
     };
   } else {
-    return res.status(400).json({ error: 'No recipe image or text provided' });
+    return res.status(400).json({ error: 'No image or text provided' });
   }
 
   try {
     const response = await fetch(
-      `[https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=$](https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=$){apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -67,15 +82,14 @@ Extract or transcribe the recipe into valid raw JSON only. Do not wrap in markdo
 
     const data = await response.json();
     if (!response.ok) {
-      throw new Error(data.error?.message || 'Failed to communicate with Gemini API');
+      throw new Error(data.error?.message || 'Gemini API call failed');
     }
 
     const rawOutput = data.candidates?.[0]?.content?.parts?.[0]?.text;
     if (!rawOutput) {
-      throw new Error('No readable recipe content generated');
+      throw new Error('No recipe content generated');
     }
 
-    // Clean any markdown backticks or accidental surrounding prose
     let cleanJson = rawOutput.trim();
     if (cleanJson.startsWith('```json')) {
       cleanJson = cleanJson.replace(/^```json\s*/i, '').replace(/\s*```$/, '');
@@ -83,7 +97,6 @@ Extract or transcribe the recipe into valid raw JSON only. Do not wrap in markdo
       cleanJson = cleanJson.replace(/^```\s*/i, '').replace(/\s*```$/, '');
     }
 
-    // Isolate the outermost JSON block if needed
     const firstBrace = cleanJson.indexOf('{');
     const lastBrace = cleanJson.lastIndexOf('}');
     if (firstBrace !== -1 && lastBrace !== -1) {
