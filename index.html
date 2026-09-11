@@ -1,409 +1,2125 @@
-<script>
-    const SUPABASE_URL = "https://lowxjyvlwmscakumpxht.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_fngegDh8DniH9zJAPpchGA_jVQkiLr-";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
-    let supabase = null;
-    let wakeLock = null;
-
-    const defaultBinders = ["All", "Desserts", "Mains", "Sunday Bakes", "Appetizers"];
+    <title>Between Stained Pages — Heirloom Recipe Tin & Library</title>
+    <meta name="description" content="Cherished vintage culinary archive for scanning handwritten cards, screenshots, and custom heirloom cookbooks.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="StainedPages">
+    <meta name="theme-color" content="#F7F3EC">
     
-    const defaultPantryPresets = [
-        { id: "p-1", name: "Eggs", category: "Dairy & Refrigerated", stocked: true },
-        { id: "p-2", name: "Milk", category: "Dairy & Refrigerated", stocked: true },
-        { id: "p-3", name: "Butter", category: "Dairy & Refrigerated", stocked: true },
-        { id: "p-4", name: "All-Purpose Flour", category: "Baking", stocked: true },
-        { id: "p-5", name: "Granulated Sugar", category: "Baking", stocked: true },
-        { id: "p-6", name: "Salt", category: "Spices & Pantry", stocked: true },
-        { id: "p-7", name: "Olive Oil", category: "Oils & Vinegars", stocked: true }
-    ];
-
-    const commonSubstitutions = [
-        { item: "Sour Cream", sub: "Greek Yogurt", ratio: "1:1 ratio", note: "Plain Greek yogurt mimics the tang and thickness perfectly." },
-        { item: "Buttermilk", sub: "Milk + Lemon Juice", ratio: "1 cup milk + 1 tbsp lemon juice/vinegar", note: "Let sit for 5 minutes before using." },
-        { item: "Mayonnaise", sub: "Greek Yogurt or Sour Cream", ratio: "1:1 ratio", note: "Great for lighter dressings or salads." },
-        { item: "Eggs (for baking)", sub: "Applesauce or Mashed Banana", ratio: "1/4 cup per egg", note: "Adds moisture and natural sweetness in cakes and muffins." },
-        { item: "Honey", sub: "Maple Syrup or Agave Nectar", ratio: "1:1 ratio", note: "Direct liquid swap in dressings and marinades." },
-        { item: "Soy Sauce", sub: "Tamari or Worcestershire Sauce", ratio: "1:1 ratio", note: "Tamari provides a gluten-free alternative." },
-        { item: "Heavy Cream", sub: "Milk + Melted Butter", ratio: "3/4 cup milk + 1/4 cup melted butter", note: "Whisk thoroughly for soups and sauces." },
-        { item: "Sugar", sub: "Maple Syrup or Honey", ratio: "3/4 cup liquid sweetener per 1 cup sugar", note: "Reduce other liquids in recipe slightly." }
-    ];
-
-    let currentUserId = localStorage.getItem("currentUserId") || "demo-user";
-    let userRecipes = JSON.parse(localStorage.getItem(`recipes_${currentUserId}`)) || [];
-    let userBinders = JSON.parse(localStorage.getItem(`binders_${currentUserId}`)) || defaultBinders;
-    let userCookbooks = JSON.parse(localStorage.getItem(`cookbooks_${currentUserId}`)) || [];
-    let pantryItems = JSON.parse(localStorage.getItem(`pantry_${currentUserId}`)) || defaultPantryPresets;
-    let userProfile = JSON.parse(localStorage.getItem(`profile_${currentUserId}`)) || { name: "Cook", email: "", avatar: "", wreath: "wreath-flowers", unitSystem: "imperial", fontSizeScale: 1.0 };
+    <!-- Weathered Cookbook with Floral & Ephemera App Icon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%236B4423'/%3E%3Cpath d='M96 80h320a32 32 0 0 1 32 32v288a32 32 0 0 1-32 32H96a32 32 0 0 1-32-32V112a32 32 0 0 1 32-32z' fill='%23E8DFD1'/%3E%3Cpath d='M96 80h32v352H96z' fill='%23523318'/%3E%3Cpath d='M160 140h160v16H160zM160 180h200v12H160z' fill='%23C2785C' opacity='0.7'/%3E%3Ccircle cx='320' cy='320' r='60' fill='%23E5989B' opacity='0.8'/%3E%3Cpath d='M300 320c0-25 40-45 40-45s0 40-40 45zm0 0c-25 0-45 40-45 40s40 0 45-40z' fill='%238A9A86'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%236B4423'/%3E%3Cpath d='M96 80h320a32 32 0 0 1 32 32v288a32 32 0 0 1-32 32H96a32 32 0 0 1-32-32V112a32 32 0 0 1 32-32z' fill='%23E8DFD1'/%3E%3Cpath d='M96 80h32v352H96z' fill='%23523318'/%3E%3Cpath d='M160 140h160v16H160zM160 180h200v12H160z' fill='%23C2785C' opacity='0.7'/%3E%3Ccircle cx='320' cy='320' r='60' fill='%23E5989B' opacity='0.8'/%3E%3Cpath d='M300 320c0-25 40-45 40-45s0 40-40 45zm0 0c-25 0-45 40-45 40s40 0 45-40z' fill='%238A9A86'/%3E%3C/svg%3E">
     
-    let selectedCategory = "All";
-    let activeRecipe = null;
-    let activeScaleFactor = 1.0;
-    let originalServings = 1;
-    let authMode = "signUp";
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,400&family=Limelight&family=Monoton&family=Pacifico&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rajdhani:wght@600;700&family=Righteous&family=Shrikhand&family=Special+Elite&display=swap" rel="stylesheet">
     
-    let cookStepIndex = 0;
-    let cookTimerInterval = null;
-    let cookSecondsElapsed = 0;
+    <!-- Supabase JS & Lucide Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="https://unpkg.com/lucide@latest" defer onload="if(window.lucide){lucide.createIcons();}"></script>
 
-    let activeBookEditingId = null;
-    let currentSelectedSpineBadge = "🥐";
-    let multiScanImages = [null, null, null];
-    let pantryFilterCategory = "All";
-
-    function showVintageToast(message, iconName = 'sparkles') {
-        const container = document.getElementById('vintageToastContainer');
-        if (!container) return;
-        const toast = document.createElement('div');
-        toast.className = 'vintage-toast';
-        toast.innerHTML = `<i data-lucide="${iconName}" style="width:1.15rem; height:1.15rem; color:var(--accent-primary); flex-shrink:0;"></i><span>${message}</span>`;
-        container.appendChild(toast);
-        refreshIcons();
-        setTimeout(() => { toast.remove(); }, 3500);
-    }
-
-    function safeRun(fn, ...args) {
-        try {
-            return fn(...args);
-        } catch (err) {
-            console.error("Execution Error:", err);
-            showVintageToast(`Notice: ${err.message || 'Action unavailable.'}`, 'alert-triangle');
+    <style>
+        :root { --base-font-size: 1rem; }
+        body, body.era-1970s {
+            --bg-canvas: #F7F3EC; --bg-card: #FFFFFF; --bg-tint: #EFEADF;
+            --accent-primary: #C2785C; --accent-secondary: #D4A373; --accent-tertiary: #8A9A86;
+            --text-primary: #2C221E; --text-muted: #6B5B53; --border-primary: rgba(107, 91, 83, 0.18);
+            --font-display: 'Shrikhand', cursive; --font-sub: 'Fraunces', serif; --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+            --radius-card: 1.25rem; --top-stripe: linear-gradient(90deg, #C2785C 0%, #D4A373 50%, #8A9A86 100%);
         }
-    }
+        body.era-1920s { --bg-canvas: #121316; --bg-card: #1C1E24; --bg-tint: #252830; --accent-primary: #D4AF37; --accent-secondary: #F9F5EC; --accent-tertiary: #8A7322; --text-primary: #F9F5EC; --text-muted: #9E9B93; --border-primary: rgba(212, 175, 55, 0.35); --font-display: 'Cinzel', serif; --font-sub: 'Cinzel', serif; --font-body: 'Plus Jakarta Sans', system-ui, sans-serif; --radius-card: 0.35rem; --top-stripe: linear-gradient(90deg, #D4AF37, #F9F5EC, #D4AF37); }
+        body.era-1930s { --bg-canvas: #F4EFE6; --bg-card: #FAF7F2; --bg-tint: #E8E0D2; --accent-primary: #5B1426; --accent-secondary: #A08C75; --accent-tertiary: #CBD5E1; --text-primary: #2B1810; --text-muted: #6B5B52; --border-primary: rgba(91, 20, 38, 0.2); --font-display: 'Limelight', cursive; --font-sub: 'Playfair Display', serif; --font-body: 'Plus Jakarta Sans', system-ui, sans-serif; --radius-card: 1.25rem; --top-stripe: linear-gradient(90deg, #5B1426, #A08C75); }
+        body.era-1940s { --bg-canvas: #EFE8D3; --bg-card: #F7F3E6; --bg-tint: #E3D9BE; --accent-primary: #A82323; --accent-secondary: #6B6943; --accent-tertiary: #3A4B35; --text-primary: #2D2A26; --text-muted: #5C574F; --border-primary: rgba(45, 42, 38, 0.25); --font-display: 'Special Elite', cursive; --font-sub: 'Special Elite', cursive; --font-body: 'Special Elite', monospace; --radius-card: 0.25rem; --top-stripe: repeating-linear-gradient(90deg, #A82323, #A82323 15px, #EFE8D3 15px, #EFE8D3 30px); }
+        body.era-1950s { --bg-canvas: #FFFDF7; --bg-card: #FFFFFF; --bg-tint: #E0F2F1; --accent-primary: #E91E63; --accent-secondary: #00BFA5; --accent-tertiary: #FFD54F; --text-primary: #263238; --text-muted: #546E7A; --border-primary: rgba(0, 191, 165, 0.3); --font-display: 'Pacifico', cursive; --font-sub: 'Playfair Display', serif; --font-body: 'Plus Jakarta Sans', system-ui, sans-serif; --radius-card: 1.5rem; --top-stripe: repeating-linear-gradient(45deg, #00BFA5, #00BFA5 10px, #FFF 10px, #FFF 20px); }
+        body.era-1960s { --bg-canvas: #FFF8E7; --bg-card: #FFFFFF; --bg-tint: #FFE082; --accent-primary: #FF6F00; --accent-secondary: #8BC34A; --accent-tertiary: #212121; --text-primary: #212121; --text-muted: #616161; --border-primary: #212121; --font-display: 'Shrikhand', cursive; --font-sub: 'Righteous', cursive; --font-body: 'Plus Jakarta Sans', system-ui, sans-serif; --radius-card: 2rem; --top-stripe: linear-gradient(90deg, #FF6F00, #8BC34A, #212121); }
+        body.era-1980s { --bg-canvas: #1A1026; --bg-card: #251638; --bg-tint: #341D4E; --accent-primary: #FF007F; --accent-secondary: #00F0FF; --accent-tertiary: #FFE600; --text-primary: #FFFFFF; --text-muted: #B8A9CF; --border-primary: rgba(255, 0, 127, 0.45); --font-display: 'Monoton', cursive; --font-sub: 'Righteous', cursive; --font-body: 'Plus Jakarta Sans', system-ui, sans-serif; --radius-card: 0.5rem; --top-stripe: linear-gradient(90deg, #FF007F, #00F0FF, #FFE600); }
+        body.era-1990s { --bg-canvas: #EAE6DF; --bg-card: #F4F1EA; --bg-tint: #D8D2C5; --accent-primary: #7B341E; --accent-secondary: #4A5568; --accent-tertiary: #2D3748; --text-primary: #1A202C; --text-muted: #4A5568; --border-primary: rgba(45, 55, 72, 0.28); --font-display: 'Special Elite', monospace; --font-sub: 'Playfair Display', serif; --font-body: 'Plus Jakarta Sans', system-ui, sans-serif; --radius-card: 0.25rem; --top-stripe: linear-gradient(90deg, #7B341E, #4A5568); }
+        body.era-2000s { --bg-canvas: #EFF6FF; --bg-card: #FFFFFF; --bg-tint: #DBEAFE; --accent-primary: #0284C7; --accent-secondary: #9333EA; --accent-tertiary: #06B6D4; --text-primary: #0F172A; --text-muted: #475569; --border-primary: rgba(2, 132, 199, 0.25); --font-display: 'Rajdhani', sans-serif; --font-sub: 'Plus Jakarta Sans', sans-serif; --font-body: 'Plus Jakarta Sans', system-ui, sans-serif; --radius-card: 1.5rem; --top-stripe: linear-gradient(90deg, #0284C7, #06B6D4, #9333EA); }
+        body.era-2010s { --bg-canvas: #F8F6F4; --bg-card: #FFFFFF; --bg-tint: #EFEAE5; --accent-primary: #B57F7D; --accent-secondary: #748272; --accent-tertiary: #9E8F82; --text-primary: #2B2927; --text-muted: #78736E; --border-primary: rgba(43, 41, 39, 0.1); --font-display: 'Playfair Display', serif; --font-sub: 'Playfair Display', serif; --font-body: 'Plus Jakarta Sans', system-ui, sans-serif; --radius-card: 0.75rem; --top-stripe: #B57F7D; }
 
-    function applyDecadeTheme(era) {
-        const allEras = ['1920s', '1930s', '1940s', '1950s', '1960s', '1970s', '1980s', '1990s', '2000s', '2010s'];
-        allEras.forEach(e => document.body.classList.remove(`era-${e}`));
-        document.body.classList.add(`era-${era}`);
-        localStorage.setItem('user_decade_era', era);
-        const sSelect = document.getElementById('settingsEraSelect');
-        if (sSelect) sSelect.value = era;
-    }
+        * { box-sizing: border-box; margin: 0; padding: 0; min-width: 0; }
+        html { font-size: var(--base-font-size, 1rem); }
+        body { font-family: var(--font-body); background-color: var(--bg-canvas); color: var(--text-primary); -webkit-tap-highlight-color: transparent; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; padding-bottom: env(safe-area-inset-bottom, 5.5rem); transition: background-color 0.25s ease, color 0.25s ease; }
+        @media (min-width: 768px) { body { padding-bottom: 0; } }
 
-    function initDecadeTheme() {
-        const savedEra = localStorage.getItem('user_decade_era') || '1970s';
-        applyDecadeTheme(savedEra);
-    }
+        .font-retro-title { font-family: var(--font-display); letter-spacing: 0.02em; overflow-wrap: break-word; word-break: break-word; }
+        .font-retro-sub { font-family: var(--font-sub); overflow-wrap: break-word; }
+        .max-container { max-width: 72rem; margin-left: auto; margin-right: auto; width: 100%; padding-left: 0.75rem; padding-right: 0.75rem; }
 
-    function adjustTextAccessibility(scaleVal) {
-        const scale = parseFloat(scaleVal);
-        userProfile.fontSizeScale = scale;
-        localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
-        document.documentElement.style.setProperty('--base-font-size', `${scale}rem`);
-        const display = document.getElementById('fontSizeDisplay');
-        if (display) display.innerText = `${Math.round(scale * 100)}%`;
-    }
+        header { position: sticky; top: 0; z-index: 40; background-color: var(--bg-card); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1.5px solid var(--border-primary); padding: 0.5rem 0.75rem; display: flex; justify-content: space-between; align-items: center; }
+        .retro-stripe { height: 5px; background: var(--top-stripe); width: 100%; }
+        main { flex-grow: 1; padding-top: 0.85rem; padding-bottom: 1.25rem; display: grid; grid-template-columns: 1fr; gap: 1rem; align-items: start; }
+        @media (min-width: 768px) { main { grid-template-columns: 260px 1fr; gap: 1.5rem; padding-top: 1.25rem; } }
 
-    function initApp() {
-        try {
-            if (window.supabase) supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        } catch(e) { console.warn("Supabase fallback.", e); }
+        button { font-family: inherit; cursor: pointer; border: none; touch-action: manipulation; }
+        .btn-retro-orange { background-color: var(--accent-primary); color: #fff; padding: 0.55rem 1rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; box-shadow: 0 3px 8px rgba(0,0,0,0.1); white-space: nowrap; transition: transform 0.1s ease, filter 0.15s ease; }
+        .btn-retro-orange:hover { filter: brightness(1.06); }
+        .btn-retro-orange:active { transform: scale(0.98); }
 
-        if (window.innerWidth >= 768) {
-            const aside = document.getElementById('desktopSidebar');
-            if (aside) aside.style.display = 'block';
+        .btn-retro-avocado { background-color: var(--accent-secondary); color: #fff; padding: 0.55rem 1rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; box-shadow: 0 3px 8px rgba(0,0,0,0.08); white-space: nowrap; transition: transform 0.1s ease, filter 0.15s ease; }
+        .btn-retro-avocado:hover { filter: brightness(1.06); }
+
+        .recipe-grid { display: grid; grid-template-columns: 1fr; gap: 0.85rem; }
+        @media (min-width: 640px) { .recipe-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .pantry-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+        @media (min-width: 640px) { .pantry-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        #vintageToastContainer { position: fixed; bottom: 4.8rem; right: 0.75rem; left: 0.75rem; z-index: 150; display: flex; flex-direction: column; gap: 0.4rem; pointer-events: none; align-items: center; }
+        @media(min-width: 768px) { #vintageToastContainer { left: auto; right: 1rem; align-items: flex-end; } }
+        .vintage-toast { background: var(--bg-card); border: 2px solid var(--accent-primary); border-radius: 1rem; padding: 0.75rem 1rem; box-shadow: 0 10px 25px rgba(0,0,0,0.25); font-size: 0.78rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem; pointer-events: auto; animation: slideInToast 0.3s ease forwards, fadeOutToast 0.3s ease 3.5s forwards; max-width: 22rem; width: 100%; }
+        @keyframes slideInToast { from { transform: translateY(15px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes fadeOutToast { to { opacity: 0; transform: translateY(8px); } }
+
+        /* FLOATING BUG REPORT BUTTON */
+        #bugReportFloatBtn {
+            position: fixed;
+            bottom: 4.8rem;
+            right: 0.85rem;
+            z-index: 100;
+            background: var(--accent-primary);
+            color: #fff;
+            width: 2.8rem;
+            height: 2.8rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            border: 2px solid #fff;
+            transition: transform 0.2s ease;
+        }
+        #bugReportFloatBtn:hover { transform: scale(1.08); }
+        @media(min-width: 768px) {
+            #bugReportFloatBtn { bottom: 1.5rem; right: 1.5rem; }
+            #vintageToastContainer { bottom: 1.5rem; }
         }
 
-        initDecadeTheme();
-        renderBinders();
-        updateAuthControls();
-        updatePantryCounters();
-        applyProfileUI();
-        renderSubstitutionsList();
-
-        if (userProfile.fontSizeScale) {
-            adjustTextAccessibility(userProfile.fontSizeScale);
+        /* STICKY ACTION BAR FOR DETAIL VIEW */
+        .sticky-detail-bar {
+            position: sticky;
+            top: 3.5rem;
+            z-index: 30;
+            background: var(--bg-card);
+            padding: 0.6rem 0.85rem;
+            border-radius: 0.85rem;
+            border: 1.5px solid var(--border-primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            backdrop-filter: blur(8px);
         }
 
-        handleHashChange();
-        window.addEventListener('hashchange', handleHashChange);
-        refreshIcons();
-    }
+        .avatar-frame-container { position: relative; width: 4.5rem; height: 4.5rem; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+        .avatar-img { width: 3.8rem; height: 3.8rem; border-radius: 50%; object-fit: cover; border: 2px solid var(--border-primary); background: var(--bg-tint); }
+        .avatar-wreath { position: absolute; inset: -3px; pointer-events: none; border-radius: 50%; }
+        .wreath-flowers { box-shadow: 0 0 0 3px #E8A5B8, 0 0 0 6px #A3B899; }
+        .wreath-cookies { box-shadow: 0 0 0 3px #C78B1D, 0 0 0 6px #8D5537; }
+        .wreath-citrus  { box-shadow: 0 0 0 3px #E6C55C, 0 0 0 6px #8A9A86; }
+        .wreath-wheat   { box-shadow: 0 0 0 3px #D4A373, 0 0 0 6px #F7F3EC; }
 
-    function refreshIcons() {
-        if (window.lucide && typeof lucide.createIcons === 'function') {
-            lucide.createIcons();
-        } else {
-            setTimeout(() => { if (window.lucide) lucide.createIcons(); }, 150);
+        .bookcase-container { background: radial-gradient(circle at 50% 25%, #3a2215 0%, #1a0f08 100%); border: 8px solid #27160d; border-radius: 1rem; box-shadow: inset 0 0 35px rgba(0,0,0,0.8), 0 10px 25px rgba(0,0,0,0.35); padding: 1.5rem 0.75rem 1.25rem; display: flex; flex-direction: column; gap: 3rem; position: relative; overflow: hidden; }
+        .bookshelf-row { position: relative; display: flex; align-items: flex-end; gap: 0.75rem; min-height: 160px; padding: 0 0.25rem 0.4rem; z-index: 1; flex-wrap: wrap; }
+        .shelf-ledge { position: absolute; bottom: -14px; left: -0.75rem; right: -0.75rem; height: 20px; background: linear-gradient(180deg, #6c4028 0%, #4a2816 45%, #2a150a 100%); box-shadow: 0 8px 14px rgba(0,0,0,0.7), 0 2px 4px rgba(255,255,255,0.1) inset; border-top: 2px solid #8d5537; z-index: 2; }
+        .cookbook-spine { position: relative; height: 150px; border-radius: 4px 6px 6px 3px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 0.6rem 0.25rem; box-shadow: -3px 0 8px rgba(0,0,0,0.4), 2px 0 6px rgba(0,0,0,0.25); transition: transform 0.25s ease, box-shadow 0.25s ease; transform-origin: bottom center; user-select: none; }
+        .cookbook-spine::before { content: ''; position: absolute; top: 10px; bottom: 10px; left: 3px; width: 2px; background: rgba(255,255,255,0.2); }
+        .cookbook-spine:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 15px 20px rgba(0,0,0,0.5); z-index: 10; }
+        .spine-badge { font-size: 0.95rem; line-height: 1; }
+        .spine-title-vertical { writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); font-weight: 800; letter-spacing: 0.08em; font-size: 0.72rem; text-shadow: 0 1px 2px rgba(0,0,0,0.7); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-height: 85px; margin: auto 0; text-align: center; }
+        .spine-ribbon { position: absolute; bottom: -9px; left: 50%; transform: translateX(-50%); width: 9px; height: 15px; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 70%, 0 100%); }
+        .brass-add-card { height: 135px; width: 85px; border: 2px dashed rgba(212, 175, 55, 0.4); border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem; color: #d4af37; cursor: pointer; background: rgba(0,0,0,0.2); transition: all 0.2s ease; }
+        .brass-add-card:hover { background: rgba(212, 175, 55, 0.1); transform: translateY(-4px); }
+
+        .hidden { display: none !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body>
+
+    <div class="retro-stripe"></div>
+    <div id="vintageToastContainer"></div>
+
+    <!-- Floating Bug Report Button -->
+    <button id="bugReportFloatBtn" onclick="safeRun(openBugModal)" title="Report a Bug">
+        <i data-lucide="bug" style="width: 1.35rem; height: 1.35rem;"></i>
+    </button>
+
+    <header class="max-container">
+        <div style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; min-width: 0; flex-shrink: 1;" onclick="safeRun(navigate, 'feed')">
+            <div style="width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--accent-secondary); display: flex; align-items: center; justify-content: center; color: var(--bg-card); flex-shrink: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                <i data-lucide="book-open" style="width: 1.1rem; height: 1.1rem;"></i>
+            </div>
+            <div style="min-width: 0; overflow: hidden;">
+                <h1 class="font-retro-title" style="font-size: 1.05rem; color: var(--accent-primary); line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Stained Pages</h1>
+                <p style="font-size: 0.5rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 700;">Heirloom Archive</p>
+            </div>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 0.35rem; flex-shrink: 0;">
+            <button onclick="safeRun(navigate, 'settings')" title="App Settings" style="width: 2rem; height: 2rem; border-radius: 50%; background: var(--bg-tint); border: 1px solid var(--border-primary); color: var(--text-primary); display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="settings" style="width: 0.95rem; height: 0.95rem; color: var(--accent-primary);"></i>
+            </button>
+
+            <button id="authBtn" onclick="safeRun(handleProfileHeaderClick)" style="display: flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.6rem; border-radius: 9999px; border: 1.5px solid var(--border-primary); background: var(--bg-card); font-size: 0.68rem; font-weight: 700; color: var(--text-primary);">
+                <img id="headerAvatarImg" src="" class="hidden" style="width: 0.95rem; height: 0.95rem; border-radius: 50%; object-fit: cover;">
+                <i id="headerAvatarIcon" data-lucide="user" style="width: 0.75rem; height: 0.75rem;"></i>
+                <span id="authBtnText" style="white-space: nowrap;">Sign In</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-container">
+        <!-- Desktop Sidebar -->
+        <aside style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1rem; border: 1.5px solid var(--border-primary); display: none;" id="desktopSidebar">
+            <p style="font-size: 0.65rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;">Cookbook Binders</p>
+            <nav style="display: flex; flex-direction: column; gap: 0.35rem;">
+                <button onclick="safeRun(navigate, 'feed')" class="sidebar-btn" id="btn-feed" style="width: 100%; display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.75rem; border-radius: 0.75rem; text-align: left; font-weight: 800; background: var(--bg-tint); color: var(--accent-primary);">
+                    <i data-lucide="layout-grid" style="width: 1.1rem; height: 1.1rem; color: var(--accent-primary);"></i>
+                    <span>Recipe Tin</span>
+                </button>
+                <button onclick="safeRun(navigate, 'bookshelf')" class="sidebar-btn" id="btn-bookshelf" style="width: 100%; display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.75rem; border-radius: 0.75rem; text-align: left; font-weight: 700; background: transparent; color: var(--text-muted);">
+                    <i data-lucide="library" style="width: 1.1rem; height: 1.1rem;"></i>
+                    <span>My Bookshelf</span>
+                </button>
+                <button onclick="safeRun(navigate, 'substitutions')" class="sidebar-btn" id="btn-substitutions" style="width: 100%; display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.75rem; border-radius: 0.75rem; text-align: left; font-weight: 700; background: transparent; color: var(--text-muted);">
+                    <i data-lucide="scale" style="width: 1.1rem; height: 1.1rem;"></i>
+                    <span>Substitutions</span>
+                </button>
+                <button onclick="safeRun(navigate, 'import')" class="sidebar-btn" id="btn-import" style="width: 100%; display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.75rem; border-radius: 0.75rem; text-align: left; font-weight: 700; background: transparent; color: var(--text-muted);">
+                    <i data-lucide="camera" style="width: 1.1rem; height: 1.1rem;"></i>
+                    <span>Scan & Import</span>
+                </button>
+                <button onclick="safeRun(navigate, 'pantry')" class="sidebar-btn" id="btn-pantry" style="width: 100%; display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.75rem; border-radius: 0.75rem; text-align: left; font-weight: 700; background: transparent; color: var(--text-muted);">
+                    <i data-lucide="shopping-basket" style="width: 1.1rem; height: 1.1rem;"></i>
+                    <span>Kitchen Pantry</span>
+                </button>
+                <button onclick="safeRun(navigate, 'settings')" class="sidebar-btn" id="btn-settings" style="width: 100%; display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.75rem; border-radius: 0.75rem; text-align: left; font-weight: 700; background: transparent; color: var(--text-muted);">
+                    <i data-lucide="settings" style="width: 1.1rem; height: 1.1rem;"></i>
+                    <span>Settings</span>
+                </button>
+            </nav>
+        </aside>
+
+        <section style="display: flex; flex-direction: column; gap: 1rem; min-width: 0;">
+            
+            <!-- VIEW 1: RECIPE TIN FEED -->
+            <div id="section-feed" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="background: var(--bg-card); border: 1.5px solid var(--border-primary); border-radius: var(--radius-card); padding: 1.25rem; display: flex; justify-content: space-between; align-items: center; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.03); flex-wrap: wrap; gap: 0.85rem;">
+                    <div style="position: absolute; right: -15px; top: -15px; width: 100px; height: 100px; border-radius: 50%; background: var(--accent-secondary); opacity: 0.1;"></div>
+                    <div style="z-index: 1; min-width: 0; flex-shrink: 1;">
+                        <span style="font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 800;">Welcome to your vintage tin</span>
+                        <h2 class="font-retro-title" style="font-size: 1.5rem; color: var(--accent-primary); margin-top: 0.15rem;">Let's get cooking!</h2>
+                    </div>
+                    <button onclick="safeRun(navigate, 'import')" class="btn-retro-orange" style="z-index: 1; flex-shrink: 0;">
+                        <i data-lucide="plus" style="width: 0.95rem; height: 0.95rem;"></i>
+                        <span>New Recipe</span>
+                    </button>
+                </div>
+
+                <div style="background: var(--bg-card); padding: 0.75rem; border-radius: var(--radius-card); border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.65rem;">
+                    <div style="position: relative; width: 100%;">
+                        <i data-lucide="search" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 1rem; height: 1rem; color: var(--text-muted);"></i>
+                        <input type="text" id="recipeSearch" oninput="safeRun(filterRecipes)" placeholder="Search recipes, ingredients..." style="width: 100%; background: var(--bg-canvas); padding: 0.5rem 0.85rem 0.5rem 2.35rem; border-radius: 9999px; font-size: 0.78rem; border: 1px solid var(--border-primary); color: var(--text-primary); outline: none; font-family: inherit;">
+                    </div>
+                    <div id="bindersList" style="display: flex; align-items: center; gap: 0.35rem; overflow-x: auto;" class="no-scrollbar"></div>
+                </div>
+
+                <div id="recipeGrid" class="recipe-grid"></div>
+
+                <div id="emptyState" class="hidden" style="text-align: center; padding: 2.5rem 1rem; border-radius: var(--radius-card); border: 1.5px dashed var(--border-primary); background: var(--bg-card);">
+                    <div style="width: 3.5rem; height: 3.5rem; background: var(--bg-tint); color: var(--accent-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.85rem; border: 1.5px solid var(--border-primary);">
+                        <i data-lucide="book-open-check" style="width: 1.75rem; height: 1.75rem;"></i>
+                    </div>
+                    <h3 class="font-retro-sub" style="font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.35rem;">Your recipe tin is empty!</h3>
+                    <p style="font-size: 0.72rem; color: var(--text-muted); max-width: 20rem; margin: 0 auto 1.15rem; line-height: 1.4;">
+                        Snap photos of handwritten cards, save social media recipe screenshots, or paste links to build your archive.
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+                        <button onclick="safeRun(navigate, 'import')" class="btn-retro-orange">Scan Card or URL</button>
+                        <button onclick="safeRun(addSampleRecipe)" class="btn-retro-avocado">Add Sample Recipe</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: MY BOOKSHELF -->
+            <div id="section-bookshelf" class="hidden" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 1rem 1.2rem; border-radius: var(--radius-card); border: 1.5px solid var(--border-primary); flex-wrap: wrap; gap: 0.6rem;">
+                    <div style="min-width: 0; flex-shrink: 1;">
+                        <span style="font-size: 0.58rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.1em;">Private Culinary Library</span>
+                        <h2 class="font-retro-title" style="font-size: 1.4rem; color: var(--accent-primary); margin-top: 0.1rem;">My Bookshelf</h2>
+                    </div>
+                    <button onclick="safeRun(openCookbookCreatorModal)" class="btn-retro-orange" style="padding: 0.45rem 0.75rem; border-radius: 50%; width: 2.2rem; height: 2.2rem; flex-shrink: 0;" title="Bind New Cookbook">
+                        <i data-lucide="plus" style="width: 1rem; height: 1rem;"></i>
+                    </button>
+                </div>
+
+                <div class="bookcase-container" id="bookcaseDisplay"></div>
+            </div>
+
+            <!-- VIEW: FOOD SUBSTITUTIONS -->
+            <div id="section-substitutions" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.25rem; border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; gap: 1rem;">
+                <div>
+                    <span style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.1em;">Kitchen Reference</span>
+                    <h2 class="font-retro-title" style="font-size: 1.5rem; color: var(--accent-primary); margin-top: 0.15rem;">Common Food Substitutions</h2>
+                </div>
+
+                <div style="position: relative; width: 100%;">
+                    <i data-lucide="search" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 1rem; height: 1rem; color: var(--text-muted);"></i>
+                    <input type="text" id="subSearchInput" oninput="safeRun(filterSubstitutions)" placeholder="Search ingredient or substitute..." style="width: 100%; background: var(--bg-canvas); padding: 0.5rem 0.85rem 0.5rem 2.35rem; border-radius: 9999px; font-size: 0.78rem; border: 1px solid var(--border-primary); color: var(--text-primary); outline: none; font-family: inherit;">
+                </div>
+
+                <div id="substitutionsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;"></div>
+            </div>
+
+            <!-- VIEW: SETTINGS -->
+            <div id="section-settings" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.25rem; border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; gap: 1.15rem;">
+                <div>
+                    <span style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.1em;">Preferences</span>
+                    <h2 class="font-retro-title" style="font-size: 1.5rem; color: var(--accent-primary); margin-top: 0.15rem;">App Settings</h2>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 0.85rem; width: 100%;">
+                    <div style="background: var(--bg-tint); padding: 0.85rem; border-radius: 0.75rem; border: 1px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.35rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary);">Text Size Accessibility</label>
+                            <span id="fontSizeDisplay" style="font-size: 0.7rem; font-weight: 800; color: var(--accent-primary);">100%</span>
+                        </div>
+                        <input type="range" id="textSizeSlider" min="0.85" max="1.4" step="0.05" value="1.0" oninput="safeRun(adjustTextAccessibility, this.value)" style="accent-color: var(--accent-primary); cursor: pointer; width: 100%;">
+                    </div>
+
+                    <div style="background: var(--bg-tint); padding: 0.85rem; border-radius: 0.75rem; border: 1px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.35rem;">
+                        <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary);">Global App Timeline Era</label>
+                        <select id="settingsEraSelect" onchange="safeRun(applyDecadeTheme, this.value)" style="background: var(--bg-card); padding: 0.55rem 0.7rem; border-radius: 0.6rem; border: 1.5px solid var(--border-primary); font-size: 0.75rem; font-weight: 700; color: var(--text-primary); outline: none; font-family: inherit; width: 100%;">
+                            <option value="1920s">1920s: Art Deco & Gilded Jazz Age</option>
+                            <option value="1930s">1930s: Streamline Moderne & Hollywood Glamour</option>
+                            <option value="1940s">1940s: Victory Utility & Handwritten Rations</option>
+                            <option value="1950s">1950s: Mid-Century Atomic Pastel Diner</option>
+                            <option value="1960s">1960s: Mod Pop & Psychedelic Sunshine</option>
+                            <option value="1970s">1970s: Earthy Harvest & Disco Kitchen (Default)</option>
+                            <option value="1980s">1980s: Memphis Neon & Radical Bakes</option>
+                            <option value="1990s">1990s: Minimal Raw Slate & Grunge Notebook</option>
+                            <option value="2000s">2000s: Y2K Cyber Glaze & Glossy Bling</option>
+                            <option value="2010s">2010s: Rustic Edison & Millennial Pastel</option>
+                        </select>
+                    </div>
+
+                    <div style="background: var(--bg-tint); padding: 0.85rem; border-radius: 0.75rem; border: 1px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.45rem;">
+                        <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary);">Custom Cookbook Decades</label>
+                        <div id="settingsCookbooksList" style="display: flex; flex-direction: column; gap: 0.35rem; max-height: 7rem; overflow-y: auto;"></div>
+                    </div>
+
+                    <div style="background: var(--bg-tint); padding: 0.85rem; border-radius: 0.75rem; border: 1px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.65rem;">
+                        <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-primary);">Account & Data Management</label>
+                        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                            <button onclick="safeRun(exportArchiveData)" class="btn-retro-avocado" style="font-size: 0.7rem; padding: 0.4rem 0.65rem;">
+                                <i data-lucide="download" style="width: 0.8rem; height: 0.8rem;"></i> Export JSON
+                            </button>
+                            <button onclick="safeRun(handlePasswordReset)" style="font-size: 0.7rem; padding: 0.4rem 0.65rem; border-radius: 9999px; background: var(--bg-card); border: 1px solid var(--border-primary); font-weight: 700;">
+                                Reset Password
+                            </button>
+                        </div>
+                        <div style="border-top: 1px solid var(--border-primary); padding-top: 0.55rem;">
+                            <button onclick="safeRun(handleDeleteAccount)" style="width: 100%; padding: 0.6rem; border-radius: 9999px; border: 1.5px solid #FFCDD2; background: #FFEBEE; color: #C62828; font-size: 0.68rem; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; gap: 0.3rem;">
+                                <i data-lucide="user-x" style="width: 0.85rem; height: 0.85rem;"></i> Delete Account & Data
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 2: MULTI-PAGE & BATCH SCAN & IMPORT SCREEN -->
+            <div id="section-import" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.25rem; border: 1.5px solid var(--border-primary);">
+                <div style="margin-bottom: 1.15rem;">
+                    <h2 class="font-retro-title" style="font-size: 1.5rem; color: var(--accent-primary);">Scan & Batch Import</h2>
+                    <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem;">Choose up to 3 sequential pages for one card, or select multiple single photos from your gallery to batch upload recipes instantly.</p>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Multi-Page Card Slots (Up to 3 photos)</label>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
+                        <div style="background: var(--bg-tint); border: 2px dashed var(--border-primary); border-radius: 0.65rem; height: 7rem; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: pointer;">
+                            <img id="slotImg0" src="" class="hidden" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
+                            <div id="slotPlaceholder0" style="text-align:center; padding:0.35rem; color:var(--text-muted);">
+                                <i data-lucide="camera" style="width: 1.25rem; height: 1.25rem; margin-bottom: 0.2rem;"></i>
+                                <span style="display:block; font-size:0.6rem; font-weight:800;">Page 1</span>
+                            </div>
+                            <input type="file" accept="image/*" onchange="safeRun(handleMultiScanUpload, this, 0)" style="position:absolute; inset:0; opacity:0; cursor:pointer;">
+                        </div>
+
+                        <div style="background: var(--bg-tint); border: 2px dashed var(--border-primary); border-radius: 0.65rem; height: 7rem; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: pointer;">
+                            <img id="slotImg1" src="" class="hidden" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
+                            <div id="slotPlaceholder1" style="text-align:center; padding:0.35rem; color:var(--text-muted);">
+                                <i data-lucide="camera" style="width: 1.25rem; height: 1.25rem; margin-bottom: 0.2rem;"></i>
+                                <span style="display:block; font-size:0.6rem; font-weight:800;">Page 2</span>
+                            </div>
+                            <input type="file" accept="image/*" onchange="safeRun(handleMultiScanUpload, this, 1)" style="position:absolute; inset:0; opacity:0; cursor:pointer;">
+                        </div>
+
+                        <div style="background: var(--bg-tint); border: 2px dashed var(--border-primary); border-radius: 0.65rem; height: 7rem; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: pointer;">
+                            <img id="slotImg2" src="" class="hidden" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
+                            <div id="slotPlaceholder2" style="text-align:center; padding:0.35rem; color:var(--text-muted);">
+                                <i data-lucide="camera" style="width: 1.25rem; height: 1.25rem; margin-bottom: 0.2rem;"></i>
+                                <span style="display:block; font-size:0.6rem; font-weight:800;">Page 3</span>
+                            </div>
+                            <input type="file" accept="image/*" onchange="safeRun(handleMultiScanUpload, this, 2)" style="position:absolute; inset:0; opacity:0; cursor:pointer;">
+                        </div>
+                    </div>
+
+                    <button onclick="safeRun(runMultiPageGeminiOCR)" class="btn-retro-orange" style="width: 100%; padding: 0.7rem;">
+                        <i data-lucide="sparkles" style="width: 1rem; height: 1rem;"></i>
+                        <span>Transcribe Multi-Page Card</span>
+                    </button>
+
+                    <div style="background: var(--bg-tint); padding: 0.85rem; border-radius: 0.75rem; border: 1px solid var(--border-primary); margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <h3 class="font-retro-sub" style="font-size: 0.9rem; font-weight: 800; color: var(--text-primary);">Batch Gallery Import (Multiple Recipes)</h3>
+                        <p style="font-size: 0.68rem; color: var(--text-muted); line-height: 1.35;">Select multiple photos from your phone gallery simultaneously to generate separate recipe cards in bulk.</p>
+                        <label class="btn-retro-avocado" style="cursor: pointer; width: 100%; justify-content: center;">
+                            <i data-lucide="layers" style="width: 0.95rem; height: 0.95rem;"></i>
+                            <span>Select Multiple Gallery Photos</span>
+                            <input type="file" accept="image/*" multiple class="hidden" onchange="safeRun(handleBatchGalleryUpload, this)">
+                        </label>
+                    </div>
+
+                    <div style="border-top: 1px solid var(--border-primary); padding-top: 0.85rem; margin-top: 0.2rem;">
+                        <h3 class="font-retro-sub" style="font-size: 0.9rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.4rem;">Or Paste Recipe Web URL</h3>
+                        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                            <input type="url" id="recipeUrlInput" placeholder="https://cooking.nytimes.com/recipes/..." style="flex-grow: 1; min-width: 180px; background: var(--bg-tint); padding: 0.5rem 0.65rem; border-radius: 0.6rem; border: 1px solid var(--border-primary); font-size: 0.75rem; color: var(--text-primary); outline: none; font-family: inherit;">
+                            <button onclick="safeRun(parseRecipeUrlWithGemini)" class="btn-retro-avocado" style="padding: 0.5rem 1rem;">Parse</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="parseStatusBanner" class="hidden" style="margin-top: 0.85rem; padding: 0.85rem; border-radius: 0.75rem; background: var(--bg-tint); border: 1px solid var(--border-primary); display: flex; align-items: center; gap: 0.65rem;">
+                    <i data-lucide="refresh-cw" style="width: 1.15rem; height: 1.15rem; color: var(--accent-primary); animation: spin 1s linear infinite;"></i>
+                    <div style="flex-grow: 1;">
+                        <p id="parseStatusText" style="font-size: 0.72rem; font-weight: 800; color: var(--text-primary);">Processing scans...</p>
+                        <div style="width: 100%; max-width: 14rem; height: 5px; background: var(--bg-canvas); border-radius: 9999px; margin-top: 0.3rem; overflow: hidden; border: 1px solid var(--border-primary);">
+                            <div id="parseProgressBar" style="height: 100%; background: var(--accent-primary); width: 0%; transition: width 0.3s ease;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 3: KITCHEN PANTRY -->
+            <div id="section-pantry" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.25rem; border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; gap: 1.15rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+                    <div>
+                        <span style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.12em;">Inventory & Stock</span>
+                        <h2 class="font-retro-title" style="font-size: 1.5rem; color: var(--accent-primary); margin-top: 0.15rem;">Kitchen Pantry</h2>
+                    </div>
+                    <button onclick="safeRun(addPantryItemPrompt)" class="btn-retro-orange" style="padding: 0.45rem 0.85rem; font-size: 0.7rem;">
+                        <i data-lucide="plus" style="width: 0.9rem; height: 0.9rem;"></i>
+                        <span>Add Item</span>
+                    </button>
+                </div>
+
+                <div style="display: flex; gap: 0.4rem; overflow-x: auto;" class="no-scrollbar">
+                    <button onclick="filterPantryCategory('All')" class="pantry-cat-btn" style="padding: 0.3rem 0.75rem; border-radius: 9999px; background: var(--bg-tint); font-size: 0.68rem; font-weight: 700; border: 1px solid var(--border-primary); white-space: nowrap;">All Stock</button>
+                    <button onclick="filterPantryCategory('Dairy & Refrigerated')" class="pantry-cat-btn" style="padding: 0.3rem 0.75rem; border-radius: 9999px; background: var(--bg-tint); font-size: 0.68rem; font-weight: 700; border: 1px solid var(--border-primary); white-space: nowrap;">Dairy & Fridge</button>
+                    <button onclick="filterPantryCategory('Baking')" class="pantry-cat-btn" style="padding: 0.3rem 0.75rem; border-radius: 9999px; background: var(--bg-tint); font-size: 0.68rem; font-weight: 700; border: 1px solid var(--border-primary); white-space: nowrap;">Baking</button>
+                    <button onclick="filterPantryCategory('Spices & Pantry')" class="pantry-cat-btn" style="padding: 0.3rem 0.75rem; border-radius: 9999px; background: var(--bg-tint); font-size: 0.68rem; font-weight: 700; border: 1px solid var(--border-primary); white-space: nowrap;">Spices</button>
+                </div>
+
+                <div id="pantryGrid" class="pantry-grid"></div>
+            </div>
+
+            <!-- VIEW 4: RECIPE DETAIL -->
+            <div id="section-detail" class="hidden" style="display: flex; flex-direction: column; gap: 0.85rem;">
+                
+                <!-- STICKY ACTION BAR -->
+                <div class="sticky-detail-bar">
+                    <button onclick="safeRun(navigate, 'feed')" style="display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.7rem; font-weight: 800; color: var(--text-primary); background: transparent;">
+                        <i data-lucide="arrow-left" style="width: 0.95rem; height: 0.95rem;"></i>
+                        <span>Tin</span>
+                    </button>
+                    <div style="display: flex; gap: 0.35rem;">
+                        <button onclick="safeRun(openRecipeEditorModal)" class="btn-retro-avocado" style="padding: 0.3rem 0.65rem; font-size: 0.65rem;">
+                            <i data-lucide="edit-3" style="width: 0.8rem; height: 0.8rem;"></i> Edit
+                        </button>
+                        <button onclick="safeRun(startCookMode)" class="btn-retro-orange" style="padding: 0.3rem 0.65rem; font-size: 0.65rem;">
+                            <i data-lucide="flame" style="width: 0.8rem; height: 0.8rem;"></i> Cook
+                        </button>
+                    </div>
+                </div>
+
+                <div class="print-card-box" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.25rem; border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; gap: 1.15rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <div id="detailImageContainer" onclick="safeRun(openLightbox)" style="position: relative; height: 13rem; width: 100%; border-radius: 0.85rem; overflow: hidden; background: var(--bg-tint); cursor: pointer; border: 1px solid var(--border-primary);">
+                        <img id="detailImg" src="" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div style="position: absolute; bottom: 0.65rem; right: 0.65rem; background: rgba(0, 0, 0, 0.75); color: #fff; padding: 0.3rem 0.6rem; border-radius: 9999px; font-size: 0.6rem; font-weight: 700; display: flex; align-items: center; gap: 0.3rem;">
+                            <i data-lucide="maximize-2" style="width: 0.8rem; height: 0.8rem;"></i>
+                            <span>Tap card photo</span>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 0.75rem;">
+                        <div>
+                            <span id="detailCategory" style="padding: 0.2rem 0.65rem; border-radius: 9999px; background: var(--accent-secondary); color: #fff; font-size: 0.58rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;">Sunday Bakes</span>
+                            <h2 id="detailTitle" class="font-retro-title" style="font-size: 1.5rem; color: var(--accent-primary); margin: 0.4rem 0 0.15rem; line-height: 1.2;"></h2>
+                            <p id="detailSource" style="font-size: 0.68rem; color: var(--text-muted); font-style: italic;"></p>
+                        </div>
+
+                        <div class="no-print" style="display: flex; align-items: center; gap: 0.35rem;">
+                            <button id="detailBookmarkBtn" onclick="safeRun(toggleDetailBookmark)" style="width: 2.35rem; height: 2.35rem; border-radius: 50%; border: 1.5px solid var(--border-primary); background: var(--bg-card); display: flex; align-items: center; justify-content: center; color: var(--accent-primary);">
+                                <i data-lucide="heart" style="width: 1.1rem; height: 1.1rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <p id="detailDescription" class="font-retro-sub" style="font-size: 0.8rem; color: var(--text-primary); font-style: italic; line-height: 1.45; padding: 0.85rem; border-radius: 0.75rem; border: 1px dashed var(--border-primary); background: var(--bg-tint);"></p>
+
+                    <div id="detailTipsContainer" class="hidden" style="padding: 0.85rem; border-radius: 0.75rem; background: rgba(212, 163, 115, 0.12); border: 1.5px solid var(--accent-secondary);">
+                        <div style="display: flex; align-items: center; gap: 0.3rem; color: var(--accent-primary); font-weight: 800; font-size: 0.68rem; text-transform: uppercase;">
+                            <i data-lucide="lightbulb" style="width: 0.9rem; height: 0.9rem;"></i>
+                            <span>Kitchen Tips & Family Notes</span>
+                        </div>
+                        <p id="detailTipsText" class="font-retro-sub" style="font-style: italic; font-size: 0.78rem; color: var(--text-primary); margin-top: 0.3rem; line-height: 1.4;"></p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); padding: 0.65rem; background: var(--bg-tint); border-radius: 0.75rem; border: 1px solid var(--border-primary); text-align: center;">
+                        <div>
+                            <span style="display: block; font-size: 0.58rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800;">Prep Time</span>
+                            <span id="detailPrepTime" style="font-size: 0.75rem; font-weight: 800; color: var(--text-primary);">15m</span>
+                        </div>
+                        <div style="border-left: 1px solid var(--border-primary); border-right: 1px solid var(--border-primary);">
+                            <span style="display: block; font-size: 0.58rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800;">Cook Time</span>
+                            <span id="detailCookTime" style="font-size: 0.75rem; font-weight: 800; color: var(--text-primary);">30m</span>
+                        </div>
+                        <div>
+                            <span style="display: block; font-size: 0.58rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800;">Difficulty</span>
+                            <span id="detailDifficulty" style="font-size: 0.75rem; font-weight: 800; color: var(--text-primary);">Easy</span>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 1.25rem;">
+                        <div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <h3 class="font-retro-title" style="font-size: 1.15rem; color: var(--text-primary);">Ingredients</h3>
+                                <div class="no-print" style="display: flex; align-items: center; gap: 0.35rem; background: var(--bg-tint); padding: 0.25rem 0.6rem; border-radius: 9999px; border: 1px solid var(--border-primary);">
+                                    <button onclick="safeRun(scaleServings, -1)" style="font-weight: 800; color: var(--text-primary); background: transparent; padding: 0 0.2rem;">-</button>
+                                    <span id="scaledServingsCount" style="font-size: 0.72rem; font-weight: 800; color: var(--text-primary); min-width: 0.75rem; text-align: center;">4</span>
+                                    <button onclick="safeRun(scaleServings, 1)" style="font-weight: 800; color: var(--text-primary); background: transparent; padding: 0 0.2rem;">+</button>
+                                    <span style="font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; font-weight: 800;">serv</span>
+                                </div>
+                            </div>
+                            <ul id="detailIngredientsList" style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem;"></ul>
+                        </div>
+
+                        <div>
+                            <h3 class="font-retro-title" style="font-size: 1.15rem; color: var(--text-primary); margin-bottom: 0.75rem;">Instructions</h3>
+                            <ol id="detailStepsList" style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem;"></ol>
+                        </div>
+                    </div>
+
+                    <div class="no-print" style="display: flex; justify-content: flex-end; padding-top: 0.3rem;">
+                        <button onclick="safeRun(deleteRecipeDetail)" style="display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.4rem 0.75rem; border-radius: 9999px; border: 1.5px solid #FFCDD2; background: transparent; color: #C62828; font-size: 0.68rem; font-weight: 800;">
+                            <i data-lucide="trash-2" style="width: 0.85rem; height: 0.85rem;"></i>
+                            <span>Delete Recipe</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 5: COOK MODE -->
+            <div id="section-cook" class="hidden" style="background: var(--bg-tint); color: var(--text-primary); border-radius: var(--radius-card); padding: 1.25rem; display: flex; flex-direction: column; gap: 1.15rem; border: 1.5px solid var(--border-primary);">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-primary); padding-bottom: 0.75rem;">
+                    <div>
+                        <h2 class="font-retro-title" style="font-size: 1.25rem; color: var(--accent-primary);">Cook Mode Active</h2>
+                        <p style="font-size: 0.58rem; color: var(--text-muted); text-transform: uppercase; font-weight: 800;">Screen-Awake Enabled</p>
+                    </div>
+                    <button onclick="safeRun(exitCookMode)" style="padding: 0.3rem 0.65rem; border-radius: 9999px; border: 1px solid var(--border-primary); background: transparent; color: var(--text-primary); font-size: 0.68rem; font-weight: 700;">Exit</button>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span id="cookStepHeader" style="font-size: 0.7rem; text-transform: uppercase; font-weight: 800; letter-spacing: 0.08em; color: var(--accent-secondary);">Step 1 of 3</span>
+                    <div style="display: flex; align-items: center; gap: 0.35rem; background: var(--bg-card); padding: 0.3rem 0.75rem; border-radius: 9999px; border: 1px solid var(--border-primary);">
+                        <i data-lucide="timer" style="width: 0.9rem; height: 0.9rem; color: var(--accent-primary);"></i>
+                        <span id="cookTimer" style="font-family: monospace; font-size: 0.78rem; font-weight: 800;">00:00</span>
+                        <button onclick="safeRun(toggleCookTimer)" id="cookTimerControl" style="font-size: 0.62rem; text-transform: uppercase; font-weight: 800; color: var(--accent-secondary); background: transparent;">Start</button>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); padding: 1.25rem; border-radius: 0.85rem; border: 1px solid var(--border-primary);">
+                    <h3 id="cookStepTitle" class="font-retro-title" style="font-size: 1.25rem; color: var(--accent-primary); margin-bottom: 0.4rem;"></h3>
+                    <p id="cookStepInstruction" style="font-size: 0.95rem; line-height: 1.5; color: var(--text-primary);"></p>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;">
+                    <button onclick="safeRun(navigateCookStep, -1)" id="prevStepBtn" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.35rem; padding: 0.65rem; border-radius: 9999px; background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-primary); font-size: 0.72rem; font-weight: 800;">
+                        <i data-lucide="chevron-left" style="width: 0.95rem; height: 0.95rem;"></i>
+                        <span>Prev</span>
+                    </button>
+                    <button onclick="safeRun(navigateCookStep, 1)" id="nextStepBtn" class="btn-retro-orange" style="flex: 1; padding: 0.65rem;">
+                        <span>Next</span>
+                        <i data-lucide="chevron-right" style="width: 0.95rem; height: 0.95rem;"></i>
+                    </button>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="hidden" onclick="safeRun(closeLightbox)">
+        <img id="lightboxImg" src="" onclick="event.stopPropagation()">
+    </div>
+
+    <!-- BUG REPORT MODAL -->
+    <div id="bugReportModal" class="hidden" style="position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; padding: 1rem;">
+        <div style="background: var(--bg-card); max-width: 26rem; width: 100%; border-radius: var(--radius-card); padding: 1.5rem; border: 1.5px solid var(--border-primary); position: relative; box-shadow: 0 20px 25px rgba(0,0,0,0.3);">
+            <button onclick="safeRun(closeBugModal)" style="position: absolute; right: 0.85rem; top: 0.85rem; width: 1.85rem; height: 1.85rem; background: var(--bg-tint); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
+                <i data-lucide="x" style="width: 1rem; height: 1rem;"></i>
+            </button>
+
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem; color: var(--accent-primary);">
+                <i data-lucide="bug" style="width: 1.25rem; height: 1.25rem;"></i>
+                <h3 class="font-retro-title" style="font-size: 1.25rem;">Report an App Bug</h3>
+            </div>
+            <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1.15rem; line-height: 1.35;">Found something acting weird? Leave a message and attach an optional screenshot so we can fix it right away!</p>
+
+            <form onsubmit="safeRun(submitBugReport, event)" style="display: flex; flex-direction: column; gap: 0.85rem;">
+                <div>
+                    <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">What went wrong?</label>
+                    <textarea id="bugMessageInput" required rows="3" placeholder="Describe the bug or unexpected behavior..." style="width: 100%; background: var(--bg-tint); padding: 0.55rem 0.75rem; border-radius: 0.65rem; border: 1px solid var(--border-primary); font-size: 0.78rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit; resize: vertical;"></textarea>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Attach Screenshot (Optional)</label>
+                    <input type="file" id="bugScreenshotInput" accept="image/*" style="width: 100%; font-size: 0.7rem; margin-top: 0.2rem; color: var(--text-muted);">
+                </div>
+
+                <button type="submit" class="btn-retro-orange" style="width: 100%; padding: 0.75rem; margin-top: 0.3rem;">
+                    <i data-lucide="send" style="width: 1rem; height: 1rem;"></i>
+                    <span>Send Directly to Developer</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 40; background: var(--bg-card); border-top: 1.5px solid var(--border-primary); padding: 0.5rem 0.5rem; display: flex; justify-content: space-around; align-items: center;" id="mobileNav">
+        <button onclick="safeRun(navigate, 'feed')" class="mobile-nav-btn" id="mbtn-feed" style="display: flex; flex-direction: column; align-items: center; gap: 0.15rem; color: var(--accent-primary); background: transparent; padding: 0.2rem;">
+            <i data-lucide="layout-grid" style="width: 1.15rem; height: 1.15rem; color: var(--accent-primary);"></i>
+            <span style="font-size: 0.55rem; font-weight: 800;">Tin</span>
+        </button>
+        <button onclick="safeRun(navigate, 'bookshelf')" class="mobile-nav-btn" id="mbtn-bookshelf" style="display: flex; flex-direction: column; align-items: center; gap: 0.15rem; color: var(--text-muted); background: transparent; padding: 0.2rem;">
+            <i data-lucide="library" style="width: 1.15rem; height: 1.15rem;"></i>
+            <span style="font-size: 0.55rem; font-weight: 700;">Library</span>
+        </button>
+        <button onclick="safeRun(navigate, 'substitutions')" class="mobile-nav-btn" id="mbtn-substitutions" style="display: flex; flex-direction: column; align-items: center; gap: 0.15rem; color: var(--text-muted); background: transparent; padding: 0.2rem;">
+            <i data-lucide="scale" style="width: 1.15rem; height: 1.15rem;"></i>
+            <span style="font-size: 0.55rem; font-weight: 700;">Subs</span>
+        </button>
+        <button onclick="safeRun(navigate, 'import')" class="mobile-nav-btn" id="mbtn-import" style="display: flex; flex-direction: column; align-items: center; gap: 0.15rem; color: var(--text-muted); background: transparent; padding: 0.2rem;">
+            <i data-lucide="camera" style="width: 1.15rem; height: 1.15rem;"></i>
+            <span style="font-size: 0.55rem; font-weight: 700;">Scan</span>
+        </button>
+        <button onclick="safeRun(navigate, 'pantry')" class="mobile-nav-btn" id="mbtn-pantry" style="display: flex; flex-direction: column; align-items: center; gap: 0.15rem; color: var(--text-muted); background: transparent; padding: 0.2rem;">
+            <i data-lucide="shopping-basket" style="width: 1.15rem; height: 1.15rem;"></i>
+            <span style="font-size: 0.55rem; font-weight: 700;">Pantry</span>
+        </button>
+        <button onclick="safeRun(navigate, 'settings')" class="mobile-nav-btn" id="mbtn-settings" style="display: flex; flex-direction: column; align-items: center; gap: 0.15rem; color: var(--text-muted); background: transparent; padding: 0.2rem;">
+            <i data-lucide="settings" style="width: 1.15rem; height: 1.15rem;"></i>
+            <span style="font-size: 0.55rem; font-weight: 700;">Settings</span>
+        </button>
+    </nav>
+
+    <!-- RECIPE EDITOR MODAL -->
+    <div id="recipeEditorModal" class="hidden" style="position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; padding: 1rem;">
+        <div style="background: var(--bg-card); max-width: 32rem; width: 100%; border-radius: var(--radius-card); padding: 1.5rem; border: 1.5px solid var(--border-primary); position: relative; box-shadow: 0 20px 25px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto;">
+            <button onclick="safeRun(closeRecipeEditorModal)" style="position: absolute; right: 0.85rem; top: 0.85rem; width: 1.85rem; height: 1.85rem; background: var(--bg-tint); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
+                <i data-lucide="x" style="width: 1rem; height: 1rem;"></i>
+            </button>
+
+            <h3 class="font-retro-title" style="font-size: 1.25rem; color: var(--accent-primary); margin-bottom: 0.25rem;">Edit Recipe Details</h3>
+            <p style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 1rem;">Modify ingredients, instructions, or add family tips & notes.</p>
+
+            <form onsubmit="safeRun(saveRecipeEdits, event)" style="display: flex; flex-direction: column; gap: 0.85rem;">
+                <div>
+                    <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Recipe Title</label>
+                    <input type="text" id="editRecipeTitle" required style="width: 100%; background: var(--bg-tint); padding: 0.5rem 0.65rem; border-radius: 0.55rem; border: 1px solid var(--border-primary); font-size: 0.78rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit;">
+                </div>
+
+                <div>
+                    <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Description</label>
+                    <textarea id="editRecipeDesc" rows="2" style="width: 100%; background: var(--bg-tint); padding: 0.5rem 0.65rem; border-radius: 0.55rem; border: 1px solid var(--border-primary); font-size: 0.78rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit; resize: vertical;"></textarea>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Kitchen Tips & Family Notes</label>
+                    <textarea id="editRecipeTips" rows="2" placeholder="Add family secrets, tips, or notes here..." style="width: 100%; background: var(--bg-tint); padding: 0.5rem 0.65rem; border-radius: 0.55rem; border: 1px solid var(--border-primary); font-size: 0.78rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit; resize: vertical;"></textarea>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Ingredients (One per line)</label>
+                    <textarea id="editRecipeIngredients" rows="3" placeholder="1 cup flour&#10;2 eggs" style="width: 100%; background: var(--bg-tint); padding: 0.5rem 0.65rem; border-radius: 0.55rem; border: 1px solid var(--border-primary); font-size: 0.78rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit; resize: vertical;"></textarea>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Instructions (One per line per step)</label>
+                    <textarea id="editRecipeSteps" rows="3" placeholder="Mix dry ingredients.&#10;Bake at 350°F for 30 minutes." style="width: 100%; background: var(--bg-tint); padding: 0.5rem 0.65rem; border-radius: 0.55rem; border: 1px solid var(--border-primary); font-size: 0.78rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit; resize: vertical;"></textarea>
+                </div>
+
+                <button type="submit" class="btn-retro-orange" style="width: 100%; padding: 0.7rem; margin-top: 0.4rem;">Save Recipe Updates</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MY ACCOUNT PROFILE DRAWER / MODAL -->
+    <div id="accountModal" class="hidden" style="position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; padding: 1rem;">
+        <div style="background: var(--bg-card); max-width: 26rem; width: 100%; border-radius: var(--radius-card); padding: 1.5rem; border: 1.5px solid var(--border-primary); position: relative; box-shadow: 0 20px 25px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto;">
+            <button onclick="safeRun(toggleAccountModal)" style="position: absolute; right: 0.85rem; top: 0.85rem; width: 1.85rem; height: 1.85rem; background: var(--bg-tint); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
+                <i data-lucide="x" style="width: 1rem; height: 1rem;"></i>
+            </button>
+
+            <div style="text-align: center; margin-bottom: 1.15rem;">
+                <div class="avatar-frame-container" id="profileAvatarContainer">
+                    <img id="myAccountAvatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C2785C'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M12 14c-6 0-8 3-8 6v1h16v-1c0-3-2-6-8-6z'/%3E%3C/svg%3E" class="avatar-img">
+                    <div id="myAccountWreath" class="avatar-wreath wreath-flowers"></div>
+                </div>
+                
+                <label style="cursor: pointer; display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.7rem; font-weight: 800; color: var(--accent-primary); margin-top: 0.65rem;">
+                    <i data-lucide="camera" style="width: 0.85rem; height: 0.85rem;"></i>
+                    <span>Change Profile Photo</span>
+                    <input type="file" accept="image/*" class="hidden" onchange="safeRun(handleAvatarUpload, this)">
+                </label>
+
+                <h3 id="myAccountDisplayName" class="font-retro-title" style="font-size: 1.35rem; color: var(--accent-primary); margin-top: 0.3rem;">Cook</h3>
+                <p id="myAccountEmail" style="font-size: 0.72rem; color: var(--text-muted);"></p>
+                
+                <div style="display: inline-flex; align-items: center; gap: 0.3rem; background: var(--bg-tint); padding: 0.2rem 0.55rem; border-radius: 9999px; font-size: 0.6rem; font-weight: 800; color: var(--accent-secondary); margin-top: 0.35rem; border: 1px solid var(--border-primary);">
+                    <i data-lucide="cloud" style="width: 0.75rem; height: 0.75rem;"></i>
+                    <span>Cloud Archive Sync Active</span>
+                </div>
+
+                <div style="margin-top: 0.35rem;">
+                    <button onclick="safeRun(handlePasswordReset)" style="font-size: 0.62rem; font-weight: 700; color: var(--text-muted); text-decoration: underline; background: transparent;">Reset Account Password</button>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 1.15rem;">
+                <label style="font-size: 0.62rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Profile Picture Banner Frame</label>
+                <div style="display: flex; gap: 0.4rem; margin-top: 0.35rem; overflow-x: auto;" class="no-scrollbar">
+                    <button type="button" onclick="safeRun(setProfileWreath, 'wreath-flowers')" style="padding: 0.3rem 0.55rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 700; background: var(--bg-tint); border: 1px solid var(--border-primary);">🌸 Spring Flowers</button>
+                    <button type="button" onclick="safeRun(setProfileWreath, 'wreath-cookies')" style="padding: 0.3rem 0.55rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 700; background: var(--bg-tint); border: 1px solid var(--border-primary);">🍪 Baker's Cookies</button>
+                    <button type="button" onclick="safeRun(setProfileWreath, 'wreath-citrus')" style="padding: 0.3rem 0.55rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 700; background: var(--bg-tint); border: 1px solid var(--border-primary);">🍋 Citrus Orchard</button>
+                    <button type="button" onclick="safeRun(setProfileWreath, 'wreath-wheat')" style="padding: 0.3rem 0.55rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 700; background: var(--bg-tint); border: 1px solid var(--border-primary);">🌾 Harvest Wheat</button>
+                    <button type="button" onclick="safeRun(setProfileWreath, '')" style="padding: 0.3rem 0.55rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 700; background: var(--bg-tint); border: 1px solid var(--border-primary);">Plain</button>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; background: var(--bg-tint); padding: 0.75rem; border-radius: 0.85rem; border: 1px solid var(--border-primary); text-align: center; margin-bottom: 1.15rem;">
+                <div>
+                    <span id="statRecipeCount" style="display: block; font-size: 1.05rem; font-weight: 800; color: var(--accent-primary);">0</span>
+                    <span style="font-size: 0.58rem; text-transform: uppercase; font-weight: 800; color: var(--text-muted);">Recipes</span>
+                </div>
+                <div style="border-left: 1px solid var(--border-primary); border-right: 1px solid var(--border-primary);">
+                    <span id="statBooksCount" style="display: block; font-size: 1.05rem; font-weight: 800; color: var(--accent-primary);">0</span>
+                    <span style="font-size: 0.58rem; text-transform: uppercase; font-weight: 800; color: var(--text-muted);">Books</span>
+                </div>
+                <div>
+                    <span id="statPantryCount" style="display: block; font-size: 1.05rem; font-weight: 800; color: var(--accent-primary);">0</span>
+                    <span style="font-size: 0.58rem; text-transform: uppercase; font-weight: 800; color: var(--text-muted);">Pantry</span>
+                </div>
+            </div>
+
+            <div style="background: var(--bg-tint); padding: 0.75rem 0.85rem; border-radius: 0.85rem; border: 1px solid var(--border-primary); margin-bottom: 1.15rem; display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                    <span style="display: block; font-size: 0.72rem; font-weight: 800; color: var(--text-primary);">Kitchen Measurement Units</span>
+                    <span id="unitPreferenceLabel" style="font-size: 0.62rem; color: var(--text-muted);">Imperial (cups, tbsp, oz)</span>
+                </div>
+                <button type="button" onclick="safeRun(toggleUnitPreference)" id="unitToggleBtn" style="padding: 0.3rem 0.75rem; border-radius: 9999px; background: var(--accent-secondary); color: #fff; font-size: 0.68rem; font-weight: 800; border: 1px solid var(--border-primary);">
+                    Imperial
+                </button>
+            </div>
+
+            <div style="display: flex; gap: 0.4rem; margin-bottom: 1.15rem;">
+                <button type="button" onclick="safeRun(exportArchiveData)" class="btn-retro-avocado" style="flex: 1; padding: 0.55rem; font-size: 0.68rem;">
+                    <i data-lucide="download" style="width: 0.85rem; height: 0.85rem;"></i>
+                    <span>Export JSON</span>
+                </button>
+                <button type="button" onclick="window.print()" class="btn-retro-orange" style="flex: 1; padding: 0.55rem; font-size: 0.68rem;">
+                    <i data-lucide="printer" style="width: 0.85rem; height: 0.85rem;"></i>
+                    <span>Print Archive</span>
+                </button>
+            </div>
+
+            <button onclick="safeRun(handleSignOut)" style="width: 100%; padding: 0.65rem; border-radius: 9999px; border: 1.5px solid #FFCDD2; background: #FFEBEE; color: #C62828; font-size: 0.72rem; font-weight: 800;">Log Out of Tin</button>
+        </div>
+    </div>
+
+    <!-- ONBOARDING WELCOME & SIGN UP MODAL -->
+    <div id="authModal" class="hidden" style="position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; padding: 1rem;">
+        <div style="background: var(--bg-card); max-width: 24rem; width: 100%; border-radius: var(--radius-card); padding: 1.5rem; border: 1.5px solid var(--border-primary); position: relative; box-shadow: 0 20px 25px rgba(0, 0, 0, 0.2);">
+            <button onclick="safeRun(toggleAuthModal)" style="position: absolute; right: 0.85rem; top: 0.85rem; width: 1.85rem; height: 1.85rem; background: var(--bg-tint); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
+                <i data-lucide="x" style="width: 1rem; height: 1rem;"></i>
+            </button>
+
+            <div style="text-align: center; margin-bottom: 1.15rem;">
+                <div style="width: 3rem; height: 3rem; background: var(--accent-secondary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                    <i data-lucide="book-open" style="width: 1.5rem; height: 1.5rem;"></i>
+                </div>
+                <h3 class="font-retro-title" style="font-size: 1.25rem; color: var(--accent-primary);">Welcome to Between Stained Pages</h3>
+                <p id="authSubtitle" style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem; line-height: 1.35;">Every family recipe tells a story—what will you create today?</p>
+            </div>
+
+            <div style="display: flex; border-radius: 9999px; background: var(--bg-tint); padding: 0.2rem; margin-bottom: 0.85rem; border: 1px solid var(--border-primary);">
+                <button onclick="safeRun(setAuthMode, 'signUp')" id="authTabSignUp" style="flex: 1; padding: 0.4rem; font-size: 0.72rem; font-weight: 800; border-radius: 9999px; background: var(--accent-primary); color: #fff;">Create Account</button>
+                <button onclick="safeRun(setAuthMode, 'signIn')" id="authTabSignIn" style="flex: 1; padding: 0.4rem; font-size: 0.72rem; font-weight: 800; border-radius: 9999px; background: transparent; color: var(--text-muted);">Log In</button>
+            </div>
+
+            <div id="authError" class="hidden" style="margin-bottom: 0.85rem; padding: 0.65rem; border-radius: 0.65rem; background: #FFEBEE; border: 1px solid #FFCDD2; font-size: 0.72rem; color: #C62828; display: flex; align-items: center; gap: 0.4rem;">
+                <i data-lucide="alert-circle" style="width: 0.9rem; height: 0.9rem;"></i>
+                <span id="authErrorText">Invalid Credentials</span>
+            </div>
+
+            <form id="authForm" style="display: flex; flex-direction: column; gap: 0.65rem;" onsubmit="safeRun(handleAuthSubmit, event)">
+                <div id="authNameField" style="display: flex; flex-direction: column; gap: 0.2rem;">
+                    <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">First Name</label>
+                    <input type="text" id="authName" placeholder="e.g., Clara" style="background: var(--bg-tint); padding: 0.55rem 0.75rem; border-radius: 0.65rem; border: 1px solid var(--border-primary); font-size: 0.75rem; color: var(--text-primary); outline: none; font-family: inherit;">
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+                    <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Email Address</label>
+                    <input type="email" id="authEmail" required placeholder="cook@stainedpages.app" style="background: var(--bg-tint); padding: 0.55rem 0.75rem; border-radius: 0.65rem; border: 1px solid var(--border-primary); font-size: 0.75rem; color: var(--text-primary); outline: none; font-family: inherit;">
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+                    <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Password</label>
+                    <input type="password" id="authPassword" required placeholder="Min 6 characters" style="background: var(--bg-tint); padding: 0.55rem 0.75rem; border-radius: 0.65rem; border: 1px solid var(--border-primary); font-size: 0.75rem; color: var(--text-primary); outline: none; font-family: inherit;">
+                </div>
+
+                <p style="font-size: 0.65rem; color: var(--text-muted); font-style: italic; line-height: 1.3; padding: 0.25rem 0;">
+                    Your account keeps all family recipes safely backed up so you can access them on your phone, iPad, or any device.
+                </p>
+
+                <button type="submit" id="authSubmitBtn" class="btn-retro-orange" style="width: 100%; padding: 0.75rem; margin-top: 0.2rem;">Create Account & Open Tin</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- COOKBOOK CREATOR MODAL -->
+    <div id="cookbookModal" class="hidden" style="position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; padding: 1rem;">
+        <div style="background: var(--bg-card); max-width: 26rem; width: 100%; border-radius: var(--radius-card); padding: 1.5rem; border: 1.5px solid var(--border-primary); position: relative; box-shadow: 0 20px 25px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto;">
+            <button onclick="safeRun(closeCookbookModal)" style="position: absolute; right: 0.85rem; top: 0.85rem; width: 1.85rem; height: 1.85rem; background: var(--bg-tint); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
+                <i data-lucide="x" style="width: 1rem; height: 1rem;"></i>
+            </button>
+
+            <div id="bookStep1">
+                <h3 class="font-retro-title" style="font-size: 1.35rem; color: var(--accent-primary); margin-bottom: 0.2rem;">Bind a New Cookbook</h3>
+                <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1.15rem;">Choose your cover shade, titles, and spine badge.</p>
+
+                <div id="bookCoverPreview" style="background: #C2785C; border-radius: 0.65rem; padding: 1.25rem 1rem; border: 3px solid #fff; box-shadow: 0 6px 12px rgba(0,0,0,0.2); text-align: center; margin-bottom: 1.15rem; transition: background-color 0.2s ease;">
+                    <div id="previewBadge" style="font-size: 1.5rem; margin-bottom: 0.3rem;">🥐</div>
+                    <div id="previewTitle" class="font-retro-title" style="font-size: 1.2rem; color: #FFFFFF; line-height: 1.2;">Nana's Recipes</div>
+                    <div id="previewSubtitle" class="font-retro-sub" style="font-size: 0.7rem; color: #FFFFFF; opacity: 0.85; margin-top: 0.2rem; font-style: italic;">All of Nana's Baked Goods</div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <div>
+                        <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Main Title</label>
+                        <input type="text" id="newBookTitle" required value="Nana's Recipes" oninput="safeRun(updateCoverPreview)" placeholder="e.g. Nana's Recipes" style="width: 100%; background: var(--bg-tint); padding: 0.55rem 0.75rem; border-radius: 0.65rem; border: 1px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit;">
+                    </div>
+
+                    <div>
+                        <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Subtitle</label>
+                        <input type="text" id="newBookSubtitle" value="All of Nana's Baked Goods" oninput="safeRun(updateCoverPreview)" placeholder="e.g. All of Nana's Baked Goods" style="width: 100%; background: var(--bg-tint); padding: 0.55rem 0.75rem; border-radius: 0.65rem; border: 1px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; margin-top: 0.2rem; font-family: inherit;">
+                    </div>
+
+                    <div>
+                        <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Cover Color Wheel</label>
+                        <div style="display: flex; align-items: center; gap: 0.65rem; margin-top: 0.3rem;">
+                            <input type="color" id="newBookColorWheel" value="#C2785C" onchange="safeRun(updateCoverPreview)" style="width: 2.8rem; height: 2.2rem; border: none; border-radius: 0.4rem; cursor: pointer; background: transparent;">
+                            <span style="font-size: 0.72rem; color: var(--text-muted);">Tap wheel to choose custom hue</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Front Font Color</label>
+                        <div style="display: flex; gap: 0.85rem; margin-top: 0.3rem;">
+                            <label style="display: flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; font-weight: 700; cursor: pointer;">
+                                <input type="radio" name="newBookFontColor" value="#FFFFFF" checked onchange="safeRun(updateCoverPreview)"> White
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; font-weight: 700; cursor: pointer;">
+                                <input type="radio" name="newBookFontColor" value="#1A1A1A" onchange="safeRun(updateCoverPreview)"> Black
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; font-weight: 700; cursor: pointer;">
+                                <input type="radio" name="newBookFontColor" value="#3B2213" onchange="safeRun(updateCoverPreview)"> Brown
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Spine Icon Badge</label>
+                        <div id="spineEmojiPicker" style="display: flex; gap: 0.35rem; overflow-x: auto; padding: 0.35rem 0;" class="no-scrollbar">
+                            <button type="button" onclick="safeRun(selectSpineBadge, '🥐')" class="emoji-btn" style="font-size: 1.25rem; padding: 0.25rem 0.45rem; border-radius: 0.4rem; background: var(--bg-tint); border: 2px solid var(--accent-primary);">🥐</button>
+                            <button type="button" onclick="safeRun(selectSpineBadge, '🍕')" class="emoji-btn" style="font-size: 1.25rem; padding: 0.25rem 0.45rem; border-radius: 0.4rem; background: var(--bg-tint); border: 1px solid var(--border-primary);">🍕</button>
+                            <button type="button" onclick="safeRun(selectSpineBadge, '🍰')" class="emoji-btn" style="font-size: 1.25rem; padding: 0.25rem 0.45rem; border-radius: 0.4rem; background: var(--bg-tint); border: 1px solid var(--border-primary);">🍰</button>
+                            <button type="button" onclick="safeRun(selectSpineBadge, '🍳')" class="emoji-btn" style="font-size: 1.25rem; padding: 0.25rem 0.45rem; border-radius: 0.4rem; background: var(--bg-tint); border: 1px solid var(--border-primary);">🍳</button>
+                            <button type="button" onclick="safeRun(selectSpineBadge, '🥩')" class="emoji-btn" style="font-size: 1.25rem; padding: 0.25rem 0.45rem; border-radius: 0.4rem; background: var(--bg-tint); border: 1px solid var(--border-primary);">🥩</button>
+                            <button type="button" onclick="safeRun(selectSpineBadge, '🥖')" class="emoji-btn" style="font-size: 1.25rem; padding: 0.25rem 0.45rem; border-radius: 0.4rem; background: var(--bg-tint); border: 1px solid var(--border-primary);">🥖</button>
+                            <button type="button" onclick="safeRun(selectSpineBadge, '🍷')" class="emoji-btn" style="font-size: 1.25rem; padding: 0.25rem 0.45rem; border-radius: 0.4rem; background: var(--bg-tint); border: 1px solid var(--border-primary);">🍷</button>
+                            <button type="button" onclick="safeRun(selectSpineBadge, '☕')" class="emoji-btn" style="font-size: 1.25rem; padding: 0.25rem 0.45rem; border-radius: 0.4rem; background: var(--bg-tint); border: 1px solid var(--border-primary);">☕</button>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="safeRun(goToBookStep2)" class="btn-retro-orange" style="width: 100%; padding: 0.75rem; margin-top: 0.4rem;">
+                        <span>I'm Ready to Bind</span>
+                        <i data-lucide="arrow-right" style="width: 1rem; height: 1rem;"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="bookStep2" class="hidden">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;">
+                    <h3 class="font-retro-title" style="font-size: 1.35rem; color: var(--accent-primary);">Select Recipes</h3>
+                    <button type="button" onclick="safeRun(goToBookStep1)" style="font-size: 0.72rem; font-weight: 800; color: var(--text-muted); background: transparent;">Back</button>
+                </div>
+                <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 1rem;">Check the recipes to tuck inside this cookbook. You can add or remove them anytime.</p>
+
+                <div id="cookbookRecipeChecklist" style="display: flex; flex-direction: column; gap: 0.55rem; max-height: 15rem; overflow-y: auto; margin-bottom: 1.15rem; padding-right: 0.2rem;"></div>
+
+                <button type="button" onclick="safeRun(finishCookbookBinding)" class="btn-retro-orange" style="width: 100%; padding: 0.75rem;">
+                    <i data-lucide="check" style="width: 1rem; height: 1rem;"></i>
+                    <span>Save & Complete</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script Logic -->
+    <script>
+        const SUPABASE_URL = "https://lowxjyvlwmscakumpxht.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_fngegDh8DniH9zJAPpchGA_jVQkiLr-";
+        
+        let supabase = null;
+        let wakeLock = null;
+
+        const defaultBinders = ["All", "Desserts", "Mains", "Sunday Bakes", "Appetizers"];
+        
+        const defaultPantryPresets = [
+            { id: "p-1", name: "Eggs", category: "Dairy & Refrigerated", stocked: true },
+            { id: "p-2", name: "Milk", category: "Dairy & Refrigerated", stocked: true },
+            { id: "p-3", name: "Butter", category: "Dairy & Refrigerated", stocked: true },
+            { id: "p-4", name: "All-Purpose Flour", category: "Baking", stocked: true },
+            { id: "p-5", name: "Granulated Sugar", category: "Baking", stocked: true },
+            { id: "p-6", name: "Salt", category: "Spices & Pantry", stocked: true },
+            { id: "p-7", name: "Olive Oil", category: "Oils & Vinegars", stocked: true }
+        ];
+
+        const commonSubstitutions = [
+            { item: "Sour Cream", sub: "Greek Yogurt", ratio: "1:1 ratio", note: "Plain Greek yogurt mimics the tang and thickness perfectly." },
+            { item: "Buttermilk", sub: "Milk + Lemon Juice", ratio: "1 cup milk + 1 tbsp lemon juice/vinegar", note: "Let sit for 5 minutes before using." },
+            { item: "Mayonnaise", sub: "Greek Yogurt or Sour Cream", ratio: "1:1 ratio", note: "Great for lighter dressings or salads." },
+            { item: "Eggs (for baking)", sub: "Applesauce or Mashed Banana", ratio: "1/4 cup per egg", note: "Adds moisture and natural sweetness in cakes and muffins." },
+            { item: "Honey", sub: "Maple Syrup or Agave Nectar", ratio: "1:1 ratio", note: "Direct liquid swap in dressings and marinades." },
+            { item: "Soy Sauce", sub: "Tamari or Worcestershire Sauce", ratio: "1:1 ratio", note: "Tamari provides a gluten-free alternative." },
+            { item: "Heavy Cream", sub: "Milk + Melted Butter", ratio: "3/4 cup milk + 1/4 cup melted butter", note: "Whisk thoroughly for soups and sauces." },
+            { item: "Sugar", sub: "Maple Syrup or Honey", ratio: "3/4 cup liquid sweetener per 1 cup sugar", note: "Reduce other liquids in recipe slightly." }
+        ];
+
+        let currentUserId = localStorage.getItem("currentUserId") || "demo-user";
+        let userRecipes = JSON.parse(localStorage.getItem(`recipes_${currentUserId}`)) || [];
+        let userBinders = JSON.parse(localStorage.getItem(`binders_${currentUserId}`)) || defaultBinders;
+        let userCookbooks = JSON.parse(localStorage.getItem(`cookbooks_${currentUserId}`)) || [];
+        let pantryItems = JSON.parse(localStorage.getItem(`pantry_${currentUserId}`)) || defaultPantryPresets;
+        let userProfile = JSON.parse(localStorage.getItem(`profile_${currentUserId}`)) || { name: "Cook", email: "", avatar: "", wreath: "wreath-flowers", unitSystem: "imperial", fontSizeScale: 1.0 };
+        
+        let selectedCategory = "All";
+        let activeRecipe = null;
+        let activeScaleFactor = 1.0;
+        let originalServings = 1;
+        let authMode = "signUp";
+        
+        let cookStepIndex = 0;
+        let cookTimerInterval = null;
+        let cookSecondsElapsed = 0;
+
+        let activeBookEditingId = null;
+        let currentSelectedSpineBadge = "🥐";
+        let multiScanImages = [null, null, null];
+        let pantryFilterCategory = "All";
+
+        function showVintageToast(message, iconName = 'sparkles') {
+            const container = document.getElementById('vintageToastContainer');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = 'vintage-toast';
+            toast.innerHTML = `<i data-lucide="${iconName}" style="width:1.15rem; height:1.15rem; color:var(--accent-primary); flex-shrink:0;"></i><span>${message}</span>`;
+            container.appendChild(toast);
+            refreshIcons();
+            setTimeout(() => { toast.remove(); }, 3500);
         }
-    }
 
-    function navigate(route) {
-        window.location.hash = route;
-    }
-
-    function handleHashChange() {
-        const hash = window.location.hash.replace('#', '') || 'feed';
-        if (hash.startsWith('detail=')) {
-            const id = hash.split('=')[1];
-            viewRecipeDetail(id, false);
-            return;
+        function safeRun(fn, ...args) {
+            try {
+                return fn(...args);
+            } catch (err) {
+                console.error("Execution Error:", err);
+                showVintageToast(`Notice: ${err.message || 'Action unavailable.'}`, 'alert-triangle');
+            }
         }
-        showSection(hash, false);
-    }
 
-    // FIXED ROBUST VIEW ROUTER
-    function showSection(sectionId, updateHash = true) {
-        if (updateHash) window.location.hash = sectionId;
+        // ================= BUG REPORTING SYSTEM =================
+        function openBugModal() {
+            const modal = document.getElementById('bugReportModal');
+            if (modal) modal.classList.remove('hidden');
+            refreshIcons();
+        }
 
-        const sections = ['feed', 'bookshelf', 'settings', 'substitutions', 'import', 'pantry', 'detail', 'cook'];
-        sections.forEach(sec => {
-            const el = document.getElementById(`section-${sec}`);
-            if (el) {
-                if (sec === sectionId) {
-                    el.classList.remove('hidden');
-                } else {
-                    el.classList.add('hidden');
+        function closeBugModal() {
+            const modal = document.getElementById('bugReportModal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        async function submitBugReport(event) {
+            event.preventDefault();
+            const message = document.getElementById('bugMessageInput').value.trim();
+            const fileInput = document.getElementById('bugScreenshotInput');
+            let screenshotData = null;
+
+            if (fileInput && fileInput.files && fileInput.files[0]) {
+                try {
+                    screenshotData = await compressImage(fileInput.files[0], 1000, 0.7);
+                } catch(e) {
+                    console.warn("Bug screenshot compression failed:", e);
                 }
             }
-        });
 
-        // Highlight active nav buttons
-        document.querySelectorAll('.sidebar-btn').forEach(btn => {
-            btn.style.background = 'transparent';
-            btn.style.color = 'var(--text-muted)';
-            btn.style.fontWeight = '700';
-        });
-        document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
-            btn.style.color = 'var(--text-muted)';
-        });
+            const developerEmail = "sarahsimboli@gmail.com";
+            const subject = encodeURIComponent("[Stained Pages Bug Report]");
+            const body = encodeURIComponent(`Bug Description:\n${message}\n\nDevice Info:\n${navigator.userAgent}\nTimestamp: ${new Date().toISOString()}`);
 
-        const sideBtn = document.getElementById(`btn-${sectionId}`);
-        const mobBtn = document.getElementById(`mbtn-${sectionId}`);
-        if (sideBtn) {
-            sideBtn.style.background = 'var(--bg-tint)';
-            sideBtn.style.color = 'var(--accent-primary)';
-            sideBtn.style.fontWeight = '800';
-        }
-        if (mobBtn) mobBtn.style.color = 'var(--accent-primary)';
+            closeBugModal();
+            document.getElementById('bugMessageInput').value = '';
+            if (fileInput) fileInput.value = '';
 
-        if (sectionId === 'feed') renderRecipes();
-        else if (sectionId === 'bookshelf') renderBookshelf();
-        else if (sectionId === 'substitutions') renderSubstitutionsList();
-        else if (sectionId === 'pantry') renderPantry();
-        
-        refreshIcons();
-    }
-
-    function renderBookshelf() {
-        const bookcase = document.getElementById('bookcaseDisplay');
-        if (!bookcase) return;
-        bookcase.innerHTML = '';
-
-        const shelfRow = document.createElement('div');
-        shelfRow.className = 'bookshelf-row';
-
-        const addCard = document.createElement('div');
-        addCard.className = 'brass-add-card';
-        addCard.onclick = () => safeRun(openCookbookCreatorModal);
-        addCard.innerHTML = `
-            <i data-lucide="plus-circle" style="width: 1.35rem; height: 1.35rem;"></i>
-            <span style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; text-align: center;">New Volume</span>
-        `;
-        shelfRow.appendChild(addCard);
-
-        userCookbooks.forEach(book => {
-            const recipesInBook = userRecipes.filter(r => (book.recipeIds || []).includes(r.id) || r.binder_category === book.title);
-            const recipeCount = recipesInBook.length;
-            const width = Math.min(68, Math.max(42, 40 + recipeCount * 3));
-
-            const spine = document.createElement('div');
-            spine.className = 'cookbook-spine';
-            spine.style.width = `${width}px`;
-            spine.style.backgroundColor = book.color || '#C2785C';
-            spine.onclick = () => safeRun(pullCookbook, book);
-
-            spine.innerHTML = `
-                <div class="spine-badge">${book.badge || '🥐'}</div>
-                <div class="spine-title-vertical" style="color: ${book.fontColor || '#FFFFFF'};">${book.title}</div>
-                <div style="font-size: 0.58rem; color: ${book.fontColor || '#FFFFFF'}; opacity: 0.8; text-align: center; font-weight: 700;">${recipeCount} rec</div>
-                <div class="spine-ribbon" style="background: ${book.color === '#C2785C' ? '#D4A373' : '#C2785C'};"></div>
-            `;
-            shelfRow.appendChild(spine);
-        });
-
-        const ledge = document.createElement('div');
-        ledge.className = 'shelf-ledge';
-        shelfRow.appendChild(ledge);
-
-        bookcase.appendChild(shelfRow);
-        refreshIcons();
-    }
-
-    function pullCookbook(book) {
-        if (book.era) applyDecadeTheme(book.era);
-        selectedCategory = book.title;
-        renderBinders();
-        navigate('feed');
-    }
-
-    function renderBinders() {
-        const list = document.getElementById('bindersList');
-        if (!list) return;
-        list.innerHTML = '';
-
-        userBinders.forEach(cat => {
-            const isSelected = selectedCategory === cat;
-            const btn = document.createElement('button');
-            btn.className = "category-chip";
-            btn.style.cssText = `padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 800; white-space: nowrap; transition: all 0.15s ease; ${
-                isSelected 
-                    ? 'background: var(--accent-primary); color: #fff; border: 1.5px solid var(--accent-primary); box-shadow: 0 2px 6px rgba(0,0,0,0.12);' 
-                    : 'background: var(--bg-tint); color: var(--text-primary); border: 1.5px solid var(--border-primary);'
-            }`;
-            btn.innerText = cat;
-            btn.onclick = () => safeRun(setCategory, cat);
-            list.appendChild(btn);
-        });
-
-        const addBtn = document.createElement('button');
-        addBtn.style.cssText = "padding: 0.35rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 800; background: var(--accent-secondary); color: #fff; display: flex; align-items: center; gap: 0.25rem; white-space: nowrap; border: 1.5px solid var(--border-primary);";
-        addBtn.innerHTML = `<i data-lucide="folder-plus" style="width: 0.85rem; height: 0.85rem;"></i><span>+ Binder</span>`;
-        addBtn.onclick = () => safeRun(openCookbookCreatorModal);
-        list.appendChild(addBtn);
-
-        refreshIcons();
-    }
-
-    function setCategory(cat) {
-        selectedCategory = cat;
-        renderBinders();
-        renderRecipes();
-    }
-
-    function filterRecipes() {
-        renderRecipes();
-    }
-
-    function renderRecipes() {
-        const grid = document.getElementById('recipeGrid');
-        const empty = document.getElementById('emptyState');
-        if (!grid || !empty) return;
-        grid.innerHTML = '';
-
-        const search = (document.getElementById('recipeSearch')?.value || '').toLowerCase();
-        const filtered = userRecipes.filter(recipe => {
-            const matchesSearch = recipe.title.toLowerCase().includes(search) || 
-                                  (recipe.description || '').toLowerCase().includes(search) ||
-                                  (recipe.binder_category || '').toLowerCase().includes(search);
-            const matchesCategory = selectedCategory === "All" || recipe.binder_category === selectedCategory;
-            return matchesSearch && matchesCategory;
-        });
-
-        if (filtered.length === 0) {
-            empty.classList.remove('hidden');
-            grid.classList.add('hidden');
-            return;
-        }
-
-        empty.classList.add('hidden');
-        grid.classList.remove('hidden');
-
-        filtered.forEach(recipe => {
-            const card = document.createElement('div');
-            card.style.cssText = "background: var(--bg-card); border-radius: var(--radius-card); padding: 1.15rem; border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; justify-content: space-between; gap: 0.85rem; cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,0.03);";
-            card.onclick = () => safeRun(viewRecipeDetail, recipe.id);
-
-            const count = (recipe.ingredients || []).length;
-            const pantryStatusText = count > 0 ? `${count} ingredients` : 'Recipe Card';
-
-            card.innerHTML = `
-                <div style="display: flex; flex-direction: column; gap: 0.75rem; min-width: 0;">
-                    <div style="height: 8.5rem; width: 100%; border-radius: 0.85rem; overflow: hidden; background: var(--bg-tint); position: relative; border: 1px solid var(--border-primary);">
-                        ${recipe.image_url 
-                            ? `<img src="${recipe.image_url}" style="width: 100%; height: 100%; object-fit: cover;">`
-                            : `<div style="display: flex; height: 100%; align-items: center; justify-content: center; color: var(--text-muted); font-style: italic;">Heirloom Recipe</div>`
-                        }
-                        <span style="position: absolute; top: 0.55rem; left: 0.55rem; padding: 0.2rem 0.6rem; border-radius: 9999px; background: rgba(255, 255, 255, 0.95); color: var(--text-primary); font-size: 0.55rem; font-weight: 800; text-transform: uppercase;">${recipe.binder_category || 'Sunday Bakes'}</span>
-                    </div>
-                    <div style="min-width: 0;">
-                        <h4 class="font-retro-title" style="font-size: 1.1rem; color: var(--accent-primary); line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${recipe.title}</h4>
-                        <p style="font-size: 0.7rem; color: var(--text-muted); font-style: italic; margin-top: 0.2rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${recipe.description || ''}</p>
-                    </div>
-                </div>
-                <div style="padding-top: 0.5rem; border-top: 1.5px dashed var(--border-primary); display: flex; align-items: center; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted);">
-                    <span style="font-weight: 800; color: var(--text-primary);">${recipe.cook_time || '30m'}</span>
-                    <span style="font-weight: 800; padding: 0.15rem 0.5rem; border-radius: 9999px; background: var(--bg-tint); color: var(--accent-secondary);">${pantryStatusText}</span>
-                </div>
-            `;
-            grid.appendChild(card);
-        });
-        refreshIcons();
-    }
-
-    function viewRecipeDetail(id, updateHash = true) {
-        const recipe = userRecipes.find(r => r.id === id);
-        if (!recipe) { navigate('feed'); return; }
-        if (updateHash) window.location.hash = `detail=${id}`;
-
-        activeRecipe = recipe;
-        originalServings = recipe.servings || 4;
-        activeScaleFactor = 1.0;
-
-        document.getElementById('detailTitle').innerText = recipe.title;
-        document.getElementById('detailCategory').innerText = recipe.binder_category || "Sunday Bakes";
-        document.getElementById('detailSource').innerText = recipe.source || "Preserved vintage card";
-        document.getElementById('detailDescription').innerText = recipe.description || "";
-        document.getElementById('scaledServingsCount').innerText = originalServings;
-
-        const imgContainer = document.getElementById('detailImageContainer');
-        const imgEl = document.getElementById('detailImg');
-        if (recipe.image_url) {
-            imgContainer.classList.remove('hidden');
-            imgEl.src = recipe.image_url;
-        } else {
-            imgContainer.classList.add('hidden');
-        }
-
-        renderDetailIngredientsAndSteps();
-        showSection('detail', false);
-    }
-
-    function renderDetailIngredientsAndSteps() {
-        const ingList = document.getElementById('detailIngredientsList');
-        if (!ingList) return;
-        ingList.innerHTML = '';
-
-        (activeRecipe.ingredients || []).forEach(ing => {
-            const li = document.createElement('li');
-            li.style.cssText = "font-size: 0.78rem; color: var(--text-primary); margin-bottom: 0.4rem;";
-            li.innerText = `• ${ing.name || ing.toString()}`;
-            ingList.appendChild(li);
-        });
-
-        const stepsList = document.getElementById('detailStepsList');
-        if (!stepsList) return;
-        stepsList.innerHTML = '';
-        (activeRecipe.steps || []).forEach((s, idx) => {
-            const li = document.createElement('li');
-            li.style.cssText = "font-size: 0.78rem; color: var(--text-primary); margin-bottom: 0.6rem; line-height: 1.4;";
-            li.innerText = `${idx + 1}. ${s.instruction || s}`;
-            stepsList.appendChild(li);
-        });
-        refreshIcons();
-    }
-
-    function renderPantry() {
-        const grid = document.getElementById('pantryGrid');
-        if (!grid) return;
-        grid.innerHTML = '';
-
-        pantryItems.forEach(item => {
-            const chip = document.createElement('div');
-            chip.style.cssText = `padding: 0.85rem; border-radius: 0.85rem; border: 1.5px solid ${item.stocked ? 'var(--accent-secondary)' : 'var(--border-primary)'}; background: ${item.stocked ? 'var(--bg-tint)' : 'var(--bg-card)'}; display: flex; flex-direction: column; justify-content: space-between; gap: 0.6rem; cursor: pointer;`;
-            chip.onclick = () => safeRun(() => {
-                item.stocked = !item.stocked;
-                localStorage.setItem(`pantry_${currentUserId}`, JSON.stringify(pantryItems));
-                renderPantry();
-            });
+            showVintageToast("Bug report prepared! Opening your mail client...", 'send');
             
-            chip.innerHTML = `
-                <span style="font-size: 0.72rem; font-weight: 800; color: ${item.stocked ? 'var(--text-primary)' : 'var(--text-muted)'};">${item.name}</span>
-                <span style="font-size: 0.52rem; text-transform: uppercase; font-weight: 800; color: var(--accent-primary);">${item.category}</span>
-            `;
-            grid.appendChild(chip);
-        });
-        refreshIcons();
-    }
+            setTimeout(() => {
+                window.location.href = `mailto:${developerEmail}?subject=${subject}&body=${body}`;
+            }, 800);
+        }
 
-    document.addEventListener('DOMContentLoaded', initApp);
-</script>
+        function addSampleRecipe() {
+            const sample = {
+                id: "rec-sample-" + Date.now(),
+                title: "Grandma's Cinnamon Sourdough",
+                source: "Family Recipe Archive",
+                source_type: "FAMILY_NOTE",
+                description: "A cherished weekend bake passed down through generations with a wonderfully crisp crust.",
+                image_url: "",
+                prep_time: "20m",
+                cook_time: "45m",
+                difficulty: "Medium",
+                binder_category: "Sunday Bakes",
+                servings: 8,
+                ingredients: [
+                    { name: "3 cups active sourdough starter" },
+                    { name: "1.5 cups warm water" },
+                    { name: "2 tsp sea salt" },
+                    { name: "1 tbsp ground cinnamon" }
+                ],
+                steps: [
+                    { step_number: 1, instruction: "Combine starter and warm water in a large mixing bowl." },
+                    { step_number: 2, instruction: "Fold in flour, salt, and cinnamon until a shaggy dough forms." },
+                    { step_number: 3, instruction: "Bake in a preheated Dutch oven at 425°F for 45 minutes." }
+                ],
+                secret_note: "Mom always said let it rest on a wooden board before slicing.",
+                tips_note: "Make sure your starter is bubbly and active before mixing.",
+                bookmarked: true
+            };
+            userRecipes.unshift(sample);
+            localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
+            syncRecipeToSupabase(sample);
+            showVintageToast("Sample recipe added to your tin!", 'book-open-check');
+            renderRecipes();
+        }
+
+        window.addEventListener('error', function(event) {
+            console.error("Global Runtime Exception:", event.message);
+            showVintageToast(`Kitchen Alert: ${event.message}`, 'shield-alert');
+        });
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch((err) => console.warn('SW:', err));
+            });
+        }
+
+        async function enableWakeLock() {
+            try {
+                if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen');
+            } catch (err) { console.warn('Wake Lock failed:', err); }
+        }
+
+        function disableWakeLock() {
+            if (wakeLock !== null) wakeLock.release().then(() => { wakeLock = null; });
+        }
+
+        function applyDecadeTheme(era) {
+            const allEras = ['1920s', '1930s', '1940s', '1950s', '1960s', '1970s', '1980s', '1990s', '2000s', '2010s'];
+            allEras.forEach(e => document.body.classList.remove(`era-${e}`));
+            document.body.classList.add(`era-${era}`);
+            localStorage.setItem('user_decade_era', era);
+            const sSelect = document.getElementById('settingsEraSelect');
+            if (sSelect) sSelect.value = era;
+        }
+
+        function initDecadeTheme() {
+            const savedEra = localStorage.getItem('user_decade_era') || '1970s';
+            applyDecadeTheme(savedEra);
+        }
+
+        function adjustTextAccessibility(scaleVal) {
+            const scale = parseFloat(scaleVal);
+            userProfile.fontSizeScale = scale;
+            localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+            document.documentElement.style.setProperty('--base-font-size', `${scale}rem`);
+            const display = document.getElementById('fontSizeDisplay');
+            if (display) display.innerText = `${Math.round(scale * 100)}%`;
+        }
+
+        function initApp() {
+            try {
+                if (window.supabase) supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+            } catch(e) { console.warn("Supabase fallback.", e); }
+
+            if (window.innerWidth >= 768) {
+                const aside = document.getElementById('desktopSidebar');
+                if (aside) aside.style.display = 'block';
+            }
+
+            initDecadeTheme();
+            renderBinders();
+            updateAuthControls();
+            updatePantryCounters();
+            applyProfileUI();
+            renderSubstitutionsList();
+
+            if (userProfile.fontSizeScale) {
+                adjustTextAccessibility(userProfile.fontSizeScale);
+            }
+
+            if (!currentUserId || currentUserId === 'demo-user') {
+                showVintageToast("Notice: Guest session active. Unsaved cards will vanish if you leave!", "alert-circle");
+            }
+
+            handleHashChange();
+            window.addEventListener('hashchange', handleHashChange);
+            refreshIcons();
+        }
+
+        function refreshIcons() {
+            if (window.lucide && typeof lucide.createIcons === 'function') {
+                lucide.createIcons();
+            } else {
+                setTimeout(() => { if (window.lucide) lucide.createIcons(); }, 150);
+            }
+        }
+
+        function navigate(route) {
+            window.location.hash = route;
+        }
+
+        function handleHashChange() {
+            const hash = window.location.hash.replace('#', '') || 'feed';
+            if (hash.startsWith('detail=')) {
+                const id = hash.split('=')[1];
+                viewRecipeDetail(id, false);
+                return;
+            }
+            showSection(hash, false);
+        }
+
+        function showSection(sectionId, updateHash = true) {
+            if (updateHash) window.location.hash = sectionId;
+
+            const sections = ['feed', 'bookshelf', 'settings', 'substitutions', 'import', 'pantry', 'detail', 'cook'];
+            sections.forEach(sec => {
+                const el = document.getElementById(`section-${sec}`);
+                if (el) {
+                    if (sec === sectionId) {
+                        el.classList.remove('hidden');
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                }
+            });
+
+            document.querySelectorAll('.sidebar-btn').forEach(btn => {
+                btn.style.background = 'transparent';
+                btn.style.color = 'var(--text-muted)';
+                btn.style.fontWeight = '700';
+            });
+            document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+                btn.style.color = 'var(--text-muted)';
+            });
+
+            const sideBtn = document.getElementById(`btn-${sectionId}`);
+            const mobBtn = document.getElementById(`mbtn-${sectionId}`);
+            if (sideBtn) {
+                sideBtn.style.background = 'var(--bg-tint)';
+                sideBtn.style.color = 'var(--accent-primary)';
+                sideBtn.style.fontWeight = '800';
+            }
+            if (mobBtn) mobBtn.style.color = 'var(--accent-primary)';
+
+            if (sectionId === 'feed') renderRecipes();
+            else if (sectionId === 'bookshelf') renderBookshelf();
+            else if (sectionId === 'substitutions') renderSubstitutionsList();
+            else if (sectionId === 'pantry') renderPantry();
+            
+            refreshIcons();
+        }
+
+        // ================= 3D WALNUT BOOKSHELF =================
+        function renderBookshelf() {
+            const bookcase = document.getElementById('bookcaseDisplay');
+            if (!bookcase) return;
+            bookcase.innerHTML = '';
+
+            const shelfRow = document.createElement('div');
+            shelfRow.className = 'bookshelf-row';
+
+            const addCard = document.createElement('div');
+            addCard.className = 'brass-add-card';
+            addCard.onclick = () => safeRun(openCookbookCreatorModal);
+            addCard.innerHTML = `
+                <i data-lucide="plus-circle" style="width: 1.35rem; height: 1.35rem;"></i>
+                <span style="font-size: 0.6rem; font-weight: 800; text-transform: uppercase; text-align: center;">New Volume</span>
+            `;
+            shelfRow.appendChild(addCard);
+
+            userCookbooks.forEach(book => {
+                const recipesInBook = userRecipes.filter(r => (book.recipeIds || []).includes(r.id) || r.binder_category === book.title);
+                const recipeCount = recipesInBook.length;
+                const width = Math.min(68, Math.max(42, 40 + recipeCount * 3));
+
+                const spine = document.createElement('div');
+                spine.className = 'cookbook-spine';
+                spine.style.width = `${width}px`;
+                spine.style.backgroundColor = book.color || '#C2785C';
+                spine.onclick = () => safeRun(pullCookbook, book);
+
+                spine.innerHTML = `
+                    <div class="spine-badge">${book.badge || '🥐'}</div>
+                    <div class="spine-title-vertical" style="color: ${book.fontColor || '#FFFFFF'};">${book.title}</div>
+                    <div style="font-size: 0.58rem; color: ${book.fontColor || '#FFFFFF'}; opacity: 0.8; text-align: center; font-weight: 700;">${recipeCount} rec</div>
+                    <div class="spine-ribbon" style="background: ${book.color === '#C2785C' ? '#D4A373' : '#C2785C'};"></div>
+                `;
+                shelfRow.appendChild(spine);
+            });
+
+            const ledge = document.createElement('div');
+            ledge.className = 'shelf-ledge';
+            shelfRow.appendChild(ledge);
+
+            bookcase.appendChild(shelfRow);
+            refreshIcons();
+        }
+
+        function pullCookbook(book) {
+            if (book.era) applyDecadeTheme(book.era);
+            selectedCategory = book.title;
+            renderBinders();
+            navigate('feed');
+        }
+
+        function openCookbookCreatorModal(bookToEdit = null) {
+            activeBookEditingId = bookToEdit ? bookToEdit.id : null;
+            goToBookStep1();
+
+            const titleInput = document.getElementById('newBookTitle');
+            const subInput = document.getElementById('newBookSubtitle');
+            const colorPicker = document.getElementById('newBookColorWheel');
+
+            if (bookToEdit) {
+                titleInput.value = bookToEdit.title;
+                subInput.value = bookToEdit.subtitle || '';
+                colorPicker.value = bookToEdit.color || '#C2785C';
+                currentSelectedSpineBadge = bookToEdit.badge || '🥐';
+                const fRadio = document.querySelector(`input[name="newBookFontColor"][value="${bookToEdit.fontColor || '#FFFFFF'}"]`);
+                if (fRadio) fRadio.checked = true;
+            } else {
+                titleInput.value = "Nana's Recipes";
+                subInput.value = "All of Nana's Baked Goods";
+                colorPicker.value = "#C2785C";
+                currentSelectedSpineBadge = "🥐";
+            }
+
+            updateCoverPreview();
+            document.getElementById('cookbookModal').classList.remove('hidden');
+            refreshIcons();
+        }
+
+        function closeCookbookModal() {
+            document.getElementById('cookbookModal').classList.add('hidden');
+            activeBookEditingId = null;
+        }
+
+        function selectSpineBadge(emoji) {
+            currentSelectedSpineBadge = emoji;
+            document.querySelectorAll('#spineEmojiPicker button').forEach(btn => {
+                btn.style.border = btn.innerText === emoji ? "2px solid var(--accent-primary)" : "1px solid var(--border-primary)";
+            });
+            updateCoverPreview();
+        }
+
+        function updateCoverPreview() {
+            const title = document.getElementById('newBookTitle').value.trim() || "Untitled Volume";
+            const sub = document.getElementById('newBookSubtitle').value.trim();
+            const color = document.getElementById('newBookColorWheel').value;
+            const fontColor = document.querySelector('input[name="newBookFontColor"]:checked')?.value || '#FFFFFF';
+
+            const previewCover = document.getElementById('bookCoverPreview');
+            const pTitle = document.getElementById('previewTitle');
+            const pSub = document.getElementById('previewSubtitle');
+            const pBadge = document.getElementById('previewBadge');
+
+            previewCover.style.backgroundColor = color;
+            pTitle.innerText = title;
+            pTitle.style.color = fontColor;
+            pSub.innerText = sub;
+            pSub.style.color = fontColor;
+            pBadge.innerText = currentSelectedSpineBadge;
+        }
+
+        function goToBookStep1() {
+            document.getElementById('bookStep1').classList.remove('hidden');
+            document.getElementById('bookStep2').classList.add('hidden');
+            refreshIcons();
+        }
+
+        function goToBookStep2() {
+            const title = document.getElementById('newBookTitle').value.trim();
+            if (!title) return alert("Please enter a title for your cookbook.");
+
+            document.getElementById('bookStep1').classList.add('hidden');
+            document.getElementById('bookStep2').classList.remove('hidden');
+
+            renderCookbookRecipeChecklist();
+            refreshIcons();
+        }
+
+        function renderCookbookRecipeChecklist() {
+            const list = document.getElementById('cookbookRecipeChecklist');
+            list.innerHTML = '';
+
+            let preselectedIds = [];
+            if (activeBookEditingId) {
+                const book = userCookbooks.find(b => b.id === activeBookEditingId);
+                if (book) preselectedIds = book.recipeIds || [];
+            }
+
+            if (userRecipes.length === 0) {
+                list.innerHTML = '<p style="font-size:0.72rem; color:var(--text-muted); font-style:italic; padding:0.4rem 0;">No recipes in your tin yet. You can still bind this book and add them later!</p>';
+                return;
+            }
+
+            userRecipes.forEach(recipe => {
+                const isChecked = preselectedIds.includes(recipe.id) || recipe.binder_category === document.getElementById('newBookTitle').value.trim();
+                const item = document.createElement('label');
+                item.style.cssText = "display:flex; align-items:center; justify-content:space-between; background:var(--bg-tint); padding:0.55rem 0.75rem; border-radius:0.65rem; border:1px solid var(--border-primary); cursor:pointer;";
+                item.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:0.55rem;">
+                        <input type="checkbox" value="${recipe.id}" ${isChecked ? 'checked' : ''} class="book-recipe-checkbox" style="width:1.05rem; height:1.05rem; accent-color:var(--accent-primary);">
+                        <div>
+                            <p style="font-size:0.78rem; font-weight:800; color:var(--text-primary); line-height:1.2;">${recipe.title}</p>
+                            <span style="font-size:0.6rem; color:var(--text-muted);">${recipe.cook_time || '30m'}</span>
+                        </div>
+                    </div>
+                    <span style="font-size:0.6rem; font-weight:700; color:var(--accent-secondary); text-transform:uppercase;">${recipe.binder_category || 'Sunday Bakes'}</span>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function finishCookbookBinding() {
+            const title = document.getElementById('newBookTitle').value.trim();
+            const sub = document.getElementById('newBookSubtitle').value.trim();
+            const color = document.getElementById('newBookColorWheel').value;
+            const fontColor = document.querySelector('input[name="newBookFontColor"]:checked')?.value || '#FFFFFF';
+
+            const selectedRecipeIds = Array.from(document.querySelectorAll('.book-recipe-checkbox:checked')).map(cb => cb.value);
+
+            userRecipes.forEach(r => {
+                if (selectedRecipeIds.includes(r.id)) {
+                    r.binder_category = title;
+                }
+            });
+            localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
+
+            if (activeBookEditingId) {
+                const bIdx = userCookbooks.findIndex(b => b.id === activeBookEditingId);
+                if (bIdx !== -1) {
+                    userCookbooks[bIdx].title = title;
+                    userCookbooks[bIdx].subtitle = sub;
+                    userCookbooks[bIdx].color = color;
+                    userCookbooks[bIdx].fontColor = fontColor;
+                    userCookbooks[bIdx].badge = currentSelectedSpineBadge;
+                    userCookbooks[bIdx].recipeIds = selectedRecipeIds;
+                }
+            } else {
+                const newBook = {
+                    id: 'cb-' + Date.now(),
+                    title: title,
+                    subtitle: sub,
+                    color: color,
+                    fontColor: fontColor,
+                    badge: currentSelectedSpineBadge,
+                    recipeIds: selectedRecipeIds,
+                    era: localStorage.getItem('user_decade_era') || '1970s'
+                };
+                userCookbooks.push(newBook);
+            }
+
+            localStorage.setItem(`cookbooks_${currentUserId}`, JSON.stringify(userCookbooks));
+
+            if (!userBinders.includes(title)) {
+                userBinders.push(title);
+                localStorage.setItem(`binders_${currentUserId}`, JSON.stringify(userBinders));
+                renderBinders();
+            }
+
+            closeCookbookModal();
+            renderBookshelf();
+            showVintageToast(`Volume "${title}" securely bound to shelf!`, 'book-open-check');
+            navigate('bookshelf');
+        }
+
+        // ================= USER ACCOUNT =================
+        function handleProfileHeaderClick() {
+            if (currentUserId && currentUserId !== 'demo-user') {
+                toggleAccountModal();
+            } else {
+                toggleAuthModal();
+            }
+        }
+
+        function toggleAccountModal() {
+            const modal = document.getElementById('accountModal');
+            modal.classList.toggle('hidden');
+            document.getElementById('statRecipeCount').innerText = userRecipes.length;
+            document.getElementById('statBooksCount').innerText = userCookbooks.length;
+            document.getElementById('statPantryCount').innerText = pantryItems.length;
+            refreshIcons();
+        }
+
+        function applyProfileUI() {
+            const btnText = document.getElementById('authBtnText');
+            const hImg = document.getElementById('headerAvatarImg');
+            const hIcon = document.getElementById('headerAvatarIcon');
+            const accName = document.getElementById('myAccountDisplayName');
+            const accEmail = document.getElementById('myAccountEmail');
+            const accImg = document.getElementById('myAccountAvatarImg');
+            const accWreath = document.getElementById('myAccountWreath');
+            const unitBtn = document.getElementById('unitToggleBtn');
+            const unitLabel = document.getElementById('unitPreferenceLabel');
+
+            if (currentUserId && currentUserId !== 'demo-user') {
+                btnText.innerText = userProfile.name || "Cook";
+                accName.innerText = userProfile.name || "Cook";
+                accEmail.innerText = userProfile.email || "";
+
+                if (userProfile.avatar) {
+                    hImg.src = userProfile.avatar;
+                    hImg.classList.remove('hidden');
+                    hIcon.classList.add('hidden');
+                    accImg.src = userProfile.avatar;
+                } else {
+                    hImg.classList.add('hidden');
+                    hIcon.classList.remove('hidden');
+                }
+
+                if (accWreath) {
+                    accWreath.className = "avatar-wreath " + (userProfile.wreath || '');
+                }
+
+                const isMetric = userProfile.unitSystem === 'metric';
+                if (unitBtn) unitBtn.innerText = isMetric ? "Metric" : "Imperial";
+                if (unitLabel) unitLabel.innerText = isMetric ? "Metric (grams, ml, kg)" : "Imperial (cups, tbsp, oz)";
+            } else {
+                btnText.innerText = "Sign In";
+                hImg.classList.add('hidden');
+                hIcon.classList.remove('hidden');
+            }
+        }
+
+        function handleAvatarUpload(input) {
+            if (!input.files || !input.files[0]) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                userProfile.avatar = e.target.result;
+                localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+                applyProfileUI();
+                showVintageToast("Your cook profile portrait has been updated!", 'camera');
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        function setProfileWreath(wreathClass) {
+            userProfile.wreath = wreathClass;
+            localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+            applyProfileUI();
+            showVintageToast("Profile banner frame adjusted.", 'sparkles');
+        }
+
+        function toggleUnitPreference() {
+            userProfile.unitSystem = userProfile.unitSystem === 'metric' ? 'imperial' : 'metric';
+            localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+            applyProfileUI();
+            if (activeRecipe) renderDetailIngredientsAndSteps();
+            showVintageToast(`Switched measurements to ${userProfile.unitSystem.toUpperCase()}.`, 'scale');
+        }
+
+        async function handlePasswordReset() {
+            const email = userProfile.email || prompt("Enter your email address to receive a password reset link:");
+            if (!email) return;
+
+            if (supabase) {
+                try {
+                    const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin });
+                    if (error) throw error;
+                    showVintageToast(`Password reset dispatched to ${email}!`, 'mail-check');
+                } catch(err) {
+                    alert("Reset request failed: " + err.message);
+                }
+            } else {
+                showVintageToast(`Password reset link queued for ${email}.`, 'mail-check');
+            }
+        }
+
+        function exportArchiveData() {
+            const exportPayload = {
+                exportedAt: new Date().toISOString(),
+                user: userProfile.name,
+                recipes: userRecipes,
+                cookbooks: userCookbooks,
+                pantry: pantryItems
+            };
+
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportPayload, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `StainedPages_Archive_${new Date().toISOString().slice(0, 10)}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+            showVintageToast("Family archive successfully exported to JSON!", 'download-cloud');
+        }
+
+        // BINDERS
+        function renderBinders() {
+            const list = document.getElementById('bindersList');
+            if (!list) return;
+            list.innerHTML = '';
+
+            userBinders.forEach(cat => {
+                const isSelected = selectedCategory === cat;
+                const btn = document.createElement('button');
+                btn.className = "category-chip";
+                btn.style.cssText = `padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 800; white-space: nowrap; transition: all 0.15s ease; ${
+                    isSelected 
+                        ? 'background: var(--accent-primary); color: #fff; border: 1.5px solid var(--accent-primary); box-shadow: 0 2px 6px rgba(0,0,0,0.12);' 
+                        : 'background: var(--bg-tint); color: var(--text-primary); border: 1.5px solid var(--border-primary);'
+                }`;
+                btn.innerText = cat;
+                btn.onclick = () => safeRun(setCategory, cat);
+                list.appendChild(btn);
+            });
+
+            const addBtn = document.createElement('button');
+            addBtn.style.cssText = "padding: 0.35rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 800; background: var(--accent-secondary); color: #fff; display: flex; align-items: center; gap: 0.25rem; white-space: nowrap; border: 1.5px solid var(--border-primary);";
+            addBtn.innerHTML = `<i data-lucide="folder-plus" style="width: 0.85rem; height: 0.85rem;"></i><span>+ Binder</span>`;
+            addBtn.onclick = () => safeRun(openCookbookCreatorModal);
+            list.appendChild(addBtn);
+
+            refreshIcons();
+        }
+
+        function setCategory(cat) {
+            selectedCategory = cat;
+            renderBinders();
+            renderRecipes();
+        }
+
+        function filterRecipes() {
+            renderRecipes();
+        }
+
+        function renderRecipes() {
+            const grid = document.getElementById('recipeGrid');
+            const empty = document.getElementById('emptyState');
+            if (!grid || !empty) return;
+            grid.innerHTML = '';
+
+            const search = (document.getElementById('recipeSearch')?.value || '').toLowerCase();
+            const filtered = userRecipes.filter(recipe => {
+                const matchesSearch = recipe.title.toLowerCase().includes(search) || 
+                                      (recipe.description || '').toLowerCase().includes(search) ||
+                                      (recipe.binder_category || '').toLowerCase().includes(search);
+                const matchesCategory = selectedCategory === "All" || recipe.binder_category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            if (filtered.length === 0) {
+                empty.classList.remove('hidden');
+                grid.classList.add('hidden');
+                return;
+            }
+
+            empty.classList.add('hidden');
+            grid.classList.remove('hidden');
+
+            filtered.forEach(recipe => {
+                const card = document.createElement('div');
+                card.style.cssText = "background: var(--bg-card); border-radius: var(--radius-card); padding: 1.15rem; border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; justify-content: space-between; gap: 0.85rem; cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,0.03);";
+                card.onclick = () => safeRun(viewRecipeDetail, recipe.id);
+
+                const count = (recipe.ingredients || []).length;
+                const pantryStatusText = count > 0 ? `${count} ingredients` : 'Recipe Card';
+
+                card.innerHTML = `
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem; min-width: 0;">
+                        <div style="height: 8.5rem; width: 100%; border-radius: 0.85rem; overflow: hidden; background: var(--bg-tint); position: relative; border: 1px solid var(--border-primary);">
+                            ${recipe.image_url 
+                                ? `<img src="${recipe.image_url}" style="width: 100%; height: 100%; object-fit: cover;">`
+                                : `<div style="display: flex; height: 100%; align-items: center; justify-content: center; color: var(--text-muted); font-style: italic;">Heirloom Recipe</div>`
+                            }
+                            <span style="position: absolute; top: 0.55rem; left: 0.55rem; padding: 0.2rem 0.6rem; border-radius: 9999px; background: rgba(255, 255, 255, 0.95); color: var(--text-primary); font-size: 0.55rem; font-weight: 800; text-transform: uppercase;">${recipe.binder_category || 'Sunday Bakes'}</span>
+                            <button onclick="event.stopPropagation(); safeRun(toggleBookmark, '${recipe.id}')" style="position: absolute; top: 0.55rem; right: 0.55rem; width: 2rem; height: 2rem; border-radius: 50%; background: rgba(255, 255, 255, 0.95); color: var(--accent-primary); display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-primary);">
+                                <i data-lucide="heart" style="width: 0.95rem; height: 0.95rem; ${recipe.bookmarked ? 'fill: var(--accent-primary);' : ''}"></i>
+                            </button>
+                        </div>
+                        <div style="min-width: 0;">
+                            <h4 class="font-retro-title" style="font-size: 1.1rem; color: var(--accent-primary); line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${recipe.title}</h4>
+                            <p style="font-size: 0.7rem; color: var(--text-muted); font-style: italic; margin-top: 0.2rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${recipe.description || ''}</p>
+                        </div>
+                    </div>
+                    <div style="padding-top: 0.5rem; border-top: 1.5px dashed var(--border-primary); display: flex; align-items: center; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted);">
+                        <span style="font-weight: 800; color: var(--text-primary);">${recipe.cook_time || '30m'}</span>
+                        <span style="font-weight: 800; padding: 0.15rem 0.5rem; border-radius: 9999px; background: var(--bg-tint); color: var(--accent-secondary);">${pantryStatusText}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            refreshIcons();
+        }
+
+        function toggleBookmark(id) {
+            const index = userRecipes.findIndex(r => r.id === id);
+            if (index !== -1) {
+                userRecipes[index].bookmarked = !userRecipes[index].bookmarked;
+                localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
+                syncRecipeToSupabase(userRecipes[index]);
+                renderRecipes();
+            }
+        }
+
+        function viewRecipeDetail(id, updateHash = true) {
+            const recipe = userRecipes.find(r => r.id === id);
+            if (!recipe) { navigate('feed'); return; }
+            if (updateHash) window.location.hash = `detail=${id}`;
+
+            activeRecipe = recipe;
+            originalServings = recipe.servings || 4;
+            activeScaleFactor = 1.0;
+
+            document.getElementById('detailTitle').innerText = recipe.title;
+            document.getElementById('detailCategory').innerText = recipe.binder_category || "Sunday Bakes";
+            document.getElementById('detailSource').innerText = recipe.source || "Preserved vintage card";
+            document.getElementById('detailDescription').innerText = recipe.description || "";
+            document.getElementById('scaledServingsCount').innerText = originalServings;
+
+            const imgContainer = document.getElementById('detailImageContainer');
+            const imgEl = document.getElementById('detailImg');
+            if (recipe.image_url) {
+                imgContainer.classList.remove('hidden');
+                imgEl.src = recipe.image_url;
+            } else {
+                imgContainer.classList.add('hidden');
+            }
+
+            renderDetailIngredientsAndSteps();
+            showSection('detail', false);
+        }
+
+        function renderDetailIngredientsAndSteps() {
+            const ingList = document.getElementById('detailIngredientsList');
+            if (!ingList) return;
+            ingList.innerHTML = '';
+
+            (activeRecipe.ingredients || []).forEach(ing => {
+                const li = document.createElement('li');
+                li.style.cssText = "font-size: 0.78rem; color: var(--text-primary); margin-bottom: 0.4rem;";
+                li.innerText = `• ${ing.name || ing.toString()}`;
+                ingList.appendChild(li);
+            });
+
+            const stepsList = document.getElementById('detailStepsList');
+            if (!stepsList) return;
+            stepsList.innerHTML = '';
+            (activeRecipe.steps || []).forEach((s, idx) => {
+                const li = document.createElement('li');
+                li.style.cssText = "font-size: 0.78rem; color: var(--text-primary); margin-bottom: 0.6rem; line-height: 1.4;";
+                li.innerText = `${idx + 1}. ${s.instruction || s}`;
+                stepsList.appendChild(li);
+            });
+            refreshIcons();
+        }
+
+        // ================= MULTI-PAGE & BATCH GALLERY UPLOAD =================
+        async function compressImage(file, maxWidth = 1200, quality = 0.8) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > maxWidth) {
+                            height = Math.round((height * maxWidth) / width);
+                            width = maxWidth;
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        resolve(canvas.toDataURL('image/jpeg', quality));
+                    };
+                    img.onerror = reject;
+                };
+                reader.onerror = reject;
+            });
+        }
+
+        async function handleMultiScanUpload(input, index) {
+            if (!input.files || !input.files[0]) return;
+            try {
+                showVintageToast("Compressing card photo...", "cpu");
+                const compressedUrl = await compressImage(input.files[0], 1200, 0.8);
+                multiScanImages[index] = compressedUrl;
+                
+                const slotImg = document.getElementById(`slotImg${index}`);
+                const slotPh = document.getElementById(`slotPlaceholder${index}`);
+                if (slotImg && slotPh) {
+                    slotImg.src = compressedUrl;
+                    slotImg.classList.remove('hidden');
+                    slotPh.classList.add('hidden');
+                }
+                showVintageToast(`Page ${index + 1} attached successfully!`, "check");
+            } catch (err) {
+                showVintageToast(`Compression failed: ${err.message}`, "shield-alert");
+            }
+        }
+
+        async function runMultiPageGeminiOCR() {
+            const validImages = multiScanImages.filter(img => img !== null);
+            if (validImages.length === 0) {
+                showVintageToast("Please attach at least one page scan.", "alert-circle");
+                return;
+            }
+
+            const banner = document.getElementById('parseStatusBanner');
+            const bar = document.getElementById('parseProgressBar');
+            const pText = document.getElementById('parseStatusText');
+
+            if (banner) banner.classList.remove('hidden');
+            if (bar) bar.style.width = '25%';
+            if (pText) pText.innerText = `Transcribing ${validImages.length} multi-page card(s)...`;
+
+            try {
+                let combinedIngredients = [];
+                let combinedSteps = [];
+                let recipeTitle = "Multi-Page Heirloom Recipe";
+                let recipeDesc = "Preserved multi-page card entry.";
+
+                for (let i = 0; i < validImages.length; i++) {
+                    if (bar) bar.style.width = `${25 + Math.round((i + 1) * (60 / validImages.length))}%`;
+                    if (pText) pText.innerText = `Reading page ${i + 1} of ${validImages.length}...`;
+
+                    const base64Data = validImages[i].split(',')[1];
+                    const res = await fetch('/api/parse', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ imageBase64: base64Data, mimeType: 'image/jpeg' })
+                    });
+
+                    if (!res.ok) throw new Error(`Gateway timeout on page ${i + 1}`);
+                    const parsed = await res.json();
+
+                    if (i === 0 && parsed.title) recipeTitle = parsed.title;
+                    if (i === 0 && parsed.description) recipeDesc = parsed.description;
+                    if (parsed.ingredients) combinedIngredients = combinedIngredients.concat(parsed.ingredients);
+                    if (parsed.steps) combinedSteps = combinedSteps.concat(parsed.steps);
+                }
+
+                const newRecipe = {
+                    id: "rec-" + Date.now(),
+                    title: recipeTitle,
+                    source: `Multi-Page Scan (${validImages.length} pages)`,
+                    source_type: "VINTAGE_SCAN",
+                    description: recipeDesc,
+                    image_url: validImages[0],
+                    prep_time: "15m",
+                    cook_time: "30m",
+                    difficulty: "Easy",
+                    binder_category: "Sunday Bakes",
+                    servings: 4,
+                    ingredients: combinedIngredients,
+                    steps: combinedSteps,
+                    secret_note: "",
+                    tips_note: "",
+                    bookmarked: false
+                };
+
+                userRecipes.unshift(newRecipe);
+                localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
+                syncRecipeToSupabase(newRecipe);
+
+                if (bar) bar.style.width = '100%';
+                if (pText) pText.innerText = "Complete! Filing into tin...";
+
+                setTimeout(() => {
+                    if (banner) banner.classList.add('hidden');
+                    multiScanImages = [null, null, null];
+                    for (let i = 0; i < 3; i++) {
+                        const sImg = document.getElementById(`slotImg${i}`);
+                        const sPh = document.getElementById(`slotPlaceholder${i}`);
+                        if (sImg) sImg.classList.add('hidden');
+                        if (sPh) sPh.classList.remove('hidden');
+                    }
+                    showVintageToast("Multi-page recipe successfully transcribed & bound!", 'sparkles');
+                    viewRecipeDetail(newRecipe.id);
+                }, 800);
+
+            } catch (err) {
+                console.error("Multi-Page OCR Exception:", err);
+                if (banner) banner.classList.add('hidden');
+                showVintageToast(`Scan interrupted: ${err.message}`, 'shield-alert');
+            }
+        }
+
+        async function handleBatchGalleryUpload(input) {
+            if (!input.files || input.files.length === 0) return;
+            const files = Array.from(input.files);
+
+            const banner = document.getElementById('parseStatusBanner');
+            const bar = document.getElementById('parseProgressBar');
+            const pText = document.getElementById('parseStatusText');
+
+            if (banner) banner.classList.remove('hidden');
+            if (bar) bar.style.width = '20%';
+            if (pText) pText.innerText = `Batch importing ${files.length} gallery photo(s)...`;
+
+            try {
+                let addedCount = 0;
+                for (let i = 0; i < files.length; i++) {
+                    if (bar) bar.style.width = `${20 + Math.round((i + 1) * (70 / files.length))}%`;
+                    if (pText) pText.innerText = `Processing photo ${i + 1} of ${files.length}...`;
+
+                    const compressedUrl = await compressImage(files[i], 1200, 0.8);
+                    const base64Data = compressedUrl.split(',')[1];
+
+                    const res = await fetch('/api/parse', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ imageBase64: base64Data, mimeType: 'image/jpeg' })
+                    });
+
+                    let parsed = {};
+                    if (res.ok) {
+                        parsed = await res.json();
+                    }
+
+                    const batchRecipe = {
+                        id: "rec-" + Date.now() + "-" + i,
+                        title: parsed.title || `Gallery Recipe ${i + 1}`,
+                        source: "Batch Gallery Import",
+                        source_type: "VINTAGE_SCAN",
+                        description: parsed.description || "Imported from phone photo library.",
+                        image_url: compressedUrl,
+                        prep_time: parsed.prep_time || "15m",
+                        cook_time: parsed.cook_time || "30m",
+                        difficulty: parsed.difficulty || "Easy",
+                        binder_category: parsed.binder_category || "Sunday Bakes",
+                        servings: parsed.servings || 4,
+                        ingredients: parsed.ingredients || [{ name: "See card photo for ingredients" }],
+                        steps: parsed.steps || [{ step_number: 1, instruction: "Follow directions shown on scanned heirloom card." }],
+                        secret_note: "",
+                        tips_note: "",
+                        bookmarked: false
+                    };
+
+                    userRecipes.unshift(batchRecipe);
+                    syncRecipeToSupabase(batchRecipe);
+                    addedCount++;
+                }
+
+                localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
+
+                if (bar) bar.style.width = '100%';
+                if (pText) pText.innerText = "Batch import complete!";
+
+                setTimeout(() => {
+                    if (banner) banner.classList.add('hidden');
+                    input.value = "";
+                    showVintageToast(`Successfully imported ${addedCount} recipe cards from gallery!`, 'layers');
+                    navigate('feed');
+                }, 800);
+
+            } catch (err) {
+                console.error("Batch Gallery Exception:", err);
+                if (banner) banner.classList.add('hidden');
+                showVintageToast(`Batch import error: ${err.message}`, 'shield-alert');
+                input.value = "";
+            }
+        }
+
+        async function parseRecipeUrlWithGemini() {
+            const urlInput = document.getElementById('recipeUrlInput');
+            const url = urlInput ? urlInput.value.trim() : '';
+            if (!url || !url.startsWith('http')) return alert("Please paste a valid recipe URL.");
+
+            const banner = document.getElementById('parseStatusBanner');
+            const bar = document.getElementById('parseProgressBar');
+            const pText = document.getElementById('parseStatusText');
+
+            if (banner) banner.classList.remove('hidden');
+            if (bar) bar.style.width = '40%';
+            if (pText) pText.innerText = "Extracting URL recipe...";
+
+            try {
+                const res = await fetch('/api/parse', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: `Extract the recipe from: ${url}` })
+                });
+
+                const parsed = await res.json();
+                if (!res.ok) throw new Error(parsed.error || 'Failed to parse link');
+
+                const newRecipe = {
+                    id: "rec-" + Date.now(),
+                    title: parsed.title || "Web Recipe",
+                    source: url.replace('https://', '').split('/')[0],
+                    source_type: "FAMILY_NOTE",
+                    description: parsed.description || "Clean extracted recipe.",
+                    image_url: "",
+                    prep_time: parsed.prep_time || "15m",
+                    cook_time: parsed.cook_time || "30m",
+                    difficulty: parsed.difficulty || "Easy",
+                    binder_category: parsed.binder_category || "Sunday Bakes",
+                    servings: parsed.servings || 4,
+                    ingredients: parsed.ingredients || [],
+                    steps: parsed.steps || [],
+                    secret_note: "",
+                    tips_note: "",
+                    bookmarked: false
+                };
+
+                userRecipes.unshift(newRecipe);
+                localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
+                syncRecipeToSupabase(newRecipe);
+
+                if (bar) bar.style.width = '100%';
+                if (pText) pText.innerText = "Recipe parsed!";
+                if (urlInput) urlInput.value = '';
+
+                setTimeout(() => {
+                    if (banner) banner.classList.add('hidden');
+                    showVintageToast("Web recipe successfully parsed into your tin!", 'globe');
+                    viewRecipeDetail(newRecipe.id);
+                }, 800);
+            } catch (err) {
+                if (banner) banner.classList.add('hidden');
+                showVintageToast(`Failed to parse link: ${err.message}`, 'shield-alert');
+            }
+        }
+
+        async function syncRecipeToSupabase(recipe) {
+            if (!supabase || currentUserId === 'demo-user') return;
+            try {
+                await supabase.from('recipes').upsert({ ...recipe, user_id: currentUserId, id: recipe.id }, { onConflict: 'id' });
+            } catch(e) { console.warn("Retained locally.", e); }
+        }
+
+        async function deleteRecipeFromSupabase(id) {
+            if (!supabase || currentUserId === 'demo-user') return;
+            try { await supabase.from('recipes').delete().eq('id', id); } catch(e) { console.warn("Local deletion only.", e); }
+        }
+
+        function toggleAuthModal() {
+            const modal = document.getElementById('authModal');
+            if (modal) modal.classList.toggle('hidden');
+            const err = document.getElementById('authError');
+            if (err) err.classList.add('hidden');
+            refreshIcons();
+        }
+
+        function setAuthMode(mode) {
+            authMode = mode;
+            const tabSignUp = document.getElementById('authTabSignUp');
+            const tabSignIn = document.getElementById('authTabSignIn');
+            const nameField = document.getElementById('authNameField');
+            const submitBtn = document.getElementById('authSubmitBtn');
+            const subtitle = document.getElementById('authSubtitle');
+
+            if (mode === 'signUp') {
+                if (tabSignUp) { tabSignUp.style.background = 'var(--accent-primary)'; tabSignUp.style.color = '#fff'; }
+                if (tabSignIn) { tabSignIn.style.background = 'transparent'; tabSignIn.style.color = 'var(--text-muted)'; }
+                if (nameField) nameField.classList.remove('hidden');
+                if (submitBtn) submitBtn.innerText = "Create Account & Open Tin";
+                if (subtitle) subtitle.innerText = "Every family recipe tells a story—what will you create today?";
+            } else {
+                if (tabSignUp) { tabSignUp.style.background = 'transparent'; tabSignUp.style.color = 'var(--text-muted)'; }
+                if (tabSignIn) { tabSignIn.style.background = 'var(--accent-primary)'; tabSignIn.style.color = '#fff'; }
+                if (nameField) nameField.classList.add('hidden');
+                if (submitBtn) submitBtn.innerText = "Log In to My Recipe Tin";
+                if (subtitle) subtitle.innerText = "Welcome back! Sign in to synchronize your kitchen archive.";
+            }
+        }
+
+        async function handleAuthSubmit(event) {
+            event.preventDefault();
+            const errDiv = document.getElementById('authError');
+            if (errDiv) errDiv.classList.add('hidden');
+
+            const emailInput = document.getElementById('authEmail');
+            const passwordInput = document.getElementById('authPassword');
+            const nameInput = document.getElementById('authName');
+
+            const email = emailInput ? emailInput.value.trim() : '';
+            const password = passwordInput ? passwordInput.value.trim() : '';
+            const firstName = nameInput ? nameInput.value.trim() || "Cook" : "Cook";
+
+            if (!supabase) {
+                currentUserId = email.replace(/[^a-zA-Z0-9]/g, '') || 'demouser';
+                localStorage.setItem("currentUserId", currentUserId);
+                userProfile.name = firstName;
+                userProfile.email = email;
+                localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+                toggleAuthModal();
+                updateAuthControls();
+                applyProfileUI();
+                showVintageToast(`Welcome aboard, ${firstName}! Archive tethered.`, 'sparkles');
+                navigate('feed');
+                return;
+            }
+
+            try {
+                if (authMode === 'signUp') {
+                    const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { name: firstName } } });
+                    if (error) throw error;
+                    if (data?.user) {
+                        currentUserId = data.user.id;
+                        localStorage.setItem("currentUserId", currentUserId);
+                        userProfile.name = firstName;
+                        userProfile.email = email;
+                        localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+                        toggleAuthModal();
+                        updateAuthControls();
+                        applyProfileUI();
+                        showVintageToast(`Welcome aboard, ${firstName}! Archive tethered.`, 'sparkles');
+                        navigate('feed');
+                    }
+                } else {
+                    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+                    if (error) throw error;
+                    if (data?.user) {
+                        currentUserId = data.user.id;
+                        localStorage.setItem("currentUserId", currentUserId);
+                        userProfile.name = data.user.user_metadata?.name || firstName;
+                        userProfile.email = email;
+                        localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
+                        toggleAuthModal();
+                        updateAuthControls();
+                        applyProfileUI();
+                        showVintageToast(`Welcome back, ${userProfile.name}! Tin synced.`, 'cloud-check');
+                        navigate('feed');
+                    }
+                }
+            } catch(error) {
+                if (errDiv) errDiv.classList.remove('hidden');
+                const errText = document.getElementById('authErrorText');
+                if (errText) errText.innerText = error.message || "Authentication failed.";
+            }
+        }
+
+        function updateAuthControls() { applyProfileUI(); }
+
+        function handleSignOut() {
+            if (confirm("Log out of your Stained Pages session?")) {
+                if (supabase) supabase.auth.signOut();
+                currentUserId = "demo-user";
+                localStorage.setItem("currentUserId", currentUserId);
+                userProfile = { name: "Cook", email: "", avatar: "", wreath: "wreath-flowers", unitSystem: "imperial", fontSizeScale: 1.0 };
+                toggleAccountModal();
+                updateAuthControls();
+                applyProfileUI();
+                showVintageToast("Logged out successfully.", 'log-out');
+                navigate('feed');
+            }
+        }
+
+        function openRecipeEditorModal() {
+            if (!activeRecipe) return;
+            document.getElementById('editRecipeTitle').value = activeRecipe.title || '';
+            document.getElementById('editRecipeDesc').value = activeRecipe.description || '';
+            document.getElementById('editRecipeTips').value = activeRecipe.tips_note || '';
+
+            const ingText = (activeRecipe.ingredients || []).map(i => i.name || i.toString()).join('\n');
+            document.getElementById('editRecipeIngredients').value = ingText;
+
+            const stepText = (activeRecipe.steps || []).map(s => s.instruction || s).join('\n');
+            document.getElementById('editRecipeSteps').value = stepText;
+
+            document.getElementById('recipeEditorModal').classList.remove('hidden');
+            refreshIcons();
+        }
+
+        function closeRecipeEditorModal() {
+            document.getElementById('recipeEditorModal').classList.add('hidden');
+        }
+
+        function saveRecipeEdits(event) {
+            event.preventDefault();
+            if (!activeRecipe) return;
+
+            activeRecipe.title = document.getElementById('editRecipeTitle').value.trim();
+            activeRecipe.description = document.getElementById('editRecipeDesc').value.trim();
+            activeRecipe.tips_note = document.getElementById('editRecipeTips').value.trim();
+
+            const rawIngs = document.getElementById('editRecipeIngredients').value.split('\n').filter(l => l.trim() !== '');
+            activeRecipe.ingredients = rawIngs.map(line => ({ name: line.trim() }));
+
+            const rawSteps = document.getElementById('editRecipeSteps').value.split('\n').filter(l => l.trim() !== '');
+            activeRecipe.steps = rawSteps.map((st, idx) => ({ step_number: idx + 1, instruction: st.trim() }));
+
+            localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
+            syncRecipeToSupabase(activeRecipe);
+
+            closeRecipeEditorModal();
+            viewRecipeDetail(activeRecipe.id, false);
+            showVintageToast("Recipe updates saved successfully.", 'edit-3');
+        }
+
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
