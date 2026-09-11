@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -398,7 +398,7 @@
                 <div id="pantryGrid" class="pantry-grid"></div>
             </div>
 
-            <!-- VIEW 4: RECIPE DETAIL CARD VIEW (WITH ZOOMABLE CARD & PRINT/EXPORT) -->
+            <!-- VIEW 4: RECIPE DETAIL CARD VIEW (WITH SUBSECTIONS, ZOOMABLE CARD & PRINT/EXPORT) -->
             <div id="section-detail" class="hidden" style="display: flex; flex-direction: column; gap: 1rem;">
                 <div class="no-print" style="display: flex; justify-content: space-between; align-items: center;">
                     <button onclick="navigate('feed')" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 700; color: var(--sage-700); background: transparent;">
@@ -923,11 +923,23 @@
             document.getElementById('lightboxModal').classList.add('hidden');
         }
 
+        // RENDER INGREDIENTS WITH AUTOMATIC SUBSECTION GROUPING
         function renderDetailIngredientsAndSteps() {
             const ingList = document.getElementById('detailIngredientsList');
             ingList.innerHTML = '';
 
+            let currentSection = '';
+
             (activeRecipe.ingredients || []).forEach(ing => {
+                // If this ingredient belongs to a new section, add a bold sub-header
+                if (ing.section && ing.section !== currentSection && ing.section.toLowerCase() !== 'main') {
+                    currentSection = ing.section;
+                    const headerLi = document.createElement('li');
+                    headerLi.style.cssText = "font-family: 'Playfair Display', serif; font-weight: 700; color: var(--terracotta-700); font-size: 0.85rem; margin-top: 0.65rem; list-style: none;";
+                    headerLi.innerText = currentSection.endsWith(':') ? currentSection : `${currentSection}:`;
+                    ingList.appendChild(headerLi);
+                }
+
                 let displayQty = '';
                 if (typeof ing.quantity === 'number') {
                     displayQty = (ing.quantity * activeScaleFactor).toFixed(1).replace(/\.0$/, '');
