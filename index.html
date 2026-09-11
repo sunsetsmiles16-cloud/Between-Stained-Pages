@@ -4,67 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
-    <!-- PWA Primary Meta Tags -->
     <title>Between Stained Pages — Heirloom Recipe Tin</title>
-    <meta name="description" content="Cherished vintage culinary archive for scanning handwritten recipe cards, phone screenshots, and preserving timeless kitchen heritage.">
+    <meta name="description" content="Cherished vintage culinary archive for scanning handwritten cards, phone screenshots, and 70s kitchen heritage.">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="StainedPages">
-    <meta name="theme-color" content="#5E6D5A">
+    <meta name="theme-color" content="#FAF4E8">
     
-    <!-- Standalone Cottagecore Vector App Icon (SVG Data URI) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%235E6D5A'/%3E%3Cpath d='M140 120h232a24 24 0 0 1 24 24v224a24 24 0 0 1-24 24H140a24 24 0 0 1-24-24V144a24 24 0 0 1 24-24z' fill='%23FDFBF7' opacity='0.95'/%3E%3Cpath d='M170 190h172M170 240h172M170 290h110' stroke='%23C97A63' stroke-width='16' stroke-linecap='round'/%3E%3Ccircle cx='340' cy='310' r='18' fill='%23758572'/%3E%3C/svg%3E">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%235E6D5A'/%3E%3Cpath d='M140 120h232a24 24 0 0 1 24 24v224a24 24 0 0 1-24 24H140a24 24 0 0 1-24-24V144a24 24 0 0 1 24-24z' fill='%23FDFBF7' opacity='0.95'/%3E%3Cpath d='M170 190h172M170 240h172M170 290h110' stroke='%23C97A63' stroke-width='16' stroke-linecap='round'/%3E%3Ccircle cx='340' cy='310' r='18' fill='%23758572'/%3E%3C/svg%3E">
+    <!-- 70s Retro Vector App Icon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%23DE5E2E'/%3E%3Ccircle cx='256' cy='256' r='180' fill='%23FAF4E8'/%3E%3Ccircle cx='256' cy='256' r='140' fill='%23EAA823'/%3E%3Ccircle cx='256' cy='256' r='100' fill='%237C8D6D'/%3E%3Ccircle cx='256' cy='256' r='60' fill='%23FAF4E8'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%23DE5E2E'/%3E%3Ccircle cx='256' cy='256' r='180' fill='%23FAF4E8'/%3E%3Ccircle cx='256' cy='256' r='140' fill='%23EAA823'/%3E%3Ccircle cx='256' cy='256' r='100' fill='%237C8D6D'/%3E%3Ccircle cx='256' cy='256' r='60' fill='%23FAF4E8'/%3E%3C/svg%3E">
     
-    <!-- Embedded Web App Manifest -->
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkJldHdlZW4gU3RhaW5lZCBQYWdlcyIsCiAgInNob3J0X25hbWUiOiAiU3RhaW5lZFBhZ2VzIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNGREZCRjciLAogICJ0aGVtZV9jb2xvciI6ICIjNUU2RDVBIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA1MTIgNTEyJyUzRSUzQ3JlY3Qgd2lkdGg9JzUxMicgaGVpZ2h0PSc1MTInIHJ4PScxMjgnIGZpbGw9JyUyMzVFNkQ1QScvJTNFJTNDcGF0aCBkPSdNMTQwIDEyMGgyMzJhMjQgMjQgMCAwIDEgMjQgMjR2MjI0YTI0IDI0IDAgMCAxLTI0IDI0SDE0MGEyNCAyNCAwIDAgMS0yNC0yNFYxNDRhMjQgMjQgMCAwIDEgMjQtMjR6JyBmaWxsPSclMjNGREZCRjcnIG9wYWNpdHk9JzAuOTUnLyUzRSUzQ3BhdGggZD0nTTE3MCAxOTBoMTcyTTE3MCAyNDBoMTcyTTE3MCAyOTBoMTEwJyBzdHJva2U9JyUyM0M5N0E2Mycgc3Ryb2tlLXdpZHRoPScxNicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8lM0UlM0NjaXJjbGUgY3g9JzM0MCcgY3k9JzMxMCcgcj0nMTgnIGZpbGw9JyUyMzc1ODU3MicvJTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNreWJsZSIKICAgIH0KICBdCn0=" />
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkJldHdlZW4gU3RhaW5lZCBQYWdlcyIsCiAgInNob3J0X25hbWUiOiAiU3RhaW5lZFBhZ2VzIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNGQUY0RTgiLAogICJ0aGVtZV9jb2xvciI6ICIjREU1RTJFIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA1MTIgNTEyJyUzRSUzQ3JlY3Qgd2lkdGg9JzUxMicgaGVpZ2h0PSc1MTInIHJ4PScxMjgnIGZpbGw9JyUyM0RFNUUyRScvJTNFJTNDY2lyY2xlIGN4PScyNTYnIGN5PScyNTYnIHI9JzE4MCcgZmlsbD0nJTIzRkFGNEU4Jy8lM0UlM0NjaXJjbGUgY3g9JzI1NicgY3k9JzI1Nicgcj0nMTQwJyBmaWxsPSclMjNFQUE4MjMnLyUzRSUzQ2NpcmNsZSBjeD0nMjU2JyBjeT0nMjU2JyByPScxMDAnIGZpbGw9JyUyMzdDREQ2RCcvJTNFJTNDY2lyY2xlIGN4PScyNTYnIGN5PScyNTYnIHI9JzYwJyBmaWxsPSclMjNGQUY0RTgnLyUzRSUzQy9zdmclM0UiLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNreWJsZSIKICAgIH0KICBdCn0=" />
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Fraunces (70s Display Serif), Shrikhand (Retro Headline), Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Shrikhand&display=swap" rel="stylesheet">
     
     <!-- Supabase JS & Lucide Icons -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="https://unpkg.com/lucide@latest" defer onload="if(window.lucide){lucide.createIcons();}"></script>
 
     <style>
+        /* -----------------------------------------------
+           70s HEIRLOOM THEME (DEFAULT)
+        ----------------------------------------------- */
         :root {
-            --cream-50: #FDFBF7;
-            --cream-100: #FAF5ED;
-            --cream-200: #F2E8D5;
-            --sage-50: #F4F6F3;
-            --sage-100: #E4EDE3;
-            --sage-200: #C9DBC7;
-            --sage-500: #8A9A86;
-            --sage-600: #758572;
-            --sage-700: #5E6D5A;
-            --sage-800: #485445;
-            --terracotta-100: #F9EBE7;
-            --terracotta-200: #F2D3CA;
-            --terracotta-500: #C97A63;
-            --terracotta-600: #B65F47;
-            --terracotta-700: #994833;
-            --text-dark: #3C3836;
+            --bg-canvas: #FAF4E8;
+            --bg-card: #FFFDF9;
+            --bg-tint: #F3EBD9;
+            
+            --retro-orange: #DE5E2E;
+            --retro-gold: #EAA823;
+            --retro-mustard: #C78B1D;
+            --retro-avocado: #7C8D6D;
+            --retro-olive: #5B6A4E;
+            --retro-brown: #523120;
+            --retro-tan: #D9C3A5;
+            --retro-cream: #FFF9EE;
+
+            --text-primary: #382012;
+            --text-muted: #6E5343;
+            --border-primary: rgba(82, 49, 32, 0.18);
+
+            --font-display: 'Shrikhand', cursive;
+            --font-sub: 'Fraunces', serif;
+            --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+            --radius-card: 1.75rem;
+            --rainbow-border: linear-gradient(90deg, #DE5E2E 0%, #EAA823 50%, #7C8D6D 100%);
+        }
+
+        /* -----------------------------------------------
+           CLEAN MODERN MINIMAL THEME
+        ----------------------------------------------- */
+        body.theme-clean {
+            --bg-canvas: #F8F9F8;
+            --bg-card: #FFFFFF;
+            --bg-tint: #EEF2EE;
+
+            --retro-orange: #4A5D4E;
+            --retro-gold: #5E7163;
+            --retro-mustard: #5E7163;
+            --retro-avocado: #687D6E;
+            --retro-olive: #3D4F42;
+            --retro-brown: #242E27;
+            --retro-tan: #D4DDD5;
+            --retro-cream: #FFFFFF;
+
+            --text-primary: #1C241E;
+            --text-muted: #57655B;
+            --border-primary: rgba(36, 46, 39, 0.12);
+
+            --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+            --font-sub: 'Plus Jakarta Sans', system-ui, sans-serif;
+            --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+            --radius-card: 1rem;
+            --rainbow-border: none;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-            background-color: var(--cream-50);
-            color: var(--text-dark);
+            font-family: var(--font-body);
+            background-color: var(--bg-canvas);
+            color: var(--text-primary);
             -webkit-tap-highlight-color: transparent;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
             padding-bottom: 5rem;
+            transition: background-color 0.25s ease, color 0.25s ease;
         }
 
         @media (min-width: 768px) { body { padding-bottom: 0; } }
 
-        h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', Georgia, serif; }
+        .font-retro-title { font-family: var(--font-display); letter-spacing: 0.02em; }
+        .font-retro-sub { font-family: var(--font-sub); }
 
         .max-container {
             max-width: 72rem;
@@ -79,14 +116,25 @@
             position: sticky;
             top: 0;
             z-index: 40;
-            background-color: rgba(253, 251, 247, 0.95);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--sage-100);
+            background-color: rgba(250, 244, 232, 0.94);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--border-primary);
             padding: 0.75rem 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+        body.theme-clean header {
+            background-color: rgba(248, 249, 248, 0.94);
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        /* 70s Rainbow Stripe Accent */
+        .retro-stripe {
+            height: 6px;
+            background: var(--rainbow-border);
+            width: 100%;
         }
 
         main {
@@ -102,35 +150,39 @@
         @media (min-width: 768px) { main { grid-template-columns: 280px 1fr; } }
 
         button { font-family: inherit; cursor: pointer; border: none; }
-        .btn-sage {
-            background-color: var(--sage-600);
+
+        .btn-retro-orange {
+            background-color: var(--retro-orange);
             color: #fff;
-            padding: 0.625rem 1.25rem;
+            padding: 0.65rem 1.25rem;
             border-radius: 9999px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            transition: background 0.15s ease;
+            box-shadow: 0 4px 10px rgba(222, 94, 46, 0.25);
+            transition: transform 0.1s ease, filter 0.15s ease;
         }
-        .btn-sage:hover { background-color: var(--sage-700); }
-        
-        .btn-terracotta {
-            background-color: var(--terracotta-600);
+        .btn-retro-orange:hover { filter: brightness(1.06); }
+        .btn-retro-orange:active { transform: scale(0.98); }
+
+        .btn-retro-avocado {
+            background-color: var(--retro-avocado);
             color: #fff;
-            padding: 0.625rem 1.25rem;
+            padding: 0.65rem 1.25rem;
             border-radius: 9999px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            transition: background 0.15s ease;
+            box-shadow: 0 4px 10px rgba(124, 141, 109, 0.25);
+            transition: transform 0.1s ease, filter 0.15s ease;
         }
-        .btn-terracotta:hover { background-color: var(--terracotta-700); }
+        .btn-retro-avocado:hover { filter: brightness(1.06); }
 
         .recipe-grid {
             display: grid;
@@ -146,17 +198,10 @@
         }
         @media (min-width: 640px) { .pantry-grid { grid-template-columns: repeat(3, 1fr); } }
 
-        .parchment-texture {
-            background-image: radial-gradient(rgba(197, 180, 150, 0.18) 1px, transparent 0),
-                              radial-gradient(rgba(197, 180, 150, 0.18) 1px, transparent 0);
-            background-size: 8px 8px;
-            background-position: 0 0, 4px 4px;
-        }
-
         .checklist-item input:checked + span {
             position: relative;
-            color: var(--sage-500);
-            opacity: 0.7;
+            color: var(--text-muted);
+            opacity: 0.65;
         }
         .checklist-item input:checked + span::after {
             content: '';
@@ -164,8 +209,8 @@
             left: 0;
             top: 50%;
             width: 100%;
-            height: 1.5px;
-            background-color: var(--terracotta-500);
+            height: 2px;
+            background-color: var(--retro-orange);
             transform: scaleX(0);
             transform-origin: left;
             animation: strikethrough 0.25s ease-out forwards;
@@ -177,7 +222,7 @@
             position: fixed;
             inset: 0;
             z-index: 100;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(40, 24, 15, 0.94);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -186,9 +231,10 @@
         #lightboxModal img {
             max-width: 95%;
             max-height: 90vh;
-            border-radius: 0.75rem;
+            border-radius: 1rem;
             object-fit: contain;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 4px solid var(--retro-gold);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
         }
 
         .hidden { display: none !important; }
@@ -197,7 +243,7 @@
 
         /* Print / 4x6 Index Card Styling */
         @media print {
-            header, aside, #mobileNav, .no-print, button, #section-feed, #section-import, #section-pantry, #section-cook {
+            header, aside, #mobileNav, .no-print, button, #section-feed, #section-import, #section-pantry, #section-cook, .retro-stripe {
                 display: none !important;
             }
             body {
@@ -210,11 +256,9 @@
                 max-width: 100% !important;
                 padding: 0 !important;
             }
-            #section-detail {
-                display: block !important;
-            }
+            #section-detail { display: block !important; }
             .print-card-box {
-                border: 2px solid #5E6D5A !important;
+                border: 2px solid #523120 !important;
                 border-radius: 12px !important;
                 padding: 20px !important;
                 page-break-inside: avoid;
@@ -223,34 +267,40 @@
                 min-height: 4in !important;
                 margin: 0 auto !important;
             }
-            #detailImageContainer {
-                display: none !important;
-            }
+            #detailImageContainer { display: none !important; }
         }
     </style>
 </head>
 <body>
 
+    <div class="retro-stripe"></div>
+
     <!-- Header Navigation -->
     <header class="max-container">
-        <div style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer;" onclick="navigate('feed')">
-            <div style="width: 2.5rem; height: 2.5rem; border-radius: 9999px; background: var(--sage-100); display: flex; align-items: center; justify-content: center; color: var(--sage-700);">
-                <i data-lucide="book-open" style="width: 1.35rem; height: 1.35rem;"></i>
+        <div style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer;" onclick="navigate('feed')">
+            <div style="width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--retro-gold); display: flex; align-items: center; justify-content: center; color: var(--retro-brown); box-shadow: 0 3px 6px rgba(0,0,0,0.1);">
+                <i data-lucide="book-open" style="width: 1.45rem; height: 1.45rem;"></i>
             </div>
             <div>
-                <h1 style="font-size: 1.25rem; font-weight: 700; color: var(--terracotta-700); line-height: 1.2;">Between Stained Pages</h1>
-                <p style="font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--sage-600); font-weight: 700;">Heirloom Culinary Archive</p>
+                <h1 class="font-retro-title" style="font-size: 1.35rem; color: var(--retro-orange); line-height: 1.1;">Between Stained Pages</h1>
+                <p style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--retro-olive); font-weight: 700;">Vintage Kitchen Archive</p>
             </div>
         </div>
         
-        <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <button id="pantrySyncBadge" onclick="navigate('pantry')" style="display: none; align-items: center; gap: 0.35rem; padding: 0.35rem 0.75rem; border-radius: 9999px; background: var(--sage-100); color: var(--sage-700); font-size: 0.75rem; font-weight: 600;">
-                <i data-lucide="shopping-basket" style="width: 1rem; height: 1rem;"></i>
-                <span id="pantryCount">0</span> In Pantry
+        <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <!-- UI Style Switcher Button -->
+            <button onclick="toggleTheme()" id="themeToggleBtn" style="padding: 0.35rem 0.75rem; border-radius: 9999px; background: var(--bg-tint); border: 1.5px solid var(--border-primary); color: var(--text-primary); font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; gap: 0.35rem;">
+                <i data-lucide="palette" style="width: 0.9rem; height: 0.9rem; color: var(--retro-orange);"></i>
+                <span id="themeToggleText">70s Kitchen</span>
+            </button>
+
+            <button id="pantrySyncBadge" onclick="navigate('pantry')" style="display: none; align-items: center; gap: 0.35rem; padding: 0.35rem 0.75rem; border-radius: 9999px; background: var(--bg-tint); color: var(--text-primary); font-size: 0.75rem; font-weight: 700; border: 1px solid var(--border-primary);">
+                <i data-lucide="shopping-basket" style="width: 1rem; height: 1rem; color: var(--retro-avocado);"></i>
+                <span id="pantryCount">0</span> Stocked
             </button>
             
-            <button id="authBtn" onclick="toggleAuthModal()" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.85rem; border-radius: 9999px; border: 1px solid var(--sage-200); background: transparent; font-size: 0.75rem; font-weight: 600; color: var(--sage-700);">
-                <i data-lucide="user" style="width: 1rem; height: 1rem;"></i>
+            <button id="authBtn" onclick="toggleAuthModal()" style="display: flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.85rem; border-radius: 9999px; border: 1.5px solid var(--border-primary); background: var(--bg-card); font-size: 0.75rem; font-weight: 700; color: var(--text-primary);">
+                <i data-lucide="user" style="width: 0.95rem; height: 0.95rem;"></i>
                 <span id="authBtnText">Sign In</span>
             </button>
         </div>
@@ -260,54 +310,55 @@
     <main class="max-container">
         
         <!-- Desktop Sidebar -->
-        <aside style="background: rgba(250, 245, 237, 0.65); border-radius: 1.5rem; padding: 1.25rem; border: 1px solid var(--sage-100); display: none;" id="desktopSidebar">
-            <p style="font-size: 0.75rem; font-weight: 700; color: var(--sage-500); text-transform: uppercase; letter-spacing: 0.1em; padding-left: 0.75rem; margin-bottom: 0.5rem;">My Cookbook</p>
-            <nav style="display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1.5rem;">
-                <button onclick="navigate('feed')" class="sidebar-btn" id="btn-feed" style="width: 100%; display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.85rem; border-radius: 1rem; text-align: left; font-weight: 700; background: var(--cream-200); color: var(--terracotta-600);">
-                    <i data-lucide="layout-grid" style="width: 1.25rem; height: 1.25rem; color: var(--terracotta-500);"></i>
+        <aside style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.5rem; border: 2px solid var(--border-primary); display: none;" id="desktopSidebar">
+            <p style="font-size: 0.75rem; font-weight: 800; color: var(--retro-mustard); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.75rem;">Cookbook Binders</p>
+            <nav style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem;">
+                <button onclick="navigate('feed')" class="sidebar-btn" id="btn-feed" style="width: 100%; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: 1rem; text-align: left; font-weight: 800; background: var(--bg-tint); color: var(--retro-orange);">
+                    <i data-lucide="layout-grid" style="width: 1.25rem; height: 1.25rem; color: var(--retro-orange);"></i>
                     <span>Recipe Tin</span>
                 </button>
-                <button onclick="navigate('import')" class="sidebar-btn" id="btn-import" style="width: 100%; display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.85rem; border-radius: 1rem; text-align: left; font-weight: 600; background: transparent; color: var(--sage-600);">
-                    <i data-lucide="cloud-lightning" style="width: 1.25rem; height: 1.25rem;"></i>
+                <button onclick="navigate('import')" class="sidebar-btn" id="btn-import" style="width: 100%; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: 1rem; text-align: left; font-weight: 700; background: transparent; color: var(--text-muted);">
+                    <i data-lucide="camera" style="width: 1.25rem; height: 1.25rem;"></i>
                     <span>Scan & Import</span>
                 </button>
-                <button onclick="navigate('pantry')" class="sidebar-btn" id="btn-pantry" style="width: 100%; display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.85rem; border-radius: 1rem; text-align: left; font-weight: 600; background: transparent; color: var(--sage-600);">
+                <button onclick="navigate('pantry')" class="sidebar-btn" id="btn-pantry" style="width: 100%; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: 1rem; text-align: left; font-weight: 700; background: transparent; color: var(--text-muted);">
                     <i data-lucide="shopping-basket" style="width: 1.25rem; height: 1.25rem;"></i>
                     <span>Kitchen Pantry</span>
                 </button>
             </nav>
 
-            <div class="parchment-texture" style="border: 1px solid rgba(138, 154, 134, 0.25); border-radius: 1rem; padding: 1rem; text-align: center;">
-                <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.75rem; color: var(--sage-700); line-height: 1.5; margin-bottom: 0.5rem;">
-                    "A family recipe is a timeline of love, written down on index cards, stained with coffee, vanilla, and memory."
+            <div style="border: 2px dashed var(--border-primary); border-radius: 1.25rem; padding: 1.15rem; text-align: center; background: var(--bg-tint);">
+                <p class="font-retro-sub" style="font-style: italic; font-size: 0.8rem; color: var(--text-primary); line-height: 1.5; margin-bottom: 0.5rem;">
+                    "Good food, good friends, sunshine and home-baked pies."
                 </p>
-                <span style="font-size: 0.625rem; letter-spacing: 0.08em; color: var(--terracotta-500); text-transform: uppercase; font-weight: 700;">— Eleanor Vance</span>
+                <span style="font-size: 0.65rem; letter-spacing: 0.1em; color: var(--retro-orange); text-transform: uppercase; font-weight: 800;">— 1974 Kitchen Motto</span>
             </div>
         </aside>
 
-        <!-- Main Dynamic Views -->
+        <!-- Dynamic Main Views -->
         <section style="display: flex; flex-direction: column; gap: 1.5rem;">
             
             <!-- VIEW 1: RECIPE TIN FEED -->
             <div id="section-feed" style="display: flex; flex-direction: column; gap: 1.5rem;">
                 
-                <!-- Sage Welcome Header -->
-                <div style="background: var(--sage-700); color: #fff; border-radius: 1.5rem; padding: 1.5rem 1.75rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 8px 20px -4px rgba(94, 109, 90, 0.25);">
-                    <div>
-                        <span style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--sage-200); font-weight: 700;">Welcome to your kitchen tin</span>
-                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #fff; margin-top: 0.25rem;">Let's get cooking!</h2>
+                <!-- 70s Welcome Banner -->
+                <div style="background: var(--bg-card); border: 2px solid var(--border-primary); border-radius: var(--radius-card); padding: 1.75rem; display: flex; justify-content: space-between; align-items: center; position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(82, 49, 32, 0.06);">
+                    <div style="position: absolute; right: -20px; top: -20px; width: 120px; height: 120px; border-radius: 50%; background: var(--retro-gold); opacity: 0.15;"></div>
+                    <div style="z-index: 1;">
+                        <span style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--retro-mustard); font-weight: 800;">Welcome to your vintage tin</span>
+                        <h2 class="font-retro-title" style="font-size: 2rem; color: var(--retro-orange); margin-top: 0.25rem;">Let's get cooking!</h2>
                     </div>
-                    <button onclick="navigate('import')" class="btn-terracotta" style="box-shadow: 0 4px 12px rgba(201, 122, 99, 0.35);">
-                        <i data-lucide="plus" style="width: 1rem; height: 1rem;"></i>
+                    <button onclick="navigate('import')" class="btn-retro-orange" style="z-index: 1;">
+                        <i data-lucide="plus" style="width: 1.1rem; height: 1.1rem;"></i>
                         <span>New Recipe</span>
                     </button>
                 </div>
 
                 <!-- Search & Custom Binders Filter Bar -->
-                <div style="background: rgba(250, 245, 237, 0.5); padding: 0.85rem; border-radius: 1.5rem; border: 1px solid var(--sage-100); display: flex; flex-direction: column; gap: 0.75rem;">
+                <div style="background: var(--bg-card); padding: 1rem; border-radius: var(--radius-card); border: 2px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.85rem;">
                     <div style="position: relative; width: 100%;">
-                        <i data-lucide="search" style="position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); width: 1.1rem; height: 1.1rem; color: var(--sage-500);"></i>
-                        <input type="text" id="recipeSearch" oninput="filterRecipes()" placeholder="Search recipes, ingredients, or notes..." style="width: 100%; background: var(--cream-50); padding: 0.5rem 1rem 0.5rem 2.5rem; border-radius: 1rem; font-size: 0.875rem; border: 1px solid var(--sage-200); color: var(--sage-800); outline: none;">
+                        <i data-lucide="search" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 1.15rem; height: 1.15rem; color: var(--retro-mustard);"></i>
+                        <input type="text" id="recipeSearch" oninput="filterRecipes()" placeholder="Search your recipe binders, cards, ingredients..." style="width: 100%; background: var(--bg-canvas); padding: 0.65rem 1rem 0.65rem 2.75rem; border-radius: 9999px; font-size: 0.85rem; border: 1.5px solid var(--border-primary); color: var(--text-primary); outline: none; font-family: inherit;">
                     </div>
                     
                     <div id="bindersList" style="display: flex; align-items: center; gap: 0.5rem; overflow-x: auto;" class="no-scrollbar"></div>
@@ -315,57 +366,57 @@
 
                 <div id="recipeGrid" class="recipe-grid"></div>
 
-                <div id="emptyState" class="hidden parchment-texture" style="text-align: center; padding: 3rem 1.5rem; border-radius: 1.5rem; border: 1px solid var(--sage-100);">
-                    <div style="width: 4rem; height: 4rem; background: var(--sage-100); color: var(--sage-600); border-radius: 9999px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
-                        <i data-lucide="book-open-check" style="width: 2rem; height: 2rem;"></i>
+                <div id="emptyState" class="hidden" style="text-align: center; padding: 3.5rem 1.5rem; border-radius: var(--radius-card); border: 2px dashed var(--border-primary); background: var(--bg-card);">
+                    <div style="width: 4.5rem; height: 4.5rem; background: var(--bg-tint); color: var(--retro-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; border: 2px solid var(--border-primary);">
+                        <i data-lucide="book-open-check" style="width: 2.25rem; height: 2.25rem;"></i>
                     </div>
-                    <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--sage-800); margin-bottom: 0.5rem;">Your recipe tin is empty!</h3>
-                    <p style="font-size: 0.75rem; color: var(--sage-600); max-width: 24rem; margin: 0 auto 1.25rem; line-height: 1.5;">
-                        Upload photos of handwritten cards, screenshots, or paste website links.
+                    <h3 class="font-retro-sub" style="font-size: 1.35rem; font-weight: 800; color: var(--retro-brown); margin-bottom: 0.5rem;">Your recipe tin is empty!</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); max-width: 24rem; margin: 0 auto 1.5rem; line-height: 1.5;">
+                        Snap photos of handwritten cards, save social media recipe screenshots, or paste links to build your archive.
                     </p>
-                    <button onclick="navigate('import')" class="btn-sage">Add Your First Recipe</button>
+                    <button onclick="navigate('import')" class="btn-retro-orange">Add Your First Recipe</button>
                 </div>
             </div>
 
-            <!-- VIEW 2: IMPORT & SCAN SCREEN (HANDWRITTEN CARDS & SCREENSHOTS) -->
-            <div id="section-import" class="hidden" style="background: rgba(250, 245, 237, 0.65); border-radius: 1.5rem; padding: 1.5rem; border: 1px solid var(--sage-100);">
-                <div style="margin-bottom: 1.25rem;">
-                    <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--sage-800);">Import Loved Family Recipes</h2>
-                    <p style="font-size: 0.75rem; color: var(--sage-600); margin-top: 0.25rem;">Upload photos of physical cards, cookbook pages, or digital phone screenshots (TikTok, Instagram, Notes).</p>
+            <!-- VIEW 2: IMPORT & SCAN SCREEN -->
+            <div id="section-import" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.75rem; border: 2px solid var(--border-primary);">
+                <div style="margin-bottom: 1.5rem;">
+                    <h2 class="font-retro-title" style="font-size: 1.75rem; color: var(--retro-orange);">Import Cherished Recipes</h2>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Transcribe physical heirloom cards or phone screenshots (TikTok, Instagram, Apple Notes) with dual AI OCR.</p>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
-                    <!-- Universal Photo / Screenshot OCR -->
-                    <div style="background: var(--cream-50); border-radius: 1rem; padding: 1.25rem; border: 1px solid rgba(138, 154, 134, 0.25); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
+                    <!-- Photo / Screenshot OCR -->
+                    <div style="background: var(--bg-tint); border-radius: 1.25rem; padding: 1.5rem; border: 2px solid var(--border-primary); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
                         <div>
-                            <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: var(--terracotta-100); color: var(--terracotta-600); font-size: 0.625rem; font-weight: 700; text-transform: uppercase;">Universal Vision OCR</span>
-                            <h3 style="font-size: 1rem; font-weight: 700; color: var(--sage-800); margin: 0.5rem 0 0.25rem;">Scan Card or Screenshot</h3>
-                            <p style="font-size: 0.7rem; color: var(--sage-600); line-height: 1.4;">Snap a photo of an index card or choose a screenshot from your photo roll. The image is preserved above your recipe card.</p>
+                            <span style="padding: 0.25rem 0.65rem; border-radius: 9999px; background: var(--retro-gold); color: var(--retro-brown); font-size: 0.65rem; font-weight: 800; text-transform: uppercase;">Universal Vision OCR</span>
+                            <h3 class="font-retro-sub" style="font-size: 1.15rem; font-weight: 800; color: var(--retro-brown); margin: 0.65rem 0 0.25rem;">Scan Card or Screenshot</h3>
+                            <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">Snap a photo of an index card or choose a screenshot from your photo roll. The image is preserved above your recipe card.</p>
                         </div>
 
-                        <div id="scanPreviewArea" class="hidden" style="position: relative; height: 10rem; width: 100%; border-radius: 0.75rem; overflow: hidden; background: #000;">
-                            <img id="scanPreviewImg" src="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6;">
-                            <div style="position: absolute; left: 0; right: 0; height: 3px; background: var(--terracotta-500); box-shadow: 0 0 8px var(--terracotta-500); top: 50%;"></div>
+                        <div id="scanPreviewArea" class="hidden" style="position: relative; height: 10rem; width: 100%; border-radius: 1rem; overflow: hidden; background: #000;">
+                            <img id="scanPreviewImg" src="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.7;">
+                            <div style="position: absolute; left: 0; right: 0; height: 3px; background: var(--retro-orange); box-shadow: 0 0 10px var(--retro-orange); top: 50%;"></div>
                         </div>
 
-                        <label class="btn-sage" style="cursor: pointer; width: 100%;">
-                            <i data-lucide="camera" style="width: 1rem; height: 1rem;"></i>
+                        <label class="btn-retro-orange" style="cursor: pointer; width: 100%;">
+                            <i data-lucide="camera" style="width: 1.1rem; height: 1.1rem;"></i>
                             <span>Upload Photo or Screenshot</span>
                             <input type="file" accept="image/*" class="hidden" onchange="runGeminiOCR(this)">
                         </label>
                     </div>
 
                     <!-- Web URL Parser -->
-                    <div style="background: var(--cream-50); border-radius: 1rem; padding: 1.25rem; border: 1px solid rgba(138, 154, 134, 0.25); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
+                    <div style="background: var(--bg-tint); border-radius: 1.25rem; padding: 1.5rem; border: 2px solid var(--border-primary); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
                         <div>
-                            <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: var(--sage-100); color: var(--sage-700); font-size: 0.625rem; font-weight: 700; text-transform: uppercase;">Direct Web Link</span>
-                            <h3 style="font-size: 1rem; font-weight: 700; color: var(--sage-800); margin: 0.5rem 0 0.25rem;">Paste Recipe URL</h3>
-                            <p style="font-size: 0.7rem; color: var(--sage-600); line-height: 1.4;">Paste any cooking blog, website, or YouTube link to parse clean ingredients and steps.</p>
+                            <span style="padding: 0.25rem 0.65rem; border-radius: 9999px; background: var(--retro-avocado); color: #fff; font-size: 0.65rem; font-weight: 800; text-transform: uppercase;">Direct Web Link</span>
+                            <h3 class="font-retro-sub" style="font-size: 1.15rem; font-weight: 800; color: var(--retro-brown); margin: 0.65rem 0 0.25rem;">Paste Recipe URL</h3>
+                            <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">Paste any cooking blog, website, or YouTube link to parse clean ingredients and steps.</p>
                         </div>
 
-                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                            <input type="url" id="recipeUrlInput" placeholder="https://cooking.nytimes.com/recipes/..." style="width: 100%; background: rgba(250, 245, 237, 0.5); padding: 0.625rem 0.85rem; border-radius: 0.75rem; border: 1px solid var(--sage-200); font-size: 0.75rem; color: var(--sage-800); outline: none;">
-                            <button onclick="parseRecipeUrlWithGemini()" class="btn-sage" style="width: 100%;">
+                        <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+                            <input type="url" id="recipeUrlInput" placeholder="https://cooking.nytimes.com/recipes/..." style="width: 100%; background: var(--bg-card); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.75rem; color: var(--text-primary); outline: none; font-family: inherit;">
+                            <button onclick="parseRecipeUrlWithGemini()" class="btn-retro-avocado" style="width: 100%;">
                                 <i data-lucide="sparkles" style="width: 1rem; height: 1rem;"></i>
                                 <span>Parse Link Recipe</span>
                             </button>
@@ -373,123 +424,122 @@
                     </div>
                 </div>
 
-                <div id="parseStatusBanner" class="hidden" style="margin-top: 1rem; padding: 1rem; border-radius: 1rem; background: var(--sage-50); border: 1px solid var(--sage-100); display: flex; align-items: center; gap: 0.75rem;">
-                    <i data-lucide="refresh-cw" style="width: 1.25rem; height: 1.25rem; color: var(--sage-600); animation: spin 1s linear infinite;"></i>
+                <div id="parseStatusBanner" class="hidden" style="margin-top: 1.25rem; padding: 1.25rem; border-radius: 1rem; background: var(--bg-tint); border: 2px solid var(--border-primary); display: flex; align-items: center; gap: 0.85rem;">
+                    <i data-lucide="refresh-cw" style="width: 1.5rem; height: 1.5rem; color: var(--retro-orange); animation: spin 1s linear infinite;"></i>
                     <div style="flex-grow: 1;">
-                        <p id="parseStatusText" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800);">Reading image lines...</p>
-                        <div style="width: 100%; max-width: 16rem; height: 6px; background: var(--sage-100); border-radius: 9999px; margin-top: 0.35rem; overflow: hidden;">
-                            <div id="parseProgressBar" style="height: 100%; background: var(--sage-500); width: 0%; transition: width 0.3s ease;"></div>
+                        <p id="parseStatusText" style="font-size: 0.8rem; font-weight: 800; color: var(--retro-brown);">Transcribing card / screenshot...</p>
+                        <div style="width: 100%; max-width: 18rem; height: 8px; background: var(--bg-canvas); border-radius: 9999px; margin-top: 0.4rem; overflow: hidden; border: 1px solid var(--border-primary);">
+                            <div id="parseProgressBar" style="height: 100%; background: var(--retro-orange); width: 0%; transition: width 0.3s ease;"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- VIEW 3: KITCHEN PANTRY SCREEN -->
-            <div id="section-pantry" class="hidden" style="background: rgba(250, 245, 237, 0.65); border-radius: 1.5rem; padding: 1.5rem; border: 1px solid var(--sage-100);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+            <div id="section-pantry" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.75rem; border: 2px solid var(--border-primary);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                     <div>
-                        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--sage-800);">Kitchen Pantry Tracker</h2>
-                        <p style="font-size: 0.75rem; color: var(--sage-600); margin-top: 0.25rem;">Stocked ingredients auto-check on active cards.</p>
+                        <h2 class="font-retro-title" style="font-size: 1.75rem; color: var(--retro-orange);">Kitchen Pantry</h2>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Stocked ingredients auto-check on your recipe cards.</p>
                     </div>
-                    <button onclick="addPantryItemPrompt()" style="width: 2rem; height: 2rem; border-radius: 9999px; background: var(--sage-100); color: var(--sage-700); display: flex; align-items: center; justify-content: center;">
-                        <i data-lucide="plus" style="width: 1rem; height: 1rem;"></i>
+                    <button onclick="addPantryItemPrompt()" style="width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--retro-gold); color: var(--retro-brown); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                        <i data-lucide="plus" style="width: 1.25rem; height: 1.25rem;"></i>
                     </button>
                 </div>
                 <div id="pantryGrid" class="pantry-grid"></div>
             </div>
 
-            <!-- VIEW 4: RECIPE DETAIL CARD VIEW (WITH SUBSECTIONS, ZOOMABLE CARD & PRINT/EXPORT) -->
+            <!-- VIEW 4: RECIPE DETAIL CARD VIEW -->
             <div id="section-detail" class="hidden" style="display: flex; flex-direction: column; gap: 1rem;">
                 <div class="no-print" style="display: flex; justify-content: space-between; align-items: center;">
-                    <button onclick="navigate('feed')" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 700; color: var(--sage-700); background: transparent;">
-                        <i data-lucide="arrow-left" style="width: 1.1rem; height: 1.1rem;"></i>
+                    <button onclick="navigate('feed')" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; font-weight: 800; color: var(--retro-brown); background: transparent;">
+                        <i data-lucide="arrow-left" style="width: 1.15rem; height: 1.15rem;"></i>
                         <span>Back to Recipe Tin</span>
                     </button>
                     
-                    <!-- Print & Export Button -->
-                    <button onclick="window.print()" class="btn-sage" style="padding: 0.45rem 0.85rem; font-size: 0.7rem;">
-                        <i data-lucide="printer" style="width: 0.95rem; height: 0.95rem;"></i>
+                    <button onclick="window.print()" class="btn-retro-avocado" style="padding: 0.5rem 0.95rem; font-size: 0.75rem;">
+                        <i data-lucide="printer" style="width: 1rem; height: 1rem;"></i>
                         <span>Print 4x6 Index Card</span>
                     </button>
                 </div>
 
-                <div class="print-card-box" style="background: rgba(250, 245, 237, 0.45); border-radius: 1.5rem; padding: 1.5rem; border: 1px solid var(--sage-100); display: flex; flex-direction: column; gap: 1.25rem;">
+                <div class="print-card-box" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.75rem; border: 2px solid var(--border-primary); display: flex; flex-direction: column; gap: 1.5rem; box-shadow: 0 6px 20px rgba(82, 49, 32, 0.07);">
                     
-                    <!-- Original Image / Screenshot (Tap to Zoom) -->
-                    <div id="detailImageContainer" onclick="openLightbox()" style="position: relative; height: 16rem; width: 100%; border-radius: 1rem; overflow: hidden; background: var(--sage-700); cursor: pointer;">
+                    <!-- Original Image (Click to Expand in Lightbox) -->
+                    <div id="detailImageContainer" onclick="openLightbox()" style="position: relative; height: 17rem; width: 100%; border-radius: 1.25rem; overflow: hidden; background: var(--retro-brown); cursor: pointer; border: 2px solid var(--border-primary);">
                         <img id="detailImg" src="" style="width: 100%; height: 100%; object-fit: cover;">
-                        <div style="position: absolute; bottom: 0.75rem; right: 0.75rem; background: rgba(0,0,0,0.65); color: #fff; padding: 0.35rem 0.65rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 700; display: flex; align-items: center; gap: 0.35rem;">
-                            <i data-lucide="maximize-2" style="width: 0.85rem; height: 0.85rem;"></i>
-                            <span>Tap to view original card/screenshot</span>
+                        <div style="position: absolute; bottom: 0.85rem; right: 0.85rem; background: rgba(56, 32, 18, 0.85); color: #fff; padding: 0.4rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; gap: 0.4rem;">
+                            <i data-lucide="maximize-2" style="width: 0.9rem; height: 0.9rem;"></i>
+                            <span>Tap to view full-size card / screenshot</span>
                         </div>
                     </div>
 
                     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 1rem;">
                         <div>
-                            <span id="detailCategory" style="padding: 0.25rem 0.75rem; border-radius: 9999px; background: var(--sage-100); color: var(--sage-700); font-size: 0.625rem; font-weight: 700; text-transform: uppercase;">Sunday Bakes</span>
-                            <h2 id="detailTitle" style="font-size: 1.75rem; font-weight: 700; color: var(--terracotta-700); margin: 0.5rem 0 0.25rem; line-height: 1.2;"></h2>
-                            <p id="detailSource" style="font-size: 0.75rem; color: var(--sage-600); font-style: italic;"></p>
+                            <span id="detailCategory" style="padding: 0.3rem 0.85rem; border-radius: 9999px; background: var(--retro-gold); color: var(--retro-brown); font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;">Sunday Bakes</span>
+                            <h2 id="detailTitle" class="font-retro-title" style="font-size: 2rem; color: var(--retro-orange); margin: 0.65rem 0 0.25rem; line-height: 1.2;"></h2>
+                            <p id="detailSource" style="font-size: 0.75rem; color: var(--text-muted); font-style: italic;"></p>
                         </div>
 
                         <div class="no-print" style="display: flex; align-items: center; gap: 0.5rem;">
-                            <button id="detailBookmarkBtn" onclick="toggleDetailBookmark()" style="width: 2.5rem; height: 2.5rem; border-radius: 9999px; border: 1px solid var(--sage-200); background: var(--cream-50); display: flex; align-items: center; justify-content: center; color: var(--sage-600);">
-                                <i data-lucide="heart" style="width: 1.25rem; height: 1.25rem;"></i>
+                            <button id="detailBookmarkBtn" onclick="toggleDetailBookmark()" style="width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 2px solid var(--border-primary); background: var(--bg-card); display: flex; align-items: center; justify-content: center; color: var(--retro-orange);">
+                                <i data-lucide="heart" style="width: 1.35rem; height: 1.35rem;"></i>
                             </button>
-                            <button onclick="startCookMode()" class="btn-sage">
-                                <i data-lucide="flame" style="width: 1rem; height: 1rem;"></i>
+                            <button onclick="startCookMode()" class="btn-retro-orange">
+                                <i data-lucide="flame" style="width: 1.1rem; height: 1.1rem;"></i>
                                 <span>Start Cook Mode</span>
                             </button>
                         </div>
                     </div>
 
-                    <p id="detailDescription" class="parchment-texture" style="font-size: 0.85rem; color: var(--sage-700); font-style: italic; line-height: 1.5; padding: 1rem; border-radius: 0.75rem; border: 1px solid var(--sage-100);"></p>
+                    <p id="detailDescription" class="font-retro-sub" style="font-size: 0.9rem; color: var(--text-primary); font-style: italic; line-height: 1.6; padding: 1.15rem; border-radius: 1rem; border: 2px dashed var(--border-primary); background: var(--bg-tint);"></p>
 
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); padding: 0.75rem; background: rgba(253, 251, 247, 0.7); border-radius: 1rem; border: 1px solid var(--sage-100); text-align: center;">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); padding: 0.85rem; background: var(--bg-tint); border-radius: 1rem; border: 1.5px solid var(--border-primary); text-align: center;">
                         <div>
-                            <span style="display: block; font-size: 0.6rem; text-transform: uppercase; color: var(--sage-500); font-weight: 700;">Prep Time</span>
-                            <span id="detailPrepTime" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800);">15m</span>
+                            <span style="display: block; font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800;">Prep Time</span>
+                            <span id="detailPrepTime" style="font-size: 0.85rem; font-weight: 800; color: var(--retro-brown);">15m</span>
                         </div>
-                        <div style="border-left: 1px solid var(--sage-100); border-right: 1px solid var(--sage-100);">
-                            <span style="display: block; font-size: 0.6rem; text-transform: uppercase; color: var(--sage-500); font-weight: 700;">Cook Time</span>
-                            <span id="detailCookTime" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800);">30m</span>
+                        <div style="border-left: 1.5px solid var(--border-primary); border-right: 1.5px solid var(--border-primary);">
+                            <span style="display: block; font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800;">Cook Time</span>
+                            <span id="detailCookTime" style="font-size: 0.85rem; font-weight: 800; color: var(--retro-brown);">30m</span>
                         </div>
                         <div>
-                            <span style="display: block; font-size: 0.6rem; text-transform: uppercase; color: var(--sage-500); font-weight: 700;">Difficulty</span>
-                            <span id="detailDifficulty" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800);">Easy</span>
+                            <span style="display: block; font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800;">Difficulty</span>
+                            <span id="detailDifficulty" style="font-size: 0.85rem; font-weight: 800; color: var(--retro-brown);">Easy</span>
                         </div>
                     </div>
 
                     <!-- Ingredients & Preparation Grid -->
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.75rem;">
                         <div>
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-                                <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--sage-800);">Ingredients</h3>
-                                <div class="no-print" style="display: flex; align-items: center; gap: 0.5rem; background: var(--cream-50); padding: 0.35rem 0.65rem; border-radius: 9999px; border: 1px solid var(--sage-200);">
-                                    <button onclick="scaleServings(-1)" style="font-weight: 700; color: var(--sage-700); background: transparent; padding: 0 0.25rem;">-</button>
-                                    <span id="scaledServingsCount" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800); min-width: 1rem; text-align: center;">4</span>
-                                    <button onclick="scaleServings(1)" style="font-weight: 700; color: var(--sage-700); background: transparent; padding: 0 0.25rem;">+</button>
-                                    <span style="font-size: 0.6rem; color: var(--sage-500); text-transform: uppercase; font-weight: 700;">serv</span>
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.15rem;">
+                                <h3 class="font-retro-title" style="font-size: 1.35rem; color: var(--retro-brown);">Ingredients</h3>
+                                <div class="no-print" style="display: flex; align-items: center; gap: 0.5rem; background: var(--bg-tint); padding: 0.35rem 0.75rem; border-radius: 9999px; border: 1.5px solid var(--border-primary);">
+                                    <button onclick="scaleServings(-1)" style="font-weight: 800; color: var(--retro-brown); background: transparent; padding: 0 0.25rem;">-</button>
+                                    <span id="scaledServingsCount" style="font-size: 0.8rem; font-weight: 800; color: var(--retro-brown); min-width: 1rem; text-align: center;">4</span>
+                                    <button onclick="scaleServings(1)" style="font-weight: 800; color: var(--retro-brown); background: transparent; padding: 0 0.25rem;">+</button>
+                                    <span style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-weight: 800;">serv</span>
                                 </div>
                             </div>
-                            <ul id="detailIngredientsList" style="list-style: none; display: flex; flex-direction: column; gap: 0.65rem;"></ul>
+                            <ul id="detailIngredientsList" style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;"></ul>
                         </div>
 
                         <div>
-                            <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--sage-800); margin-bottom: 1rem;">Preparation</h3>
-                            <ol id="detailStepsList" style="list-style: none; display: flex; flex-direction: column; gap: 1rem;"></ol>
+                            <h3 class="font-retro-title" style="font-size: 1.35rem; color: var(--retro-brown); margin-bottom: 1.15rem;">Instructions</h3>
+                            <ol id="detailStepsList" style="list-style: none; display: flex; flex-direction: column; gap: 1.15rem;"></ol>
                         </div>
                     </div>
 
-                    <div id="detailSecretNoteContainer" class="hidden" style="padding: 1rem; border-radius: 1rem; background: rgba(249, 235, 231, 0.4); border: 1px solid rgba(242, 211, 202, 0.5);">
-                        <div style="display: flex; align-items: center; gap: 0.35rem; color: var(--terracotta-600); font-weight: 700; font-size: 0.75rem; text-transform: uppercase;">
-                            <i data-lucide="bookmark-check" style="width: 1rem; height: 1rem;"></i>
-                            <span>Grandparent's Secret Note</span>
+                    <div id="detailSecretNoteContainer" class="hidden" style="padding: 1.15rem; border-radius: 1rem; background: var(--bg-tint); border: 2px solid var(--border-primary);">
+                        <div style="display: flex; align-items: center; gap: 0.4rem; color: var(--retro-orange); font-weight: 800; font-size: 0.75rem; text-transform: uppercase;">
+                            <i data-lucide="bookmark-check" style="width: 1.1rem; height: 1.1rem;"></i>
+                            <span>Cookbook Marginalia / Notes</span>
                         </div>
-                        <p id="detailSecretNote" style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.75rem; color: var(--sage-800); margin-top: 0.35rem; line-height: 1.5;"></p>
+                        <p id="detailSecretNote" class="font-retro-sub" style="font-style: italic; font-size: 0.85rem; color: var(--text-primary); margin-top: 0.4rem; line-height: 1.5;"></p>
                     </div>
 
                     <div class="no-print" style="display: flex; justify-content: flex-end; padding-top: 0.5rem;">
-                        <button onclick="deleteRecipeDetail()" style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.5rem 0.85rem; border-radius: 9999px; border: 1px solid #FECACA; background: transparent; color: #DC2626; font-size: 0.75rem; font-weight: 700;">
+                        <button onclick="deleteRecipeDetail()" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 0.95rem; border-radius: 9999px; border: 1.5px solid #E57373; background: transparent; color: #C62828; font-size: 0.75rem; font-weight: 800;">
                             <i data-lucide="trash-2" style="width: 1rem; height: 1rem;"></i>
                             <span>Delete Recipe</span>
                         </button>
@@ -498,37 +548,37 @@
             </div>
 
             <!-- VIEW 5: AWAKE SCREEN COOK MODE -->
-            <div id="section-cook" class="hidden" style="background: var(--sage-700); color: #fff; border-radius: 1.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 1rem;">
+            <div id="section-cook" class="hidden" style="background: var(--retro-brown); color: #fff; border-radius: var(--radius-card); padding: 1.75rem; display: flex; flex-direction: column; gap: 1.5rem; border: 2px solid var(--border-primary);">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid rgba(255,255,255,0.15); padding-bottom: 1rem;">
                     <div>
-                        <h2 style="font-size: 1.25rem; font-weight: 700;">Cook Mode Active</h2>
-                        <p style="font-size: 0.65rem; color: var(--sage-200); text-transform: uppercase; font-weight: 700;">Keep-Screen-Awake Enabled</p>
+                        <h2 class="font-retro-title" style="font-size: 1.5rem; color: var(--retro-gold);">Cook Mode Active</h2>
+                        <p style="font-size: 0.65rem; color: var(--retro-tan); text-transform: uppercase; font-weight: 800;">Keep-Screen-Awake Enabled</p>
                     </div>
-                    <button onclick="exitCookMode()" style="padding: 0.35rem 0.75rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.25); background: transparent; color: #fff; font-size: 0.75rem;">Exit Cook Mode</button>
+                    <button onclick="exitCookMode()" style="padding: 0.4rem 0.85rem; border-radius: 9999px; border: 1.5px solid rgba(255,255,255,0.3); background: transparent; color: #fff; font-size: 0.75rem; font-weight: 700;">Exit Cook Mode</button>
                 </div>
 
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span id="cookStepHeader" style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.1em; color: var(--sage-200);">Step 1 of 3</span>
-                    <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(0,0,0,0.2); padding: 0.35rem 0.85rem; border-radius: 9999px;">
-                        <i data-lucide="timer" style="width: 1rem; height: 1rem; color: var(--terracotta-500);"></i>
-                        <span id="cookTimer" style="font-family: monospace; font-size: 0.75rem; font-weight: 700;">00:00</span>
-                        <button onclick="toggleCookTimer()" id="cookTimerControl" style="font-size: 0.65rem; text-transform: uppercase; font-weight: 700; color: var(--sage-200); background: transparent;">Start</button>
+                    <span id="cookStepHeader" style="font-size: 0.8rem; text-transform: uppercase; font-weight: 800; letter-spacing: 0.1em; color: var(--retro-gold);">Step 1 of 3</span>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(0,0,0,0.3); padding: 0.4rem 0.95rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.15);">
+                        <i data-lucide="timer" style="width: 1.1rem; height: 1.1rem; color: var(--retro-orange);"></i>
+                        <span id="cookTimer" style="font-family: monospace; font-size: 0.85rem; font-weight: 800;">00:00</span>
+                        <button onclick="toggleCookTimer()" id="cookTimerControl" style="font-size: 0.7rem; text-transform: uppercase; font-weight: 800; color: var(--retro-gold); background: transparent;">Start</button>
                     </div>
                 </div>
 
-                <div style="background: rgba(0,0,0,0.15); padding: 1.5rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.08);">
-                    <h3 id="cookStepTitle" style="font-size: 1.25rem; font-weight: 700; color: var(--terracotta-200); margin-bottom: 0.5rem;"></h3>
-                    <p id="cookStepInstruction" style="font-size: 0.95rem; line-height: 1.6; color: var(--sage-100);"></p>
+                <div style="background: rgba(0,0,0,0.25); padding: 1.75rem; border-radius: 1.25rem; border: 1.5px solid rgba(255,255,255,0.1);">
+                    <h3 id="cookStepTitle" class="font-retro-title" style="font-size: 1.5rem; color: var(--retro-gold); margin-bottom: 0.65rem;"></h3>
+                    <p id="cookStepInstruction" style="font-size: 1.05rem; line-height: 1.6; color: var(--retro-cream);"></p>
                 </div>
 
                 <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
-                    <button onclick="navigateCookStep(-1)" id="prevStepBtn" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem; border-radius: 9999px; background: rgba(0,0,0,0.25); color: #fff; font-size: 0.75rem; font-weight: 700;">
-                        <i data-lucide="chevron-left" style="width: 1rem; height: 1rem;"></i>
+                    <button onclick="navigateCookStep(-1)" id="prevStepBtn" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.85rem; border-radius: 9999px; background: rgba(0,0,0,0.35); color: #fff; font-size: 0.8rem; font-weight: 800;">
+                        <i data-lucide="chevron-left" style="width: 1.1rem; height: 1.1rem;"></i>
                         <span>Previous Step</span>
                     </button>
-                    <button onclick="navigateCookStep(1)" id="nextStepBtn" class="btn-terracotta" style="flex: 1; padding: 0.75rem;">
+                    <button onclick="navigateCookStep(1)" id="nextStepBtn" class="btn-retro-orange" style="flex: 1; padding: 0.85rem;">
                         <span>Next Step</span>
-                        <i data-lucide="chevron-right" style="width: 1rem; height: 1rem;"></i>
+                        <i data-lucide="chevron-right" style="width: 1.1rem; height: 1.1rem;"></i>
                     </button>
                 </div>
             </div>
@@ -542,63 +592,63 @@
     </div>
 
     <!-- Mobile Bottom Navigation Bar -->
-    <nav style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 40; background: rgba(253, 251, 247, 0.95); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-top: 1px solid var(--sage-100); padding: 0.65rem 1.5rem; display: flex; justify-content: space-around; align-items: center;" id="mobileNav">
-        <button onclick="navigate('feed')" class="mobile-nav-btn" id="mbtn-feed" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem; color: var(--sage-700); background: transparent;">
-            <i data-lucide="layout-grid" style="width: 1.25rem; height: 1.25rem; color: var(--terracotta-500);"></i>
-            <span style="font-size: 0.6rem; font-weight: 700;">Recipe Tin</span>
+    <nav style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 40; background: var(--bg-card); border-top: 2px solid var(--border-primary); padding: 0.65rem 1.5rem; display: flex; justify-content: space-around; align-items: center;" id="mobileNav">
+        <button onclick="navigate('feed')" class="mobile-nav-btn" id="mbtn-feed" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem; color: var(--retro-orange); background: transparent;">
+            <i data-lucide="layout-grid" style="width: 1.35rem; height: 1.35rem; color: var(--retro-orange);"></i>
+            <span style="font-size: 0.65rem; font-weight: 800;">Recipe Tin</span>
         </button>
-        <button onclick="navigate('import')" class="mobile-nav-btn" id="mbtn-import" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem; color: var(--sage-500); background: transparent;">
-            <i data-lucide="cloud-lightning" style="width: 1.25rem; height: 1.25rem;"></i>
-            <span style="font-size: 0.6rem; font-weight: 600;">Scan & Import</span>
+        <button onclick="navigate('import')" class="mobile-nav-btn" id="mbtn-import" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem; color: var(--text-muted); background: transparent;">
+            <i data-lucide="camera" style="width: 1.35rem; height: 1.35rem;"></i>
+            <span style="font-size: 0.65rem; font-weight: 700;">Scan & Import</span>
         </button>
-        <button onclick="navigate('pantry')" class="mobile-nav-btn" id="mbtn-pantry" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem; color: var(--sage-500); background: transparent;">
-            <i data-lucide="shopping-basket" style="width: 1.25rem; height: 1.25rem;"></i>
-            <span style="font-size: 0.6rem; font-weight: 600;">Pantry</span>
+        <button onclick="navigate('pantry')" class="mobile-nav-btn" id="mbtn-pantry" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem; color: var(--text-muted); background: transparent;">
+            <i data-lucide="shopping-basket" style="width: 1.35rem; height: 1.35rem;"></i>
+            <span style="font-size: 0.65rem; font-weight: 700;">Pantry</span>
         </button>
     </nav>
 
     <!-- Supabase Auth Modal -->
-    <div id="authModal" class="hidden" style="position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; padding: 1rem;">
-        <div style="background: var(--cream-50); max-width: 24rem; width: 100%; border-radius: 1.5rem; padding: 1.5rem; border: 1px solid var(--sage-100); position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);">
-            <button onclick="toggleAuthModal()" style="position: absolute; right: 1rem; top: 1rem; width: 1.75rem; height: 1.75rem; background: var(--cream-100); border-radius: 9999px; display: flex; align-items: center; justify-content: center; color: var(--sage-600);">
-                <i data-lucide="x" style="width: 1rem; height: 1rem;"></i>
+    <div id="authModal" class="hidden" style="position: fixed; inset: 0; z-index: 50; background: rgba(56, 32, 18, 0.7); display: flex; align-items: center; justify-content: center; padding: 1rem;">
+        <div style="background: var(--bg-card); max-width: 24rem; width: 100%; border-radius: var(--radius-card); padding: 1.75rem; border: 2px solid var(--border-primary); position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25);">
+            <button onclick="toggleAuthModal()" style="position: absolute; right: 1rem; top: 1rem; width: 2rem; height: 2rem; background: var(--bg-tint); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--retro-brown);">
+                <i data-lucide="x" style="width: 1.15rem; height: 1.15rem;"></i>
             </button>
 
-            <div style="text-align: center; margin-bottom: 1.25rem;">
-                <div style="width: 3rem; height: 3rem; background: var(--sage-100); color: var(--sage-700); border-radius: 9999px; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem;">
-                    <i data-lucide="book-open" style="width: 1.5rem; height: 1.5rem;"></i>
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <div style="width: 3.5rem; height: 3.5rem; background: var(--retro-gold); color: var(--retro-brown); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.65rem; box-shadow: 0 3px 6px rgba(0,0,0,0.1);">
+                    <i data-lucide="book-open" style="width: 1.75rem; height: 1.75rem;"></i>
                 </div>
-                <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--terracotta-700);">Between Stained Pages</h3>
-                <p id="authSubtitle" style="font-size: 0.75rem; color: var(--sage-600); margin-top: 0.25rem; line-height: 1.4;">Create a profile to synchronize recipes across devices.</p>
+                <h3 class="font-retro-title" style="font-size: 1.35rem; color: var(--retro-orange);">Between Stained Pages</h3>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4;">Synchronize your heirloom kitchen recipes across all family devices.</p>
             </div>
 
-            <div style="display: flex; border-radius: 9999px; background: var(--cream-100); padding: 0.25rem; margin-bottom: 1rem;">
-                <button onclick="setAuthMode('signUp')" id="authTabSignUp" style="flex: 1; padding: 0.35rem; font-size: 0.75rem; font-weight: 700; border-radius: 9999px; background: var(--sage-600); color: #fff;">Create Account</button>
-                <button onclick="setAuthMode('signIn')" id="authTabSignIn" style="flex: 1; padding: 0.35rem; font-size: 0.75rem; font-weight: 700; border-radius: 9999px; background: transparent; color: var(--sage-600);">Log In</button>
+            <div style="display: flex; border-radius: 9999px; background: var(--bg-tint); padding: 0.25rem; margin-bottom: 1.25rem; border: 1.5px solid var(--border-primary);">
+                <button onclick="setAuthMode('signUp')" id="authTabSignUp" style="flex: 1; padding: 0.45rem; font-size: 0.75rem; font-weight: 800; border-radius: 9999px; background: var(--retro-orange); color: #fff;">Create Account</button>
+                <button onclick="setAuthMode('signIn')" id="authTabSignIn" style="flex: 1; padding: 0.45rem; font-size: 0.75rem; font-weight: 800; border-radius: 9999px; background: transparent; color: var(--text-muted);">Log In</button>
             </div>
 
-            <div id="authError" class="hidden" style="margin-bottom: 1rem; padding: 0.75rem; border-radius: 0.75rem; background: #FEF2F2; border: 1px solid #FEE2E2; font-size: 0.7rem; color: #DC2626; display: flex; align-items: center; gap: 0.5rem;">
+            <div id="authError" class="hidden" style="margin-bottom: 1rem; padding: 0.75rem; border-radius: 0.75rem; background: #FFEBEE; border: 1.5px solid #FFCDD2; font-size: 0.75rem; color: #C62828; display: flex; align-items: center; gap: 0.5rem;">
                 <i data-lucide="alert-circle" style="width: 1rem; height: 1rem;"></i>
                 <span id="authErrorText">Invalid Credentials</span>
             </div>
 
-            <form id="authForm" style="display: flex; flex-direction: column; gap: 0.75rem;" onsubmit="handleAuthSubmit(event)">
-                <div id="authNameField" style="display: flex; flex-direction: column; gap: 0.25rem;">
-                    <label style="font-size: 0.625rem; font-weight: 700; text-transform: uppercase; color: var(--sage-600);">Your Cook Name</label>
-                    <input type="text" id="authName" placeholder="e.g., Grandma Clara" style="background: rgba(250, 245, 237, 0.5); padding: 0.625rem 0.85rem; border-radius: 0.75rem; border: 1px solid var(--sage-200); font-size: 0.75rem; color: var(--sage-800); outline: none;">
+            <form id="authForm" style="display: flex; flex-direction: column; gap: 0.85rem;" onsubmit="handleAuthSubmit(event)">
+                <div id="authNameField" style="display: flex; flex-direction: column; gap: 0.35rem;">
+                    <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Your Cook Name</label>
+                    <input type="text" id="authName" placeholder="e.g., Betty" style="background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; font-family: inherit;">
                 </div>
 
-                <div style="display: flex; flex-direction: column; gap: 0.25rem;">
-                    <label style="font-size: 0.625rem; font-weight: 700; text-transform: uppercase; color: var(--sage-600);">Email Address</label>
-                    <input type="email" id="authEmail" required placeholder="cook@stainedpages.app" style="background: rgba(250, 245, 237, 0.5); padding: 0.625rem 0.85rem; border-radius: 0.75rem; border: 1px solid var(--sage-200); font-size: 0.75rem; color: var(--sage-800); outline: none;">
+                <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+                    <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Email Address</label>
+                    <input type="email" id="authEmail" required placeholder="cook@stainedpages.app" style="background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; font-family: inherit;">
                 </div>
 
-                <div style="display: flex; flex-direction: column; gap: 0.25rem;">
-                    <label style="font-size: 0.625rem; font-weight: 700; text-transform: uppercase; color: var(--sage-600);">Password</label>
-                    <input type="password" id="authPassword" required placeholder="Min 6 characters" style="background: rgba(250, 245, 237, 0.5); padding: 0.625rem 0.85rem; border-radius: 0.75rem; border: 1px solid var(--sage-200); font-size: 0.75rem; color: var(--sage-800); outline: none;">
+                <div style="display: flex; flex-direction: column; gap: 0.35rem;">
+                    <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Password</label>
+                    <input type="password" id="authPassword" required placeholder="Min 6 characters" style="background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; font-family: inherit;">
                 </div>
 
-                <button type="submit" id="authSubmitBtn" class="btn-sage" style="width: 100%; padding: 0.75rem; margin-top: 0.5rem;">Create Account & Open Tin</button>
+                <button type="submit" id="authSubmitBtn" class="btn-retro-orange" style="width: 100%; padding: 0.85rem; margin-top: 0.5rem;">Create Account & Open Tin</button>
             </form>
         </div>
     </div>
@@ -611,7 +661,7 @@
         let supabase = null;
         let wakeLock = null;
 
-        const defaultBinders = ["All", "Desserts", "Mains", "Sunday Bakes"];
+        const defaultBinders = ["All", "Desserts", "Mains", "Sunday Bakes", "Appetizers"];
 
         let currentUserId = localStorage.getItem("currentUserId") || "demo-user";
         let userRecipes = JSON.parse(localStorage.getItem(`recipes_${currentUserId}`)) || [];
@@ -631,7 +681,7 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js').then((reg) => {
-                    console.log('Stained Pages Service Worker active for offline use:', reg.scope);
+                    console.log('Stained Pages Service Worker active:', reg.scope);
                 }).catch((err) => {
                     console.warn('Service Worker registration skipped:', err);
                 });
@@ -655,6 +705,31 @@
             }
         }
 
+        // Theme Toggle
+        function initTheme() {
+            const savedTheme = localStorage.getItem('user_theme') || 'retro';
+            if (savedTheme === 'clean') {
+                document.body.classList.add('theme-clean');
+                document.getElementById('themeToggleText').innerText = "Modern Clean";
+            } else {
+                document.body.classList.remove('theme-clean');
+                document.getElementById('themeToggleText').innerText = "70s Kitchen";
+            }
+        }
+
+        function toggleTheme() {
+            const isClean = document.body.classList.toggle('theme-clean');
+            if (isClean) {
+                localStorage.setItem('user_theme', 'clean');
+                document.getElementById('themeToggleText').innerText = "Modern Clean";
+            } else {
+                localStorage.setItem('user_theme', 'retro');
+                document.getElementById('themeToggleText').innerText = "70s Kitchen";
+            }
+            renderBinders();
+            renderRecipes();
+        }
+
         function initApp() {
             try {
                 if (window.supabase) {
@@ -671,6 +746,7 @@
                 if (badge) badge.style.display = 'flex';
             }
 
+            initTheme();
             renderBinders();
             updateAuthControls();
             updatePantryCounters();
@@ -717,23 +793,23 @@
 
             document.querySelectorAll('.sidebar-btn').forEach(btn => {
                 btn.style.background = 'transparent';
-                btn.style.color = 'var(--sage-600)';
-                btn.style.fontWeight = '600';
+                btn.style.color = 'var(--text-muted)';
+                btn.style.fontWeight = '700';
             });
             document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
-                btn.style.color = 'var(--sage-500)';
+                btn.style.color = 'var(--text-muted)';
             });
 
             const sideBtn = document.getElementById(`btn-${sectionId}`);
             const mobBtn = document.getElementById(`mbtn-${sectionId}`);
             
             if (sideBtn) {
-                sideBtn.style.background = 'var(--cream-200)';
-                sideBtn.style.color = 'var(--terracotta-600)';
-                sideBtn.style.fontWeight = '700';
+                sideBtn.style.background = 'var(--bg-tint)';
+                sideBtn.style.color = 'var(--retro-orange)';
+                sideBtn.style.fontWeight = '800';
             }
             if (mobBtn) {
-                mobBtn.style.color = 'var(--sage-700)';
+                mobBtn.style.color = 'var(--retro-orange)';
             }
 
             if (sectionId === 'feed') renderRecipes();
@@ -750,10 +826,10 @@
                 const isSelected = selectedCategory === cat;
                 const btn = document.createElement('button');
                 btn.className = "category-chip";
-                btn.style.cssText = `padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; white-space: nowrap; transition: all 0.15s ease; ${
+                btn.style.cssText = `padding: 0.4rem 1.1rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 800; white-space: nowrap; transition: all 0.15s ease; ${
                     isSelected 
-                        ? 'background: var(--sage-500); color: #fff; border: none;' 
-                        : 'background: var(--cream-50); color: var(--sage-600); border: 1px solid var(--sage-100);'
+                        ? 'background: var(--retro-orange); color: #fff; border: 1.5px solid var(--retro-orange); box-shadow: 0 3px 8px rgba(222,94,46,0.3);' 
+                        : 'background: var(--bg-tint); color: var(--text-primary); border: 1.5px solid var(--border-primary);'
                 }`;
                 btn.innerText = cat;
                 btn.onclick = () => setCategory(cat);
@@ -761,8 +837,8 @@
             });
 
             const addBtn = document.createElement('button');
-            addBtn.style.cssText = "padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; background: var(--sage-100); color: var(--sage-700); display: flex; align-items: center; gap: 0.35rem; white-space: nowrap;";
-            addBtn.innerHTML = `<i data-lucide="folder-plus" style="width: 0.9rem; height: 0.9rem;"></i><span>+ Binder</span>`;
+            addBtn.style.cssText = "padding: 0.4rem 0.95rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 800; background: var(--retro-gold); color: var(--retro-brown); display: flex; align-items: center; gap: 0.35rem; white-space: nowrap; border: 1.5px solid var(--border-primary);";
+            addBtn.innerHTML = `<i data-lucide="folder-plus" style="width: 0.95rem; height: 0.95rem;"></i><span>+ Binder</span>`;
             addBtn.onclick = addBinderPrompt;
             list.appendChild(addBtn);
 
@@ -770,7 +846,7 @@
         }
 
         function addBinderPrompt() {
-            const name = prompt("Enter new binder name (e.g., Sunday Bakes, Clara's Stews):");
+            const name = prompt("Enter new binder name (e.g., Fondue Nights, Casseroles):");
             if (name && name.trim()) {
                 const trimmed = name.trim();
                 if (!userBinders.includes(trimmed)) {
@@ -818,35 +894,37 @@
 
             filtered.forEach(recipe => {
                 const card = document.createElement('div');
-                card.style.cssText = "background: rgba(250, 245, 237, 0.5); border-radius: 1.5rem; padding: 1.15rem; border: 1px solid var(--sage-100); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; cursor: pointer;";
+                card.style.cssText = "background: var(--bg-card); border-radius: var(--radius-card); padding: 1.25rem; border: 2px solid var(--border-primary); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(82, 49, 32, 0.05); transition: transform 0.15s ease;";
+                card.onmouseover = () => { card.style.transform = "translateY(-2px)"; };
+                card.onmouseout = () => { card.style.transform = "translateY(0)"; };
                 card.onclick = () => viewRecipeDetail(recipe.id);
 
                 const count = (recipe.ingredients || []).length;
                 const pantryStatusText = count > 0 ? `${count} ingredients` : 'Recipe Card';
 
                 card.innerHTML = `
-                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                        <div style="height: 9rem; width: 100%; border-radius: 1rem; overflow: hidden; background: var(--sage-700); position: relative;">
+                    <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+                        <div style="height: 9.5rem; width: 100%; border-radius: 1.15rem; overflow: hidden; background: var(--retro-brown); position: relative; border: 1.5px solid var(--border-primary);">
                             ${recipe.image_url 
                                 ? `<img src="${recipe.image_url}" style="width: 100%; height: 100%; object-fit: cover;">`
-                                : `<div style="display: flex; height: 100%; align-items: center; justify-content: center; color: var(--sage-200); font-family: 'Playfair Display', serif; font-style: italic;">Preserved Recipe</div>`
+                                : `<div style="display: flex; height: 100%; align-items: center; justify-content: center; color: var(--retro-tan); font-family: var(--font-sub); font-style: italic;">Heirloom Recipe</div>`
                             }
-                            <span style="position: absolute; top: 0.625rem; left: 0.625rem; padding: 0.25rem 0.625rem; border-radius: 9999px; background: rgba(253, 251, 247, 0.92); color: var(--sage-700); font-size: 0.55rem; font-weight: 700; text-transform: uppercase;">${recipe.binder_category || 'Sunday Bakes'}</span>
-                            <button onclick="event.stopPropagation(); toggleBookmark('${recipe.id}')" style="position: absolute; top: 0.625rem; right: 0.625rem; width: 2rem; height: 2rem; border-radius: 9999px; background: rgba(253, 251, 247, 0.92); color: var(--terracotta-500); display: flex; align-items: center; justify-content: center;">
-                                <i data-lucide="heart" style="width: 1rem; height: 1rem; ${recipe.bookmarked ? 'fill: var(--terracotta-500);' : ''}"></i>
+                            <span style="position: absolute; top: 0.65rem; left: 0.65rem; padding: 0.3rem 0.75rem; border-radius: 9999px; background: rgba(255, 253, 249, 0.95); color: var(--retro-brown); font-size: 0.6rem; font-weight: 800; text-transform: uppercase; border: 1px solid var(--border-primary);">${recipe.binder_category || 'Sunday Bakes'}</span>
+                            <button onclick="event.stopPropagation(); toggleBookmark('${recipe.id}')" style="position: absolute; top: 0.65rem; right: 0.65rem; width: 2.15rem; height: 2.15rem; border-radius: 50%; background: rgba(255, 253, 249, 0.95); color: var(--retro-orange); display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-primary);">
+                                <i data-lucide="heart" style="width: 1.1rem; height: 1.1rem; ${recipe.bookmarked ? 'fill: var(--retro-orange);' : ''}"></i>
                             </button>
                         </div>
                         <div>
-                            <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--sage-800); line-height: 1.25;">${recipe.title}</h4>
-                            <p style="font-size: 0.7rem; color: var(--sage-600); font-style: italic; margin-top: 0.25rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${recipe.description || ''}</p>
+                            <h4 class="font-retro-title" style="font-size: 1.25rem; color: var(--retro-orange); line-height: 1.2;">${recipe.title}</h4>
+                            <p style="font-size: 0.75rem; color: var(--text-muted); font-style: italic; margin-top: 0.3rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${recipe.description || ''}</p>
                         </div>
                     </div>
-                    <div style="padding-top: 0.5rem; border-top: 1px solid rgba(138, 154, 134, 0.2); display: flex; align-items: center; justify-content: space-between; font-size: 0.65rem; color: var(--sage-500);">
-                        <div style="display: flex; align-items: center; gap: 0.25rem;">
-                            <i data-lucide="clock" style="width: 0.85rem; height: 0.85rem;"></i>
-                            <span style="font-weight: 700;">${recipe.cook_time || '30m'}</span>
+                    <div style="padding-top: 0.65rem; border-top: 1.5px dashed var(--border-primary); display: flex; align-items: center; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted);">
+                        <div style="display: flex; align-items: center; gap: 0.35rem;">
+                            <i data-lucide="clock" style="width: 0.95rem; height: 0.95rem; color: var(--retro-mustard);"></i>
+                            <span style="font-weight: 800; color: var(--retro-brown);">${recipe.cook_time || '30m'}</span>
                         </div>
-                        <span style="font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: var(--sage-100); color: var(--sage-700);">${pantryStatusText}</span>
+                        <span style="font-weight: 800; padding: 0.2rem 0.65rem; border-radius: 9999px; background: var(--bg-tint); color: var(--retro-olive); border: 1px solid var(--border-primary);">${pantryStatusText}</span>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -880,7 +958,7 @@
 
             document.getElementById('detailTitle').innerText = recipe.title;
             document.getElementById('detailCategory').innerText = recipe.binder_category || "Sunday Bakes";
-            document.getElementById('detailSource').innerText = recipe.source || "Preserved culinary card";
+            document.getElementById('detailSource').innerText = recipe.source || "Preserved vintage card";
             document.getElementById('detailDescription').innerText = recipe.description || "";
             document.getElementById('detailPrepTime').innerText = recipe.prep_time || "15m";
             document.getElementById('detailCookTime').innerText = recipe.cook_time || "30m";
@@ -898,8 +976,8 @@
 
             const bBtn = document.getElementById('detailBookmarkBtn');
             bBtn.innerHTML = recipe.bookmarked 
-                ? `<i data-lucide="heart" style="width: 1.25rem; height: 1.25rem; fill: var(--terracotta-500); color: var(--terracotta-500);"></i>`
-                : `<i data-lucide="heart" style="width: 1.25rem; height: 1.25rem; color: var(--sage-600);"></i>`;
+                ? `<i data-lucide="heart" style="width: 1.35rem; height: 1.35rem; fill: var(--retro-orange); color: var(--retro-orange);"></i>`
+                : `<i data-lucide="heart" style="width: 1.35rem; height: 1.35rem; color: var(--retro-orange);"></i>`;
 
             const secretContainer = document.getElementById('detailSecretNoteContainer');
             if (recipe.secret_note) {
@@ -923,7 +1001,7 @@
             document.getElementById('lightboxModal').classList.add('hidden');
         }
 
-        // RENDER INGREDIENTS WITH AUTOMATIC SUBSECTION GROUPING
+        // RENDER INGREDIENTS WITH AUTOMATIC 70s SUBSECTION GROUPING
         function renderDetailIngredientsAndSteps() {
             const ingList = document.getElementById('detailIngredientsList');
             ingList.innerHTML = '';
@@ -931,11 +1009,11 @@
             let currentSection = '';
 
             (activeRecipe.ingredients || []).forEach(ing => {
-                // If this ingredient belongs to a new section, add a bold sub-header
                 if (ing.section && ing.section !== currentSection && ing.section.toLowerCase() !== 'main') {
                     currentSection = ing.section;
                     const headerLi = document.createElement('li');
-                    headerLi.style.cssText = "font-family: 'Playfair Display', serif; font-weight: 700; color: var(--terracotta-700); font-size: 0.85rem; margin-top: 0.65rem; list-style: none;";
+                    headerLi.className = "font-retro-sub";
+                    headerLi.style.cssText = "font-weight: 800; color: var(--retro-orange); font-size: 0.95rem; margin-top: 0.85rem; list-style: none; padding-bottom: 0.25rem; border-bottom: 1.5px solid var(--border-primary);";
                     headerLi.innerText = currentSection.endsWith(':') ? currentSection : `${currentSection}:`;
                     ingList.appendChild(headerLi);
                 }
@@ -954,11 +1032,11 @@
 
                 const li = document.createElement('li');
                 li.className = "checklist-item";
-                li.style.cssText = "display: flex; align-items: flex-start; gap: 0.65rem; font-size: 0.75rem; color: var(--sage-800);";
+                li.style.cssText = "display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.8rem; color: var(--text-primary);";
                 li.innerHTML = `
-                    <label style="display: flex; align-items: flex-start; gap: 0.65rem; cursor: pointer;">
-                        <input type="checkbox" onchange="toggleDetailIngredientStock('${name}', this.checked)" style="margin-top: 0.15rem; width: 1.1rem; height: 1.1rem; accent-color: var(--terracotta-500);">
-                        <span>${fullText}</span>
+                    <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+                        <input type="checkbox" onchange="toggleDetailIngredientStock('${name}', this.checked)" style="margin-top: 0.15rem; width: 1.15rem; height: 1.15rem; accent-color: var(--retro-orange);">
+                        <span style="line-height: 1.4;">${fullText}</span>
                     </label>
                 `;
                 ingList.appendChild(li);
@@ -968,11 +1046,11 @@
             stepsList.innerHTML = '';
             (activeRecipe.steps || []).forEach((s, idx) => {
                 const li = document.createElement('li');
-                li.style.cssText = "display: flex; align-items: flex-start; gap: 0.85rem; font-size: 0.75rem; color: var(--sage-700); line-height: 1.6;";
+                li.style.cssText = "display: flex; align-items: flex-start; gap: 0.85rem; font-size: 0.8rem; color: var(--text-primary); line-height: 1.6;";
                 li.innerHTML = `
-                    <span style="width: 1.35rem; height: 1.35rem; border-radius: 9999px; background: var(--cream-200); color: var(--terracotta-600); font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.65rem; margin-top: 0.1rem;">${s.step_number || idx + 1}</span>
+                    <span style="width: 1.65rem; height: 1.65rem; border-radius: 50%; background: var(--retro-gold); color: var(--retro-brown); font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.75rem; border: 1.5px solid var(--border-primary);">${s.step_number || idx + 1}</span>
                     <div>
-                        <p style="font-family: 'Playfair Display', serif; font-weight: 700; color: var(--sage-800); font-size: 0.85rem;">${s.title || 'Step ' + (idx + 1)}</p>
+                        <p class="font-retro-sub" style="font-weight: 800; color: var(--retro-brown); font-size: 0.95rem; margin-bottom: 0.15rem;">${s.title || 'Step ' + (idx + 1)}</p>
                         <p>${s.instruction || ''}</p>
                     </div>
                 `;
@@ -997,8 +1075,8 @@
             
             const bBtn = document.getElementById('detailBookmarkBtn');
             bBtn.innerHTML = activeRecipe.bookmarked 
-                ? `<i data-lucide="heart" style="width: 1.25rem; height: 1.25rem; fill: var(--terracotta-500); color: var(--terracotta-500);"></i>`
-                : `<i data-lucide="heart" style="width: 1.25rem; height: 1.25rem; color: var(--sage-600);"></i>`;
+                ? `<i data-lucide="heart" style="width: 1.35rem; height: 1.35rem; fill: var(--retro-orange); color: var(--retro-orange);"></i>`
+                : `<i data-lucide="heart" style="width: 1.35rem; height: 1.35rem; color: var(--retro-orange);"></i>`;
             
             syncRecipeToSupabase(activeRecipe);
             refreshIcons();
@@ -1051,9 +1129,9 @@
 
             const nextBtn = document.getElementById('nextStepBtn');
             if (cookStepIndex === activeRecipe.steps.length - 1) {
-                nextBtn.innerHTML = `<span>Finish Cooking</span><i data-lucide="check" style="width: 1rem; height: 1rem;"></i>`;
+                nextBtn.innerHTML = `<span>Finish Cooking</span><i data-lucide="check" style="width: 1.1rem; height: 1.1rem;"></i>`;
             } else {
-                nextBtn.innerHTML = `<span>Next Step</span><i data-lucide="chevron-right" style="width: 1rem; height: 1rem;"></i>`;
+                nextBtn.innerHTML = `<span>Next Step</span><i data-lucide="chevron-right" style="width: 1.1rem; height: 1.1rem;"></i>`;
             }
             refreshIcons();
         }
@@ -1065,7 +1143,7 @@
                 renderCookModeStep();
             } else if (target === activeRecipe.steps.length) {
                 exitCookMode();
-                alert(`Finished! Enjoy your handcrafted treat.`);
+                alert(`Delicious! You finished cooking "${activeRecipe.title}".`);
             }
         }
 
@@ -1100,17 +1178,17 @@
 
             pantryItems.forEach(item => {
                 const chip = document.createElement('div');
-                chip.style.cssText = `padding: 1rem; border-radius: 1rem; border: 1px solid ${item.stocked ? 'var(--sage-500)' : 'var(--sage-200)'}; background: ${item.stocked ? 'rgba(228, 237, 227, 0.7)' : 'var(--cream-50)'}; display: flex; flex-direction: column; justify-content: space-between; gap: 0.75rem; cursor: pointer;`;
+                chip.style.cssText = `padding: 1.15rem; border-radius: 1.15rem; border: 2px solid ${item.stocked ? 'var(--retro-avocado)' : 'var(--border-primary)'}; background: ${item.stocked ? 'var(--bg-tint)' : 'var(--bg-card)'}; display: flex; flex-direction: column; justify-content: space-between; gap: 0.85rem; cursor: pointer; transition: all 0.15s ease;`;
                 chip.onclick = () => togglePantryItemStock(item.id);
                 
                 chip.innerHTML = `
                     <div style="display: flex; align-items: center; justify-content: space-between;">
-                        <span style="font-size: 0.75rem; font-weight: 700; color: ${item.stocked ? 'var(--sage-800)' : 'var(--sage-600)'};">${item.name}</span>
-                        <div style="width: 1.25rem; height: 1.25rem; border-radius: 9999px; background: ${item.stocked ? 'var(--sage-600)' : 'rgba(242, 232, 213, 0.5)'}; color: ${item.stocked ? '#fff' : 'var(--sage-400)'}; display: flex; align-items: center; justify-content: center;">
-                            <i data-lucide="check" style="width: 0.85rem; height: 0.85rem;"></i>
+                        <span style="font-size: 0.8rem; font-weight: 800; color: ${item.stocked ? 'var(--retro-brown)' : 'var(--text-muted)'};">${item.name}</span>
+                        <div style="width: 1.35rem; height: 1.35rem; border-radius: 50%; background: ${item.stocked ? 'var(--retro-avocado)' : 'transparent'}; border: 1.5px solid ${item.stocked ? 'var(--retro-avocado)' : 'var(--border-primary)'}; color: #fff; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="check" style="width: 0.95rem; height: 0.95rem; ${item.stocked ? '' : 'display:none;'}"></i>
                         </div>
                     </div>
-                    <span style="font-size: 0.55rem; text-transform: uppercase; font-weight: 600; opacity: 0.6; color: var(--sage-700);">${item.category}</span>
+                    <span style="font-size: 0.6rem; text-transform: uppercase; font-weight: 800; color: var(--retro-mustard);">${item.category}</span>
                 `;
                 grid.appendChild(chip);
             });
@@ -1128,7 +1206,7 @@
         }
 
         function addPantryItemPrompt() {
-            const name = prompt("Enter kitchen pantry item name:");
+            const name = prompt("Enter pantry item name (e.g. Greek yogurt, Pizza sauce):");
             if (name && name.trim()) {
                 pantryItems.push({ id: "p-" + Date.now(), name: name.trim(), category: "Pantry", stocked: true });
                 localStorage.setItem(`pantry_${currentUserId}`, JSON.stringify(pantryItems));
@@ -1165,7 +1243,7 @@
 
                 banner.classList.remove('hidden');
                 bar.style.width = '30%';
-                pText.innerText = "Transcribing handwritten card / screenshot...";
+                pText.innerText = "Transcribing card / screenshot...";
 
                 try {
                     bar.style.width = '65%';
@@ -1311,24 +1389,21 @@
             const tabSignIn = document.getElementById('authTabSignIn');
             const nameField = document.getElementById('authNameField');
             const submitBtn = document.getElementById('authSubmitBtn');
-            const subtitle = document.getElementById('authSubtitle');
 
             if (mode === 'signUp') {
-                tabSignUp.style.background = 'var(--sage-600)';
+                tabSignUp.style.background = 'var(--retro-orange)';
                 tabSignUp.style.color = '#fff';
                 tabSignIn.style.background = 'transparent';
-                tabSignIn.style.color = 'var(--sage-600)';
+                tabSignIn.style.color = 'var(--text-muted)';
                 nameField.classList.remove('hidden');
                 submitBtn.innerText = "Create Account & Open Tin";
-                subtitle.innerText = "Create a profile to synchronize recipes across devices.";
             } else {
                 tabSignUp.style.background = 'transparent';
-                tabSignUp.style.color = 'var(--sage-600)';
-                tabSignIn.style.background = 'var(--sage-600)';
+                tabSignUp.style.color = 'var(--text-muted)';
+                tabSignIn.style.background = 'var(--retro-orange)';
                 tabSignIn.style.color = '#fff';
                 nameField.classList.add('hidden');
                 submitBtn.innerText = "Log In to My Recipe Tin";
-                subtitle.innerText = "Welcome back! Sign in to synchronize your recipe tin across devices.";
             }
         }
 
