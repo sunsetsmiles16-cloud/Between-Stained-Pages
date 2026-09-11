@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,29 +6,28 @@
     
     <!-- PWA Primary Meta Tags -->
     <title>Between Stained Pages — Heirloom Recipe Tin</title>
-    <meta name="description" content="Cherished vintage culinary archive for scanning handwritten recipe cards, organizing beloved family cookbooks, and preserving timeless kitchen heritage.">
+    <meta name="description" content="Cherished vintage culinary archive for scanning handwritten recipe cards, phone screenshots, and preserving timeless kitchen heritage.">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="StainedPages">
-    <meta name="theme-color" content="#FDFBF7">
+    <meta name="theme-color" content="#5E6D5A">
     
-    <!-- PWA Icons & Splash Screen iOS -->
-    <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?auto=format&fit=crop&w=180&h=180&q=80">
-    <link rel="icon" type="image/png" href="https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?auto=format&fit=crop&w=32&h=32&q=80">
+    <!-- Standalone Cottagecore Vector App Icon (SVG Data URI) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%235E6D5A'/%3E%3Cpath d='M140 120h232a24 24 0 0 1 24 24v224a24 24 0 0 1-24 24H140a24 24 0 0 1-24-24V144a24 24 0 0 1 24-24z' fill='%23FDFBF7' opacity='0.95'/%3E%3Cpath d='M170 190h172M170 240h172M170 290h110' stroke='%23C97A63' stroke-width='16' stroke-linecap='round'/%3E%3Ccircle cx='340' cy='310' r='18' fill='%23758572'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%235E6D5A'/%3E%3Cpath d='M140 120h232a24 24 0 0 1 24 24v224a24 24 0 0 1-24 24H140a24 24 0 0 1-24-24V144a24 24 0 0 1 24-24z' fill='%23FDFBF7' opacity='0.95'/%3E%3Cpath d='M170 190h172M170 240h172M170 290h110' stroke='%23C97A63' stroke-width='16' stroke-linecap='round'/%3E%3Ccircle cx='340' cy='310' r='18' fill='%23758572'/%3E%3C/svg%3E">
     
-    <!-- Web Manifest (Self-Contained Data URI) -->
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkJldHdlZW4gU3RhaW5lZCBQYWdlcyIsCiAgInNob3J0X25hbWUiOiAiU3RhaW5lZFBhZ2VzIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNGREZCRjciLAogICJ0aGVtZV9jb2xvciI6ICIjRkRGQkY3IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9pbWFnZXMudW5zcGxhc2guY29tL3Bob3RvLTE1Njg1NzE3ODA3NjUtOTI3NmFjOGI3NWEyP2F1dG89Zm9ybWF0JmZpdD1jcm9wJnc9MTkyJmg9MTkyJnE9ODAiLAogICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNreWJsZSIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9pbWFnZXMudW5zcGxhc2guY29tL3Bob3RvLTE1Njg1NzE3ODA3NjUtOTI3NmFjOGI3NWEyP2F1dG89Zm9ybWF0JmZpdD1jcm9wJnc9NTEyJmg9NTEyJnE9ODAiLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0KICBdCn0=" />
+    <!-- Embedded Web App Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkJldHdlZW4gU3RhaW5lZCBQYWdlcyIsCiAgInNob3J0X25hbWUiOiAiU3RhaW5lZFBhZ2VzIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNGREZCRjciLAogICJ0aGVtZV9jb2xvciI6ICIjNUU2RDVBIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA1MTIgNTEyJyUzRSUzQ3JlY3Qgd2lkdGg9JzUxMicgaGVpZ2h0PSc1MTInIHJ4PScxMjgnIGZpbGw9JyUyMzVFNkQ1QScvJTNFJTNDcGF0aCBkPSdNMTQwIDEyMGgyMzJhMjQgMjQgMCAwIDEgMjQgMjR2MjI0YTI0IDI0IDAgMCAxLTI0IDI0SDE0MGEyNCAyNCAwIDAgMS0yNC0yNFYxNDRhMjQgMjQgMCAwIDEgMjQtMjR6JyBmaWxsPSclMjNGREZCRjcnIG9wYWNpdHk9JzAuOTUnLyUzRSUzQ3BhdGggZD0nTTE3MCAxOTBoMTcyTTE3MCAyNDBoMTcyTTE3MCAyOTBoMTEwJyBzdHJva2U9JyUyM0M5N0E2Mycgc3Ryb2tlLXdpZHRoPScxNicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8lM0UlM0NjaXJjbGUgY3g9JzM0MCcgY3k9JzMxMCcgcj0nMTgnIGZpbGw9JyUyMzc1ODU3MicvJTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNreWJsZSIKICAgIH0KICBdCn0=" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Supabase JS Client & Lucide Icons -->
+    <!-- Supabase JS & Lucide Icons -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="https://unpkg.com/lucide@latest" defer onload="if(window.lucide){lucide.createIcons();}"></script>
 
-    <!-- Embedded Pure CSS -->
     <style>
         :root {
             --cream-50: #FDFBF7;
@@ -49,11 +48,7 @@
             --text-dark: #3C3836;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -67,13 +62,9 @@
             padding-bottom: 5rem;
         }
 
-        @media (min-width: 768px) {
-            body { padding-bottom: 0; }
-        }
+        @media (min-width: 768px) { body { padding-bottom: 0; } }
 
-        h1, h2, h3, h4, .font-serif {
-            font-family: 'Playfair Display', Georgia, serif;
-        }
+        h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', Georgia, serif; }
 
         .max-container {
             max-width: 72rem;
@@ -108,17 +99,7 @@
             align-items: start;
         }
 
-        @media (min-width: 768px) {
-            main { grid-template-columns: 280px 1fr; }
-        }
-
-        .vintage-border { border: 1px solid rgba(138, 154, 134, 0.2); }
-        .parchment-texture {
-            background-image: radial-gradient(rgba(197, 180, 150, 0.18) 1px, transparent 0),
-                              radial-gradient(rgba(197, 180, 150, 0.18) 1px, transparent 0);
-            background-size: 8px 8px;
-            background-position: 0 0, 4px 4px;
-        }
+        @media (min-width: 768px) { main { grid-template-columns: 280px 1fr; } }
 
         button { font-family: inherit; cursor: pointer; border: none; }
         .btn-sage {
@@ -156,17 +137,20 @@
             grid-template-columns: 1fr;
             gap: 1.25rem;
         }
-        @media (min-width: 640px) {
-            .recipe-grid { grid-template-columns: repeat(2, 1fr); }
-        }
+        @media (min-width: 640px) { .recipe-grid { grid-template-columns: repeat(2, 1fr); } }
 
         .pantry-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 0.75rem;
         }
-        @media (min-width: 640px) {
-            .pantry-grid { grid-template-columns: repeat(3, 1fr); }
+        @media (min-width: 640px) { .pantry-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .parchment-texture {
+            background-image: radial-gradient(rgba(197, 180, 150, 0.18) 1px, transparent 0),
+                              radial-gradient(rgba(197, 180, 150, 0.18) 1px, transparent 0);
+            background-size: 8px 8px;
+            background-position: 0 0, 4px 4px;
         }
 
         .checklist-item input:checked + span {
@@ -188,23 +172,68 @@
         }
         @keyframes strikethrough { to { transform: scaleX(1); } }
 
-        @keyframes scan {
-            0% { top: 0%; opacity: 0.8; }
-            50% { top: 100%; opacity: 0.8; }
-            100% { top: 0%; opacity: 0.8; }
+        /* Lightbox Image Preview Modal */
+        #lightboxModal {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
         }
-        .scan-line { animation: scan 3s infinite linear; }
+        #lightboxModal img {
+            max-width: 95%;
+            max-height: 90vh;
+            border-radius: 0.75rem;
+            object-fit: contain;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
 
         .hidden { display: none !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Print / 4x6 Index Card Styling */
+        @media print {
+            header, aside, #mobileNav, .no-print, button, #section-feed, #section-import, #section-pantry, #section-cook {
+                display: none !important;
+            }
+            body {
+                background: #fff !important;
+                color: #000 !important;
+                padding: 0 !important;
+            }
+            main {
+                display: block !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+            #section-detail {
+                display: block !important;
+            }
+            .print-card-box {
+                border: 2px solid #5E6D5A !important;
+                border-radius: 12px !important;
+                padding: 20px !important;
+                page-break-inside: avoid;
+                background: #fff !important;
+                width: 6in !important;
+                min-height: 4in !important;
+                margin: 0 auto !important;
+            }
+            #detailImageContainer {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body>
 
     <!-- Header Navigation -->
     <header class="max-container">
-        <div style="display: flex; align-items: center; gap: 0.65rem;">
+        <div style="display: flex; align-items: center; gap: 0.65rem; cursor: pointer;" onclick="navigate('feed')">
             <div style="width: 2.5rem; height: 2.5rem; border-radius: 9999px; background: var(--sage-100); display: flex; align-items: center; justify-content: center; color: var(--sage-700);">
                 <i data-lucide="book-open" style="width: 1.35rem; height: 1.35rem;"></i>
             </div>
@@ -215,7 +244,7 @@
         </div>
         
         <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <button id="pantrySyncBadge" onclick="showSection('pantry')" style="display: none; align-items: center; gap: 0.35rem; padding: 0.35rem 0.75rem; border-radius: 9999px; background: var(--sage-100); color: var(--sage-700); font-size: 0.75rem; font-weight: 600;">
+            <button id="pantrySyncBadge" onclick="navigate('pantry')" style="display: none; align-items: center; gap: 0.35rem; padding: 0.35rem 0.75rem; border-radius: 9999px; background: var(--sage-100); color: var(--sage-700); font-size: 0.75rem; font-weight: 600;">
                 <i data-lucide="shopping-basket" style="width: 1rem; height: 1rem;"></i>
                 <span id="pantryCount">0</span> In Pantry
             </button>
@@ -227,22 +256,22 @@
         </div>
     </header>
 
-    <!-- Main App Content -->
+    <!-- Main Content Container -->
     <main class="max-container">
         
         <!-- Desktop Sidebar -->
         <aside style="background: rgba(250, 245, 237, 0.65); border-radius: 1.5rem; padding: 1.25rem; border: 1px solid var(--sage-100); display: none;" id="desktopSidebar">
             <p style="font-size: 0.75rem; font-weight: 700; color: var(--sage-500); text-transform: uppercase; letter-spacing: 0.1em; padding-left: 0.75rem; margin-bottom: 0.5rem;">My Cookbook</p>
             <nav style="display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1.5rem;">
-                <button onclick="showSection('feed')" class="sidebar-btn" id="btn-feed" style="width: 100%; display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.85rem; border-radius: 1rem; text-align: left; font-weight: 700; background: var(--cream-200); color: var(--terracotta-600);">
+                <button onclick="navigate('feed')" class="sidebar-btn" id="btn-feed" style="width: 100%; display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.85rem; border-radius: 1rem; text-align: left; font-weight: 700; background: var(--cream-200); color: var(--terracotta-600);">
                     <i data-lucide="layout-grid" style="width: 1.25rem; height: 1.25rem; color: var(--terracotta-500);"></i>
                     <span>Recipe Tin</span>
                 </button>
-                <button onclick="showSection('import')" class="sidebar-btn" id="btn-import" style="width: 100%; display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.85rem; border-radius: 1rem; text-align: left; font-weight: 600; background: transparent; color: var(--sage-600);">
+                <button onclick="navigate('import')" class="sidebar-btn" id="btn-import" style="width: 100%; display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.85rem; border-radius: 1rem; text-align: left; font-weight: 600; background: transparent; color: var(--sage-600);">
                     <i data-lucide="cloud-lightning" style="width: 1.25rem; height: 1.25rem;"></i>
                     <span>Scan & Import</span>
                 </button>
-                <button onclick="showSection('pantry')" class="sidebar-btn" id="btn-pantry" style="width: 100%; display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.85rem; border-radius: 1rem; text-align: left; font-weight: 600; background: transparent; color: var(--sage-600);">
+                <button onclick="navigate('pantry')" class="sidebar-btn" id="btn-pantry" style="width: 100%; display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.85rem; border-radius: 1rem; text-align: left; font-weight: 600; background: transparent; color: var(--sage-600);">
                     <i data-lucide="shopping-basket" style="width: 1.25rem; height: 1.25rem;"></i>
                     <span>Kitchen Pantry</span>
                 </button>
@@ -256,23 +285,32 @@
             </div>
         </aside>
 
-        <!-- Right Content Section -->
+        <!-- Main Dynamic Views -->
         <section style="display: flex; flex-direction: column; gap: 1.5rem;">
             
-            <!-- SECTION 1: RECIPE TIN FEED -->
+            <!-- VIEW 1: RECIPE TIN FEED -->
             <div id="section-feed" style="display: flex; flex-direction: column; gap: 1.5rem;">
-                <div style="background: rgba(250, 245, 237, 0.5); padding: 0.85rem; border-radius: 1.5rem; border: 1px solid var(--sage-100); display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: space-between;">
-                    <div style="position: relative; flex-grow: 1; min-width: 220px;">
+                
+                <!-- Sage Welcome Header -->
+                <div style="background: var(--sage-700); color: #fff; border-radius: 1.5rem; padding: 1.5rem 1.75rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 8px 20px -4px rgba(94, 109, 90, 0.25);">
+                    <div>
+                        <span style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--sage-200); font-weight: 700;">Welcome to your kitchen tin</span>
+                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #fff; margin-top: 0.25rem;">Let's get cooking!</h2>
+                    </div>
+                    <button onclick="navigate('import')" class="btn-terracotta" style="box-shadow: 0 4px 12px rgba(201, 122, 99, 0.35);">
+                        <i data-lucide="plus" style="width: 1rem; height: 1rem;"></i>
+                        <span>New Recipe</span>
+                    </button>
+                </div>
+
+                <!-- Search & Custom Binders Filter Bar -->
+                <div style="background: rgba(250, 245, 237, 0.5); padding: 0.85rem; border-radius: 1.5rem; border: 1px solid var(--sage-100); display: flex; flex-direction: column; gap: 0.75rem;">
+                    <div style="position: relative; width: 100%;">
                         <i data-lucide="search" style="position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); width: 1.1rem; height: 1.1rem; color: var(--sage-500);"></i>
                         <input type="text" id="recipeSearch" oninput="filterRecipes()" placeholder="Search recipes, ingredients, or notes..." style="width: 100%; background: var(--cream-50); padding: 0.5rem 1rem 0.5rem 2.5rem; border-radius: 1rem; font-size: 0.875rem; border: 1px solid var(--sage-200); color: var(--sage-800); outline: none;">
                     </div>
                     
-                    <div style="display: flex; align-items: center; gap: 0.5rem; overflow-x: auto;" class="no-scrollbar">
-                        <button onclick="setCategory('All')" class="category-chip" id="chip-All" style="padding: 0.35rem 1rem; border-radius: 9999px; background: var(--sage-500); color: #fff; font-size: 0.75rem; font-weight: 700; white-space: nowrap;">All Binders</button>
-                        <button onclick="setCategory('Desserts')" class="category-chip" id="chip-Desserts" style="padding: 0.35rem 1rem; border-radius: 9999px; background: var(--cream-50); color: var(--sage-600); font-size: 0.75rem; font-weight: 700; border: 1px solid var(--sage-100); white-space: nowrap;">Desserts</button>
-                        <button onclick="setCategory('Mains')" class="category-chip" id="chip-Mains" style="padding: 0.35rem 1rem; border-radius: 9999px; background: var(--cream-50); color: var(--sage-600); font-size: 0.75rem; font-weight: 700; border: 1px solid var(--sage-100); white-space: nowrap;">Mains</button>
-                        <button onclick="setCategory('Sunday Bakes')" class="category-chip" id="chip-SundayBakes" style="padding: 0.35rem 1rem; border-radius: 9999px; background: var(--cream-50); color: var(--sage-600); font-size: 0.75rem; font-weight: 700; border: 1px solid var(--sage-100); white-space: nowrap;">Sunday Bakes</button>
-                    </div>
+                    <div id="bindersList" style="display: flex; align-items: center; gap: 0.5rem; overflow-x: auto;" class="no-scrollbar"></div>
                 </div>
 
                 <div id="recipeGrid" class="recipe-grid"></div>
@@ -283,46 +321,46 @@
                     </div>
                     <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--sage-800); margin-bottom: 0.5rem;">Your recipe tin is empty!</h3>
                     <p style="font-size: 0.75rem; color: var(--sage-600); max-width: 24rem; margin: 0 auto 1.25rem; line-height: 1.5;">
-                        Upload photos of handwritten cards, paste recipe links, or sign in to synchronize your existing cloud recipes.
+                        Upload photos of handwritten cards, screenshots, or paste website links.
                     </p>
-                    <button onclick="showSection('import')" class="btn-sage">Add Your First Recipe</button>
+                    <button onclick="navigate('import')" class="btn-sage">Add Your First Recipe</button>
                 </div>
             </div>
 
-            <!-- SECTION 2: IMPORT & SCAN SCREEN -->
+            <!-- VIEW 2: IMPORT & SCAN SCREEN (HANDWRITTEN CARDS & SCREENSHOTS) -->
             <div id="section-import" class="hidden" style="background: rgba(250, 245, 237, 0.65); border-radius: 1.5rem; padding: 1.5rem; border: 1px solid var(--sage-100);">
                 <div style="margin-bottom: 1.25rem;">
                     <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--sage-800);">Import Loved Family Recipes</h2>
-                    <p style="font-size: 0.75rem; color: var(--sage-600); margin-top: 0.25rem;">Snap a photo of your handwritten cards or paste recipe website/video links directly.</p>
+                    <p style="font-size: 0.75rem; color: var(--sage-600); margin-top: 0.25rem;">Upload photos of physical cards, cookbook pages, or digital phone screenshots (TikTok, Instagram, Notes).</p>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
-                    <!-- Photo OCR -->
+                    <!-- Universal Photo / Screenshot OCR -->
                     <div style="background: var(--cream-50); border-radius: 1rem; padding: 1.25rem; border: 1px solid rgba(138, 154, 134, 0.25); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
                         <div>
-                            <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: var(--terracotta-100); color: var(--terracotta-600); font-size: 0.625rem; font-weight: 700; text-transform: uppercase;">Vision OCR</span>
-                            <h3 style="font-size: 1rem; font-weight: 700; color: var(--sage-800); margin: 0.5rem 0 0.25rem;">Scan Handwritten Card</h3>
-                            <p style="font-size: 0.7rem; color: var(--sage-600); line-height: 1.4;">Take a photo of an index card or cookbook page. The system will extract the title, ingredients, and steps automatically.</p>
+                            <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: var(--terracotta-100); color: var(--terracotta-600); font-size: 0.625rem; font-weight: 700; text-transform: uppercase;">Universal Vision OCR</span>
+                            <h3 style="font-size: 1rem; font-weight: 700; color: var(--sage-800); margin: 0.5rem 0 0.25rem;">Scan Card or Screenshot</h3>
+                            <p style="font-size: 0.7rem; color: var(--sage-600); line-height: 1.4;">Snap a photo of an index card or choose a screenshot from your photo roll. The image is preserved above your recipe card.</p>
                         </div>
 
                         <div id="scanPreviewArea" class="hidden" style="position: relative; height: 10rem; width: 100%; border-radius: 0.75rem; overflow: hidden; background: #000;">
                             <img id="scanPreviewImg" src="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6;">
-                            <div class="scan-line" style="position: absolute; left: 0; right: 0; height: 3px; background: var(--terracotta-500); box-shadow: 0 0 8px var(--terracotta-500);"></div>
+                            <div style="position: absolute; left: 0; right: 0; height: 3px; background: var(--terracotta-500); box-shadow: 0 0 8px var(--terracotta-500); top: 50%;"></div>
                         </div>
 
                         <label class="btn-sage" style="cursor: pointer; width: 100%;">
                             <i data-lucide="camera" style="width: 1rem; height: 1rem;"></i>
-                            <span>Upload Card Photo</span>
+                            <span>Upload Photo or Screenshot</span>
                             <input type="file" accept="image/*" class="hidden" onchange="runGeminiOCR(this)">
                         </label>
                     </div>
 
-                    <!-- Web URL / Video Link Parser -->
+                    <!-- Web URL Parser -->
                     <div style="background: var(--cream-50); border-radius: 1rem; padding: 1.25rem; border: 1px solid rgba(138, 154, 134, 0.25); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
                         <div>
-                            <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: var(--sage-100); color: var(--sage-700); font-size: 0.625rem; font-weight: 700; text-transform: uppercase;">Zero-Sponsor Extraction</span>
+                            <span style="padding: 0.25rem 0.5rem; border-radius: 9999px; background: var(--sage-100); color: var(--sage-700); font-size: 0.625rem; font-weight: 700; text-transform: uppercase;">Direct Web Link</span>
                             <h3 style="font-size: 1rem; font-weight: 700; color: var(--sage-800); margin: 0.5rem 0 0.25rem;">Paste Recipe URL</h3>
-                            <p style="font-size: 0.7rem; color: var(--sage-600); line-height: 1.4;">Paste any cooking blog, website, or YouTube link to extract clean, ad-free ingredients and steps.</p>
+                            <p style="font-size: 0.7rem; color: var(--sage-600); line-height: 1.4;">Paste any cooking blog, website, or YouTube link to parse clean ingredients and steps.</p>
                         </div>
 
                         <div style="display: flex; flex-direction: column; gap: 0.5rem;">
@@ -335,11 +373,10 @@
                     </div>
                 </div>
 
-                <!-- Progress Loading Bar -->
                 <div id="parseStatusBanner" class="hidden" style="margin-top: 1rem; padding: 1rem; border-radius: 1rem; background: var(--sage-50); border: 1px solid var(--sage-100); display: flex; align-items: center; gap: 0.75rem;">
                     <i data-lucide="refresh-cw" style="width: 1.25rem; height: 1.25rem; color: var(--sage-600); animation: spin 1s linear infinite;"></i>
                     <div style="flex-grow: 1;">
-                        <p id="parseStatusText" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800);">Reading handwritten ink...</p>
+                        <p id="parseStatusText" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800);">Reading image lines...</p>
                         <div style="width: 100%; max-width: 16rem; height: 6px; background: var(--sage-100); border-radius: 9999px; margin-top: 0.35rem; overflow: hidden;">
                             <div id="parseProgressBar" style="height: 100%; background: var(--sage-500); width: 0%; transition: width 0.3s ease;"></div>
                         </div>
@@ -347,12 +384,12 @@
                 </div>
             </div>
 
-            <!-- SECTION 3: KITCHEN PANTRY SCREEN -->
+            <!-- VIEW 3: KITCHEN PANTRY SCREEN -->
             <div id="section-pantry" class="hidden" style="background: rgba(250, 245, 237, 0.65); border-radius: 1.5rem; padding: 1.5rem; border: 1px solid var(--sage-100);">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
                     <div>
                         <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--sage-800);">Kitchen Pantry Tracker</h2>
-                        <p style="font-size: 0.75rem; color: var(--sage-600); margin-top: 0.25rem;">Toggle stocked ingredients to check off active recipe cards automatically.</p>
+                        <p style="font-size: 0.75rem; color: var(--sage-600); margin-top: 0.25rem;">Stocked ingredients auto-check on active cards.</p>
                     </div>
                     <button onclick="addPantryItemPrompt()" style="width: 2rem; height: 2rem; border-radius: 9999px; background: var(--sage-100); color: var(--sage-700); display: flex; align-items: center; justify-content: center;">
                         <i data-lucide="plus" style="width: 1rem; height: 1rem;"></i>
@@ -361,22 +398,40 @@
                 <div id="pantryGrid" class="pantry-grid"></div>
             </div>
 
-            <!-- SECTION 4: RECIPE DETAIL CARD VIEW -->
+            <!-- VIEW 4: RECIPE DETAIL CARD VIEW (WITH ZOOMABLE CARD & PRINT/EXPORT) -->
             <div id="section-detail" class="hidden" style="display: flex; flex-direction: column; gap: 1rem;">
-                <button onclick="showSection('feed')" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 700; color: var(--sage-700); background: transparent;">
-                    <i data-lucide="arrow-left" style="width: 1.1rem; height: 1.1rem;"></i>
-                    <span>Back to Recipe Tin</span>
-                </button>
+                <div class="no-print" style="display: flex; justify-content: space-between; align-items: center;">
+                    <button onclick="navigate('feed')" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 700; color: var(--sage-700); background: transparent;">
+                        <i data-lucide="arrow-left" style="width: 1.1rem; height: 1.1rem;"></i>
+                        <span>Back to Recipe Tin</span>
+                    </button>
+                    
+                    <!-- Print & Export Button -->
+                    <button onclick="window.print()" class="btn-sage" style="padding: 0.45rem 0.85rem; font-size: 0.7rem;">
+                        <i data-lucide="printer" style="width: 0.95rem; height: 0.95rem;"></i>
+                        <span>Print 4x6 Index Card</span>
+                    </button>
+                </div>
 
-                <div style="background: rgba(250, 245, 237, 0.45); border-radius: 1.5rem; padding: 1.5rem; border: 1px solid var(--sage-100); display: flex; flex-direction: column; gap: 1.25rem;">
+                <div class="print-card-box" style="background: rgba(250, 245, 237, 0.45); border-radius: 1.5rem; padding: 1.5rem; border: 1px solid var(--sage-100); display: flex; flex-direction: column; gap: 1.25rem;">
+                    
+                    <!-- Original Image / Screenshot (Tap to Zoom) -->
+                    <div id="detailImageContainer" onclick="openLightbox()" style="position: relative; height: 16rem; width: 100%; border-radius: 1rem; overflow: hidden; background: var(--sage-700); cursor: pointer;">
+                        <img id="detailImg" src="" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div style="position: absolute; bottom: 0.75rem; right: 0.75rem; background: rgba(0,0,0,0.65); color: #fff; padding: 0.35rem 0.65rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 700; display: flex; align-items: center; gap: 0.35rem;">
+                            <i data-lucide="maximize-2" style="width: 0.85rem; height: 0.85rem;"></i>
+                            <span>Tap to view original card/screenshot</span>
+                        </div>
+                    </div>
+
                     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 1rem;">
                         <div>
                             <span id="detailCategory" style="padding: 0.25rem 0.75rem; border-radius: 9999px; background: var(--sage-100); color: var(--sage-700); font-size: 0.625rem; font-weight: 700; text-transform: uppercase;">Sunday Bakes</span>
-                            <h2 id="detailTitle" style="font-size: 1.75rem; font-weight: 700; color: var(--terracotta-700); margin: 0.5rem 0 0.25rem; line-height: 1.2;">Grandma's Apple Cinnamon Cobbler</h2>
-                            <p id="detailSource" style="font-size: 0.75rem; color: var(--sage-600); font-style: italic;">Handwritten index card (1952)</p>
+                            <h2 id="detailTitle" style="font-size: 1.75rem; font-weight: 700; color: var(--terracotta-700); margin: 0.5rem 0 0.25rem; line-height: 1.2;"></h2>
+                            <p id="detailSource" style="font-size: 0.75rem; color: var(--sage-600); font-style: italic;"></p>
                         </div>
 
-                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <div class="no-print" style="display: flex; align-items: center; gap: 0.5rem;">
                             <button id="detailBookmarkBtn" onclick="toggleDetailBookmark()" style="width: 2.5rem; height: 2.5rem; border-radius: 9999px; border: 1px solid var(--sage-200); background: var(--cream-50); display: flex; align-items: center; justify-content: center; color: var(--sage-600);">
                                 <i data-lucide="heart" style="width: 1.25rem; height: 1.25rem;"></i>
                             </button>
@@ -387,34 +442,31 @@
                         </div>
                     </div>
 
-                    <div id="detailImageContainer" style="height: 14rem; width: 100%; border-radius: 1rem; overflow: hidden; background: var(--sage-100);">
-                        <img id="detailImg" src="" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-
                     <p id="detailDescription" class="parchment-texture" style="font-size: 0.85rem; color: var(--sage-700); font-style: italic; line-height: 1.5; padding: 1rem; border-radius: 0.75rem; border: 1px solid var(--sage-100);"></p>
 
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); padding: 0.75rem; background: rgba(253, 251, 247, 0.7); border-radius: 1rem; border: 1px solid var(--sage-100); text-align: center;">
                         <div>
                             <span style="display: block; font-size: 0.6rem; text-transform: uppercase; color: var(--sage-500); font-weight: 700;">Prep Time</span>
-                            <span id="detailPrepTime" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800);">25m</span>
+                            <span id="detailPrepTime" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800);">15m</span>
                         </div>
                         <div style="border-left: 1px solid var(--sage-100); border-right: 1px solid var(--sage-100);">
                             <span style="display: block; font-size: 0.6rem; text-transform: uppercase; color: var(--sage-500); font-weight: 700;">Cook Time</span>
-                            <span id="detailCookTime" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800);">45m</span>
+                            <span id="detailCookTime" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800);">30m</span>
                         </div>
                         <div>
                             <span style="display: block; font-size: 0.6rem; text-transform: uppercase; color: var(--sage-500); font-weight: 700;">Difficulty</span>
-                            <span id="detailDifficulty" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800);">Medium</span>
+                            <span id="detailDifficulty" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800);">Easy</span>
                         </div>
                     </div>
 
+                    <!-- Ingredients & Preparation Grid -->
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
                         <div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
                                 <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--sage-800);">Ingredients</h3>
-                                <div style="display: flex; align-items: center; gap: 0.5rem; background: var(--cream-50); padding: 0.35rem 0.65rem; border-radius: 9999px; border: 1px solid var(--sage-200);">
+                                <div class="no-print" style="display: flex; align-items: center; gap: 0.5rem; background: var(--cream-50); padding: 0.35rem 0.65rem; border-radius: 9999px; border: 1px solid var(--sage-200);">
                                     <button onclick="scaleServings(-1)" style="font-weight: 700; color: var(--sage-700); background: transparent; padding: 0 0.25rem;">-</button>
-                                    <span id="scaledServingsCount" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800); min-width: 1rem; text-align: center;">6</span>
+                                    <span id="scaledServingsCount" style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800); min-width: 1rem; text-align: center;">4</span>
                                     <button onclick="scaleServings(1)" style="font-weight: 700; color: var(--sage-700); background: transparent; padding: 0 0.25rem;">+</button>
                                     <span style="font-size: 0.6rem; color: var(--sage-500); text-transform: uppercase; font-weight: 700;">serv</span>
                                 </div>
@@ -436,7 +488,7 @@
                         <p id="detailSecretNote" style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.75rem; color: var(--sage-800); margin-top: 0.35rem; line-height: 1.5;"></p>
                     </div>
 
-                    <div style="display: flex; justify-content: flex-end; padding-top: 0.5rem;">
+                    <div class="no-print" style="display: flex; justify-content: flex-end; padding-top: 0.5rem;">
                         <button onclick="deleteRecipeDetail()" style="display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.5rem 0.85rem; border-radius: 9999px; border: 1px solid #FECACA; background: transparent; color: #DC2626; font-size: 0.75rem; font-weight: 700;">
                             <i data-lucide="trash-2" style="width: 1rem; height: 1rem;"></i>
                             <span>Delete Recipe</span>
@@ -445,12 +497,12 @@
                 </div>
             </div>
 
-            <!-- SECTION 5: AWAKE SCREEN COOK MODE -->
+            <!-- VIEW 5: AWAKE SCREEN COOK MODE -->
             <div id="section-cook" class="hidden" style="background: var(--sage-700); color: #fff; border-radius: 1.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 1rem;">
                     <div>
                         <h2 style="font-size: 1.25rem; font-weight: 700;">Cook Mode Active</h2>
-                        <p style="font-size: 0.65rem; color: var(--sage-200); text-transform: uppercase; font-weight: 700;">Keep-Screen-Awake & Active Tracking Enabled</p>
+                        <p style="font-size: 0.65rem; color: var(--sage-200); text-transform: uppercase; font-weight: 700;">Keep-Screen-Awake Enabled</p>
                     </div>
                     <button onclick="exitCookMode()" style="padding: 0.35rem 0.75rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.25); background: transparent; color: #fff; font-size: 0.75rem;">Exit Cook Mode</button>
                 </div>
@@ -465,7 +517,7 @@
                 </div>
 
                 <div style="background: rgba(0,0,0,0.15); padding: 1.5rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.08);">
-                    <h3 id="cookStepTitle" style="font-size: 1.25rem; font-weight: 700; color: var(--terracotta-200); margin-bottom: 0.5rem;">Prep Apples</h3>
+                    <h3 id="cookStepTitle" style="font-size: 1.25rem; font-weight: 700; color: var(--terracotta-200); margin-bottom: 0.5rem;"></h3>
                     <p id="cookStepInstruction" style="font-size: 0.95rem; line-height: 1.6; color: var(--sage-100);"></p>
                 </div>
 
@@ -484,23 +536,28 @@
         </section>
     </main>
 
+    <!-- Lightbox Modal for High-Resolution Card View -->
+    <div id="lightboxModal" class="hidden" onclick="closeLightbox()">
+        <img id="lightboxImg" src="" onclick="event.stopPropagation()">
+    </div>
+
     <!-- Mobile Bottom Navigation Bar -->
     <nav style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 40; background: rgba(253, 251, 247, 0.95); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-top: 1px solid var(--sage-100); padding: 0.65rem 1.5rem; display: flex; justify-content: space-around; align-items: center;" id="mobileNav">
-        <button onclick="showSection('feed')" class="mobile-nav-btn" id="mbtn-feed" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem; color: var(--sage-700); background: transparent;">
+        <button onclick="navigate('feed')" class="mobile-nav-btn" id="mbtn-feed" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem; color: var(--sage-700); background: transparent;">
             <i data-lucide="layout-grid" style="width: 1.25rem; height: 1.25rem; color: var(--terracotta-500);"></i>
             <span style="font-size: 0.6rem; font-weight: 700;">Recipe Tin</span>
         </button>
-        <button onclick="showSection('import')" class="mobile-nav-btn" id="mbtn-import" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem; color: var(--sage-500); background: transparent;">
+        <button onclick="navigate('import')" class="mobile-nav-btn" id="mbtn-import" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem; color: var(--sage-500); background: transparent;">
             <i data-lucide="cloud-lightning" style="width: 1.25rem; height: 1.25rem;"></i>
             <span style="font-size: 0.6rem; font-weight: 600;">Scan & Import</span>
         </button>
-        <button onclick="showSection('pantry')" class="mobile-nav-btn" id="mbtn-pantry" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem; color: var(--sage-500); background: transparent;">
+        <button onclick="navigate('pantry')" class="mobile-nav-btn" id="mbtn-pantry" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem; color: var(--sage-500); background: transparent;">
             <i data-lucide="shopping-basket" style="width: 1.25rem; height: 1.25rem;"></i>
             <span style="font-size: 0.6rem; font-weight: 600;">Pantry</span>
         </button>
     </nav>
 
-    <!-- Auth Modal -->
+    <!-- Supabase Auth Modal -->
     <div id="authModal" class="hidden" style="position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; padding: 1rem;">
         <div style="background: var(--cream-50); max-width: 24rem; width: 100%; border-radius: 1.5rem; padding: 1.5rem; border: 1px solid var(--sage-100); position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);">
             <button onclick="toggleAuthModal()" style="position: absolute; right: 1rem; top: 1rem; width: 1.75rem; height: 1.75rem; background: var(--cream-100); border-radius: 9999px; display: flex; align-items: center; justify-content: center; color: var(--sage-600);">
@@ -512,7 +569,7 @@
                     <i data-lucide="book-open" style="width: 1.5rem; height: 1.5rem;"></i>
                 </div>
                 <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--terracotta-700);">Between Stained Pages</h3>
-                <p id="authSubtitle" style="font-size: 0.75rem; color: var(--sage-600); margin-top: 0.25rem; line-height: 1.4;">Create a culinary profile to synchronize your kitchen recipes across devices.</p>
+                <p id="authSubtitle" style="font-size: 0.75rem; color: var(--sage-600); margin-top: 0.25rem; line-height: 1.4;">Create a profile to synchronize recipes across devices.</p>
             </div>
 
             <div style="display: flex; border-radius: 9999px; background: var(--cream-100); padding: 0.25rem; margin-bottom: 1rem;">
@@ -543,14 +600,6 @@
 
                 <button type="submit" id="authSubmitBtn" class="btn-sage" style="width: 100%; padding: 0.75rem; margin-top: 0.5rem;">Create Account & Open Tin</button>
             </form>
-
-            <div onclick="quickDemoFill()" style="cursor: pointer; border: 1px solid rgba(138, 154, 134, 0.3); padding: 0.75rem; border-radius: 1rem; display: flex; align-items: center; gap: 0.75rem; margin-top: 1rem;">
-                <i data-lucide="cloud-download" style="width: 1.25rem; height: 1.25rem; color: var(--sage-600);"></i>
-                <div>
-                    <p style="font-size: 0.75rem; font-weight: 700; color: var(--sage-800);">Reviewer Quick-Access (Eleanor Vance)</p>
-                    <p style="font-size: 0.625rem; color: var(--sage-500);">Click to pre-fill active credentials instantly</p>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -562,71 +611,11 @@
         let supabase = null;
         let wakeLock = null;
 
-        const demoRecipes = [
-            {
-                id: "rec-demo-1",
-                title: "Grandma's Apple Cinnamon Cobbler",
-                source: "Handwritten index card (1952)",
-                source_type: "VINTAGE_SCAN",
-                description: "Warm bubbling honeycrisp apples baked under a golden butter biscuit crust. Best served with homemade bourbon vanilla ice cream.",
-                image_url: "https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?auto=format&fit=crop&w=600&q=80",
-                prep_time: "25m",
-                cook_time: "45m",
-                difficulty: "Medium",
-                binder_category: "Desserts",
-                servings: 6,
-                ingredients: [
-                    { id: "i1", name: "Honeycrisp apples, peeled & sliced", note: "6 large", quantity: 6 },
-                    { id: "i2", name: "All-purpose flour", note: "2 cups", quantity: 2 },
-                    { id: "i3", name: "Brown sugar", note: "1/2 cup", quantity: 0.5 },
-                    { id: "i4", name: "Ceylon cinnamon", note: "1 tsp", quantity: 1 }
-                ],
-                steps: [
-                    { step_number: 1, title: "Prep Apples", instruction: "Toss sliced apples with brown sugar and cinnamon in stoneware bowl." },
-                    { step_number: 2, title: "Biscuit Batter", instruction: "Cut cold butter into flour until pea-sized crumbs form." },
-                    { step_number: 3, title: "Bake to Golden", instruction: "Drop spoonfuls of dough over apples and bake at 375F until bubbly." }
-                ],
-                secret_note: "Grandma Clara always used a pinch of freshly grated nutmeg.",
-                bookmarked: true
-            },
-            {
-                id: "rec-demo-2",
-                title: "Aunt Clara's Lemon Meringue",
-                source: "Family Kitchen Binder",
-                source_type: "FAMILY_NOTE",
-                description: "Tangy Meyer lemon curd crowned with toasted peaks of cloud-soft meringue.",
-                image_url: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&w=600&q=80",
-                prep_time: "30m",
-                cook_time: "20m",
-                difficulty: "Advanced",
-                binder_category: "Sunday Bakes",
-                servings: 8,
-                ingredients: [
-                    { id: "i5", name: "Fresh Meyer lemons, juiced & zested", note: "4 lemons", quantity: 4 },
-                    { id: "i6", name: "Granulated sugar", note: "1 cup", quantity: 1 },
-                    { id: "i7", name: "Egg yolks & whites separated", note: "4", quantity: 4 }
-                ],
-                steps: [
-                    { step_number: 1, title: "Lemon Curd", instruction: "Whisk lemon juice, zest, sugar, and egg yolks over low heat until thickened." },
-                    { step_number: 2, title: "Meringue Peaks", instruction: "Whip egg whites to stiff peaks, spread over warm filling." }
-                ],
-                secret_note: "Add a pinch of cream of tartar to stabilize meringue.",
-                bookmarked: false
-            }
-        ];
-
-        const defaultPantry = [
-            { id: "p1", name: "Apples", category: "Produce", stocked: true },
-            { id: "p2", name: "All-purpose flour", category: "Baking", stocked: true },
-            { id: "p3", name: "Brown sugar", category: "Baking", stocked: true },
-            { id: "p4", name: "Ceylon cinnamon", category: "Spices", stocked: true },
-            { id: "p5", name: "Fresh Meyer lemons", category: "Produce", stocked: false },
-            { id: "p6", name: "Granulated sugar", category: "Baking", stocked: true },
-            { id: "p7", name: "Egg yolks & whites", category: "Dairy", stocked: true }
-        ];
+        const defaultBinders = ["All", "Desserts", "Mains", "Sunday Bakes"];
 
         let currentUserId = localStorage.getItem("currentUserId") || "demo-user";
         let userRecipes = JSON.parse(localStorage.getItem(`recipes_${currentUserId}`)) || [];
+        let userBinders = JSON.parse(localStorage.getItem(`binders_${currentUserId}`)) || defaultBinders;
         let pantryItems = JSON.parse(localStorage.getItem(`pantry_${currentUserId}`)) || [];
         let selectedCategory = "All";
         let activeRecipe = null;
@@ -638,7 +627,18 @@
         let cookTimerInterval = null;
         let cookSecondsElapsed = 0;
 
-        // Wake Lock
+        // Register Service Worker for Offline Caching
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then((reg) => {
+                    console.log('Stained Pages Service Worker active for offline use:', reg.scope);
+                }).catch((err) => {
+                    console.warn('Service Worker registration skipped:', err);
+                });
+            });
+        }
+
+        // Screen Wake Lock
         async function enableWakeLock() {
             try {
                 if ('wakeLock' in navigator) {
@@ -671,18 +671,12 @@
                 if (badge) badge.style.display = 'flex';
             }
 
-            if (userRecipes.length === 0 && currentUserId === "demo-user") {
-                userRecipes = [...demoRecipes];
-                localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
-            }
-            if (pantryItems.length === 0 && currentUserId === "demo-user") {
-                pantryItems = [...defaultPantry];
-                localStorage.setItem(`pantry_${currentUserId}`, JSON.stringify(pantryItems));
-            }
-
+            renderBinders();
             updateAuthControls();
-            showSection('feed');
             updatePantryCounters();
+
+            handleHashChange();
+            window.addEventListener('hashchange', handleHashChange);
             refreshIcons();
         }
 
@@ -696,7 +690,23 @@
             }
         }
 
-        function showSection(sectionId) {
+        function navigate(route) {
+            window.location.hash = route;
+        }
+
+        function handleHashChange() {
+            const hash = window.location.hash.replace('#', '') || 'feed';
+            if (hash.startsWith('detail=')) {
+                const id = hash.split('=')[1];
+                viewRecipeDetail(id, false);
+                return;
+            }
+            showSection(hash, false);
+        }
+
+        function showSection(sectionId, updateHash = true) {
+            if (updateHash) window.location.hash = sectionId;
+
             ['feed', 'import', 'pantry', 'detail', 'cook'].forEach(sec => {
                 const el = document.getElementById(`section-${sec}`);
                 if (el) el.classList.add('hidden');
@@ -731,6 +741,58 @@
             refreshIcons();
         }
 
+        // BINDERS
+        function renderBinders() {
+            const list = document.getElementById('bindersList');
+            list.innerHTML = '';
+
+            userBinders.forEach(cat => {
+                const isSelected = selectedCategory === cat;
+                const btn = document.createElement('button');
+                btn.className = "category-chip";
+                btn.style.cssText = `padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; white-space: nowrap; transition: all 0.15s ease; ${
+                    isSelected 
+                        ? 'background: var(--sage-500); color: #fff; border: none;' 
+                        : 'background: var(--cream-50); color: var(--sage-600); border: 1px solid var(--sage-100);'
+                }`;
+                btn.innerText = cat;
+                btn.onclick = () => setCategory(cat);
+                list.appendChild(btn);
+            });
+
+            const addBtn = document.createElement('button');
+            addBtn.style.cssText = "padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; background: var(--sage-100); color: var(--sage-700); display: flex; align-items: center; gap: 0.35rem; white-space: nowrap;";
+            addBtn.innerHTML = `<i data-lucide="folder-plus" style="width: 0.9rem; height: 0.9rem;"></i><span>+ Binder</span>`;
+            addBtn.onclick = addBinderPrompt;
+            list.appendChild(addBtn);
+
+            refreshIcons();
+        }
+
+        function addBinderPrompt() {
+            const name = prompt("Enter new binder name (e.g., Sunday Bakes, Clara's Stews):");
+            if (name && name.trim()) {
+                const trimmed = name.trim();
+                if (!userBinders.includes(trimmed)) {
+                    userBinders.push(trimmed);
+                    localStorage.setItem(`binders_${currentUserId}`, JSON.stringify(userBinders));
+                    selectedCategory = trimmed;
+                    renderBinders();
+                    renderRecipes();
+                }
+            }
+        }
+
+        function setCategory(cat) {
+            selectedCategory = cat;
+            renderBinders();
+            renderRecipes();
+        }
+
+        function filterRecipes() {
+            renderRecipes();
+        }
+
         function renderRecipes() {
             const grid = document.getElementById('recipeGrid');
             const empty = document.getElementById('emptyState');
@@ -739,8 +801,8 @@
             const search = (document.getElementById('recipeSearch')?.value || '').toLowerCase();
             const filtered = userRecipes.filter(recipe => {
                 const matchesSearch = recipe.title.toLowerCase().includes(search) || 
-                                      recipe.description.toLowerCase().includes(search) ||
-                                      recipe.binder_category.toLowerCase().includes(search);
+                                      (recipe.description || '').toLowerCase().includes(search) ||
+                                      (recipe.binder_category || '').toLowerCase().includes(search);
                 const matchesCategory = selectedCategory === "All" || recipe.binder_category === selectedCategory;
                 return matchesSearch && matchesCategory;
             });
@@ -759,30 +821,30 @@
                 card.style.cssText = "background: rgba(250, 245, 237, 0.5); border-radius: 1.5rem; padding: 1.15rem; border: 1px solid var(--sage-100); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; cursor: pointer;";
                 card.onclick = () => viewRecipeDetail(recipe.id);
 
-                const ingredientsInStock = recipe.ingredients.filter(ing => {
-                    const item = pantryItems.find(p => p.name.toLowerCase().includes(ing.name.toLowerCase()) || ing.name.toLowerCase().includes(p.name.toLowerCase()));
-                    return item && item.stocked;
-                });
-                const pantryStatusText = ingredientsInStock.length === recipe.ingredients.length ? "All ingredients stocked" : `${ingredientsInStock.length}/${recipe.ingredients.length} items in pantry`;
+                const count = (recipe.ingredients || []).length;
+                const pantryStatusText = count > 0 ? `${count} ingredients` : 'Recipe Card';
 
                 card.innerHTML = `
                     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                        <div style="height: 8rem; width: 100%; border-radius: 1rem; overflow: hidden; background: var(--sage-100); position: relative;">
-                            <img src="${recipe.image_url || 'https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?auto=format&fit=crop&w=300&q=80'}" style="width: 100%; height: 100%; object-fit: cover;">
-                            <span style="position: absolute; top: 0.625rem; left: 0.625rem; padding: 0.25rem 0.625rem; border-radius: 9999px; background: rgba(253, 251, 247, 0.9); color: var(--sage-700); font-size: 0.55rem; font-weight: 700; text-transform: uppercase;">${recipe.binder_category}</span>
-                            <button onclick="event.stopPropagation(); toggleBookmark('${recipe.id}')" style="position: absolute; top: 0.625rem; right: 0.625rem; width: 2rem; height: 2rem; border-radius: 9999px; background: rgba(253, 251, 247, 0.9); color: var(--terracotta-500); display: flex; align-items: center; justify-content: center;">
+                        <div style="height: 9rem; width: 100%; border-radius: 1rem; overflow: hidden; background: var(--sage-700); position: relative;">
+                            ${recipe.image_url 
+                                ? `<img src="${recipe.image_url}" style="width: 100%; height: 100%; object-fit: cover;">`
+                                : `<div style="display: flex; height: 100%; align-items: center; justify-content: center; color: var(--sage-200); font-family: 'Playfair Display', serif; font-style: italic;">Preserved Recipe</div>`
+                            }
+                            <span style="position: absolute; top: 0.625rem; left: 0.625rem; padding: 0.25rem 0.625rem; border-radius: 9999px; background: rgba(253, 251, 247, 0.92); color: var(--sage-700); font-size: 0.55rem; font-weight: 700; text-transform: uppercase;">${recipe.binder_category || 'Sunday Bakes'}</span>
+                            <button onclick="event.stopPropagation(); toggleBookmark('${recipe.id}')" style="position: absolute; top: 0.625rem; right: 0.625rem; width: 2rem; height: 2rem; border-radius: 9999px; background: rgba(253, 251, 247, 0.92); color: var(--terracotta-500); display: flex; align-items: center; justify-content: center;">
                                 <i data-lucide="heart" style="width: 1rem; height: 1rem; ${recipe.bookmarked ? 'fill: var(--terracotta-500);' : ''}"></i>
                             </button>
                         </div>
                         <div>
-                            <h4 style="font-size: 1rem; font-weight: 700; color: var(--sage-800); line-height: 1.25;">${recipe.title}</h4>
-                            <p style="font-size: 0.7rem; color: var(--sage-600); font-style: italic; margin-top: 0.25rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${recipe.description}</p>
+                            <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--sage-800); line-height: 1.25;">${recipe.title}</h4>
+                            <p style="font-size: 0.7rem; color: var(--sage-600); font-style: italic; margin-top: 0.25rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${recipe.description || ''}</p>
                         </div>
                     </div>
                     <div style="padding-top: 0.5rem; border-top: 1px solid rgba(138, 154, 134, 0.2); display: flex; align-items: center; justify-content: space-between; font-size: 0.65rem; color: var(--sage-500);">
                         <div style="display: flex; align-items: center; gap: 0.25rem;">
                             <i data-lucide="clock" style="width: 0.85rem; height: 0.85rem;"></i>
-                            <span style="font-weight: 700;">${recipe.cook_time}</span>
+                            <span style="font-weight: 700;">${recipe.cook_time || '30m'}</span>
                         </div>
                         <span style="font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 0.25rem; background: var(--sage-100); color: var(--sage-700);">${pantryStatusText}</span>
                     </div>
@@ -790,26 +852,6 @@
                 grid.appendChild(card);
             });
             refreshIcons();
-        }
-
-        function setCategory(cat) {
-            selectedCategory = cat;
-            document.querySelectorAll('.category-chip').forEach(chip => {
-                chip.style.background = 'var(--cream-50)';
-                chip.style.color = 'var(--sage-600)';
-                chip.style.border = '1px solid var(--sage-100)';
-            });
-            const sel = document.getElementById(`chip-${cat.replace(" ", "")}`);
-            if (sel) {
-                sel.style.background = 'var(--sage-500)';
-                sel.style.color = '#fff';
-                sel.style.border = 'none';
-            }
-            renderRecipes();
-        }
-
-        function filterRecipes() {
-            renderRecipes();
         }
 
         function toggleBookmark(id) {
@@ -822,23 +864,37 @@
             }
         }
 
-        function viewRecipeDetail(id) {
+        // VIEW DETAIL
+        function viewRecipeDetail(id, updateHash = true) {
             const recipe = userRecipes.find(r => r.id === id);
-            if (!recipe) return;
+            if (!recipe) {
+                navigate('feed');
+                return;
+            }
+
+            if (updateHash) window.location.hash = `detail=${id}`;
 
             activeRecipe = recipe;
             originalServings = recipe.servings || 4;
             activeScaleFactor = 1.0;
 
             document.getElementById('detailTitle').innerText = recipe.title;
-            document.getElementById('detailCategory').innerText = recipe.binder_category;
-            document.getElementById('detailSource').innerText = recipe.source || "Preserved margin recipe";
+            document.getElementById('detailCategory').innerText = recipe.binder_category || "Sunday Bakes";
+            document.getElementById('detailSource').innerText = recipe.source || "Preserved culinary card";
             document.getElementById('detailDescription').innerText = recipe.description || "";
-            document.getElementById('detailImg').src = recipe.image_url || "https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?auto=format&fit=crop&w=600&q=80";
             document.getElementById('detailPrepTime').innerText = recipe.prep_time || "15m";
             document.getElementById('detailCookTime').innerText = recipe.cook_time || "30m";
             document.getElementById('detailDifficulty').innerText = recipe.difficulty || "Easy";
             document.getElementById('scaledServingsCount').innerText = originalServings;
+
+            const imgContainer = document.getElementById('detailImageContainer');
+            const imgEl = document.getElementById('detailImg');
+            if (recipe.image_url) {
+                imgContainer.classList.remove('hidden');
+                imgEl.src = recipe.image_url;
+            } else {
+                imgContainer.classList.add('hidden');
+            }
 
             const bBtn = document.getElementById('detailBookmarkBtn');
             bBtn.innerHTML = recipe.bookmarked 
@@ -854,27 +910,43 @@
             }
 
             renderDetailIngredientsAndSteps();
-            showSection('detail');
+            showSection('detail', false);
+        }
+
+        function openLightbox() {
+            if (!activeRecipe || !activeRecipe.image_url) return;
+            document.getElementById('lightboxImg').src = activeRecipe.image_url;
+            document.getElementById('lightboxModal').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
         }
 
         function renderDetailIngredientsAndSteps() {
             const ingList = document.getElementById('detailIngredientsList');
             ingList.innerHTML = '';
 
-            activeRecipe.ingredients.forEach(ing => {
-                const scaledQty = ing.quantity ? (ing.quantity * activeScaleFactor).toFixed(1).replace(/\.0$/, '') : '';
-                const scaledNote = ing.quantity ? `${scaledQty} ${ing.name.split(',')[1] || ing.note || ''}` : ing.name;
+            (activeRecipe.ingredients || []).forEach(ing => {
+                let displayQty = '';
+                if (typeof ing.quantity === 'number') {
+                    displayQty = (ing.quantity * activeScaleFactor).toFixed(1).replace(/\.0$/, '');
+                } else if (ing.quantity) {
+                    displayQty = ing.quantity;
+                }
 
-                const item = pantryItems.find(p => p.name.toLowerCase().includes(ing.name.toLowerCase()) || ing.name.toLowerCase().includes(p.name.toLowerCase()));
-                const isChecked = item ? item.stocked : false;
+                const unit = ing.unit ? `${ing.unit} ` : '';
+                const name = ing.name || ing.ingredient || 'Ingredient';
+                const note = ing.note ? ` (${ing.note})` : '';
+                const fullText = `${displayQty ? displayQty + ' ' : ''}${unit}${name}${note}`.trim();
 
                 const li = document.createElement('li');
                 li.className = "checklist-item";
                 li.style.cssText = "display: flex; align-items: flex-start; gap: 0.65rem; font-size: 0.75rem; color: var(--sage-800);";
                 li.innerHTML = `
                     <label style="display: flex; align-items: flex-start; gap: 0.65rem; cursor: pointer;">
-                        <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleDetailIngredientStock('${ing.name}', this.checked)" style="margin-top: 0.15rem; width: 1.1rem; height: 1.1rem; accent-color: var(--terracotta-500);">
-                        <span>${scaledNote}</span>
+                        <input type="checkbox" onchange="toggleDetailIngredientStock('${name}', this.checked)" style="margin-top: 0.15rem; width: 1.1rem; height: 1.1rem; accent-color: var(--terracotta-500);">
+                        <span>${fullText}</span>
                     </label>
                 `;
                 ingList.appendChild(li);
@@ -882,19 +954,28 @@
 
             const stepsList = document.getElementById('detailStepsList');
             stepsList.innerHTML = '';
-            activeRecipe.steps.forEach(s => {
+            (activeRecipe.steps || []).forEach((s, idx) => {
                 const li = document.createElement('li');
                 li.style.cssText = "display: flex; align-items: flex-start; gap: 0.85rem; font-size: 0.75rem; color: var(--sage-700); line-height: 1.6;";
                 li.innerHTML = `
-                    <span style="width: 1.35rem; height: 1.35rem; border-radius: 9999px; background: var(--cream-200); color: var(--terracotta-600); font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.65rem; margin-top: 0.1rem;">${s.step_number}</span>
+                    <span style="width: 1.35rem; height: 1.35rem; border-radius: 9999px; background: var(--cream-200); color: var(--terracotta-600); font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.65rem; margin-top: 0.1rem;">${s.step_number || idx + 1}</span>
                     <div>
-                        <p style="font-family: 'Playfair Display', serif; font-weight: 700; color: var(--sage-800); font-size: 0.85rem;">${s.title}</p>
-                        <p>${s.instruction}</p>
+                        <p style="font-family: 'Playfair Display', serif; font-weight: 700; color: var(--sage-800); font-size: 0.85rem;">${s.title || 'Step ' + (idx + 1)}</p>
+                        <p>${s.instruction || ''}</p>
                     </div>
                 `;
                 stepsList.appendChild(li);
             });
             refreshIcons();
+        }
+
+        function scaleServings(diff) {
+            const target = originalServings + diff;
+            if (target < 1) return;
+            originalServings = target;
+            activeScaleFactor = originalServings / (activeRecipe.servings || 4);
+            document.getElementById('scaledServingsCount').innerText = originalServings;
+            renderDetailIngredientsAndSteps();
         }
 
         function toggleDetailBookmark() {
@@ -911,26 +992,12 @@
             refreshIcons();
         }
 
-        function scaleServings(diff) {
-            const target = originalServings + diff;
-            if (target < 1) return;
-            originalServings = target;
-            activeScaleFactor = originalServings / (activeRecipe.servings || 4);
-            document.getElementById('scaledServingsCount').innerText = originalServings;
-            renderDetailIngredientsAndSteps();
-        }
-
         function toggleDetailIngredientStock(ingName, stocked) {
             const pIdx = pantryItems.findIndex(p => p.name.toLowerCase().includes(ingName.toLowerCase()) || ingName.toLowerCase().includes(p.name.toLowerCase()));
             if (pIdx !== -1) {
                 pantryItems[pIdx].stocked = stocked;
             } else {
-                pantryItems.push({
-                    id: "p-" + Date.now(),
-                    name: ingName,
-                    category: "Baking",
-                    stocked: stocked
-                });
+                pantryItems.push({ id: "p-" + Date.now(), name: ingName, category: "Pantry", stocked: stocked });
             }
             localStorage.setItem(`pantry_${currentUserId}`, JSON.stringify(pantryItems));
             updatePantryCounters();
@@ -938,16 +1005,17 @@
 
         function deleteRecipeDetail() {
             if (!activeRecipe) return;
-            if (confirm(`Do you want to archive and remove "${activeRecipe.title}" from your recipe tin?`)) {
+            if (confirm(`Do you want to delete "${activeRecipe.title}" from your tin?`)) {
                 userRecipes = userRecipes.filter(r => r.id !== activeRecipe.id);
                 localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
                 deleteRecipeFromSupabase(activeRecipe.id);
-                showSection('feed');
+                navigate('feed');
             }
         }
 
+        // COOK MODE
         function startCookMode() {
-            if (!activeRecipe || activeRecipe.steps.length === 0) return;
+            if (!activeRecipe || (activeRecipe.steps || []).length === 0) return;
             cookStepIndex = 0;
             cookSecondsElapsed = 0;
             document.getElementById('cookTimer').innerText = "00:00";
@@ -962,8 +1030,8 @@
         function renderCookModeStep() {
             const step = activeRecipe.steps[cookStepIndex];
             document.getElementById('cookStepHeader').innerText = `Step ${cookStepIndex + 1} of ${activeRecipe.steps.length}`;
-            document.getElementById('cookStepTitle').innerText = step.title;
-            document.getElementById('cookStepInstruction').innerText = step.instruction;
+            document.getElementById('cookStepTitle').innerText = step.title || `Step ${cookStepIndex + 1}`;
+            document.getElementById('cookStepInstruction').innerText = step.instruction || '';
 
             const prevBtn = document.getElementById('prevStepBtn');
             prevBtn.disabled = cookStepIndex === 0;
@@ -971,7 +1039,7 @@
 
             const nextBtn = document.getElementById('nextStepBtn');
             if (cookStepIndex === activeRecipe.steps.length - 1) {
-                nextBtn.innerHTML = `<span>Finish Bakes</span><i data-lucide="check" style="width: 1rem; height: 1rem;"></i>`;
+                nextBtn.innerHTML = `<span>Finish Cooking</span><i data-lucide="check" style="width: 1rem; height: 1rem;"></i>`;
             } else {
                 nextBtn.innerHTML = `<span>Next Step</span><i data-lucide="chevron-right" style="width: 1rem; height: 1rem;"></i>`;
             }
@@ -985,7 +1053,7 @@
                 renderCookModeStep();
             } else if (target === activeRecipe.steps.length) {
                 exitCookMode();
-                alert(`Perfect! You completed baking "${activeRecipe.title}"! Enjoy your treat.`);
+                alert(`Finished! Enjoy your handcrafted treat.`);
             }
         }
 
@@ -1010,9 +1078,10 @@
             if (cookTimerInterval) clearInterval(cookTimerInterval);
             cookTimerInterval = null;
             disableWakeLock();
-            showSection('detail');
+            showSection('detail', false);
         }
 
+        // PANTRY
         function renderPantry() {
             const grid = document.getElementById('pantryGrid');
             grid.innerHTML = '';
@@ -1047,14 +1116,9 @@
         }
 
         function addPantryItemPrompt() {
-            const name = prompt("Enter pantry item name (e.g. Honeycrisp apples, Meyer lemons):");
+            const name = prompt("Enter kitchen pantry item name:");
             if (name && name.trim()) {
-                pantryItems.push({
-                    id: "p-" + Date.now(),
-                    name: name.trim(),
-                    category: "Baking",
-                    stocked: true
-                });
+                pantryItems.push({ id: "p-" + Date.now(), name: name.trim(), category: "Pantry", stocked: true });
                 localStorage.setItem(`pantry_${currentUserId}`, JSON.stringify(pantryItems));
                 renderPantry();
                 updatePantryCounters();
@@ -1067,7 +1131,7 @@
             if (badge) badge.innerText = count;
         }
 
-        // ================= SEAMLESS BACKEND AI PARSING =================
+        // ================= GEMINI UNIVERSAL OCR (CARDS & SCREENSHOTS) =================
         async function runGeminiOCR(input) {
             if (!input.files || !input.files[0]) return;
             const file = input.files[0];
@@ -1089,7 +1153,7 @@
 
                 banner.classList.remove('hidden');
                 bar.style.width = '30%';
-                pText.innerText = "Transcribing handwritten card...";
+                pText.innerText = "Transcribing handwritten card / screenshot...";
 
                 try {
                     bar.style.width = '65%';
@@ -1100,18 +1164,24 @@
                     });
 
                     const parsed = await res.json();
-                    if (!res.ok) throw new Error(parsed.error || 'Parsing failed');
+                    if (!res.ok) throw new Error(parsed.error || 'Transcription failed');
+
+                    if (parsed.binder_category && !userBinders.includes(parsed.binder_category)) {
+                        userBinders.push(parsed.binder_category);
+                        localStorage.setItem(`binders_${currentUserId}`, JSON.stringify(userBinders));
+                        renderBinders();
+                    }
 
                     const newRecipe = {
                         id: "rec-" + Date.now(),
-                        title: parsed.title || "Handwritten Family Recipe",
-                        source: "Vintage Handwritten Scan",
+                        title: parsed.title || "Transcribed Recipe",
+                        source: "Card / Screenshot Scan",
                         source_type: "VINTAGE_SCAN",
-                        description: parsed.description || "A cherished handwritten heirloom recipe.",
+                        description: parsed.description || "Preserved recipe card.",
                         image_url: dataUrl,
                         prep_time: parsed.prep_time || "15m",
                         cook_time: parsed.cook_time || "30m",
-                        difficulty: parsed.difficulty || "Medium",
+                        difficulty: parsed.difficulty || "Easy",
                         binder_category: parsed.binder_category || "Sunday Bakes",
                         servings: parsed.servings || 4,
                         ingredients: parsed.ingredients || [],
@@ -1125,13 +1195,13 @@
                     syncRecipeToSupabase(newRecipe);
 
                     bar.style.width = '100%';
-                    pText.innerText = "Scan Complete! Added to Recipe Tin.";
+                    pText.innerText = "Success! Opening recipe...";
 
                     setTimeout(() => {
                         banner.classList.add('hidden');
                         previewArea.classList.add('hidden');
                         input.value = "";
-                        showSection('feed');
+                        viewRecipeDetail(newRecipe.id);
                     }, 800);
                 } catch (err) {
                     alert("Scan failed: " + err.message);
@@ -1146,10 +1216,7 @@
         async function parseRecipeUrlWithGemini() {
             const urlInput = document.getElementById('recipeUrlInput');
             const url = urlInput.value.trim();
-            if (!url || !url.startsWith('http')) {
-                alert("Please paste a valid recipe URL.");
-                return;
-            }
+            if (!url || !url.startsWith('http')) return alert("Please paste a valid recipe URL.");
 
             const banner = document.getElementById('parseStatusBanner');
             const bar = document.getElementById('parseProgressBar');
@@ -1157,26 +1224,26 @@
 
             banner.classList.remove('hidden');
             bar.style.width = '30%';
-            pText.innerText = "Visiting link and extracting recipe...";
+            pText.innerText = "Extracting ingredients & directions...";
 
             try {
                 bar.style.width = '65%';
                 const res = await fetch('/api/parse', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ text: `Extract the full recipe from this link: ${url}` })
+                    body: JSON.stringify({ text: `Extract the recipe from: ${url}` })
                 });
 
                 const parsed = await res.json();
-                if (!res.ok) throw new Error(parsed.error || 'Could not parse link');
+                if (!res.ok) throw new Error(parsed.error || 'Failed to parse link');
 
                 const newRecipe = {
                     id: "rec-" + Date.now(),
                     title: parsed.title || "Web Recipe",
                     source: url.replace('https://', '').split('/')[0],
                     source_type: "FAMILY_NOTE",
-                    description: parsed.description || "Imported web recipe.",
-                    image_url: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&w=600&q=80",
+                    description: parsed.description || "Clean extracted recipe.",
+                    image_url: "",
                     prep_time: parsed.prep_time || "15m",
                     cook_time: parsed.cook_time || "30m",
                     difficulty: parsed.difficulty || "Easy",
@@ -1193,12 +1260,12 @@
                 syncRecipeToSupabase(newRecipe);
 
                 bar.style.width = '100%';
-                pText.innerText = "Recipe parsed and added!";
+                pText.innerText = "Recipe parsed!";
                 urlInput.value = '';
 
                 setTimeout(() => {
                     banner.classList.add('hidden');
-                    showSection('feed');
+                    viewRecipeDetail(newRecipe.id);
                 }, 800);
             } catch (err) {
                 alert("Failed to parse link: " + err.message);
@@ -1206,27 +1273,17 @@
             }
         }
 
-        // ================= SUPABASE AUTH & DATA =================
+        // SUPABASE SYNC
         async function syncRecipeToSupabase(recipe) {
             if (!supabase || currentUserId === 'demo-user') return;
             try {
-                await supabase.from('recipes').upsert({
-                    ...recipe,
-                    user_id: currentUserId,
-                    id: recipe.id
-                }, { onConflict: 'id' });
-            } catch(e) {
-                console.warn("Retained locally.", e);
-            }
+                await supabase.from('recipes').upsert({ ...recipe, user_id: currentUserId, id: recipe.id }, { onConflict: 'id' });
+            } catch(e) { console.warn("Retained locally.", e); }
         }
 
         async function deleteRecipeFromSupabase(id) {
             if (!supabase || currentUserId === 'demo-user') return;
-            try {
-                await supabase.from('recipes').delete().eq('id', id);
-            } catch(e) {
-                console.warn("Local deletion only.", e);
-            }
+            try { await supabase.from('recipes').delete().eq('id', id); } catch(e) { console.warn("Local deletion only.", e); }
         }
 
         function toggleAuthModal() {
@@ -1251,7 +1308,7 @@
                 tabSignIn.style.color = 'var(--sage-600)';
                 nameField.classList.remove('hidden');
                 submitBtn.innerText = "Create Account & Open Tin";
-                subtitle.innerText = "Create a culinary profile to synchronize recipes across devices.";
+                subtitle.innerText = "Create a profile to synchronize recipes across devices.";
             } else {
                 tabSignUp.style.background = 'transparent';
                 tabSignUp.style.color = 'var(--sage-600)';
@@ -1272,7 +1329,11 @@
             const name = document.getElementById('authName').value.trim();
 
             if (!supabase) {
-                processMockSession(email, password, name);
+                currentUserId = email.replace(/[^a-zA-Z0-9]/g, '');
+                localStorage.setItem("currentUserId", currentUserId);
+                toggleAuthModal();
+                updateAuthControls();
+                navigate('feed');
                 return;
             }
 
@@ -1287,13 +1348,9 @@
                     if (data?.user) {
                         currentUserId = data.user.id;
                         localStorage.setItem("currentUserId", currentUserId);
-                        alert("Account created successfully! Welcome to your digital recipe tin.");
-                        await supabase.from('profiles').upsert({
-                            user_id: currentUserId,
-                            name: name || email.split('@')[0],
-                            email: email
-                        });
-                        loadUserCloudData();
+                        toggleAuthModal();
+                        updateAuthControls();
+                        navigate('feed');
                     }
                 } else {
                     const { data, error } = await supabase.auth.signInWithPassword({
@@ -1304,55 +1361,15 @@
                     if (data?.user) {
                         currentUserId = data.user.id;
                         localStorage.setItem("currentUserId", currentUserId);
-                        loadUserCloudData();
+                        toggleAuthModal();
+                        updateAuthControls();
+                        navigate('feed');
                     }
                 }
             } catch(error) {
                 document.getElementById('authError').classList.remove('hidden');
                 document.getElementById('authErrorText').innerText = error.message || "Authentication failed.";
             }
-        }
-
-        function processMockSession(email, password, name) {
-            currentUserId = email.replace(/[^a-zA-Z0-9]/g, '');
-            localStorage.setItem("currentUserId", currentUserId);
-            
-            if (authMode === 'signUp') {
-                userRecipes = [];
-                localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
-                alert(`Welcome, ${name || 'Home Cook'}! Opening your fresh culinary tin.`);
-            } else {
-                userRecipes = [...demoRecipes];
-                localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
-                alert(`Welcome back!`);
-            }
-            pantryItems = [...defaultPantry];
-            localStorage.setItem(`pantry_${currentUserId}`, JSON.stringify(pantryItems));
-
-            toggleAuthModal();
-            updateAuthControls();
-            showSection('feed');
-        }
-
-        async function loadUserCloudData() {
-            if (!supabase) return;
-            try {
-                const { data, error } = await supabase
-                    .from('recipes')
-                    .select('*')
-                    .eq('user_id', currentUserId);
-
-                if (!error && data) {
-                    userRecipes = data;
-                    localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
-                }
-            } catch(e) {
-                console.warn("Retained offline copies.", e);
-            }
-
-            toggleAuthModal();
-            updateAuthControls();
-            showSection('feed');
         }
 
         function updateAuthControls() {
@@ -1367,25 +1384,13 @@
         }
 
         function handleSignOut() {
-            if (confirm("Log out of your Stained Pages session? Your local modifications will stay cached.")) {
+            if (confirm("Log out of your Stained Pages session?")) {
                 if (supabase) supabase.auth.signOut();
                 currentUserId = "demo-user";
                 localStorage.setItem("currentUserId", currentUserId);
-                userRecipes = [...demoRecipes];
-                pantryItems = [...defaultPantry];
-                localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
-                localStorage.setItem(`pantry_${currentUserId}`, JSON.stringify(pantryItems));
-                
                 updateAuthControls();
-                showSection('feed');
+                navigate('feed');
             }
-        }
-
-        function quickDemoFill() {
-            document.getElementById('authEmail').value = "cook@stainedpages.app";
-            document.getElementById('authPassword').value = "heirloom123";
-            document.getElementById('authName').value = "Eleanor Vance";
-            setAuthMode('signIn');
         }
 
         document.addEventListener('DOMContentLoaded', initApp);
