@@ -13,12 +13,12 @@ export default async function handler(req, res) {
   const systemPrompt = `You are a vintage culinary archivist and precision recipe OCR engine.
 Analyze the provided image or text. It may be:
 - A handwritten vintage recipe card or notebook page
-- A phone screenshot (TikTok recipe overlay, Instagram reel text, Apple Notes, website screenshot)
+- A phone screenshot (TikTok overlay, Instagram reel, Notes app, blog screenshot)
 - A printed cookbook page
 
-Carefully transcribe all ingredients with measurements and step-by-step directions. If information is partially obscured or written in shorthand, interpret it cleanly into conventional kitchen units.
+Carefully transcribe all ingredients with measurements and step-by-step directions into standard kitchen units.
 
-Return strictly valid raw JSON with NO markdown formatting, NO backticks, and NO conversational chatter:
+Return strictly valid raw JSON with NO markdown backticks, NO formatting ticks, and NO conversational chatter:
 {
   "title": "Recipe Title",
   "binder_category": "Sunday Bakes",
@@ -70,43 +70,62 @@ Return strictly valid raw JSON with NO markdown formatting, NO backticks, and NO
     return res.status(400).json({ error: 'No image or text provided' });
   }
 
-  try {
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestBody)
+  // Model cascade: try primary fast model, fall back if Google is under heavy load
+  const models = ['gemini-2.5-flash', 'gemini-1.5-flash'];
+  let lastError = null;
+
+  for (const model of models) {
+    try {
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestBody)
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        const msg = data.error?.message || `HTTP ${response.status}`;
+        // If high demand or capacity error, continue loop to try fallback model
+        if (response.status === 503 || response.status === 429 || msg.includes('high demand')) {
+          console.warn(`Model ${model} overloaded. Falling back...`);
+          lastError = new Error(msg);
+          continue;
+        }
+        throw new Error(msg);
       }
-    );
 
-    const data = await response.json();
-    if (!response.ok) {
-      throw new Error(data.error?.message || 'Gemini API call failed');
+      const rawOutput = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!rawOutput) {
+        throw new Error('No recipe content generated');
+      }
+
+      let cleanJson = rawOutput.trim();
+      if (cleanJson.startsWith('```json')) {
+        cleanJson = cleanJson.replace(/^```json\s*/i, '').replace(/\s*```$/, '');
+      } else if (cleanJson.startsWith('```')) {
+        cleanJson = cleanJson.replace(/^```\s*/i, '').replace(/\s*```$/, '');
+      }
+
+      const firstBrace = cleanJson.indexOf('{');
+      const lastBrace = cleanJson.lastIndexOf('}');
+      if (firstBrace !== -1 && lastBrace !== -1) {
+        cleanJson = cleanJson.substring(firstBrace, lastBrace + 1);
+      }
+
+      const recipeJson = JSON.parse(cleanJson);
+      return res.status(200).json(recipeJson);
+
+    } catch (err) {
+      lastError = err;
+      console.warn(`Error on ${model}:`, err.message);
     }
-
-    const rawOutput = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!rawOutput) {
-      throw new Error('No recipe content generated');
-    }
-
-    let cleanJson = rawOutput.trim();
-    if (cleanJson.startsWith('```json')) {
-      cleanJson = cleanJson.replace(/^```json\s*/i, '').replace(/\s*```$/, '');
-    } else if (cleanJson.startsWith('```')) {
-      cleanJson = cleanJson.replace(/^```\s*/i, '').replace(/\s*```$/, '');
-    }
-
-    const firstBrace = cleanJson.indexOf('{');
-    const lastBrace = cleanJson.lastIndexOf('}');
-    if (firstBrace !== -1 && lastBrace !== -1) {
-      cleanJson = cleanJson.substring(firstBrace, lastBrace + 1);
-    }
-
-    const recipeJson = JSON.parse(cleanJson);
-    return res.status(200).json(recipeJson);
-  } catch (error) {
-    console.error('API Parse Error:', error);
-    return res.status(500).json({ error: error.message || 'Error processing recipe data' });
   }
+
+  return res.status(500).json({
+    error: lastError ? lastError.message : 'All vision models are currently under heavy load. Please try again in a few moments.'
+  });
 }
