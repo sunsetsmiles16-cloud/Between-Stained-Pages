@@ -17,7 +17,7 @@
     
     <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkJldHdlZW4gU3RhaW5lZCBQYWdlcyIsCiAgInNob3J0X25hbWUiOiAiU3RhaW5lZFBhZ2VzIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNGQUY0RTgiLAogICJ0aGVtZV9jb2xvciI6ICIjREU1RTJFIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA1MTIgNTEyJyUzRSUzQ3JlY3Qgd2lkdGg9JzUxMicgaGVpZ2h0PSc1MTInIHJ4PScxMjgnIGZpbGw9JyUyM0RFNUUyRScvJTNFJTNDY2lyY2xlIGN4PScyNTYnIGN5PScyNTYnIHI9JzE4MCcgZmlsbD0nJTIzRkFGNEU4Jy8lM0UlM0NjaXJjbGUgY3g9JzI1NicgY3k9JzI1Nicgcj0nMTQwJyBmaWxsPSclMjNFQUE4MjMnLyUzRSUzQ2NpcmNsZSBjeD0nMjU2JyBjeT0nMjU2JyByPScxMDAnIGZpbGw9JyUyMzdDREQ2RCcvJTNFJTNDY2lyY2xlIGN4PScyNTYnIGN5PScyNTYnIHI9JzYwJyBmaWxsPSclMjNGQUY0RTgnLyUzRSUzQy9zdmclM0UiLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNreWJsZSIKICAgIH0KICBdCn0=" />
 
-    <!-- Google Fonts for Multi-Decade Design System -->
+    <!-- Multi-Decade Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,400&family=Limelight&family=Pacifico&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Righteous&family=Shrikhand&family=Special+Elite&display=swap" rel="stylesheet">
@@ -27,18 +27,14 @@
     <script src="https://unpkg.com/lucide@latest" defer onload="if(window.lucide){lucide.createIcons();}"></script>
 
     <style>
-        /* =========================================================
-           DECADE DESIGN SYSTEM ENGINE (1920s - 2010s)
-           ========================================================= */
-        
-        /* DEFAULT THEME: 1970s EARTHY & DISCO */
+        /* DECADE DESIGN TOKENS */
         body, body.era-1970s {
             --bg-canvas: #FAF4E8;
             --bg-card: #FFFDF9;
             --bg-tint: #F3EBD9;
-            --accent-primary: #DE5E2E; /* Burnt Orange */
-            --accent-secondary: #EAA823; /* Harvest Gold */
-            --accent-tertiary: #7C8D6D; /* Avocado Sage */
+            --accent-primary: #DE5E2E;
+            --accent-secondary: #EAA823;
+            --accent-tertiary: #7C8D6D;
             --text-primary: #382012;
             --text-muted: #6E5343;
             --border-primary: rgba(82, 49, 32, 0.18);
@@ -49,13 +45,12 @@
             --top-stripe: linear-gradient(90deg, #DE5E2E 0%, #EAA823 50%, #7C8D6D 100%);
         }
 
-        /* 1920s: ART DECO & JAZZ AGE */
         body.era-1920s {
             --bg-canvas: #121316;
             --bg-card: #1B1D22;
             --bg-tint: #242730;
-            --accent-primary: #D4AF37; /* Antique Gold Foil */
-            --accent-secondary: #F9F5EC; /* Pale Champagne */
+            --accent-primary: #D4AF37;
+            --accent-secondary: #F9F5EC;
             --accent-tertiary: #8A7322;
             --text-primary: #F9F5EC;
             --text-muted: #9E9B93;
@@ -67,13 +62,12 @@
             --top-stripe: linear-gradient(90deg, #D4AF37 0%, #F9F5EC 50%, #D4AF37 100%);
         }
 
-        /* 1930s: STREAMLINE MODERNE & HOLLYWOOD GLAMOUR */
         body.era-1930s {
             --bg-canvas: #F4EFE6;
             --bg-card: #FAF7F2;
             --bg-tint: #E8E0D2;
-            --accent-primary: #5B1426; /* Deep Burgundy */
-            --accent-secondary: #A08C75; /* Warm Streamline Chrome */
+            --accent-primary: #5B1426;
+            --accent-secondary: #A08C75;
             --accent-tertiary: #CBD5E1;
             --text-primary: #2B1810;
             --text-muted: #6B5B52;
@@ -85,13 +79,12 @@
             --top-stripe: linear-gradient(90deg, #5B1426 0%, #A08C75 100%);
         }
 
-        /* 1940s: VICTORY UTILITY & VINTAGE TYPEWRITER */
         body.era-1940s {
             --bg-canvas: #EFE8D3;
             --bg-card: #F7F3E6;
             --bg-tint: #E3D9BE;
-            --accent-primary: #A82323; /* Victory Crimson */
-            --accent-secondary: #6B6943; /* Drab Khaki */
+            --accent-primary: #A82323;
+            --accent-secondary: #6B6943;
             --accent-tertiary: #3A4B35;
             --text-primary: #2D2A26;
             --text-muted: #5C574F;
@@ -103,13 +96,12 @@
             --top-stripe: repeating-linear-gradient(90deg, #A82323, #A82323 15px, #EFE8D3 15px, #EFE8D3 30px);
         }
 
-        /* 1950s: MID-CENTURY ATOMIC PASTEL DINER */
         body.era-1950s {
             --bg-canvas: #FFFDF7;
             --bg-card: #FFFFFF;
             --bg-tint: #E0F2F1;
-            --accent-primary: #E91E63; /* Flamingo Pink */
-            --accent-secondary: #00BFA5; /* Turquoise Enamel */
+            --accent-primary: #E91E63;
+            --accent-secondary: #00BFA5;
             --accent-tertiary: #FFD54F;
             --text-primary: #263238;
             --text-muted: #546E7A;
@@ -121,13 +113,12 @@
             --top-stripe: repeating-linear-gradient(45deg, #00BFA5, #00BFA5 10px, #FFF 10px, #FFF 20px);
         }
 
-        /* 1960s: MOD POP & PSYCHEDELIC */
         body.era-1960s {
             --bg-canvas: #FFF8E7;
             --bg-card: #FFFFFF;
             --bg-tint: #FFE082;
-            --accent-primary: #FF6F00; /* Pop Tangerine */
-            --accent-secondary: #8BC34A; /* Acid Lime */
+            --accent-primary: #FF6F00;
+            --accent-secondary: #8BC34A;
             --accent-tertiary: #212121;
             --text-primary: #212121;
             --text-muted: #616161;
@@ -139,13 +130,12 @@
             --top-stripe: linear-gradient(90deg, #FF6F00 0%, #8BC34A 50%, #212121 100%);
         }
 
-        /* 1980s: MEMPHIS NEON & MAXIMALISM */
         body.era-1980s {
             --bg-canvas: #1A1026;
             --bg-card: #251638;
             --bg-tint: #341D4E;
-            --accent-primary: #FF007F; /* Hot Magenta */
-            --accent-secondary: #00F0FF; /* Electric Cyan */
+            --accent-primary: #FF007F;
+            --accent-secondary: #00F0FF;
             --accent-tertiary: #FFE600;
             --text-primary: #FFFFFF;
             --text-muted: #B8A9CF;
@@ -157,13 +147,12 @@
             --top-stripe: linear-gradient(90deg, #FF007F 0%, #00F0FF 50%, #FFE600 100%);
         }
 
-        /* 1990s: MINIMAL RAW SLATE & GRUNGE */
         body.era-1990s {
             --bg-canvas: #EAE6DF;
             --bg-card: #F4F1EA;
             --bg-tint: #D8D2C5;
-            --accent-primary: #7B341E; /* Flannel Brick */
-            --accent-secondary: #4A5568; /* Slate */
+            --accent-primary: #7B341E;
+            --accent-secondary: #4A5568;
             --accent-tertiary: #2D3748;
             --text-primary: #1A202C;
             --text-muted: #4A5568;
@@ -175,13 +164,12 @@
             --top-stripe: linear-gradient(90deg, #7B341E, #4A5568);
         }
 
-        /* 2000s: Y2K CYBER GLAZE & GLOSSY BLING */
         body.era-2000s {
             --bg-canvas: #EFF6FF;
             --bg-card: #FFFFFF;
             --bg-tint: #DBEAFE;
-            --accent-primary: #0284C7; /* Bondi Blue */
-            --accent-secondary: #9333EA; /* Cyber Purple */
+            --accent-primary: #0284C7;
+            --accent-secondary: #9333EA;
             --accent-tertiary: #06B6D4;
             --text-primary: #0F172A;
             --text-muted: #475569;
@@ -193,13 +181,12 @@
             --top-stripe: linear-gradient(90deg, #0284C7, #06B6D4, #9333EA);
         }
 
-        /* 2010s: RUSTIC EDISON & MILLENNIAL MINIMAL */
         body.era-2010s {
             --bg-canvas: #FBF9F7;
             --bg-card: #FFFFFF;
             --bg-tint: #F3ECE8;
-            --accent-primary: #C47B78; /* Millennial Rose */
-            --accent-secondary: #5E6D5A; /* Slate Sage */
+            --accent-primary: #C47B78;
+            --accent-secondary: #5E6D5A;
             --accent-tertiary: #8C7A6B;
             --text-primary: #2B2927;
             --text-muted: #78736E;
@@ -340,29 +327,7 @@
         }
         @keyframes strikethrough { to { transform: scaleX(1); } }
 
-        /* Lightbox Image Preview Modal */
-        #lightboxModal {
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            background: rgba(0, 0, 0, 0.92);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-        #lightboxModal img {
-            max-width: 95%;
-            max-height: 90vh;
-            border-radius: 1rem;
-            object-fit: contain;
-            border: 3px solid var(--accent-secondary);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-        }
-
-        /* =========================================================
-           RICH WALNUT BOOKSHELF STYLING & SKEUOMORPHISM
-           ========================================================= */
+        /* SKEUOMORPHIC 3D WALNUT BOOKSHELF */
         .bookcase-container {
             background: radial-gradient(circle at 50% 25%, #3a2215 0%, #1a0f08 100%);
             border: 12px solid #27160d;
@@ -407,7 +372,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 0.85rem 0.4rem;
+            align-items: center;
+            padding: 0.85rem 0.35rem;
             box-shadow: -4px 0 10px rgba(0,0,0,0.45), 3px 0 8px rgba(0,0,0,0.3);
             transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
             transform-origin: bottom center;
@@ -431,18 +397,24 @@
             z-index: 10;
         }
 
+        .spine-badge {
+            font-size: 1.15rem;
+            line-height: 1;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+        }
+
         .spine-title-vertical {
             writing-mode: vertical-rl;
             text-orientation: mixed;
             transform: rotate(180deg);
             font-weight: 800;
             letter-spacing: 0.12em;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             text-shadow: 0 1px 2px rgba(0,0,0,0.7);
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-            max-height: 110px;
+            max-height: 100px;
             margin: auto 0;
             text-align: center;
         }
@@ -483,21 +455,12 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Print / 4x6 Index Card Styling */
         @media print {
             header, aside, #mobileNav, .no-print, button, #section-feed, #section-import, #section-pantry, #section-cook, #section-bookshelf, .retro-stripe {
                 display: none !important;
             }
-            body {
-                background: #fff !important;
-                color: #000 !important;
-                padding: 0 !important;
-            }
-            main {
-                display: block !important;
-                max-width: 100% !important;
-                padding: 0 !important;
-            }
+            body { background: #fff !important; color: #000 !important; padding: 0 !important; }
+            main { display: block !important; max-width: 100% !important; padding: 0 !important; }
             #section-detail { display: block !important; }
             .print-card-box {
                 border: 2px solid #000 !important;
@@ -530,7 +493,6 @@
         </div>
         
         <div style="display: flex; align-items: center; gap: 0.65rem;">
-            <!-- Hidden Settings Cog (Opens Decade & App Options) -->
             <button onclick="toggleSettingsModal()" title="App Settings" style="width: 2.35rem; height: 2.35rem; border-radius: 50%; background: var(--bg-tint); border: 1.5px solid var(--border-primary); color: var(--text-primary); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.06);">
                 <i data-lucide="settings" style="width: 1.15rem; height: 1.15rem; color: var(--accent-primary);"></i>
             </button>
@@ -585,8 +547,6 @@
             
             <!-- VIEW 1: RECIPE TIN FEED -->
             <div id="section-feed" style="display: flex; flex-direction: column; gap: 1.5rem;">
-                
-                <!-- Welcome Banner -->
                 <div style="background: var(--bg-card); border: 2px solid var(--border-primary); border-radius: var(--radius-card); padding: 1.75rem; display: flex; justify-content: space-between; align-items: center; position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
                     <div style="position: absolute; right: -20px; top: -20px; width: 120px; height: 120px; border-radius: 50%; background: var(--accent-secondary); opacity: 0.12;"></div>
                     <div style="z-index: 1;">
@@ -599,13 +559,11 @@
                     </button>
                 </div>
 
-                <!-- Search & Custom Binders Filter Bar -->
                 <div style="background: var(--bg-card); padding: 1rem; border-radius: var(--radius-card); border: 2px solid var(--border-primary); display: flex; flex-direction: column; gap: 0.85rem;">
                     <div style="position: relative; width: 100%;">
                         <i data-lucide="search" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 1.15rem; height: 1.15rem; color: var(--accent-secondary);"></i>
                         <input type="text" id="recipeSearch" oninput="filterRecipes()" placeholder="Search your recipe binders, cards, ingredients..." style="width: 100%; background: var(--bg-canvas); padding: 0.65rem 1rem 0.65rem 2.75rem; border-radius: 9999px; font-size: 0.85rem; border: 1.5px solid var(--border-primary); color: var(--text-primary); outline: none; font-family: inherit;">
                     </div>
-                    
                     <div id="bindersList" style="display: flex; align-items: center; gap: 0.5rem; overflow-x: auto;" class="no-scrollbar"></div>
                 </div>
 
@@ -630,9 +588,9 @@
                         <span style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--accent-secondary); letter-spacing: 0.15em;">Private Culinary Library</span>
                         <h2 class="font-retro-title" style="font-size: 1.75rem; color: var(--accent-primary); margin-top: 0.2rem;">My Bookshelf</h2>
                     </div>
-                    <button onclick="openCookbookCreatorModal()" class="btn-retro-orange">
-                        <i data-lucide="plus" style="width: 1rem; height: 1rem;"></i>
-                        <span>Bind New Cookbook</span>
+                    <!-- Top-Right Plus to Create Cookbook -->
+                    <button onclick="openCookbookCreatorModal()" class="btn-retro-orange" style="padding: 0.65rem 0.9rem; border-radius: 50%; width: 2.6rem; height: 2.6rem;" title="Bind New Cookbook">
+                        <i data-lucide="plus" style="width: 1.25rem; height: 1.25rem;"></i>
                     </button>
                 </div>
 
@@ -647,7 +605,6 @@
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
-                    <!-- Photo / Screenshot OCR -->
                     <div style="background: var(--bg-tint); border-radius: 1.25rem; padding: 1.5rem; border: 2px solid var(--border-primary); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
                         <div>
                             <span style="padding: 0.25rem 0.65rem; border-radius: 9999px; background: var(--accent-secondary); color: #fff; font-size: 0.65rem; font-weight: 800; text-transform: uppercase;">Universal Vision OCR</span>
@@ -667,7 +624,6 @@
                         </label>
                     </div>
 
-                    <!-- Web URL Parser -->
                     <div style="background: var(--bg-tint); border-radius: 1.25rem; padding: 1.5rem; border: 2px solid var(--border-primary); display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
                         <div>
                             <span style="padding: 0.25rem 0.65rem; border-radius: 9999px; background: var(--accent-secondary); color: #fff; font-size: 0.65rem; font-weight: 800; text-transform: uppercase;">Direct Web Link</span>
@@ -725,8 +681,6 @@
                 </div>
 
                 <div class="print-card-box" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.75rem; border: 2px solid var(--border-primary); display: flex; flex-direction: column; gap: 1.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.06);">
-                    
-                    <!-- Original Image (Click to Expand in Lightbox) -->
                     <div id="detailImageContainer" onclick="openLightbox()" style="position: relative; height: 17rem; width: 100%; border-radius: 1.25rem; overflow: hidden; background: var(--bg-tint); cursor: pointer; border: 2px solid var(--border-primary);">
                         <img id="detailImg" src="" style="width: 100%; height: 100%; object-fit: cover;">
                         <div style="position: absolute; bottom: 0.85rem; right: 0.85rem; background: rgba(0, 0, 0, 0.8); color: #fff; padding: 0.4rem 0.75rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; gap: 0.4rem;">
@@ -770,7 +724,6 @@
                         </div>
                     </div>
 
-                    <!-- Ingredients & Instructions Grid -->
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.75rem;">
                         <div>
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.15rem;">
@@ -852,7 +805,7 @@
         <img id="lightboxImg" src="" onclick="event.stopPropagation()">
     </div>
 
-    <!-- Mobile Bottom Navigation Bar -->
+    <!-- Mobile Bottom Navigation Bar (Now Includes Bookshelf) -->
     <nav style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 40; background: var(--bg-card); border-top: 2px solid var(--border-primary); padding: 0.65rem 1.5rem; display: flex; justify-content: space-around; align-items: center;" id="mobileNav">
         <button onclick="navigate('feed')" class="mobile-nav-btn" id="mbtn-feed" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem; color: var(--accent-primary); background: transparent;">
             <i data-lucide="layout-grid" style="width: 1.35rem; height: 1.35rem; color: var(--accent-primary);"></i>
@@ -872,7 +825,7 @@
         </button>
     </nav>
 
-    <!-- Dedicated Settings Modal -->
+    <!-- App Settings Modal (Includes Custom Era per Cookbook) -->
     <div id="settingsModal" class="hidden" style="position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; padding: 1rem;">
         <div style="background: var(--bg-card); max-width: 24rem; width: 100%; border-radius: var(--radius-card); padding: 1.75rem; border: 2px solid var(--border-primary); position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25);">
             <button onclick="toggleSettingsModal()" style="position: absolute; right: 1rem; top: 1rem; width: 2rem; height: 2rem; background: var(--bg-tint); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
@@ -883,10 +836,10 @@
                 <i data-lucide="palette" style="width: 1.25rem; height: 1.25rem; color: var(--accent-primary);"></i>
                 <h3 class="font-retro-title" style="font-size: 1.35rem; color: var(--accent-primary);">Kitchen Aesthetics</h3>
             </div>
-            <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.25rem;">Switch your culinary timeline to shift typography, palette, and card styles.</p>
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.25rem;">Switch your app timeline or assign decade skins to individual cookbooks.</p>
 
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.5rem;">
-                <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Active Era Theme</label>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem;">
+                <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Global App Timeline Era</label>
                 <select id="settingsEraSelect" onchange="applyDecadeTheme(this.value)" style="background: var(--bg-tint); padding: 0.75rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; font-weight: 700; color: var(--text-primary); outline: none; font-family: inherit;">
                     <option value="1970s">1970s: Earthy Harvest & Disco Kitchen (Default)</option>
                     <option value="1920s">1920s: Art Deco & Gilded Jazz Age</option>
@@ -901,55 +854,109 @@
                 </select>
             </div>
 
+            <!-- Manage Era Per Cookbook -->
+            <div id="settingsCookbookErasContainer" style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.5rem;">
+                <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Cookbook Decades</label>
+                <div id="settingsCookbooksList" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 8rem; overflow-y: auto;"></div>
+            </div>
+
             <button onclick="toggleSettingsModal()" class="btn-retro-orange" style="width: 100%; padding: 0.8rem;">Save & Close</button>
         </div>
     </div>
 
-    <!-- BIND NEW COOKBOOK MODAL -->
-    <div id="cookbookModal" class="hidden" style="position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; padding: 1rem;">
-        <div style="background: var(--bg-card); max-width: 26rem; width: 100%; border-radius: var(--radius-card); padding: 1.75rem; border: 2px solid var(--border-primary); position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.3);">
+    <!-- TWO-STEP COOKBOOK CREATOR & RECIPE BINDER MODAL -->
+    <div id="cookbookModal" class="hidden" style="position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; padding: 1rem;">
+        <div style="background: var(--bg-card); max-width: 28rem; width: 100%; border-radius: var(--radius-card); padding: 1.75rem; border: 2px solid var(--border-primary); position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.35); max-height: 90vh; overflow-y: auto;">
             <button onclick="closeCookbookModal()" style="position: absolute; right: 1rem; top: 1rem; width: 2rem; height: 2rem; background: var(--bg-tint); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
                 <i data-lucide="x" style="width: 1.1rem; height: 1.1rem;"></i>
             </button>
 
-            <h3 class="font-retro-title" style="font-size: 1.4rem; color: var(--accent-primary); margin-bottom: 0.25rem;">Bind a New Cookbook</h3>
-            <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.25rem;">Handcraft a custom culinary volume for your walnut library shelf.</p>
+            <!-- STEP 1: COVER, FONT COLOR, & SPINE EMOJI -->
+            <div id="bookStep1">
+                <h3 class="font-retro-title" style="font-size: 1.4rem; color: var(--accent-primary); margin-bottom: 0.25rem;">Bind a New Cookbook</h3>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.25rem;">Choose your cover shade, titles, and spine badge.</p>
 
-            <form onsubmit="handleCreateCookbook(event)" style="display: flex; flex-direction: column; gap: 1rem;">
-                <div>
-                    <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Cookbook Title</label>
-                    <input type="text" id="newBookTitle" required placeholder="e.g. Sunday Bakes & Pies" style="width: 100%; background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.85rem; color: var(--text-primary); outline: none; margin-top: 0.25rem; font-family: inherit;">
+                <!-- Live Interactive Cover Preview -->
+                <div id="bookCoverPreview" style="background: #5B1426; border-radius: 0.75rem; padding: 1.5rem 1rem; border: 4px solid #fff; box-shadow: 0 8px 16px rgba(0,0,0,0.25); text-align: center; margin-bottom: 1.25rem; transition: background-color 0.2s ease;">
+                    <div id="previewBadge" style="font-size: 1.75rem; margin-bottom: 0.35rem;">🥐</div>
+                    <div id="previewTitle" class="font-retro-title" style="font-size: 1.35rem; color: #FFFFFF; line-height: 1.2;">Nana's Recipes</div>
+                    <div id="previewSubtitle" class="font-retro-sub" style="font-size: 0.75rem; color: #FFFFFF; opacity: 0.85; margin-top: 0.25rem; font-style: italic;">All of Nana's Baked Goods</div>
                 </div>
 
-                <div>
-                    <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Era & Aesthetic Style</label>
-                    <select id="newBookEra" style="width: 100%; background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; font-weight: 700; color: var(--text-primary); outline: none; margin-top: 0.25rem; font-family: inherit;">
-                        <option value="1970s" selected>1970s: Harvest Gold & Avocado</option>
-                        <option value="1920s">1920s: Gilded Art Deco Leather</option>
-                        <option value="1930s">1930s: Streamline Burgundy Cloth</option>
-                        <option value="1940s">1940s: Victory Utility Buckram</option>
-                        <option value="1950s">1950s: Atomic Diner Enamel</option>
-                        <option value="1960s">1960s: Mod Psychedelic Tangerine</option>
-                        <option value="1980s">1980s: Rad Memphis Lacquer</option>
-                        <option value="1990s">1990s: Minimal Raw Slate</option>
-                        <option value="2000s">2000s: Cyber Glaze Bondi</option>
-                        <option value="2010s">2010s: Rustic Edison Pastel</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Cloth Binding Shade</label>
-                    <div style="display: flex; gap: 0.5rem; margin-top: 0.35rem;">
-                        <label style="cursor: pointer;"><input type="radio" name="bookColor" value="#5B1426" checked class="hidden"><span style="display: block; width: 2rem; height: 2rem; border-radius: 50%; background: #5B1426; border: 2px solid #fff; box-shadow: 0 0 0 1px #000;"></span></label>
-                        <label style="cursor: pointer;"><input type="radio" name="bookColor" value="#DE5E2E" class="hidden"><span style="display: block; width: 2rem; height: 2rem; border-radius: 50%; background: #DE5E2E; border: 2px solid #fff; box-shadow: 0 0 0 1px #000;"></span></label>
-                        <label style="cursor: pointer;"><input type="radio" name="bookColor" value="#4A5D4E" class="hidden"><span style="display: block; width: 2rem; height: 2rem; border-radius: 50%; background: #4A5D4E; border: 2px solid #fff; box-shadow: 0 0 0 1px #000;"></span></label>
-                        <label style="cursor: pointer;"><input type="radio" name="bookColor" value="#C78B1D" class="hidden"><span style="display: block; width: 2rem; height: 2rem; border-radius: 50%; background: #C78B1D; border: 2px solid #fff; box-shadow: 0 0 0 1px #000;"></span></label>
-                        <label style="cursor: pointer;"><input type="radio" name="bookColor" value="#1C241E" class="hidden"><span style="display: block; width: 2rem; height: 2rem; border-radius: 50%; background: #1C241E; border: 2px solid #fff; box-shadow: 0 0 0 1px #000;"></span></label>
+                <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+                    <div>
+                        <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Main Title</label>
+                        <input type="text" id="newBookTitle" required value="Nana's Recipes" oninput="updateCoverPreview()" placeholder="e.g. Nana's Recipes" style="width: 100%; background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.85rem; color: var(--text-primary); outline: none; margin-top: 0.25rem; font-family: inherit;">
                     </div>
-                </div>
 
-                <button type="submit" class="btn-retro-orange" style="width: 100%; padding: 0.85rem; margin-top: 0.5rem;">Bind & Place on Shelf</button>
-            </form>
+                    <div>
+                        <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Subtitle</label>
+                        <input type="text" id="newBookSubtitle" value="All of Nana's Baked Goods" oninput="updateCoverPreview()" placeholder="e.g. All of Nana's Baked Goods" style="width: 100%; background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.85rem; color: var(--text-primary); outline: none; margin-top: 0.25rem; font-family: inherit;">
+                    </div>
+
+                    <!-- Color Wheel & Pickers -->
+                    <div>
+                        <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Cover Color (Picker / Wheel)</label>
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-top: 0.35rem;">
+                            <input type="color" id="newBookColorWheel" value="#5B1426" onchange="updateCoverPreview()" style="width: 3.2rem; height: 2.5rem; border: none; border-radius: 0.5rem; cursor: pointer; background: transparent;">
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Tap wheel to choose any custom hue</span>
+                        </div>
+                    </div>
+
+                    <!-- Front Font Color: Black, White, Brown -->
+                    <div>
+                        <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Front Font Color</label>
+                        <div style="display: flex; gap: 1rem; margin-top: 0.35rem;">
+                            <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; font-weight: 700; cursor: pointer;">
+                                <input type="radio" name="newBookFontColor" value="#FFFFFF" checked onchange="updateCoverPreview()"> White
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; font-weight: 700; cursor: pointer;">
+                                <input type="radio" name="newBookFontColor" value="#1A1A1A" onchange="updateCoverPreview()"> Black
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; font-weight: 700; cursor: pointer;">
+                                <input type="radio" name="newBookFontColor" value="#3B2213" onchange="updateCoverPreview()"> Brown
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Spine UI Icon / Food Emoji -->
+                    <div>
+                        <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Spine Icon Badge</label>
+                        <div id="spineEmojiPicker" style="display: flex; gap: 0.4rem; overflow-x: auto; padding: 0.4rem 0;" class="no-scrollbar">
+                            <button type="button" onclick="selectSpineBadge('🥐')" class="emoji-btn" style="font-size: 1.35rem; padding: 0.3rem 0.5rem; border-radius: 0.5rem; background: var(--bg-tint); border: 2px solid var(--accent-primary);">🥐</button>
+                            <button type="button" onclick="selectSpineBadge('🍕')" class="emoji-btn" style="font-size: 1.35rem; padding: 0.3rem 0.5rem; border-radius: 0.5rem; background: var(--bg-tint); border: 1px solid var(--border-primary);">🍕</button>
+                            <button type="button" onclick="selectSpineBadge('🍰')" class="emoji-btn" style="font-size: 1.35rem; padding: 0.3rem 0.5rem; border-radius: 0.5rem; background: var(--bg-tint); border: 1px solid var(--border-primary);">🍰</button>
+                            <button type="button" onclick="selectSpineBadge('🍳')" class="emoji-btn" style="font-size: 1.35rem; padding: 0.3rem 0.5rem; border-radius: 0.5rem; background: var(--bg-tint); border: 1px solid var(--border-primary);">🍳</button>
+                            <button type="button" onclick="selectSpineBadge('🥩')" class="emoji-btn" style="font-size: 1.35rem; padding: 0.3rem 0.5rem; border-radius: 0.5rem; background: var(--bg-tint); border: 1px solid var(--border-primary);">🥩</button>
+                            <button type="button" onclick="selectSpineBadge('🥖')" class="emoji-btn" style="font-size: 1.35rem; padding: 0.3rem 0.5rem; border-radius: 0.5rem; background: var(--bg-tint); border: 1px solid var(--border-primary);">🥖</button>
+                            <button type="button" onclick="selectSpineBadge('🍷')" class="emoji-btn" style="font-size: 1.35rem; padding: 0.3rem 0.5rem; border-radius: 0.5rem; background: var(--bg-tint); border: 1px solid var(--border-primary);">🍷</button>
+                            <button type="button" onclick="selectSpineBadge('☕')" class="emoji-btn" style="font-size: 1.35rem; padding: 0.3rem 0.5rem; border-radius: 0.5rem; background: var(--bg-tint); border: 1px solid var(--border-primary);">☕</button>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="goToBookStep2()" class="btn-retro-orange" style="width: 100%; padding: 0.85rem; margin-top: 0.5rem;">
+                        <span>I'm Ready to Bind</span>
+                        <i data-lucide="arrow-right" style="width: 1.1rem; height: 1.1rem;"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: RECIPE SELECTION CHECKLIST -->
+            <div id="bookStep2" class="hidden">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <h3 class="font-retro-title" style="font-size: 1.4rem; color: var(--accent-primary);">Select Recipes</h3>
+                    <button type="button" onclick="goToBookStep1()" style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); background: transparent;">Back</button>
+                </div>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.15rem;">Check the recipes to tuck inside this cookbook volume. You can add or remove them anytime.</p>
+
+                <!-- Checkbox list of all existing recipes -->
+                <div id="cookbookRecipeChecklist" style="display: flex; flex-direction: column; gap: 0.65rem; max-height: 16rem; overflow-y: auto; margin-bottom: 1.25rem; padding-right: 0.25rem;"></div>
+
+                <button type="button" onclick="finishCookbookBinding()" class="btn-retro-orange" style="width: 100%; padding: 0.85rem;">
+                    <i data-lucide="check" style="width: 1.1rem; height: 1.1rem;"></i>
+                    <span>Save & Complete</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -994,7 +1001,6 @@
                     <input type="password" id="authPassword" required placeholder="Min 6 characters" style="background: var(--bg-tint); padding: 0.65rem 0.85rem; border-radius: 0.75rem; border: 1.5px solid var(--border-primary); font-size: 0.8rem; color: var(--text-primary); outline: none; font-family: inherit;">
                 </div>
 
-                <!-- Eloquent Onboarding Decade Picker (Only visible during Sign Up) -->
                 <div id="authEraField" style="display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.25rem; padding-top: 0.65rem; border-top: 1.5px dashed var(--border-primary);">
                     <label style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">
                         Your Kitchen's Golden Era
@@ -1046,39 +1052,28 @@
         let cookTimerInterval = null;
         let cookSecondsElapsed = 0;
 
-        // Register Service Worker for Offline Caching
+        let activeBookEditingId = null;
+        let currentSelectedSpineBadge = "🥐";
+
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').then((reg) => {
-                    console.log('Stained Pages Service Worker active:', reg.scope);
-                }).catch((err) => {
-                    console.warn('Service Worker registration skipped:', err);
-                });
+                navigator.serviceWorker.register('/sw.js').catch((err) => console.warn('SW:', err));
             });
         }
 
-        // Screen Wake Lock
         async function enableWakeLock() {
             try {
-                if ('wakeLock' in navigator) {
-                    wakeLock = await navigator.wakeLock.request('screen');
-                }
-            } catch (err) {
-                console.warn('Wake Lock failed:', err);
-            }
+                if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen');
+            } catch (err) { console.warn('Wake Lock failed:', err); }
         }
 
         function disableWakeLock() {
-            if (wakeLock !== null) {
-                wakeLock.release().then(() => { wakeLock = null; });
-            }
+            if (wakeLock !== null) wakeLock.release().then(() => { wakeLock = null; });
         }
 
-        // ================= DECADE THEME ENGINE =================
         function applyDecadeTheme(era) {
             const allEras = ['1920s', '1930s', '1940s', '1950s', '1960s', '1970s', '1980s', '1990s', '2000s', '2010s'];
             allEras.forEach(e => document.body.classList.remove(`era-${e}`));
-            
             document.body.classList.add(`era-${era}`);
             localStorage.setItem('user_decade_era', era);
 
@@ -1096,17 +1091,46 @@
         function toggleSettingsModal() {
             const modal = document.getElementById('settingsModal');
             modal.classList.toggle('hidden');
+            renderSettingsCookbookEras();
             refreshIcons();
+        }
+
+        function renderSettingsCookbookEras() {
+            const list = document.getElementById('settingsCookbooksList');
+            if (!list) return;
+            list.innerHTML = '';
+            if (userCookbooks.length === 0) {
+                list.innerHTML = '<span style="font-size:0.75rem; color:var(--text-muted); font-style:italic;">No custom cookbooks bound yet.</span>';
+                return;
+            }
+            userCookbooks.forEach(book => {
+                const row = document.createElement('div');
+                row.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:var(--bg-tint); padding:0.4rem 0.6rem; border-radius:0.5rem;";
+                row.innerHTML = `
+                    <span style="font-size:0.75rem; font-weight:700;">${book.badge || '🥐'} ${book.title}</span>
+                    <select onchange="updateCookbookEra('${book.id}', this.value)" style="background:var(--bg-card); font-size:0.7rem; font-weight:700; border:1px solid var(--border-primary); border-radius:0.35rem; padding:0.2rem 0.4rem;">
+                        ${['1920s','1930s','1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s'].map(era => `
+                            <option value="${era}" ${book.era === era ? 'selected' : ''}>${era}</option>
+                        `).join('')}
+                    </select>
+                `;
+                list.appendChild(row);
+            });
+        }
+
+        function updateCookbookEra(bookId, era) {
+            const bIdx = userCookbooks.findIndex(b => b.id === bookId);
+            if (bIdx !== -1) {
+                userCookbooks[bIdx].era = era;
+                localStorage.setItem(`cookbooks_${currentUserId}`, JSON.stringify(userCookbooks));
+                renderBookshelf();
+            }
         }
 
         function initApp() {
             try {
-                if (window.supabase) {
-                    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-                }
-            } catch(e) {
-                console.warn("Supabase local fallback active.", e);
-            }
+                if (window.supabase) supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+            } catch(e) { console.warn("Supabase fallback.", e); }
 
             if (window.innerWidth >= 768) {
                 const aside = document.getElementById('desktopSidebar');
@@ -1129,9 +1153,7 @@
             if (window.lucide && typeof lucide.createIcons === 'function') {
                 lucide.createIcons();
             } else {
-                setTimeout(() => {
-                    if (window.lucide) lucide.createIcons();
-                }, 150);
+                setTimeout(() => { if (window.lucide) lucide.createIcons(); }, 150);
             }
         }
 
@@ -1171,15 +1193,12 @@
 
             const sideBtn = document.getElementById(`btn-${sectionId}`);
             const mobBtn = document.getElementById(`mbtn-${sectionId}`);
-            
             if (sideBtn) {
                 sideBtn.style.background = 'var(--bg-tint)';
                 sideBtn.style.color = 'var(--accent-primary)';
                 sideBtn.style.fontWeight = '800';
             }
-            if (mobBtn) {
-                mobBtn.style.color = 'var(--accent-primary)';
-            }
+            if (mobBtn) mobBtn.style.color = 'var(--accent-primary)';
 
             if (sectionId === 'feed') renderRecipes();
             else if (sectionId === 'bookshelf') renderBookshelf();
@@ -1187,7 +1206,7 @@
             refreshIcons();
         }
 
-        // ================= 3D WALNUT BOOKSHELF LOGIC =================
+        // ================= TWO-STEP COOKBOOK CREATOR & SHELF =================
         function renderBookshelf() {
             const bookcase = document.getElementById('bookcaseDisplay');
             bookcase.innerHTML = '';
@@ -1195,7 +1214,7 @@
             const shelfRow = document.createElement('div');
             shelfRow.className = 'bookshelf-row';
 
-            // Brass Add Book Plaque (Shelf is blank by default until volumes are added)
+            // Brass Add Card (Shelf sits blank by default until volumes are bound)
             const addCard = document.createElement('div');
             addCard.className = 'brass-add-card';
             addCard.onclick = openCookbookCreatorModal;
@@ -1205,10 +1224,10 @@
             `;
             shelfRow.appendChild(addCard);
 
-            // Render Bound Cookbooks
             userCookbooks.forEach(book => {
-                const recipeCount = userRecipes.filter(r => r.binder_category === book.title).length;
-                const width = Math.min(68, Math.max(42, 38 + recipeCount * 4));
+                const recipesInBook = userRecipes.filter(r => (book.recipeIds || []).includes(r.id) || r.binder_category === book.title);
+                const recipeCount = recipesInBook.length;
+                const width = Math.min(72, Math.max(45, 42 + recipeCount * 3));
 
                 const spine = document.createElement('div');
                 spine.className = 'cookbook-spine';
@@ -1217,15 +1236,14 @@
                 spine.onclick = () => pullCookbook(book);
 
                 spine.innerHTML = `
-                    <div style="font-size: 0.55rem; color: #d4af37; font-weight: 800; text-transform: uppercase; text-align: center; letter-spacing: 0.08em;">${book.era || '70s'}</div>
-                    <div class="spine-title-vertical" style="color: #f7e7b4;">${book.title}</div>
-                    <div style="font-size: 0.6rem; color: rgba(255,255,255,0.7); text-align: center; font-weight: 700;">${recipeCount} rec</div>
+                    <div class="spine-badge">${book.badge || '🥐'}</div>
+                    <div class="spine-title-vertical" style="color: ${book.fontColor || '#FFFFFF'};">${book.title}</div>
+                    <div style="font-size: 0.6rem; color: ${book.fontColor || '#FFFFFF'}; opacity: 0.8; text-align: center; font-weight: 700;">${recipeCount} rec</div>
                     <div class="spine-ribbon" style="background: ${book.color === '#DE5E2E' ? '#EAA823' : '#DE5E2E'};"></div>
                 `;
                 shelfRow.appendChild(spine);
             });
 
-            // Solid Walnut Shelf Ledge Base
             const ledge = document.createElement('div');
             ledge.className = 'shelf-ledge';
             shelfRow.appendChild(ledge);
@@ -1236,36 +1254,160 @@
 
         function pullCookbook(book) {
             if (book.era) applyDecadeTheme(book.era);
-            setCategory(book.title);
+            selectedCategory = book.title;
+            renderBinders();
             navigate('feed');
         }
 
-        function openCookbookCreatorModal() {
+        function openCookbookCreatorModal(bookToEdit = null) {
+            activeBookEditingId = bookToEdit ? bookToEdit.id : null;
+            goToBookStep1();
+
+            const titleInput = document.getElementById('newBookTitle');
+            const subInput = document.getElementById('newBookSubtitle');
+            const colorPicker = document.getElementById('newBookColorWheel');
+
+            if (bookToEdit) {
+                titleInput.value = bookToEdit.title;
+                subInput.value = bookToEdit.subtitle || '';
+                colorPicker.value = bookToEdit.color || '#5B1426';
+                currentSelectedSpineBadge = bookToEdit.badge || '🥐';
+                const fRadio = document.querySelector(`input[name="newBookFontColor"][value="${bookToEdit.fontColor || '#FFFFFF'}"]`);
+                if (fRadio) fRadio.checked = true;
+            } else {
+                titleInput.value = "Nana's Recipes";
+                subInput.value = "All of Nana's Baked Goods";
+                colorPicker.value = "#5B1426";
+                currentSelectedSpineBadge = "🥐";
+            }
+
+            updateCoverPreview();
             document.getElementById('cookbookModal').classList.remove('hidden');
             refreshIcons();
         }
 
         function closeCookbookModal() {
             document.getElementById('cookbookModal').classList.add('hidden');
+            activeBookEditingId = null;
         }
 
-        function handleCreateCookbook(event) {
-            event.preventDefault();
+        function selectSpineBadge(emoji) {
+            currentSelectedSpineBadge = emoji;
+            document.querySelectorAll('#spineEmojiPicker button').forEach(btn => {
+                btn.style.border = btn.innerText === emoji ? "2px solid var(--accent-primary)" : "1px solid var(--border-primary)";
+            });
+            updateCoverPreview();
+        }
+
+        function updateCoverPreview() {
+            const title = document.getElementById('newBookTitle').value.trim() || "Untitled Volume";
+            const sub = document.getElementById('newBookSubtitle').value.trim();
+            const color = document.getElementById('newBookColorWheel').value;
+            const fontColor = document.querySelector('input[name="newBookFontColor"]:checked')?.value || '#FFFFFF';
+
+            const previewCover = document.getElementById('bookCoverPreview');
+            const pTitle = document.getElementById('previewTitle');
+            const pSub = document.getElementById('previewSubtitle');
+            const pBadge = document.getElementById('previewBadge');
+
+            previewCover.style.backgroundColor = color;
+            pTitle.innerText = title;
+            pTitle.style.color = fontColor;
+            pSub.innerText = sub;
+            pSub.style.color = fontColor;
+            pBadge.innerText = currentSelectedSpineBadge;
+        }
+
+        function goToBookStep1() {
+            document.getElementById('bookStep1').classList.remove('hidden');
+            document.getElementById('bookStep2').classList.add('hidden');
+            refreshIcons();
+        }
+
+        function goToBookStep2() {
             const title = document.getElementById('newBookTitle').value.trim();
-            const era = document.getElementById('newBookEra').value;
-            const colorEl = document.querySelector('input[name="bookColor"]:checked');
-            const color = colorEl ? colorEl.value : '#5B1426';
+            if (!title) return alert("Please enter a title for your cookbook.");
 
-            if (!title) return;
+            document.getElementById('bookStep1').classList.add('hidden');
+            document.getElementById('bookStep2').classList.remove('hidden');
 
-            const newBook = {
-                id: 'cb-' + Date.now(),
-                title: title,
-                era: era,
-                color: color
-            };
+            renderCookbookRecipeChecklist();
+            refreshIcons();
+        }
 
-            userCookbooks.push(newBook);
+        function renderCookbookRecipeChecklist() {
+            const list = document.getElementById('cookbookRecipeChecklist');
+            list.innerHTML = '';
+
+            let preselectedIds = [];
+            if (activeBookEditingId) {
+                const book = userCookbooks.find(b => b.id === activeBookEditingId);
+                if (book) preselectedIds = book.recipeIds || [];
+            }
+
+            if (userRecipes.length === 0) {
+                list.innerHTML = '<p style="font-size:0.75rem; color:var(--text-muted); font-style:italic; padding:0.5rem 0;">No recipes in your tin yet. You can still bind this book and add them later!</p>';
+                return;
+            }
+
+            userRecipes.forEach(recipe => {
+                const isChecked = preselectedIds.includes(recipe.id) || recipe.binder_category === document.getElementById('newBookTitle').value.trim();
+                const item = document.createElement('label');
+                item.style.cssText = "display:flex; align-items:center; justify-content:space-between; background:var(--bg-tint); padding:0.6rem 0.85rem; border-radius:0.75rem; border:1px solid var(--border-primary); cursor:pointer;";
+                item.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:0.65rem;">
+                        <input type="checkbox" value="${recipe.id}" ${isChecked ? 'checked' : ''} class="book-recipe-checkbox" style="width:1.15rem; height:1.15rem; accent-color:var(--accent-primary);">
+                        <div>
+                            <p style="font-size:0.8rem; font-weight:800; color:var(--text-primary); line-height:1.2;">${recipe.title}</p>
+                            <span style="font-size:0.65rem; color:var(--text-muted);">${recipe.cook_time || '30m'}</span>
+                        </div>
+                    </div>
+                    <span style="font-size:0.65rem; font-weight:700; color:var(--accent-secondary); text-transform:uppercase;">${recipe.binder_category || 'Sunday Bakes'}</span>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function finishCookbookBinding() {
+            const title = document.getElementById('newBookTitle').value.trim();
+            const sub = document.getElementById('newBookSubtitle').value.trim();
+            const color = document.getElementById('newBookColorWheel').value;
+            const fontColor = document.querySelector('input[name="newBookFontColor"]:checked')?.value || '#FFFFFF';
+
+            const selectedRecipeIds = Array.from(document.querySelectorAll('.book-recipe-checkbox:checked')).map(cb => cb.value);
+
+            // Update binder category on chosen recipes
+            userRecipes.forEach(r => {
+                if (selectedRecipeIds.includes(r.id)) {
+                    r.binder_category = title;
+                }
+            });
+            localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
+
+            if (activeBookEditingId) {
+                const bIdx = userCookbooks.findIndex(b => b.id === activeBookEditingId);
+                if (bIdx !== -1) {
+                    userCookbooks[bIdx].title = title;
+                    userCookbooks[bIdx].subtitle = sub;
+                    userCookbooks[bIdx].color = color;
+                    userCookbooks[bIdx].fontColor = fontColor;
+                    userCookbooks[bIdx].badge = currentSelectedSpineBadge;
+                    userCookbooks[bIdx].recipeIds = selectedRecipeIds;
+                }
+            } else {
+                const newBook = {
+                    id: 'cb-' + Date.now(),
+                    title: title,
+                    subtitle: sub,
+                    color: color,
+                    fontColor: fontColor,
+                    badge: currentSelectedSpineBadge,
+                    recipeIds: selectedRecipeIds,
+                    era: localStorage.getItem('user_decade_era') || '1970s'
+                };
+                userCookbooks.push(newBook);
+            }
+
             localStorage.setItem(`cookbooks_${currentUserId}`, JSON.stringify(userCookbooks));
 
             if (!userBinders.includes(title)) {
@@ -1274,9 +1416,9 @@
                 renderBinders();
             }
 
-            document.getElementById('newBookTitle').value = '';
             closeCookbookModal();
             renderBookshelf();
+            navigate('bookshelf');
         }
 
         // BINDERS
@@ -1301,24 +1443,10 @@
             const addBtn = document.createElement('button');
             addBtn.style.cssText = "padding: 0.4rem 0.95rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 800; background: var(--accent-secondary); color: #fff; display: flex; align-items: center; gap: 0.35rem; white-space: nowrap; border: 1.5px solid var(--border-primary);";
             addBtn.innerHTML = `<i data-lucide="folder-plus" style="width: 0.95rem; height: 0.95rem;"></i><span>+ Binder</span>`;
-            addBtn.onclick = addBinderPrompt;
+            addBtn.onclick = () => openCookbookCreatorModal();
             list.appendChild(addBtn);
 
             refreshIcons();
-        }
-
-        function addBinderPrompt() {
-            const name = prompt("Enter new binder name (e.g., Fondue Nights, Casseroles):");
-            if (name && name.trim()) {
-                const trimmed = name.trim();
-                if (!userBinders.includes(trimmed)) {
-                    userBinders.push(trimmed);
-                    localStorage.setItem(`binders_${currentUserId}`, JSON.stringify(userBinders));
-                    selectedCategory = trimmed;
-                    renderBinders();
-                    renderRecipes();
-                }
-            }
         }
 
         function setCategory(cat) {
@@ -1404,13 +1532,9 @@
             }
         }
 
-        // VIEW DETAIL
         function viewRecipeDetail(id, updateHash = true) {
             const recipe = userRecipes.find(r => r.id === id);
-            if (!recipe) {
-                navigate('feed');
-                return;
-            }
+            if (!recipe) { navigate('feed'); return; }
 
             if (updateHash) window.location.hash = `detail=${id}`;
 
@@ -1463,7 +1587,6 @@
             document.getElementById('lightboxModal').classList.add('hidden');
         }
 
-        // RENDER INGREDIENTS WITH AUTOMATIC SUBSECTION GROUPING
         function renderDetailIngredientsAndSteps() {
             const ingList = document.getElementById('detailIngredientsList');
             ingList.innerHTML = '';
@@ -1683,7 +1806,7 @@
             if (badge) badge.innerText = count;
         }
 
-        // ================= GEMINI UNIVERSAL OCR (CARDS & SCREENSHOTS) =================
+        // ================= GEMINI UNIVERSAL OCR =================
         async function runGeminiOCR(input) {
             if (!input.files || !input.files[0]) return;
             const file = input.files[0];
@@ -1825,7 +1948,6 @@
             }
         }
 
-        // SUPABASE SYNC
         async function syncRecipeToSupabase(recipe) {
             if (!supabase || currentUserId === 'demo-user') return;
             try {
@@ -1880,7 +2002,6 @@
             const password = document.getElementById('authPassword').value.trim();
             const name = document.getElementById('authName').value.trim();
             
-            // Capture chosen decade during sign-up
             if (authMode === 'signUp') {
                 const chosenEra = document.getElementById('authEraSelect').value || '1970s';
                 applyDecadeTheme(chosenEra);
