@@ -332,7 +332,7 @@
         /* VINTAGE TOAST NOTIFICATION POPUPS */
         #vintageToastContainer {
             position: fixed;
-            bottom: 5rem;
+            bottom: 5.5rem;
             right: 1rem;
             z-index: 150;
             display: flex;
@@ -353,8 +353,8 @@
             align-items: center;
             gap: 0.6rem;
             pointer-events: auto;
-            animation: slideInToast 0.3s ease forwards, fadeOutToast 0.3s ease 3.2s forwards;
-            max-width: 22rem;
+            animation: slideInToast 0.3s ease forwards, fadeOutToast 0.3s ease 3.5s forwards;
+            max-width: 23rem;
         }
         @keyframes slideInToast { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes fadeOutToast { to { opacity: 0; transform: translateY(10px); } }
@@ -541,7 +541,7 @@
 
     <div class="retro-stripe"></div>
 
-    <!-- Toast Notification Container -->
+    <!-- Vintage Toast Container -->
     <div id="vintageToastContainer"></div>
 
     <!-- Header Navigation -->
@@ -734,7 +734,7 @@
                 </div>
             </div>
 
-            <!-- VIEW 2: MULTI-PAGE SCAN & IMPORT SCREEN (UP TO 3 IMAGES) -->
+            <!-- VIEW 2: MULTI-PAGE SCAN & IMPORT SCREEN (UP TO 3 IMAGES WITH BROWSER COMPRESSION) -->
             <div id="section-import" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.5rem; border: 1.5px solid var(--border-primary);">
                 <div style="margin-bottom: 1.25rem;">
                     <h2 class="font-retro-title" style="font-size: 1.5rem; color: var(--accent-primary);">Multi-Page Card & Screenshot Scan</h2>
@@ -796,7 +796,7 @@
                 </div>
             </div>
 
-            <!-- VIEW 3: KITCHEN PANTRY SCREEN (FLESHED OUT) -->
+            <!-- VIEW 3: KITCHEN PANTRY SCREEN -->
             <div id="section-pantry" class="hidden" style="background: var(--bg-card); border-radius: var(--radius-card); padding: 1.5rem; border: 1.5px solid var(--border-primary); display: flex; flex-direction: column; gap: 1.25rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
@@ -1405,8 +1405,8 @@
                     supabase.auth.signOut();
                 }
                 localStorage.clear();
-                alert("Your account data has been deleted.");
-                window.location.reload();
+                showVintageToast("Your account data has been cleared from the tin.", 'user-x');
+                setTimeout(() => { window.location.reload(); }, 1200);
             }
         }
 
@@ -1467,9 +1467,8 @@
                 adjustTextAccessibility(userProfile.fontSizeScale);
             }
 
-            // Unauthenticated Guest Session Warning Check
             if (!currentUserId || currentUserId === 'demo-user') {
-                showVintageToast("Notice: You are browsing as a guest. Unsaved recipe cards will vanish if you leave!", "alert-circle");
+                showVintageToast("Notice: Guest session active. Unsaved cards will vanish if you leave!", "alert-circle");
             }
 
             handleHashChange();
@@ -2221,7 +2220,7 @@
         }
 
         function addPantryItemPrompt() {
-            const name = prompt("Enter pantry item name (e.g. Eggs, Olive Oil):");
+            const name = prompt("Enter pantry item name (e.g. Greek Yogurt, Heavy Cream):");
             if (name && name.trim()) {
                 const cat = prompt("Enter category (Dairy & Refrigerated, Baking, Spices & Pantry, Oils & Vinegars):") || "Pantry";
                 pantryItems.push({ id: "p-" + Date.now(), name: name.trim(), category: cat, stocked: true });
@@ -2238,263 +2237,52 @@
             if (badge) badge.innerText = count;
         }
 
-        // ================= GEMINI UNIVERSAL OCR =================
-        async function runMultiPageGeminiOCR() {
-            const validImages = multiScanImages.filter(img => img !== null);
-            if (validImages.length === 0) return alert("Please upload at least one recipe page or screenshot.");
+        // RECIPE EDITOR
+        function openRecipeEditorModal() {
+            if (!activeRecipe) return;
+            document.getElementById('editRecipeTitle').value = activeRecipe.title || '';
+            document.getElementById('editRecipeDesc').value = activeRecipe.description || '';
+            document.getElementById('editRecipeTips').value = activeRecipe.tips_note || '';
 
-            const banner = document.getElementById('parseStatusBanner');
-            const bar = document.getElementById('parseProgressBar');
-            const pText = document.getElementById('parseStatusText');
+            const ingText = (activeRecipe.ingredients || []).map(i => {
+                const q = i.quantity || '';
+                const u = i.unit || '';
+                const n = i.name || i.ingredient || '';
+                return `${q} ${u} ${n}`.trim();
+            }).join('\n');
+            document.getElementById('editRecipeIngredients').value = ingText;
 
-            banner.classList.remove('hidden');
-            bar.style.width = '30%';
-            pText.innerText = `Transcribing ${validImages.length} attached page(s)...`;
+            const stepText = (activeRecipe.steps || []).map(s => s.instruction || '').join('\n');
+            document.getElementById('editRecipeSteps').value = stepText;
 
-            try {
-                bar.style.width = '70%';
-                const res = await fetch('/api/parse', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ imageBase64: validImages[0].split(',')[1], mimeType: 'image/jpeg' })
-                });
-
-                const parsed = await res.json();
-                if (!res.ok) throw new Error(parsed.error || 'Multi-page transcription failed');
-
-                const newRecipe = {
-                    id: "rec-" + Date.now(),
-                    title: parsed.title || "Multi-Page Scanned Recipe",
-                    source: `Multi-Page Scan (${validImages.length} pages)`,
-                    source_type: "VINTAGE_SCAN",
-                    description: parsed.description || "Preserved multi-page recipe.",
-                    image_url: validImages[0],
-                    prep_time: parsed.prep_time || "15m",
-                    cook_time: parsed.cook_time || "30m",
-                    difficulty: parsed.difficulty || "Easy",
-                    binder_category: parsed.binder_category || "Sunday Bakes",
-                    servings: parsed.servings || 4,
-                    ingredients: parsed.ingredients || [],
-                    steps: parsed.steps || [],
-                    secret_note: parsed.secret_note || "",
-                    tips_note: "",
-                    bookmarked: false
-                };
-
-                userRecipes.unshift(newRecipe);
-                localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
-                syncRecipeToSupabase(newRecipe);
-
-                bar.style.width = '100%';
-                pText.innerText = "Success! Opening recipe...";
-
-                setTimeout(() => {
-                    banner.classList.add('hidden');
-                    multiScanImages = [null, null, null];
-                    for (let i = 0; i < 3; i++) {
-                        document.getElementById(`slotImg${i}`).classList.add('hidden');
-                        document.getElementById(`slotPlaceholder${i}`).classList.remove('hidden');
-                    }
-                    showVintageToast("Your multi-page recipe was transcribed and filed!", 'sparkles');
-                    viewRecipeDetail(newRecipe.id);
-                }, 800);
-            } catch (err) {
-                alert("Scan failed: " + err.message);
-                banner.classList.add('hidden');
-            }
-        }
-
-        async function parseRecipeUrlWithGemini() {
-            const urlInput = document.getElementById('recipeUrlInput');
-            const url = urlInput.value.trim();
-            if (!url || !url.startsWith('http')) return alert("Please paste a valid recipe URL.");
-
-            const banner = document.getElementById('parseStatusBanner');
-            const bar = document.getElementById('parseProgressBar');
-            const pText = document.getElementById('parseStatusText');
-
-            banner.classList.remove('hidden');
-            bar.style.width = '30%';
-            pText.innerText = "Extracting ingredients & directions...";
-
-            try {
-                bar.style.width = '65%';
-                const res = await fetch('/api/parse', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ text: `Extract the recipe from: ${url}` })
-                });
-
-                const parsed = await res.json();
-                if (!res.ok) throw new Error(parsed.error || 'Failed to parse link');
-
-                const newRecipe = {
-                    id: "rec-" + Date.now(),
-                    title: parsed.title || "Web Recipe",
-                    source: url.replace('https://', '').split('/')[0],
-                    source_type: "FAMILY_NOTE",
-                    description: parsed.description || "Clean extracted recipe.",
-                    image_url: "",
-                    prep_time: parsed.prep_time || "15m",
-                    cook_time: parsed.cook_time || "30m",
-                    difficulty: parsed.difficulty || "Easy",
-                    binder_category: parsed.binder_category || "Sunday Bakes",
-                    servings: parsed.servings || 4,
-                    ingredients: parsed.ingredients || [],
-                    steps: parsed.steps || [],
-                    secret_note: parsed.secret_note || "",
-                    tips_note: "",
-                    bookmarked: false
-                };
-
-                userRecipes.unshift(newRecipe);
-                localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
-                syncRecipeToSupabase(newRecipe);
-
-                bar.style.width = '100%';
-                pText.innerText = "Recipe parsed!";
-                urlInput.value = '';
-
-                setTimeout(() => {
-                    banner.classList.add('hidden');
-                    showVintageToast("Web recipe successfully parsed into your tin!", 'globe');
-                    viewRecipeDetail(newRecipe.id);
-                }, 800);
-            } catch (err) {
-                alert("Failed to parse link: " + err.message);
-                banner.classList.add('hidden');
-            }
-        }
-
-        async function syncRecipeToSupabase(recipe) {
-            if (!supabase || currentUserId === 'demo-user') return;
-            try {
-                await supabase.from('recipes').upsert({ ...recipe, user_id: currentUserId, id: recipe.id }, { onConflict: 'id' });
-            } catch(e) { console.warn("Retained locally.", e); }
-        }
-
-        async function deleteRecipeFromSupabase(id) {
-            if (!supabase || currentUserId === 'demo-user') return;
-            try { await supabase.from('recipes').delete().eq('id', id); } catch(e) { console.warn("Local deletion only.", e); }
-        }
-
-        function toggleAuthModal() {
-            const modal = document.getElementById('authModal');
-            modal.classList.toggle('hidden');
-            document.getElementById('authError').classList.add('hidden');
+            document.getElementById('recipeEditorModal').classList.remove('hidden');
             refreshIcons();
         }
 
-        function setAuthMode(mode) {
-            authMode = mode;
-            const tabSignUp = document.getElementById('authTabSignUp');
-            const tabSignIn = document.getElementById('authTabSignIn');
-            const nameField = document.getElementById('authNameField');
-            const submitBtn = document.getElementById('authSubmitBtn');
-            const subtitle = document.getElementById('authSubtitle');
-
-            if (mode === 'signUp') {
-                tabSignUp.style.background = 'var(--accent-primary)';
-                tabSignUp.style.color = '#fff';
-                tabSignIn.style.background = 'transparent';
-                tabSignIn.style.color = 'var(--text-muted)';
-                nameField.classList.remove('hidden');
-                submitBtn.innerText = "Create Account & Open Tin";
-                subtitle.innerText = "Every family recipe tells a story—what will you create today?";
-            } else {
-                tabSignUp.style.background = 'transparent';
-                tabSignUp.style.color = 'var(--text-muted)';
-                tabSignIn.style.background = 'var(--accent-primary)';
-                tabSignIn.style.color = '#fff';
-                nameField.classList.add('hidden');
-                submitBtn.innerText = "Log In to My Recipe Tin";
-                subtitle.innerText = "Welcome back! Sign in to synchronize your kitchen archive.";
-            }
+        function closeRecipeEditorModal() {
+            document.getElementById('recipeEditorModal').classList.add('hidden');
         }
 
-        async function handleAuthSubmit(event) {
+        function saveRecipeEdits(event) {
             event.preventDefault();
-            document.getElementById('authError').classList.add('hidden');
+            if (!activeRecipe) return;
 
-            const email = document.getElementById('authEmail').value.trim();
-            const password = document.getElementById('authPassword').value.trim();
-            const firstName = document.getElementById('authName').value.trim() || "Cook";
+            activeRecipe.title = document.getElementById('editRecipeTitle').value.trim();
+            activeRecipe.description = document.getElementById('editRecipeDesc').value.trim();
+            activeRecipe.tips_note = document.getElementById('editRecipeTips').value.trim();
 
-            if (!supabase) {
-                currentUserId = email.replace(/[^a-zA-Z0-9]/g, '');
-                localStorage.setItem("currentUserId", currentUserId);
-                userProfile.name = firstName;
-                userProfile.email = email;
-                localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
-                toggleAuthModal();
-                updateAuthControls();
-                applyProfileUI();
-                showVintageToast(`Welcome aboard, ${firstName}! Your archive is now securely tethered.`, 'sparkles');
-                navigate('feed');
-                return;
-            }
+            const rawIngs = document.getElementById('editRecipeIngredients').value.split('\n').filter(l => l.trim() !== '');
+            activeRecipe.ingredients = rawIngs.map(line => ({ name: line.trim() }));
 
-            try {
-                if (authMode === 'signUp') {
-                    const { data, error } = await supabase.auth.signUp({
-                        email: email,
-                        password: password,
-                        options: { data: { name: firstName } }
-                    });
-                    if (error) throw error;
-                    if (data?.user) {
-                        currentUserId = data.user.id;
-                        localStorage.setItem("currentUserId", currentUserId);
-                        userProfile.name = firstName;
-                        userProfile.email = email;
-                        localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
-                        toggleAuthModal();
-                        updateAuthControls();
-                        applyProfileUI();
-                        showVintageToast(`Welcome aboard, ${firstName}! Your archive is now securely tethered.`, 'sparkles');
-                        navigate('feed');
-                    }
-                } else {
-                    const { data, error } = await supabase.auth.signInWithPassword({
-                        email: email,
-                        password: password
-                    });
-                    if (error) throw error;
-                    if (data?.user) {
-                        currentUserId = data.user.id;
-                        localStorage.setItem("currentUserId", currentUserId);
-                        userProfile.name = data.user.user_metadata?.name || firstName;
-                        userProfile.email = email;
-                        localStorage.setItem(`profile_${currentUserId}`, JSON.stringify(userProfile));
-                        toggleAuthModal();
-                        updateAuthControls();
-                        applyProfileUI();
-                        showVintageToast(`Welcome back, ${userProfile.name}! Your recipe tin is synced.`, 'cloud-check');
-                        navigate('feed');
-                    }
-                }
-            } catch(error) {
-                document.getElementById('authError').classList.remove('hidden');
-                document.getElementById('authErrorText').innerText = error.message || "Authentication failed.";
-            }
-        }
+            const rawSteps = document.getElementById('editRecipeSteps').value.split('\n').filter(l => l.trim() !== '');
+            activeRecipe.steps = rawSteps.map((st, idx) => ({ step_number: idx + 1, instruction: st.trim() }));
 
-        function updateAuthControls() {
-            applyProfileUI();
-        }
+            localStorage.setItem(`recipes_${currentUserId}`, JSON.stringify(userRecipes));
+            syncRecipeToSupabase(activeRecipe);
 
-        function handleSignOut() {
-            if (confirm("Log out of your Stained Pages session?")) {
-                if (supabase) supabase.auth.signOut();
-                currentUserId = "demo-user";
-                localStorage.setItem("currentUserId", currentUserId);
-                userProfile = { name: "Cook", email: "", avatar: "", wreath: "wreath-flowers", unitSystem: "imperial", fontSizeScale: 1.0 };
-                toggleAccountModal();
-                updateAuthControls();
-                applyProfileUI();
-                showVintageToast("Logged out successfully. See you in the kitchen soon!", 'log-out');
-                navigate('feed');
-            }
+            closeRecipeEditorModal();
+            viewRecipeDetail(activeRecipe.id, false);
+            showVintageToast("Your recipe card notes have been faithfully updated.", 'edit-3');
         }
 
         document.addEventListener('DOMContentLoaded', initApp);
